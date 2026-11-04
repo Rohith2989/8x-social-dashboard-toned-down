@@ -1,0 +1,195 @@
+.bar {
+  position: sticky;
+  bottom: 16px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  max-width: 100%;
+  margin: -64px auto 0;
+  padding: 8px 8px 8px 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 24px 50px -20px rgb(11 11 12 / 0.65);
+  transform: translateY(calc(100% + 30px));
+  opacity: 0;
+  transition:
+    transform 480ms var(--ease-out),
+    opacity 300ms var(--ease-out);
+}
+
+.bar[data-up="true"] {
+  transform: none;
+  opacity: 1;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 6px;
+}
+
+/* what is picked: faces, or posters, overlapping, ringed in the bar's ink */
+.heads {
+  display: flex;
+  align-items: center;
+}
+
+.heads > * {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.heads > * + * {
+  margin-left: -10px;
+}
+
+.count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 15px;
+  white-space: nowrap;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.count :global(.num) {
+  font-size: 22px;
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.action:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.action:disabled {
+  color: rgb(255 255 255 / 0.4);
+  cursor: default;
+}
+
+/* a long task (downloads) says where it is in place of its label */
+.action[data-busy] span {
+  font-variant-numeric: tabular-nums;
+}
+
+.flag {
+  background: rgb(255 255 255 / 0.1);
+}
+
+.flag:hover:not(:disabled) {
+  background: var(--danger);
+}
+
+.clear {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.1);
+  color: #fff;
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.clear:hover {
+  background: rgb(255 255 255 / 0.2);
+}
+
+/* a tray too narrow for the labels: the actions keep their icons, their titles say the rest (a bar with many
+   actions folds sooner) */
+@container tray (max-width: 1000px) {
+  .bar[data-many] .action span {
+    display: none;
+  }
+
+  .bar[data-many] .action {
+    padding: 0 13px;
+  }
+}
+
+@container tray (max-width: 720px) {
+  .action span {
+    display: none;
+  }
+
+  .action {
+    padding: 0 13px;
+  }
+}
+
+@media (max-width: 767px) {
+  .bar {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    margin: 0;
+    justify-content: space-between;
+  }
+
+  /* the number stays, its noun goes */
+  .count > span:last-child {
+    display: none;
+  }
+}
+
+/* the narrowest phones: the count stays, the faces go, the icons close up (and slide, as a last resort) */
+@media (max-width: 480px) {
+  .bar {
+    gap: 8px;
+    padding: 6px 6px 6px 14px;
+  }
+
+  .heads {
+    display: none;
+  }
+
+  .actions {
+    min-width: 0;
+    gap: 2px;
+    padding-left: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bar .action,
+  .bar[data-many] .action {
+    flex: none;
+    height: 40px;
+    padding: 0 9px;
+  }
+
+  .clear {
+    flex: none;
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,346 @@
+/* the post table sits in the Creators table's shell (creators/table.module.css); these are its own parts */
+.wrap {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.wrap::-webkit-scrollbar {
+  display: none;
+}
+
+/* a little closer than the Creators table: thirteen columns share the tray */
+.wrap th,
+.wrap td {
+  padding-left: 9px !important;
+  padding-right: 9px !important;
+}
+
+.wrap th:first-child,
+.wrap td:first-child {
+  padding-left: 18px !important;
+}
+
+.post {
+  min-width: 270px;
+}
+
+.postCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+/* the post's own poster: the way into it */
+.thumb {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 66px;
+  border-radius: 9px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, var(--dot-ghost) 1px, transparent 1.4px) 0 0 / 6px 6px,
+    var(--canvas);
+  transition: box-shadow var(--t-fast) var(--ease-out);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb:hover {
+  box-shadow:
+    0 0 0 2px var(--paper),
+    0 0 0 4px var(--vertical);
+}
+
+.thumb > svg {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+.play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(8 12 30 / 0.55);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+.play svg {
+  fill: currentColor;
+  margin-left: 1px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  white-space: normal;
+}
+
+.caption {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  max-width: 260px;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.byline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+}
+
+.byline svg {
+  border-radius: 4px;
+}
+
+.handle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* views, with the milestone it passed beside the number it grades */
+.views {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.handle:hover {
+  color: var(--vertical-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.when {
+  font-size: 14px;
+}
+
+.when > span {
+  display: block;
+  line-height: 1.3;
+}
+
+.when :global(.mono) {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.na {
+  color: var(--text-muted) !important;
+}
+
+/* status: a dot and a word; a flag in red under it */
+.status {
+  white-space: normal !important;
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.state i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vertical);
+}
+
+.state[data-status="deleted"] {
+  color: var(--text-muted);
+}
+
+.state[data-status="deleted"] i {
+  background: var(--dot-quiet);
+}
+
+.flag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--danger);
+}
+
+/* the spark code: its first five characters, and a copy that says it copied */
+.spark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 10px 0 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition:
+    box-shadow var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+
+.spark :global(.mono) {
+  font-size: 13px;
+}
+
+.spark:hover {
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.spark[data-copied] {
+  color: var(--vertical-deep);
+  box-shadow: inset 0 0 0 1.5px var(--vertical-deep);
+}
+
+.copiedTick {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 14;
+  animation: draw 320ms var(--ease-out) both;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 14;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.none {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.country {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.country :global(.mono) {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* a deleted or flagged post dims, all but its status, which says why */
+.row[data-dim] td:not(:first-child):not(.status) {
+  opacity: 0.5;
+}
+
+.row[data-dim] .thumb {
+  filter: grayscale(1);
+}
+
+/* the day taken to from the feed */
+.tinted {
+  background: color-mix(in srgb, var(--vertical-light) 70%, #fff);
+}
+
+.tinted td:first-child {
+  box-shadow: inset 3px 0 0 var(--vertical);
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 60px;
+  margin-top: 14px;
+  border-radius: 20px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition: box-shadow var(--t) var(--ease-out);
+}
+
+.more > span {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.more em {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.more:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--stone-2),
+    0 12px 24px -16px rgb(11 11 12 / 0.35);
+}
+
+/* narrow, the table keeps the columns that matter most */
+@container (max-width: 1240px) {
+  .lg {
+    display: none;
+  }
+}
+
+@container (max-width: 790px) {
+  .md {
+    display: none;
+  }
+}
+
+@container (max-width: 680px) {
+  .sm {
+    display: none;
+  }
+
+  .caption {
+    max-width: 200px;
+  }
+}
+
+@container (max-width: 420px) {
+  .xs {
+    display: none;
+  }
+
+  .post {
+    min-width: 0;
+  }
+
+  .caption {
+    max-width: 170px;
+  }
+}

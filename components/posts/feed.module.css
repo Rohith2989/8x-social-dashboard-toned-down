@@ -1,0 +1,564 @@
+.feed {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  /* how many whole cards a row shows; the cards share the row's width exactly, so it rests on whole cards only */
+  --n: 6;
+  --gap: 16px;
+}
+
+/* (a container cannot style itself, so the queries set the count on its days and its grid) */
+@container (max-width: 1180px) {
+  .day,
+  .grid {
+    --n: 5;
+  }
+}
+
+@container (max-width: 960px) {
+  .day,
+  .grid {
+    --n: 4;
+  }
+}
+
+@container (max-width: 740px) {
+  .day,
+  .grid {
+    --n: 3;
+  }
+}
+
+@container (max-width: 520px) {
+  .day,
+  .grid {
+    --n: 2;
+    --gap: 12px;
+  }
+}
+
+/* sparse results: one grid of whole cards, newest first */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 22px var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  min-width: 0;
+  animation: day-in 480ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 40ms + 60ms);
+}
+
+.day {
+  animation: day-in 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 70ms + 80ms);
+}
+
+@keyframes day-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* the day's heading: it stays at the top of the tray while its posts are in view */
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: -14px -8px 10px;
+  padding: 14px 8px 12px;
+  background: linear-gradient(var(--canvas) 80%, color-mix(in srgb, var(--canvas) 0%, transparent));
+}
+
+.head h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.head p {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.head p :global(.mono) {
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+.head p i {
+  align-self: center;
+  width: 3px;
+  height: 3px;
+  margin: 0 2px;
+  border-radius: 50%;
+  background: var(--mist);
+}
+
+.toTable {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding: 6px 4px 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.toTable:hover {
+  background: color-mix(in srgb, var(--vertical) 10%, transparent);
+}
+
+/* the day's row */
+.rowWrap {
+  position: relative;
+}
+
+.row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (var(--n) - 1) * var(--gap)) / var(--n));
+  column-gap: var(--gap);
+  margin: -10px -10px 0;
+  padding: 10px 10px 14px;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 10px;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+.row > li {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.row[data-dragging] {
+  scroll-snap-type: none;
+  cursor: grabbing;
+}
+
+.row[data-dragging] .card {
+  pointer-events: none;
+}
+
+/* the arrows at a row's ends, only where there is more to see */
+.arrow {
+  position: absolute;
+  top: calc((100% - 120px) / 2);
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.94);
+  color: var(--ink);
+  box-shadow:
+    0 2px 6px rgb(11 11 12 / 0.08),
+    0 16px 30px -14px color-mix(in srgb, var(--vertical-ink) 55%, transparent);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 260ms var(--ease-out),
+    background-color var(--t-fast) var(--ease-out);
+}
+
+.arrow:hover {
+  background: #fff;
+}
+
+.prev {
+  left: -14px;
+}
+
+.next {
+  right: -14px;
+}
+
+.rowWrap:hover .arrow,
+.arrow:focus-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.rowWrap[data-start] .prev,
+.rowWrap[data-end] .next {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ---- a post card ---- */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 6px 6px 12px;
+  border-radius: 22px;
+  background: var(--paper);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.04),
+    0 16px 32px -26px rgb(11 11 12 / 0.3);
+  transition:
+    transform 320ms var(--ease-out),
+    box-shadow 320ms var(--ease-out),
+    background-color var(--t) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgb(11 11 12 / 0.05),
+    0 26px 40px -24px color-mix(in srgb, var(--vertical-ink) 45%, transparent);
+}
+
+.card:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 0 0 6px color-mix(in srgb, var(--vertical) 28%, transparent);
+}
+
+/* the open post, outlined in ink */
+.card[data-open] {
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 22px 36px -24px color-mix(in srgb, var(--vertical-ink) 45%, transparent);
+}
+
+.card[data-selected] {
+  background: color-mix(in srgb, var(--vertical-light) 55%, #fff);
+}
+
+.poster {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--canvas);
+  isolation: isolate;
+}
+
+.poster img,
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster img {
+  transition:
+    transform 700ms var(--ease-out),
+    filter 300ms var(--ease-out);
+}
+
+.card:hover .poster img {
+  transform: scale(1.04);
+}
+
+.video {
+  animation: video-in 260ms var(--ease-out);
+}
+
+@keyframes video-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* a post with no picture to show: its platform on the brand's dots */
+.blank {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle, var(--dot-ghost) 1.2px, transparent 1.6px) 0 0 / 8px 8px,
+    var(--canvas);
+}
+
+.blank svg {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+/* a post with no picture: no shade, its figures in ink */
+.poster[data-blank] .shade {
+  display: none;
+}
+
+.poster[data-blank] .over {
+  color: var(--ink);
+}
+
+.poster[data-blank] .viewsWord,
+.poster[data-blank] .duration {
+  color: var(--text-muted);
+}
+
+/* the foot of the poster darkens just enough for its figures to read */
+.shade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  background: linear-gradient(to top, rgb(8 12 30 / 0.72), rgb(8 12 30 / 0));
+  pointer-events: none;
+}
+
+.platform {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  border-radius: 7px;
+  box-shadow: 0 3px 10px -3px rgb(0 0 0 / 0.45);
+}
+
+.blank + .shade + .platform,
+.blank ~ .platform {
+  display: none;
+}
+
+/* the check: there when the pointer is on the card, or once anything is picked */
+.check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.card:hover .check,
+.card:focus-within .check,
+.card[data-selected] .check,
+.feed[data-selecting] .check {
+  opacity: 1;
+  transform: none;
+}
+
+.over {
+  position: absolute;
+  inset: auto 10px 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+}
+
+.views {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.viewsWord {
+  font-size: 13px;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  font-size: 11.5px;
+  color: rgb(255 255 255 / 0.85);
+}
+
+.playMark {
+  fill: currentColor;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 0 4px;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--ink);
+}
+
+.who time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.caption {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  min-height: 2.6em;
+  margin-top: 6px;
+  padding: 0 4px;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.counts {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding: 10px 4px 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.counts > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.counts :global(.mono) {
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.counts .na {
+  color: var(--text-muted);
+}
+
+.flagLine,
+.gone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.flagLine {
+  color: var(--danger);
+}
+
+.gone {
+  color: var(--text-muted);
+}
+
+/* a flagged or deleted post keeps its place, greyed (the flag line stays at full strength: it is the reason) */
+.card[data-flagged] .poster,
+.card[data-flagged] .who,
+.card[data-flagged] .caption,
+.card[data-flagged] .counts,
+.card[data-status="deleted"] .who,
+.card[data-status="deleted"] .caption,
+.card[data-status="deleted"] .counts {
+  opacity: 0.5;
+}
+
+.card[data-status="deleted"] .poster {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+
+/* the days before */
+.more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 64px;
+  border-radius: 22px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition:
+    box-shadow var(--t) var(--ease-out),
+    transform 260ms var(--ease-out);
+}
+
+.more > span {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.more em {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.more:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--stone-2),
+    0 12px 24px -16px rgb(11 11 12 / 0.35);
+}
+
+.end {
+  padding: 8px 0;
+  font-size: 14px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* on a phone the page itself scrolls, under its bar */
+@media (max-width: 767px) {
+  .arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .day {
+    animation: none;
+  }
+
+  .row {
+    scroll-behavior: auto;
+  }
+}

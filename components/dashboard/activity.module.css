@@ -1,0 +1,369 @@
+.card {
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 26px 28px 0;
+}
+
+.head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* tabs as words, the current one underlined in the vertical colour */
+.tabs {
+  display: flex;
+  gap: 26px;
+}
+
+.tab {
+  position: relative;
+  padding-bottom: 10px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--vertical-ink) 38%, transparent);
+  transition: color var(--t) var(--ease-out);
+}
+
+.tab:hover,
+.tab[aria-selected="true"] {
+  color: var(--vertical-ink);
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 26px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--vertical-deep);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 420ms var(--ease-out);
+}
+
+.tab[aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+
+/* the period, in an ink pill with its menu */
+.range {
+  position: relative;
+}
+
+.rangeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px 0 16px;
+  border-radius: 13px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 5;
+  min-width: 170px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: var(--shadow-float);
+  animation: menu 200ms var(--ease-out);
+}
+
+@keyframes menu {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.menu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.menu button:hover {
+  background: var(--canvas);
+}
+
+.menu button[aria-selected="true"] {
+  font-weight: 600;
+  color: var(--vertical-deep);
+}
+
+.note {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+  font-size: 15px;
+  color: color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+}
+
+.note strong {
+  color: var(--vertical-ink);
+}
+
+/* the chart runs to the card's edges */
+.chart {
+  position: relative;
+  margin: auto -28px 0;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.area {
+  opacity: 0;
+}
+
+.dot {
+  fill: #fff;
+  opacity: 0;
+}
+
+.line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--vertical-deep) 30%, transparent));
+}
+
+.on .area {
+  animation: fade 900ms var(--ease-out) 300ms forwards;
+}
+
+.on .dot {
+  animation: dot 520ms var(--ease-out) forwards;
+}
+
+.on .line {
+  animation: draw 1200ms var(--ease-current) 150ms forwards;
+}
+
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dot {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: var(--o, 1);
+    transform: none;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* the picked day */
+.pick {
+  opacity: 0;
+}
+
+.on .pick {
+  animation: fade 400ms var(--ease-out) 1100ms forwards;
+}
+
+.marker {
+  fill: var(--ink);
+  stroke: #fff;
+  stroke-width: 3.5;
+  transition:
+    cx 360ms var(--ease-out),
+    cy 360ms var(--ease-out);
+}
+
+.drop {
+  fill: var(--ink);
+  opacity: 0.85;
+}
+
+.days {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  height: 30px;
+}
+
+.days span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--vertical-ink) 72%, transparent);
+  transition:
+    background-color var(--t) var(--ease-out),
+    color var(--t) var(--ease-out);
+}
+
+.days .dayOn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+}
+
+.days .dayOff {
+  visibility: hidden;
+}
+
+/* one tooltip */
+.tip {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 14px 28px -14px rgb(8 33 89 / 0.45);
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 20px));
+  opacity: 0;
+  transition:
+    left 360ms var(--ease-out),
+    top 360ms var(--ease-out);
+}
+
+.on .tip {
+  animation: tip 500ms var(--ease-out) 1200ms forwards;
+}
+
+@keyframes tip {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.tip[data-side="start"] {
+  transform: translate(-28px, calc(-100% - 20px));
+}
+
+.tip[data-side="end"] {
+  transform: translate(calc(-100% + 28px), calc(-100% - 20px));
+}
+
+.tip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 2px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.tip[data-side="start"]::after {
+  left: 28px;
+}
+
+.tip[data-side="end"]::after {
+  left: auto;
+  right: 22px;
+}
+
+.tipIcon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--vertical-deep);
+  color: #fff;
+}
+
+.tipText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.tipText strong {
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.tipText span {
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 767px) {
+  .inner {
+    padding: 20px 18px 0;
+  }
+
+  .tabs {
+    gap: 18px;
+  }
+
+  .tab {
+    font-size: 18px;
+  }
+
+  .chart {
+    margin: 44px -18px 0;
+  }
+}

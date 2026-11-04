@@ -1,0 +1,385 @@
+/* the window's night, its aura alive in it, and one light card */
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  padding: 22px 16px 40px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--vertical-ink) 86%, #000);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.aura {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/media/grain.webp") repeat 0 0 / 256px 256px;
+  opacity: 0.9;
+}
+
+.top {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(1180px, 100%);
+}
+
+.home {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.home i {
+  width: 1px;
+  height: 20px;
+  background: rgb(255 255 255 / 0.35);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14.5px;
+  color: rgb(255 255 255 / 0.78);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: #fff;
+}
+
+.card {
+  position: relative;
+  width: min(440px, 100%);
+  margin: auto 0;
+  padding: 34px 34px 28px;
+  border-radius: 32px;
+  background: var(--paper);
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 0.12),
+    0 40px 90px -40px rgb(0 0 0 / 0.6);
+  animation: card-in 520ms var(--ease-out);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+}
+
+.eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+}
+
+.card h1 {
+  margin-top: 6px;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.lede {
+  margin-top: 8px;
+  font-size: 15.5px;
+  color: var(--text-muted);
+}
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--vertical-glow) 16%, #fff);
+}
+
+.notice svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--vertical-deep);
+}
+
+.notice[data-tone="bad"] {
+  background: color-mix(in srgb, var(--danger) 9%, #fff);
+}
+
+.notice[data-tone="bad"] svg {
+  color: var(--danger);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field > span {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field input {
+  height: 52px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 14px;
+  outline: 0;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--canvas);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vertical-ink) 10%, transparent);
+  transition: box-shadow var(--t-fast) var(--ease-out);
+}
+
+.field input:focus {
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 18%, transparent);
+}
+
+.field input[aria-invalid="true"] {
+  box-shadow: inset 0 0 0 1.5px var(--danger);
+}
+
+.primary,
+.google {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 15.5px;
+  font-weight: 600;
+  transition:
+    background-color var(--t) var(--ease-out),
+    box-shadow var(--t) var(--ease-out),
+    opacity var(--t) var(--ease-out);
+}
+
+.primary {
+  margin-top: 4px;
+  color: #fff;
+  background: var(--ink);
+}
+
+.primary:not(:disabled):hover {
+  background: var(--vertical-deep);
+  box-shadow: 0 14px 28px -14px color-mix(in srgb, var(--vertical-deep) 80%, transparent);
+}
+
+.primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.primary[disabled] span[role="status"] {
+  opacity: 1;
+}
+
+.google {
+  color: var(--ink);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vertical-ink) 14%, transparent);
+}
+
+.google:not(:disabled):hover {
+  background: var(--canvas);
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 2px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.or i {
+  flex: 1;
+  height: 1px;
+  background: color-mix(in srgb, var(--vertical-ink) 10%, transparent);
+}
+
+.sent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.sent strong {
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.quiet {
+  align-self: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.sent .quiet {
+  margin-right: -12px;
+}
+
+.quiet:not(:disabled):hover {
+  background: var(--canvas);
+}
+
+/* six drawn slots, one real field laid over them (paste and one-time-code fill both work) */
+.code {
+  position: relative;
+  display: block;
+}
+
+.code input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  color: transparent;
+  caret-color: transparent;
+  background: transparent;
+  letter-spacing: 3em;
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.slots span {
+  display: grid;
+  place-items: center;
+  height: 58px;
+  border-radius: 14px;
+  font-family: var(--font-num);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--canvas);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vertical-ink) 10%, transparent);
+  transition:
+    box-shadow var(--t-fast) var(--ease-out),
+    background-color var(--t-fast) var(--ease-out);
+}
+
+.slots span[data-filled] {
+  background: #fff;
+}
+
+.code:focus-within .slots span[data-on] {
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 18%, transparent);
+}
+
+.sample {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.signup {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid color-mix(in srgb, var(--vertical-ink) 8%, transparent);
+  font-size: 14.5px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.signup a {
+  font-weight: 700;
+  color: var(--vertical-deep);
+  text-decoration: none;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 22px 22px;
+    border-radius: 26px;
+  }
+
+  .card h1 {
+    font-size: 26px;
+  }
+
+  .slots {
+    gap: 6px;
+  }
+
+  .slots span {
+    height: 52px;
+    font-size: 22px;
+  }
+}

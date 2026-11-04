@@ -1,0 +1,29 @@
+.list {
+  margin-top: 18px;
+  transition: padding-bottom 420ms var(--ease-out);
+}
+
+/* room at the foot for the selection bar, so it never covers the last row */
+.withBar {
+  padding-bottom: 88px;
+}
+
+.note {
+  margin-top: 22px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* the posters a selection bar and a flag composer lead with */
+.head {
+  width: 26px;
+  height: 44px;
+  border-radius: 7px;
+}
+
+.flagHead {
+  width: 36px;
+  height: 62px;
+  border-radius: 9px;
+  box-shadow: 0 0 0 2px var(--paper);
+}

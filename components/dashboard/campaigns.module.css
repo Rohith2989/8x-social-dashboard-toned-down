@@ -1,0 +1,397 @@
+.section {
+  margin-top: 34px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.head h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 0.62fr);
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* a campaign: one block of colour */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 212px;
+  padding: 22px 22px 24px;
+  border-radius: 24px;
+  overflow: hidden;
+  transition:
+    opacity 520ms var(--ease-out),
+    transform 760ms var(--ease-out),
+    box-shadow var(--t) var(--ease-out);
+  transition-delay: calc(var(--i) * 80ms), calc(var(--i) * 80ms), 0ms;
+}
+
+.section[data-arrive="wait"] .card,
+.section[data-arrive="wait"] .add {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.card > * {
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.deep {
+  color: #fff;
+  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical) 80%, #fff) 0%, var(--vertical-deep) 55%);
+  box-shadow: 0 24px 40px -26px color-mix(in srgb, var(--vertical-deep) 90%, transparent);
+}
+
+.glow {
+  color: var(--vertical-ink);
+  background: radial-gradient(120% 120% at 100% 0%, var(--vertical-light) 0%, var(--vertical-glow) 60%);
+  box-shadow: 0 24px 40px -28px color-mix(in srgb, var(--vertical-glow) 90%, transparent);
+}
+
+.accent {
+  color: var(--vertical-ink);
+  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 30%, #fff) 0%, var(--vertical-accent) 62%);
+  box-shadow: 0 24px 40px -28px color-mix(in srgb, var(--vertical-accent) 90%, transparent);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faces {
+  display: flex;
+  align-items: center;
+}
+
+.faces > * + * {
+  margin-left: -9px;
+}
+
+.more {
+  display: grid;
+  place-items: center;
+  height: 34px;
+  min-width: 34px;
+  padding: 0 8px 0 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px currentColor;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.kebab {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: -8px;
+  border-radius: 10px;
+  color: inherit;
+  opacity: 0.85;
+}
+
+.kebab:hover {
+  background: rgb(255 255 255 / 0.18);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status i[data-status="live"] {
+  background: #fff;
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.3);
+}
+
+.card h3 {
+  margin-top: 6px;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.meta i {
+  width: 1px;
+  height: 12px;
+  margin: 0 4px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.bar {
+  display: block;
+  height: 6px;
+  margin-top: 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  width: var(--pct);
+  border-radius: inherit;
+  background: currentColor;
+  transform-origin: 0 50%;
+  transition: transform 1200ms var(--ease-current) calc(var(--i) * 80ms + 300ms);
+}
+
+.deep .bar i {
+  background: #fff;
+}
+
+.section[data-arrive="wait"] .bar i {
+  transform: scaleX(0);
+}
+
+/* the place for the next one, outlined in fine dots */
+.add {
+  position: relative;
+  min-height: 212px;
+  border-radius: 24px;
+  transition:
+    opacity 520ms var(--ease-out) 260ms,
+    transform 760ms var(--ease-out) 260ms;
+}
+
+.dotted {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dotted rect {
+  width: calc(100% - 3px);
+  height: calc(100% - 3px);
+  fill: none;
+  stroke: var(--mist);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 0 8;
+}
+
+.add > button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 22px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text);
+  border-radius: 24px;
+  transition: background-color var(--t) var(--ease-out);
+}
+
+.add > button:hover {
+  background: color-mix(in srgb, var(--paper) 60%, transparent);
+}
+
+.plus {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+}
+
+@media (max-width: 1279px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .add {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    min-height: 180px;
+  }
+}
+
+/* the place for the next one is a button now: it asks which way (Start a campaign) */
+.add > button {
+  width: 100%;
+  font: inherit;
+  text-align: center;
+}
+
+.all {
+  font: inherit;
+}
+
+/* --- Your campaigns, all of them --- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--canvas);
+  transition: box-shadow var(--t) var(--ease-out);
+}
+
+.row[data-lit] {
+  box-shadow: 0 0 0 2px var(--vertical);
+}
+
+.rowMark {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+.row[data-tone="deep"] .rowMark,
+.row[data-tone="deep"] .rowBar i {
+  background: var(--vertical-deep);
+}
+
+.row[data-tone="glow"] .rowMark,
+.row[data-tone="glow"] .rowBar i {
+  background: var(--vertical-glow);
+}
+
+.row[data-tone="accent"] .rowMark,
+.row[data-tone="accent"] .rowBar i {
+  background: var(--vertical-accent);
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rowText strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.rowText > span:not(.rowBar) {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.rowBar {
+  display: block;
+  height: 5px;
+  margin-top: 8px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--vertical-ink) 9%, transparent);
+  overflow: hidden;
+}
+
+.rowBar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.rowFigure {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.15;
+}
+
+.rowFigure strong {
+  font-size: 24px;
+  color: var(--ink);
+}
+
+.rowFigure span {
+  font-size: 12.5px;
+  white-space: nowrap;
+  color: var(--text-muted);
+}

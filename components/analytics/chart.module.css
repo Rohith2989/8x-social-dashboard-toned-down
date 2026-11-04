@@ -1,0 +1,395 @@
+/* the centrepiece: a white card, the metric as its title */
+.card {
+  margin-top: 20px;
+  padding: 20px 22px 18px;
+  border-radius: 26px;
+  background: var(--paper);
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.04),
+    0 18px 36px -26px rgb(11 11 12 / 0.22);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 20px;
+}
+
+.title p {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* the posts on the chart, on or off */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 48px;
+  padding: 0 16px 0 12px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.switch {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--stone-2);
+  transition: background-color var(--t) var(--ease-out);
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(11 11 12 / 0.25);
+  transition: transform var(--t) var(--ease-out);
+}
+
+.toggle[aria-pressed="true"] .switch {
+  background: var(--vertical-deep);
+}
+
+.toggle[aria-pressed="true"] .switch::after {
+  transform: translateX(14px);
+}
+
+/* ---- the plot ---- */
+
+.plot {
+  position: relative;
+  margin: 10px -6px 0;
+  cursor: crosshair;
+  outline: none;
+  user-select: none;
+}
+
+.plot:focus-visible {
+  border-radius: 14px;
+  box-shadow: 0 0 0 2px var(--vertical-deep);
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.tick line {
+  stroke: color-mix(in srgb, var(--vertical-ink) 8%, transparent);
+  stroke-width: 1;
+}
+
+.tick text,
+.date,
+.trackLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--text-muted);
+}
+
+.date:not([data-now]) {
+  fill: var(--mist);
+}
+
+.base {
+  stroke: color-mix(in srgb, var(--vertical-ink) 16%, transparent);
+  stroke-width: 1;
+}
+
+.openBand {
+  fill: var(--vertical-light);
+  opacity: 0.85;
+}
+
+.areas path {
+  animation: area-in 900ms var(--ease-out) both;
+}
+
+@keyframes area-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.before {
+  fill: none;
+  stroke: var(--mist);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* the window's lines draw themselves in, the brand's current: slow to start, long to settle */
+.line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1300ms var(--ease-current) 120ms forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.seam line {
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-opacity: 0.55;
+}
+
+.seam text {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.seamBefore {
+  fill: var(--text-muted);
+}
+
+.seamNow {
+  fill: var(--vertical-deep);
+}
+
+.rule line {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-opacity: 0.35;
+}
+
+.rule circle {
+  fill: #fff;
+  stroke-width: 2.4;
+}
+
+.openDot {
+  fill: var(--vertical-deep);
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.postDot {
+  fill: var(--vertical-deep);
+}
+
+.postDotBefore {
+  fill: var(--mist);
+}
+
+/* the faces of the posts that went big, each in a white ring over its day */
+.face {
+  position: absolute;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 0 2.5px #fff,
+    0 8px 16px -6px color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+  pointer-events: auto;
+  animation: face-in 620ms var(--ease-out) both;
+  animation-delay: calc(900ms + var(--i) * 90ms);
+}
+
+.face img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@keyframes face-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.6);
+  }
+}
+
+/* the day under the pointer */
+.tip {
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  width: 240px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  color: #fff;
+  background: color-mix(in srgb, var(--ink) 94%, var(--vertical-ink));
+  box-shadow: 0 18px 36px -16px rgb(11 11 12 / 0.55);
+  pointer-events: none;
+}
+
+.tipDate {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.tipDate span {
+  color: var(--vertical-glow);
+}
+
+.tipValue {
+  margin-top: 4px;
+  font-size: 14px;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.tipValue strong {
+  margin-right: 4px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.tipVs {
+  margin-top: 2px;
+  font-size: 13px;
+  color: rgb(255 255 255 / 0.66);
+}
+
+.tipVs[data-up] {
+  color: color-mix(in srgb, var(--success) 50%, #fff);
+}
+
+.tipSeries {
+  display: grid;
+  gap: 3px;
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+  list-style: none;
+  border-top: 1px solid rgb(255 255 255 / 0.14);
+  font-size: 13px;
+}
+
+.tipSeries li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.tipSeries i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tipSeries span {
+  margin-left: auto;
+  font-size: 13px;
+}
+
+.tipPosts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgb(255 255 255 / 0.14);
+  font-size: 13px;
+  color: rgb(255 255 255 / 0.86);
+}
+
+.tipPosts img {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.tipPosts[data-dim] {
+  opacity: 0.7;
+}
+
+/* the series, each a switch, with its total over the window */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legend button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text);
+  transition:
+    background-color var(--t-fast) var(--ease-out),
+    opacity var(--t-fast) var(--ease-out);
+}
+
+.legend button:hover:not(:disabled) {
+  background: var(--canvas);
+}
+
+.legend button:disabled {
+  cursor: default;
+}
+
+.legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.legend span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.legend button[aria-pressed="false"] {
+  opacity: 0.45;
+}
+
+.note {
+  margin-top: 6px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+
+  .areas path,
+  .face {
+    animation: none;
+  }
+}

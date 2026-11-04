@@ -1,0 +1,419 @@
+/* in the right-hand column: the two cards, one under the other */
+.eightx {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px 24px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* in the tray, below 1360 px: a section of its own, the two cards side by side where they fit */
+.inline {
+  container-type: inline-size;
+  padding: 0;
+}
+
+.inline .cards {
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* wide enough, her card reads in two columns (who she is and what she runs; her latest and the way to her), and the
+   creators' card in one line */
+@container (min-width: 700px) {
+  .inline .managerInner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    column-gap: 32px;
+  }
+
+  .inline .work {
+    padding-left: 32px;
+    border-left: 1px solid rgb(255 255 255 / 0.12);
+  }
+
+  .inline .work .sub {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .inline .write {
+    align-self: flex-start;
+  }
+
+  .inline .writeNote {
+    text-align: left;
+  }
+
+  .inline .creatorsInner {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .inline .creatorsInner > * {
+    margin-top: 0;
+  }
+}
+
+.head h2 {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.head p {
+  margin-top: 4px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+}
+
+/* the account manager: ink, lit by the vertical from its top right, with grain */
+.manager[aria-label] {
+  background:
+    radial-gradient(120% 70% at 100% 0%, color-mix(in srgb, var(--vertical) 42%, transparent), transparent 62%),
+    radial-gradient(90% 60% at 0% 100%, color-mix(in srgb, var(--vertical-accent) 16%, transparent), transparent 70%),
+    var(--ink);
+}
+
+.manager::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+/* lit for a moment when a request's "Ask Maya" brings it into view */
+.manager:has([data-flash]) {
+  animation: lit 1.6s var(--ease-out);
+}
+
+@keyframes lit {
+  0%,
+  35% {
+    box-shadow:
+      0 0 0 3px var(--vertical-glow),
+      0 24px 44px -28px rgb(11 11 12 / 0.7);
+  }
+}
+
+.managerInner {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 18px;
+  color: #fff;
+}
+
+.side,
+.work {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.kicker + .who {
+  margin-top: 18px;
+}
+
+.inline .who {
+  margin-top: 0;
+}
+
+/* her disc: an M on the vertical's glow, with grain */
+.disc {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 50%;
+  font-family: var(--font-num);
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  background: radial-gradient(100% 100% at 28% 18%, color-mix(in srgb, var(--vertical-glow) 85%, #fff), var(--vertical) 70%);
+  box-shadow:
+    0 0 0 3px rgb(255 255 255 / 0.12),
+    0 14px 26px -14px color-mix(in srgb, var(--vertical) 80%, transparent);
+}
+
+.disc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 120px 120px;
+  opacity: 0.32;
+}
+
+.whoText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.whoText strong {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.whoText > span {
+  font-size: 13.5px;
+  color: rgb(255 255 255 / 0.7);
+}
+
+/* the campaigns she runs, each in its colour, and where it stands */
+.campaigns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 14px 0 0;
+  list-style: none;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+/* the name, and where it stands under it (the column is narrow; nothing gets cut) */
+.campaigns li {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  align-items: center;
+  gap: 1px 10px;
+  font-size: 14px;
+}
+
+.campaigns i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.campaigns i[data-tone="deep"] {
+  background: var(--vertical);
+}
+
+.campaigns i[data-tone="glow"] {
+  background: var(--vertical-glow);
+}
+
+.campaigns i[data-tone="accent"] {
+  background: var(--vertical-accent);
+}
+
+.campaignName {
+  overflow: hidden;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.campaignState {
+  grid-column: 2;
+  font-size: 12.5px;
+  color: rgb(255 255 255 / 0.62);
+}
+
+.campaigns li[data-status="live"] .campaignState {
+  color: var(--vertical-glow);
+}
+
+.sub {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(255 255 255 / 0.62);
+}
+
+/* her latest, each opening its script */
+.lately {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px -8px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 8px;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.step:hover {
+  background: rgb(255 255 255 / 0.07);
+}
+
+.stepIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  color: var(--vertical-glow);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.when {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: rgb(255 255 255 / 0.58);
+}
+
+/* the way to write to her: the plan's thread */
+.write {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  margin-top: 16px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  background: #fff;
+  transition:
+    background-color var(--t) var(--ease-out),
+    box-shadow var(--t) var(--ease-out);
+}
+
+.write:hover {
+  background: var(--vertical-light);
+  box-shadow: 0 12px 24px -14px color-mix(in srgb, var(--vertical) 80%, transparent);
+}
+
+.writeNote {
+  margin-top: 8px;
+  font-size: 12.5px;
+  text-align: center;
+  color: rgb(255 255 255 / 0.58);
+}
+
+/* the creators making the posts */
+.creatorsInner {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 18px;
+}
+
+.creatorsInner h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.faces {
+  display: flex;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.faces > * {
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+.faces > * + * {
+  margin-left: -9px;
+}
+
+/* positioned like the faces, so it stands over the last one */
+.more {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  font-family: var(--font-num);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}
+
+.count {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.count strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vertical-deep);
+  text-decoration: none;
+}
+
+.go:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manager:has([data-flash]) {
+    animation: none;
+  }
+}

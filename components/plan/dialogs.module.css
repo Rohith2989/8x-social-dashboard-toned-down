@@ -1,0 +1,75 @@
+/* the scripts an approval is about, by their pictures and names */
+.scripts {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scripts li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 16px;
+  background: var(--canvas);
+}
+
+.scripts li > span:last-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.scripts strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.number {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.thumb {
+  width: 34px !important;
+  height: 60px !important;
+  border-radius: 9px !important;
+}
+
+/* a link to a video like the idea */
+.linkField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.linkField input {
+  height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-input);
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--paper);
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease-out);
+}
+
+.linkField input:focus {
+  border-color: var(--vertical);
+}
+
+.linkField input[aria-invalid] {
+  border-color: var(--danger);
+}
+
+.linkWhy {
+  font-size: 13.5px;
+  color: var(--danger);
+}

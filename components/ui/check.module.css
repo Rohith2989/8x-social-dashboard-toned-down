@@ -1,0 +1,87 @@
+.check {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.check input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--stone-2);
+  transition:
+    background-color 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.glass .box {
+  background: rgb(255 255 255 / 0.9);
+  box-shadow:
+    inset 0 0 0 1.5px rgb(255 255 255 / 0.9),
+    0 4px 10px -4px rgb(11 11 12 / 0.4);
+}
+
+.check:hover .box {
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+.check:active .box {
+  transform: scale(0.92);
+}
+
+.box svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tick {
+  stroke-dasharray: 14;
+  stroke-dashoffset: 14;
+  transition: stroke-dashoffset 260ms var(--ease-out) 60ms;
+}
+
+.bar {
+  stroke-dasharray: 8;
+}
+
+.check input:checked + .box,
+.check input:indeterminate + .box {
+  background: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+.check input:checked + .box .tick {
+  stroke-dashoffset: 0;
+}
+
+.check input:focus-visible + .box {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow:
+    inset 0 0 0 1.5px var(--ink),
+    0 0 0 5px color-mix(in srgb, var(--vertical) 30%, transparent);
+}
+
+.label {
+  font-size: 15px;
+  color: var(--text);
+}

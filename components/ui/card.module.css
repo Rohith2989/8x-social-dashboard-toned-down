@@ -1,0 +1,98 @@
+.card {
+  --delay: calc(var(--order, 0) * 90ms);
+  --band-dot: var(--vertical);
+  position: relative;
+  isolation: isolate;
+  border-radius: 26px;
+  min-width: 0;
+  transition:
+    opacity 520ms var(--ease-out) var(--delay),
+    transform 760ms var(--ease-out) var(--delay);
+}
+
+.paper {
+  background: var(--paper);
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.04),
+    0 18px 36px -26px rgb(11 11 12 / 0.22);
+}
+
+.pastel {
+  background: color-mix(in srgb, var(--vertical-glow) 46%, var(--vertical-light));
+  color: var(--ink);
+}
+
+.ink {
+  --band-dot: var(--vertical-glow);
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 24px 44px -28px rgb(11 11 12 / 0.7);
+}
+
+.aura {
+  --band-dot: #fff;
+  background: var(--vertical-deep);
+  color: #fff;
+  box-shadow: 0 2px 6px rgb(11 11 12 / 0.06), 0 28px 56px -24px color-mix(in srgb, var(--vertical-deep) 60%, transparent);
+}
+
+.body {
+  position: relative;
+  height: 100%;
+}
+
+/* the shell settles in; the content waits behind its mask */
+.card[data-arrive="wait"] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.card:is([data-arrive="wait"], [data-arrive="in"]) .body {
+  mask-image: linear-gradient(90deg, #000 45%, transparent 55%);
+  mask-size: 260% 100%;
+  mask-repeat: no-repeat;
+  mask-position: 100% 0;
+}
+
+.card[data-arrive="in"] .body {
+  animation: resolve 980ms var(--ease-current) calc(var(--delay) + 140ms) forwards;
+}
+
+/* the band of fine dots at the content's leading edge */
+.resolve {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--band-dot) 1.15px, transparent 1.55px) 0 0 / 6px 6px;
+  mask-image: linear-gradient(90deg, transparent 38%, #000 46%, #000 51%, transparent 57%);
+  mask-size: 260% 100%;
+  mask-repeat: no-repeat;
+  mask-position: 100% 0;
+  opacity: 0;
+}
+
+.card[data-arrive="in"] .resolve {
+  animation: resolve-band 980ms var(--ease-current) calc(var(--delay) + 140ms) forwards;
+}
+
+@keyframes resolve {
+  to {
+    mask-position: 0 0;
+  }
+}
+
+@keyframes resolve-band {
+  0% {
+    opacity: 0.85;
+    mask-position: 100% 0;
+  }
+  88% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    mask-position: 0 0;
+  }
+}

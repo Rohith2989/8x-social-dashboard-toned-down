@@ -1,0 +1,347 @@
+/* one script's activity: its head, the thread that scrolls, the box pinned under it */
+.activity {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 18px 16px 14px;
+  animation: activity-in 460ms var(--ease-out);
+}
+
+@keyframes activity-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.head {
+  position: relative;
+  flex: none;
+  padding: 2px 4px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.head h2 {
+  margin-top: 2px;
+  padding-right: 36px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.state > :first-child {
+  flex: none;
+}
+
+.state[data-tone="waiting"] {
+  color: var(--vertical-deep);
+}
+
+.state[data-tone="approved"] {
+  color: color-mix(in srgb, var(--vertical-deep) 72%, var(--vertical-ink));
+}
+
+.state[data-tone="flagged"] {
+  color: var(--danger);
+}
+
+.state[data-tone="updated"] {
+  color: var(--vertical);
+}
+
+.close {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--stone);
+}
+
+.close:hover {
+  background: var(--stone-2);
+}
+
+/* ---- the thread ---- */
+
+.thread {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 16px 4px 18px;
+}
+
+.thread::-webkit-scrollbar {
+  display: none;
+}
+
+.empty {
+  padding: 20px 0;
+  font-size: 14.5px;
+  color: var(--text-muted);
+}
+
+.list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.day {
+  padding-left: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.entry {
+  position: relative;
+  animation: entry-in 520ms var(--ease-out) both;
+  animation-delay: calc(min(var(--r), 8) * 45ms);
+}
+
+@keyframes entry-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* the thread's line, from under each mark to the next entry */
+.entry:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 34px;
+  bottom: -14px;
+  left: 14.5px;
+  width: 1px;
+  background: var(--border);
+}
+
+.comment,
+.line {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.disc,
+.mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.disc {
+  font: 600 11px/1 var(--font-num);
+  letter-spacing: 0.02em;
+}
+
+/* 8x's side in ink, the brand's in the vertical's colours */
+.comment[data-side="team"] .disc {
+  color: #fff;
+  background: var(--ink);
+}
+
+.comment[data-side="brand"] .disc {
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}
+
+.comment[data-you] .disc {
+  color: #fff;
+  background: var(--vertical-deep);
+}
+
+.text {
+  min-width: 0;
+  padding-top: 5px;
+}
+
+.by,
+.sentence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 7px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.by strong,
+.sentence strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.by time,
+.sentence time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.words {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 4px 16px 16px 16px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+
+.comment[data-side="brand"] .words {
+  background: var(--vertical-light);
+}
+
+.comment[data-side="team"] .words {
+  background: var(--stone);
+}
+
+.mark {
+  color: var(--text);
+  background: var(--stone);
+}
+
+.line[data-kind="approved"] .mark {
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}
+
+.line[data-kind="flagged"] .mark {
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, #fff);
+}
+
+.line[data-kind="flagResolved"] .mark {
+  color: #fff;
+  background: var(--vertical-deep);
+}
+
+.reasons {
+  margin-top: 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.line[data-kind="flagResolved"] .reasons {
+  color: var(--text-muted);
+}
+
+.note {
+  margin-top: 6px;
+  padding: 9px 12px;
+  border-radius: 4px 14px 14px 14px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--canvas);
+}
+
+/* ---- the box to write in ---- */
+
+.composer {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 7px 7px 7px 14px;
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--border);
+  transition: box-shadow var(--t) var(--ease-out);
+}
+
+.composer:focus-within {
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical-light) 80%, transparent);
+}
+
+.composer textarea {
+  flex: 1;
+  min-width: 0;
+  min-height: 24px;
+  max-height: 168px;
+  padding: 7px 0;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  resize: none;
+  field-sizing: content;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: transparent;
+}
+
+.composer textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.composer button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--ink);
+  transition:
+    background-color var(--t-fast) var(--ease-out),
+    transform var(--t-fast) var(--ease-out);
+}
+
+.composer button:hover:not(:disabled) {
+  background: var(--vertical-deep);
+}
+
+.composer button:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.composer button:disabled {
+  color: var(--mist);
+  background: var(--stone);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activity,
+  .entry {
+    animation: none;
+  }
+}

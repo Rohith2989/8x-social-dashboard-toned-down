@@ -1,0 +1,707 @@
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 14px 20px 24px;
+  animation: post-in 460ms var(--ease-out);
+}
+
+@keyframes post-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ---- the post as it ran ---- */
+.frame {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 9 / 16;
+  margin: 0 -6px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #0b0d14;
+  box-shadow:
+    0 2px 6px rgb(11 11 12 / 0.12),
+    0 30px 50px -30px color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+  transition: filter 300ms var(--ease-out);
+}
+
+.frame video,
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blank {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.12) 1.2px, transparent 1.6px) 0 0 / 9px 9px,
+    linear-gradient(160deg, #1a2140, #0b0d14);
+}
+
+.blank svg {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+.top,
+.shade {
+  position: absolute;
+  inset-inline: 0;
+  pointer-events: none;
+}
+
+.top {
+  top: 0;
+  height: 22%;
+  background: linear-gradient(rgb(5 8 20 / 0.5), rgb(5 8 20 / 0));
+}
+
+.shade {
+  bottom: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgb(5 8 20 / 0.78), rgb(5 8 20 / 0));
+}
+
+.app {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 0.4);
+}
+
+.app svg {
+  border-radius: 7px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.9);
+  color: var(--ink);
+  box-shadow: 0 4px 12px -4px rgb(0 0 0 / 0.5);
+}
+
+.close:hover {
+  background: #fff;
+}
+
+/* a post with no video here: the way to watch it where it ran */
+.watch {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.92);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px -10px rgb(0 0 0 / 0.55);
+  backdrop-filter: blur(8px);
+  transition:
+    background-color var(--t-fast) var(--ease-out),
+    transform 260ms var(--ease-out);
+}
+
+.watch:hover {
+  background: #fff;
+  transform: scale(1.03);
+}
+
+.watch svg:first-child {
+  fill: currentColor;
+}
+
+/* the platform's own rail: who, and the counts the audience saw */
+.rail {
+  position: absolute;
+  right: 10px;
+  bottom: 74px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.5);
+}
+
+.rail > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.rail svg {
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.45));
+}
+
+.railFace {
+  margin-bottom: 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.foot {
+  position: absolute;
+  left: 14px;
+  right: 66px;
+  bottom: 18px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #fff;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.45);
+}
+
+.foot strong {
+  font-size: 14px;
+}
+
+.footCaption {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.3;
+  color: rgb(255 255 255 / 0.92);
+}
+
+/* the play line along the bottom */
+.progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  height: 3px;
+  background: rgb(255 255 255 / 0.85);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--p, 0));
+}
+
+.deleted {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: auto;
+  width: max-content;
+  max-width: 80%;
+  height: max-content;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgb(11 11 12 / 0.7);
+  color: #fff;
+  font-size: 13.5px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.panel[data-status="deleted"] .frame video,
+.panel[data-status="deleted"] .frame img {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+/* ---- when, and who ---- */
+.when {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.when time {
+  color: var(--text);
+}
+
+.when :global(.mono) {
+  font-size: 12.5px;
+}
+
+.when > i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--mist);
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.state i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vertical);
+}
+
+.state[data-status="deleted"] {
+  color: var(--text-muted);
+}
+
+.state[data-status="deleted"] i {
+  background: var(--dot-quiet);
+}
+
+.creator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px -8px 0;
+  padding: 8px;
+  border-radius: 18px;
+  color: var(--ink);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.creator:hover {
+  background: var(--canvas);
+}
+
+.creator > svg {
+  margin-left: auto;
+  color: var(--mist);
+  transition:
+    color var(--t-fast) var(--ease-out),
+    transform 300ms var(--ease-out);
+}
+
+.creator:hover > svg {
+  color: var(--ink);
+  transform: translateX(3px);
+}
+
+.creatorText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.creatorText strong {
+  font-size: 15px;
+}
+
+.creatorText span {
+  overflow: hidden;
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+}
+
+/* ---- an open flag ---- */
+.flagged {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--danger) 8%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 20%, transparent);
+}
+
+.flagHead {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--danger);
+}
+
+.flagBy {
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: var(--text);
+}
+
+.flagNote {
+  margin-top: 8px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.lift {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---- the five figures ---- */
+.figures {
+  margin-top: 16px;
+}
+
+.viewsRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.views {
+  font-size: 46px;
+  line-height: 0.9;
+  color: var(--ink);
+}
+
+.viewsWord {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.passed {
+  align-self: center;
+  margin-left: auto;
+}
+
+.four {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0 0;
+}
+
+.four > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 5px;
+  padding: 12px 14px 11px;
+  border-radius: 16px;
+  background: var(--canvas);
+}
+
+.four dt {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.four dd {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.four .na {
+  color: var(--text-muted);
+}
+
+.section {
+  margin-top: 20px;
+}
+
+/* a section's name stays whole; what it says beside it moves under it when the column is narrow */
+.label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.label span {
+  font-size: 13px;
+  font-weight: 400;
+  white-space: normal;
+  color: var(--text-muted);
+}
+
+/* ---- the next milestone: a line of fine dots from the one it passed to the next ---- */
+.track {
+  display: grid;
+  grid-template-columns: repeat(34, minmax(0, 1fr));
+  justify-items: center;
+}
+
+.track i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--dot-ghost);
+}
+
+.track i.trackOn {
+  animation: track-on 360ms var(--ease-out) both;
+  animation-delay: calc(var(--k) * 18ms + 200ms);
+}
+
+@keyframes track-on {
+  from {
+    background: var(--dot-ghost);
+    transform: scale(0.6);
+  }
+  to {
+    background: var(--vertical);
+  }
+}
+
+.trackEnds {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---- views over time ---- */
+.growth {
+  position: relative;
+}
+
+/* a short life sits together on the left rather than spread across the column */
+.cols {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 3px;
+  width: min(100%, calc(var(--n) * 22px));
+}
+
+.col {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 4px);
+  justify-content: center;
+  gap: 3px;
+  padding: 2px 0;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.col i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--dot-ghost);
+}
+
+.col i.colOn {
+  animation: col-on 420ms var(--ease-out) both;
+  animation-delay: calc(var(--delay) + 240ms);
+}
+
+@keyframes col-on {
+  from {
+    background: var(--dot-ghost);
+  }
+  to {
+    background: var(--vertical);
+  }
+}
+
+.growth[data-pointing] .col:not([data-over]) {
+  opacity: 0.4;
+}
+
+.tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: max-content;
+  padding: 8px 11px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: rgb(255 255 255 / 0.75);
+  font-size: 13px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+  animation: tip-in 180ms var(--ease-out);
+}
+
+.tip strong {
+  font-weight: 600;
+  color: #fff;
+}
+
+.tip[data-edge="start"] {
+  left: 0;
+  transform: none;
+}
+
+.tip[data-edge="end"] {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+
+.axis {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: max(min(100%, calc(var(--n) * 22px)), 150px);
+  margin-top: 8px;
+  white-space: nowrap;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.oneDay {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--canvas);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---- what the brand can do with it ---- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.actions > span > button {
+  width: 100%;
+}
+
+.quick {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 8px;
+}
+
+.quickBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+  height: 44px;
+  padding: 0 8px;
+  border-radius: 14px;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.quickBtn:hover:not(:disabled) {
+  background: var(--stone);
+}
+
+.quickBtn:disabled {
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.quickBtn :global(.mono) {
+  font-size: 13px;
+}
+
+.out {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.out:hover {
+  color: var(--ink);
+}
+
+/* a post's poster, small (the selection bar's and the flag composer's heads) */
+.poster {
+  display: grid;
+  place-items: center;
+  flex: none;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, var(--dot-ghost) 1px, transparent 1.4px) 0 0 / 5px 5px,
+    var(--canvas);
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster svg {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+/* the script a post was made to, beside who made it */
+.madeMark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}

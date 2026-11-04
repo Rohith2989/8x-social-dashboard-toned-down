@@ -1,0 +1,149 @@
+.body {
+  max-height: min(84vh, 760px);
+}
+
+.thread {
+  display: grid;
+  gap: 16px;
+  max-height: 360px;
+  margin-top: 18px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.thread:empty {
+  display: none;
+}
+
+.thread::-webkit-scrollbar {
+  display: none;
+}
+
+.turn {
+  display: grid;
+  gap: 8px;
+  animation: in 420ms var(--ease-out);
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.q {
+  justify-self: end;
+  max-width: 80%;
+  padding: 9px 13px;
+  border-radius: 16px 16px 4px 16px;
+  font-size: 14.5px;
+  color: var(--ink);
+  background: var(--vertical-light);
+}
+
+.a {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 4px 16px 16px 16px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--canvas);
+}
+
+.a b {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.list {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.list span {
+  color: var(--text-muted);
+}
+
+.caveat {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.openers {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.openers button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--ink);
+  background: var(--canvas);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.openers button:hover {
+  background: color-mix(in srgb, var(--vertical-light) 70%, #fff);
+}
+
+.openers svg {
+  flex: none;
+  color: var(--vertical-deep);
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1.5px var(--border);
+}
+
+.box:focus-within {
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical-light) 80%, transparent);
+}
+
+.box input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+}
+
+.box button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--ink);
+}
+
+.box button:disabled {
+  color: var(--mist);
+  background: var(--stone);
+}

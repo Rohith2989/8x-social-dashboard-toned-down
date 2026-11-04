@@ -1,0 +1,70 @@
+/* the five depths of the vertical a tier is read in, palest to deepest */
+.mark {
+  --t1: color-mix(in srgb, var(--vertical-glow) 80%, #fff);
+  --t2: color-mix(in srgb, var(--vertical) 35%, var(--vertical-glow));
+  --t3: var(--vertical);
+  --t4: var(--vertical-deep);
+  --t5: color-mix(in srgb, var(--vertical-deep) 62%, var(--vertical-ink));
+  --off: var(--dot-ghost);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+}
+
+/* over a post's poster: the steps not reached are white, faint */
+.media {
+  --off: rgb(255 255 255 / 0.32);
+}
+
+.mark svg {
+  display: block;
+  overflow: visible;
+}
+
+.mark circle {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: butt;
+}
+
+.off {
+  stroke: var(--off);
+}
+
+.on[data-step="1"] {
+  stroke: var(--t1);
+}
+
+.on[data-step="2"] {
+  stroke: var(--t2);
+}
+
+.on[data-step="3"] {
+  stroke: var(--t3);
+}
+
+.on[data-step="4"] {
+  stroke: var(--t4);
+}
+
+.on[data-step="5"] {
+  stroke: var(--t5);
+}
+
+/* over a poster the palest steps would vanish: they go white */
+.media .on[data-step="1"],
+.media .on[data-step="2"] {
+  stroke: #fff;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.media .label {
+  color: #fff;
+}

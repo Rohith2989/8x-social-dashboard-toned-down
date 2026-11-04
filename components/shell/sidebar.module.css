@@ -1,0 +1,378 @@
+.sidebar {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 30px 22px 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 12px;
+}
+
+.lockup img {
+  height: 24px;
+  width: auto;
+}
+
+.mark {
+  display: none !important;
+}
+
+.close {
+  display: none;
+}
+
+/* who this is */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+/* the brand's logo is the avatar: its own rounded square, on a soft shadow of its navy */
+.avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 14px 16px rgb(13 24 56 / 0.28)) drop-shadow(0 2px 3px rgb(13 24 56 / 0.18));
+  transition: transform 520ms var(--ease-out);
+}
+
+.profile:hover .avatar img {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.badge {
+  position: absolute;
+  right: -6px;
+  bottom: -4px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 4px 10px -4px rgb(11 11 12 / 0.3);
+}
+
+.badge i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--vertical);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--vertical) 50%, transparent);
+  animation: live 1800ms var(--ease-out) 1200ms 2;
+}
+
+@keyframes live {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--vertical) 50%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+}
+
+.profile strong {
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.role {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* the pages */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 38px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  transition:
+    background-color var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+
+.item svg {
+  color: var(--text-muted);
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.item:hover {
+  background: color-mix(in srgb, var(--canvas) 60%, transparent);
+  color: var(--ink);
+}
+
+.item.current {
+  background: var(--canvas);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.item.current svg {
+  color: var(--vertical-deep);
+}
+
+.label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* something new waits there: a dot in the vertical colour, never a badge */
+.count.fresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vertical-deep);
+  font-weight: 600;
+}
+
+.count.fresh::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--vertical);
+}
+
+.foot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+  padding-bottom: 132px;
+}
+
+.blob {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  pointer-events: none;
+}
+
+.scrim {
+  display: none;
+}
+
+/* a shorter screen: the blob and the gaps shrink so nothing sits under it */
+@media (max-height: 860px) and (min-width: 768px) {
+  .profile {
+    margin-top: 26px;
+  }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+  }
+
+  .nav {
+    margin-top: 24px;
+    gap: 2px;
+  }
+
+  .item {
+    height: 42px;
+  }
+
+  .foot {
+    padding-bottom: 96px;
+  }
+
+  .blob {
+    height: 104px;
+  }
+}
+
+/* the rail */
+@media (max-width: 1199px) {
+  .sidebar {
+    align-items: center;
+    padding: 28px 12px 0;
+  }
+
+  .top {
+    padding: 0;
+  }
+
+  .full {
+    display: none !important;
+  }
+
+  .mark {
+    display: block !important;
+    height: 22px !important;
+  }
+
+  .profile {
+    margin-top: 32px;
+  }
+
+  .avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .badge {
+    width: 20px;
+    height: 20px;
+    right: -2px;
+    bottom: 0;
+  }
+
+  .badge i {
+    width: 7px;
+    height: 7px;
+  }
+
+  .profile strong,
+  .role,
+  .label,
+  .count,
+  .count.fresh {
+    display: none;
+  }
+
+  .item {
+    justify-content: center;
+    width: 52px;
+    padding: 0;
+  }
+
+  .nav {
+    margin-top: 28px;
+  }
+
+  .foot {
+    padding-bottom: 110px;
+  }
+
+  .blob {
+    height: 110px;
+  }
+}
+
+/* the drawer */
+@media (max-width: 767px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(300px, 86vw);
+    align-items: stretch;
+    padding: 18px 18px 0;
+    box-shadow: var(--shadow-float);
+    transform: translateX(-104%);
+    transition: transform 420ms var(--ease-out);
+  }
+
+  .open {
+    transform: none;
+  }
+
+  .scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 29;
+    background: rgb(11 11 12 / 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 320ms var(--ease-out);
+  }
+
+  .scrimOn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .top {
+    padding-left: 12px;
+  }
+
+  .full {
+    display: block !important;
+  }
+
+  .mark {
+    display: none !important;
+  }
+
+  .close {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--ink);
+  }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+  }
+
+  .profile strong,
+  .role {
+    display: flex;
+  }
+
+  .label,
+  .count {
+    display: block;
+  }
+
+  .count.fresh {
+    display: inline-flex;
+  }
+
+  .item {
+    justify-content: flex-start;
+    width: auto;
+    padding: 0 16px;
+  }
+}

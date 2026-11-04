@@ -1,0 +1,203 @@
+/* one block of the vertical's colour, lit from its top right corner, with the grain the campaign cards carry */
+.card[aria-label] {
+  container-type: inline-size;
+  background: radial-gradient(
+    120% 140% at 100% 0%,
+    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    var(--vertical-deep) 52%,
+    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
+  );
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.card > div {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 20px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.head h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.head p {
+  font-size: 14px;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.head :global(.mono) {
+  font-size: 13.5px;
+  color: #fff;
+}
+
+/* the rings, and beside them what they mean */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 6cqi, 40px);
+  margin-top: 10px;
+}
+
+.ring {
+  position: relative;
+  container-type: inline-size;
+  flex: none;
+  width: clamp(132px, 35cqi, 196px);
+  aspect-ratio: 1;
+  margin-left: clamp(10px, 3cqi, 22px);
+}
+
+.ring svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.lit,
+.ghost {
+  opacity: 0;
+}
+
+:global([data-arrive]:not([data-arrive="wait"])) .lit,
+:global([data-arrive]:not([data-arrive="wait"])) .ghost {
+  animation: dot-in 420ms var(--ease-out) forwards;
+}
+
+.lit {
+  fill: #fff;
+}
+
+.ghost {
+  fill: rgb(255 255 255 / 0.26);
+}
+
+@keyframes dot-in {
+  to {
+    opacity: var(--o, 1);
+  }
+}
+
+/* where the plan says it should be today: white, cut clear of the dots around it */
+.plan {
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out) 900ms;
+}
+
+.planOn {
+  opacity: 1;
+}
+
+.plan .halo {
+  stroke: var(--vertical-deep);
+  stroke-width: 9;
+}
+
+.plan text {
+  stroke: none;
+  fill: rgb(255 255 255 / 0.9);
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2cqi;
+  font-size: max(11px, 6.4cqi);
+  color: rgb(255 255 255 / 0.74);
+}
+
+.center :global(.mono) {
+  font-size: 0.95em;
+  color: #fff;
+}
+
+/* the count keeps its place inside the rings at any size */
+.big {
+  font-size: 23.5cqi;
+  line-height: 1;
+  color: #fff;
+}
+
+.read {
+  flex: 1;
+  min-width: 0;
+}
+
+/* the change and its words flow as one line of text, wrapping like one */
+.ahead {
+  font-size: 15px;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.84);
+}
+
+.ahead > span:first-child {
+  margin-right: 6px;
+  vertical-align: -3px;
+}
+
+.facts {
+  margin: 12px 0 0;
+}
+
+.facts > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.facts dt {
+  font-size: 14px;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.facts dd {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* a narrow card puts the figures under the rings */
+@container (max-width: 320px) {
+  .main {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .ring {
+    align-self: center;
+    margin: 6px 0 0;
+  }
+}

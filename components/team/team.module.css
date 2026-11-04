@@ -1,0 +1,18 @@
+/* the page's parts, one under another, with room between them */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+/* the 8x team comes into the tray where the window has no right-hand column (scoped under the stack, so its own
+   display never wins over this) */
+.stack > .inline {
+  display: none;
+}
+
+@media (max-width: 1359px) {
+  .stack > .inline {
+    display: flex;
+  }
+}

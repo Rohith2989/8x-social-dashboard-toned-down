@@ -1,0 +1,93 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 24px 60px;
+  border-radius: 26px;
+  background: var(--paper);
+  text-align: center;
+  animation: in 460ms var(--ease-out) both;
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* a ring of empty places, in fine dots */
+.ring {
+  position: relative;
+  width: 132px;
+  height: 132px;
+}
+
+.ring svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  overflow: visible;
+  transform: rotate(calc(var(--i) * 45deg)) translateY(-50px);
+  animation: place 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@keyframes place {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+
+.ring circle {
+  fill: none;
+  stroke: var(--dot-quiet);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0 5;
+}
+
+.center {
+  position: absolute;
+  inset: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--canvas);
+  color: var(--vertical-deep);
+}
+
+.empty h3 {
+  margin-top: 22px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.empty p {
+  max-width: 420px;
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.action {
+  height: 46px;
+  margin-top: 20px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color var(--t) var(--ease-out);
+}
+
+.action:hover {
+  background: var(--vertical-deep);
+}

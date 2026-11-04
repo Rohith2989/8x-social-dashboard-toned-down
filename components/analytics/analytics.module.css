@@ -1,0 +1,29 @@
+/* the source on the left; the window and what it is compared with on the right */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 20px;
+}
+
+.window {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 14px;
+}
+
+.window p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.footnote {
+  margin-top: 20px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}

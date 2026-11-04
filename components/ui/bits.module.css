@@ -1,0 +1,69 @@
+/* change */
+.change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.change.up {
+  color: var(--success);
+}
+.change.down {
+  color: var(--danger);
+}
+.change.ink.up {
+  color: color-mix(in srgb, var(--success) 45%, #fff);
+}
+.change.ink.down {
+  color: color-mix(in srgb, var(--danger) 45%, #fff);
+}
+.change.aura {
+  color: #fff;
+}
+
+.figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.caption {
+  margin-left: 4px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.ink .caption {
+  color: rgb(255 255 255 / 0.62);
+}
+.aura .caption {
+  color: rgb(255 255 255 / 0.72);
+}
+
+/* avatar */
+.avatar {
+  position: relative;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--vertical-light);
+  box-shadow: 0 0 0 2px var(--ring, transparent);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--vertical-ink);
+}

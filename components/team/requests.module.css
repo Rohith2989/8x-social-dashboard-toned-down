@@ -1,0 +1,370 @@
+.requests {
+  container-type: inline-size;
+}
+
+.head h2 {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.head p {
+  margin-top: 4px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* a row lit for a moment: a request just sent, or the one a refusal points at */
+.list > li[data-flash] > section {
+  animation: lit 1.6s var(--ease-out);
+}
+
+@keyframes lit {
+  0%,
+  35% {
+    box-shadow:
+      0 0 0 3px var(--vertical),
+      0 18px 36px -22px color-mix(in srgb, var(--vertical-deep) 60%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* the address and its state, the way it went, what can be done */
+.row {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1.15fr) minmax(300px, 1fr) 128px;
+  align-items: center;
+  gap: 14px 18px;
+  padding: 16px 20px;
+}
+
+.envelope {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: var(--vertical-deep);
+  background: rgb(255 255 255 / 0.9);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical-ink) 8%, transparent),
+    0 8px 18px -12px color-mix(in srgb, var(--vertical-ink) 45%, transparent);
+}
+
+.row[data-status="declined"] .envelope {
+  color: var(--text-muted);
+}
+
+.text {
+  min-width: 0;
+}
+
+.email {
+  display: block;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--ink);
+}
+
+.state {
+  margin-top: 3px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.manager {
+  font-weight: 700;
+  color: var(--vertical-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.by {
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.act {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.trash {
+  color: var(--text-muted);
+}
+
+.trash:is(:hover, :focus-visible) {
+  color: var(--danger);
+}
+
+.locked {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--mist);
+  cursor: help;
+}
+
+/* the way: asked, 8x, signed in, on one line; the lit part runs as far as the request has gone */
+.track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-self: center;
+  width: 300px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.track::before,
+.track::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 16.67%;
+  height: 2px;
+  border-radius: 2px;
+}
+
+.track::before {
+  right: 16.67%;
+  background: color-mix(in srgb, var(--vertical-ink) 12%, transparent);
+}
+
+.track::after {
+  width: 33.33%;
+  background: var(--vertical-deep);
+}
+
+.track[data-status="approved"]::after {
+  width: 50%;
+  background: linear-gradient(90deg, var(--vertical-deep) 66%, color-mix(in srgb, var(--vertical-deep) 0%, transparent));
+}
+
+.track[data-status="declined"]::after {
+  background: color-mix(in srgb, var(--vertical-ink) 30%, transparent);
+}
+
+.track li {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* every stop stands in the same 28 px, so the words under them sit on one line */
+.track li > i {
+  width: 12px;
+  height: 12px;
+  margin: 8px 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--vertical-ink) 22%, transparent);
+}
+
+.track li[data-done] > i {
+  background: var(--vertical-deep);
+  box-shadow: none;
+}
+
+.track[data-status="declined"] li[data-done] > i {
+  background: color-mix(in srgb, var(--vertical-ink) 45%, #fff);
+}
+
+/* the 8x stop: the mark in a disc; waiting it beats, approved it fills, not approved it greys with a cross */
+.track li[data-ours] > i {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  background: #fff;
+  box-shadow:
+    0 0 0 1.5px color-mix(in srgb, var(--vertical-ink) 14%, transparent),
+    0 6px 14px -8px color-mix(in srgb, var(--vertical-ink) 50%, transparent);
+}
+
+.track li[data-ours] img {
+  width: 17px;
+  height: auto;
+}
+
+.track li[data-ours][data-done] > i {
+  background: var(--vertical-deep);
+  box-shadow: 0 6px 14px -8px color-mix(in srgb, var(--vertical-deep) 80%, transparent);
+}
+
+.track li[data-ours][data-now] > i {
+  box-shadow: 0 0 0 2px var(--vertical-deep);
+  animation: beat 1.8s var(--ease-out) infinite;
+}
+
+.track li[data-ours][data-stopped] > i {
+  background: color-mix(in srgb, var(--vertical-ink) 5%, #fff);
+}
+
+.track li[data-ours][data-stopped] img {
+  opacity: 0.45;
+}
+
+.track li[data-ours] b {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  display: grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  color: #fff;
+  background: color-mix(in srgb, var(--vertical-ink) 55%, #fff);
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* signed in, waited for: a ring that beats */
+.track li[data-now]:not([data-ours]) > i {
+  box-shadow: inset 0 0 0 2.5px var(--vertical-deep);
+  animation: beat 1.8s var(--ease-out) infinite;
+}
+
+.track li[data-off] {
+  opacity: 0.35;
+}
+
+.track span {
+  font-size: 12.5px;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.track li[data-done] span {
+  color: var(--text);
+}
+
+.track li[data-now] span {
+  font-weight: 700;
+  color: var(--vertical-deep);
+}
+
+.track li[data-stopped] span {
+  font-weight: 600;
+  color: var(--text);
+}
+
+@keyframes beat {
+  0% {
+    outline: 0 solid color-mix(in srgb, var(--vertical) 45%, transparent);
+    outline-offset: 0;
+  }
+  70%,
+  100% {
+    outline: 6px solid color-mix(in srgb, var(--vertical) 0%, transparent);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track li > i {
+    animation: none !important;
+  }
+
+  .list > li[data-flash] > section {
+    animation: none;
+  }
+}
+
+/* the withdraw dialog's mark */
+.dialogMark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, #fff);
+}
+
+.strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* narrower, the way goes under the address */
+@container (max-width: 880px) {
+  .row {
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+  }
+
+  .track {
+    grid-column: 2 / 3;
+    grid-row: 2;
+    justify-self: start;
+    margin-left: -30px;
+  }
+
+  .act {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+@container (max-width: 500px) {
+  .row {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    align-items: start;
+    padding: 14px 16px;
+  }
+
+  .envelope {
+    width: 40px;
+    height: 40px;
+  }
+
+  .track {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 300px;
+    margin-left: 0;
+  }
+
+  /* the withdraw button keeps its corner; Ask again goes under the way, where it has room */
+  .act {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .row[data-status="declined"] .act {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-content: flex-start;
+  }
+
+  .act:empty {
+    display: none;
+  }
+}

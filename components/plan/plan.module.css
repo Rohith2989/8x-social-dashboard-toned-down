@@ -1,0 +1,16 @@
+/* the script a flag is about, in the composer's head */
+.flagHead {
+  width: 36px !important;
+  height: 62px !important;
+  border-radius: 9px !important;
+  box-shadow: 0 0 0 2px var(--paper);
+}
+
+.none {
+  padding: 40px 24px;
+  border-radius: 26px;
+  font-size: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--paper);
+}

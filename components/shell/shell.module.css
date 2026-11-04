@@ -1,0 +1,289 @@
+/* the night the window floats in: the vertical's darkest shade, its aura alive in it (the window itself stays light) */
+.stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 100dvh;
+  padding: clamp(10px, 1.1vw, 24px);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--vertical-ink) 86%, #000);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.aura {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/media/grain.webp") repeat 0 0 / 256px 256px;
+  opacity: 0.9;
+}
+
+/*
+  The window fills the screen at every width. On very wide screens it is drawn larger rather than stretched thin, so
+  a 2560 px screen shows the layout the 1920 one does, at its proportions (zoom, where the browser has it; elsewhere
+  it simply fills).
+*/
+@supports (zoom: 1) {
+  @media (min-width: 2100px) {
+    .stage {
+      --z: 1.15;
+    }
+  }
+
+  @media (min-width: 2400px) {
+    .stage {
+      --z: 1.3;
+    }
+  }
+
+  @media (min-width: 2900px) {
+    .stage {
+      --z: 1.5;
+    }
+  }
+
+  @media (min-width: 3500px) {
+    .stage {
+      --z: 1.8;
+    }
+  }
+}
+
+.window {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: clamp(224px, 12.5vw, 256px) minmax(0, 1fr) clamp(296px, 16vw, 336px);
+  width: 100%;
+  height: 100%;
+  zoom: var(--z, 1); /* scales the window's own sizes; its 100% still means the stage */
+  border-radius: 38px;
+  background: var(--paper);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.06),
+    0 70px 120px -60px rgb(0 0 0 / 0.8);
+  animation: window-in 900ms var(--ease-out) both;
+}
+
+@keyframes window-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+}
+
+/* the tray: a soft inset panel that holds the page and scrolls inside the window */
+.tray {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  margin: 10px 0;
+  border-radius: 30px;
+  background: var(--canvas);
+  overflow: hidden;
+}
+
+/* it scrolls without a bar: the wheel, the trackpad and the keys still move it. Its width is what the page's parts
+   answer to (the selection bar folds its labels by it) */
+.scroll {
+  container: tray / inline-size;
+  height: 100%;
+  overflow-y: auto;
+  padding: 30px 32px 30px;
+  scrollbar-width: none;
+}
+
+.scroll::-webkit-scrollbar,
+.aside::-webkit-scrollbar {
+  display: none;
+}
+
+.aside {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.mobileBar {
+  display: none;
+}
+
+/* a page's title and its actions */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.header h1 {
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.header p {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.header p strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+
+.square {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgb(11 11 12 / 0.05);
+  transition: box-shadow var(--t) var(--ease-out);
+}
+
+.square:hover {
+  box-shadow: 0 8px 18px -10px rgb(11 11 12 / 0.35);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 30px;
+  padding: 18px 4px 0;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 1359px) {
+  .window {
+    grid-template-columns: 228px minmax(0, 1fr);
+  }
+
+  .tray {
+    margin-right: 10px;
+  }
+
+  .aside {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) {
+  .window {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+}
+
+/* on a phone the window opens out to the whole screen */
+@media (max-width: 767px) {
+  .stage {
+    height: auto;
+    min-height: 100dvh;
+    padding: 0;
+    overflow: visible;
+    background: var(--canvas);
+  }
+
+  .backdrop {
+    display: none;
+  }
+
+  .window {
+    display: block;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    background: var(--canvas);
+    animation: none;
+  }
+
+  .tray {
+    margin: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .scroll {
+    height: auto;
+    overflow: visible;
+    padding: 0 16px 28px;
+  }
+
+  .mobileBar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 64px;
+  }
+
+  .mobileBar img {
+    height: 22px;
+    width: auto;
+  }
+
+  .mobileBar .mobileMark {
+    height: 32px;
+    margin-left: auto;
+  }
+
+  .menu {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-left: -8px;
+    border-radius: 50%;
+    color: var(--ink);
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  /* the last action fills what is left of its line, and drops to a line of its own when there is not room */
+  .actions > :last-child {
+    flex: 1 0 auto;
+  }
+}

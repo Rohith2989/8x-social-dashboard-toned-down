@@ -1,0 +1,259 @@
+/* the strip lays itself out by the room it has, not the screen's */
+.holder {
+  container-type: inline-size;
+  margin-top: 20px;
+}
+
+/* warm stone with the grain on it */
+.strip {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  align-items: center;
+  gap: 18px;
+  margin-right: 44px;
+  padding: 28px 0 30px 30px;
+  border-radius: 26px;
+  background:
+    url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px,
+    radial-gradient(120% 150% at 0% 0%, color-mix(in srgb, var(--vertical-accent) 10%, #fff) 0%, color-mix(in srgb, var(--vertical-accent) 26%, var(--vertical-light)) 55%, color-mix(in srgb, var(--vertical-accent) 42%, var(--vertical-light)) 120%);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 800ms var(--ease-out);
+}
+
+.strip[data-arrive="wait"] {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* narrow: the title and its line above the tiles */
+.intro {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding-right: 30px;
+}
+
+/* wide: the title beside them, as one row */
+@container (min-width: 960px) {
+  .strip {
+    grid-template-columns: minmax(160px, 0.9fr) minmax(0, 4fr) 150px;
+    padding-top: 34px;
+  }
+
+  .intro {
+    grid-column: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    align-self: stretch;
+    margin-bottom: 0;
+    padding-right: 0;
+  }
+}
+
+.intro h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.intro p {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.intro strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* the tiles, each with its icon on a square half above it */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 36px 18px 18px;
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 0 18px 30px -22px rgb(11 11 12 / 0.4);
+  transition:
+    opacity 500ms var(--ease-out),
+    transform 700ms var(--ease-out),
+    box-shadow var(--t) var(--ease-out);
+  transition-delay: calc(var(--i) * 70ms + 120ms), calc(var(--i) * 70ms + 120ms), 0ms;
+}
+
+.strip[data-arrive="wait"] .tile {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.tile:hover {
+  box-shadow: 0 22px 36px -20px rgb(11 11 12 / 0.45);
+}
+
+.square {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--vertical-deep);
+  color: #fff;
+  transform: translateY(-50%);
+  box-shadow: 0 10px 18px -8px color-mix(in srgb, var(--vertical-deep) 80%, transparent);
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.value {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.value :global(.num) {
+  font-size: 36px;
+  color: var(--ink);
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  margin-bottom: 2px;
+}
+
+.up {
+  color: var(--success);
+}
+
+.down {
+  color: var(--danger);
+}
+
+/* the thing waiting on the brand: it breaks out past the strip */
+.ask {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+  min-height: 168px;
+  margin: -12px -44px -12px 0;
+  padding: 20px 20px 18px;
+  border-radius: 24px;
+  overflow: visible;
+  color: var(--ink);
+  background:
+    url("/media/grain-coarse.webp") repeat 0 0 / 160px 160px,
+    radial-gradient(90% 80% at 85% 10%, color-mix(in srgb, var(--vertical-accent) 70%, #fff) 0%, transparent 60%),
+    linear-gradient(160deg, var(--vertical-light) 0%, color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical-light)) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.6),
+    0 26px 40px -24px color-mix(in srgb, var(--vertical-deep) 60%, transparent);
+  transition:
+    transform 500ms var(--ease-out),
+    box-shadow var(--t) var(--ease-out),
+    opacity 600ms var(--ease-out) 380ms;
+}
+
+.strip[data-arrive="wait"] .ask {
+  opacity: 0;
+}
+
+.ask:hover {
+  transform: translateY(-3px);
+}
+
+.bubble {
+  position: absolute;
+  top: -34px;
+  right: -8px;
+  width: 84px;
+  height: auto;
+  filter: drop-shadow(0 12px 14px rgb(8 33 89 / 0.35));
+  transition: transform 700ms var(--ease-out);
+}
+
+.ask:hover .bubble {
+  transform: rotate(-8deg) translateY(-4px);
+}
+
+.ask strong {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-top: 22px;
+}
+
+.go {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .strip {
+    grid-template-columns: minmax(0, 1fr);
+    margin-right: 0;
+    padding: 24px 18px 20px;
+  }
+
+  .intro {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 32px;
+    margin-top: 14px;
+  }
+
+  .ask {
+    flex-direction: row;
+    align-items: center;
+    min-height: 0;
+    margin: 6px 0 0;
+  }
+
+  .ask strong {
+    margin-top: 0;
+  }
+
+  .bubble {
+    top: -26px;
+    right: 64px;
+    width: 64px;
+  }
+}

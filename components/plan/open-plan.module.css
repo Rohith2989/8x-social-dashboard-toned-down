@@ -1,0 +1,298 @@
+/* the open plan: a white card, its head, then its scripts */
+.panel {
+  container-type: inline-size;
+  margin-top: 20px;
+  padding: 20px 20px 18px;
+  border-radius: 26px;
+  background: var(--paper);
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.04),
+    0 18px 36px -26px rgb(11 11 12 / 0.22);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px 20px;
+}
+
+.title {
+  min-width: 0;
+}
+
+.title h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+/* the details, a dot between each; a line that wraps starts on a detail, never on a dot (each dot sits in the space
+   before its detail, and the one at a line's start falls into the margin the row hides) */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 0;
+  margin: 6px 0 0 -18px;
+  overflow: hidden;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.meta span {
+  position: relative;
+  padding-left: 18px;
+}
+
+.meta span::before {
+  content: "·";
+  position: absolute;
+  left: 6px;
+  color: var(--dot-quiet);
+}
+
+.where {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.where[data-stage="review"] {
+  color: var(--vertical-deep);
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.empty {
+  margin-top: 18px;
+  padding: 26px 20px;
+  border-radius: 18px;
+  background: var(--canvas);
+  font-size: 15px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty button {
+  font-weight: 600;
+  color: var(--vertical-deep);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---- the scripts: tiles that wrap on a laptop, a sideways row on a phone ---- */
+
+.scripts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(226px, 1fr));
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@container (max-width: 560px) {
+  .scripts {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    margin: 16px -20px 0;
+    padding: 2px 20px 4px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px;
+    scrollbar-width: none;
+  }
+
+  .scripts::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scripts > li {
+    scroll-snap-align: start;
+  }
+}
+
+.scripts[data-dragging] {
+  scroll-snap-type: none;
+  cursor: grabbing;
+}
+
+.scripts > li {
+  min-width: 0;
+  animation: tile-in 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.tile {
+  position: relative;
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 8px 14px 8px 8px;
+  border-radius: 18px;
+  text-align: left;
+  background: var(--canvas);
+  box-shadow: inset 0 0 0 1px transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--t) var(--ease-out),
+    box-shadow var(--t) var(--ease-out),
+    transform var(--t) var(--ease-out);
+}
+
+.tile:hover {
+  background: color-mix(in srgb, var(--vertical-light) 70%, #fff);
+}
+
+.tile:active {
+  transform: scale(0.985);
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--vertical-deep);
+  outline-offset: 2px;
+}
+
+/* the open one, outlined in ink */
+.tile[aria-current="true"] {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  width: 45px;
+  height: 80px;
+  border-radius: 10px;
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb[data-blank] {
+  background: transparent;
+}
+
+.thumb svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.thumb rect {
+  fill: color-mix(in srgb, var(--vertical-light) 55%, #fff);
+  stroke: color-mix(in srgb, var(--vertical-deep) 55%, var(--vertical-glow));
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 0 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.thumb > :not(svg) {
+  position: relative;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.number {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.name {
+  margin-top: 1px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.state {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.state > :first-child {
+  flex: none;
+}
+
+.state[data-tone="waiting"] {
+  color: var(--vertical-deep);
+}
+
+.state[data-tone="approved"] {
+  color: color-mix(in srgb, var(--vertical-deep) 72%, var(--vertical-ink));
+}
+
+.state[data-tone="flagged"] {
+  color: var(--danger);
+}
+
+.state[data-tone="updated"] {
+  color: var(--vertical);
+}
+
+.results {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.unread {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--vertical-accent);
+  box-shadow: 0 0 0 2px var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scripts > li {
+    animation: none;
+  }
+}

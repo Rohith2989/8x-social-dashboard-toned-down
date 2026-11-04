@@ -1,0 +1,308 @@
+/* the open boosted post */
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px 24px;
+  animation: in 460ms var(--ease-out);
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  max-height: 52vh;
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 24px;
+  background: #0b0d14;
+  box-shadow:
+    0 2px 6px rgb(11 11 12 / 0.12),
+    0 30px 50px -30px color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+}
+
+.frame video,
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 6px 8px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  background: rgb(11 13 20 / 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: rgb(255 255 255 / 0.9);
+}
+
+.creator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px -8px 0;
+  padding: 8px;
+  border-radius: 18px;
+  color: var(--ink);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.creator:hover {
+  background: var(--canvas);
+}
+
+.creator > span:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.creator strong {
+  font-size: 15px;
+}
+
+.creator > span:nth-child(2) > span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.creator > svg {
+  margin-left: auto;
+  color: var(--mist);
+}
+
+.caption {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+/* what the ads added, on a block of the vertical's colour */
+.lead {
+  position: relative;
+  isolation: isolate;
+  margin-top: 14px;
+  padding: 14px 16px 14px;
+  border-radius: 20px;
+  color: #fff;
+  background: radial-gradient(
+    130% 150% at 100% 0%,
+    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    var(--vertical-deep) 55%,
+    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
+  );
+}
+
+.lead::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.45;
+}
+
+.big {
+  font-size: 14px;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.big :global(.num) {
+  margin-right: 4px;
+  font-size: 32px;
+  line-height: 1;
+  color: #fff;
+}
+
+.split {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.split i {
+  flex-basis: 0;
+  background: rgb(255 255 255 / 0.4);
+}
+
+.split i[data-paid] {
+  background: #fff;
+}
+
+.splitKey {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: rgb(255 255 255 / 0.78);
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 10px;
+  margin: 14px 0 0;
+}
+
+.figures > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.figures dt {
+  overflow: hidden;
+  font-size: 12.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+}
+
+.figures dd {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.section {
+  margin-top: 20px;
+}
+
+.label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.label span {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.cols {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 64px;
+}
+
+.col {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.col i {
+  width: 100%;
+  border-radius: 4px 4px 2px 2px;
+  background: var(--vertical-deep);
+  transform-origin: bottom;
+  animation: rise 640ms var(--ease-current) both;
+  animation-delay: calc(var(--i) * 26ms);
+}
+
+.col:hover i {
+  background: var(--vertical);
+}
+
+@keyframes rise {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+.daysNote {
+  margin-top: 8px;
+  min-height: 2.6em;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.daysNote strong {
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--stone);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.action:hover {
+  background: var(--stone-2);
+}
+
+.action :global(.mono) {
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .col i {
+    animation: none;
+  }
+}

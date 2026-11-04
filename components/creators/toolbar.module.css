@@ -1,0 +1,247 @@
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* the search: the largest thing in the bar */
+.search {
+  flex: 1 1 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 10px 0 18px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--text-muted);
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition: box-shadow var(--t-fast) var(--ease-out);
+  cursor: text;
+}
+
+.search:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--stone-2),
+    0 8px 18px -12px rgb(11 11 12 / 0.3);
+}
+
+.search:focus-within {
+  color: var(--ink);
+  box-shadow:
+    inset 0 0 0 1.5px var(--ink),
+    0 0 0 5px color-mix(in srgb, var(--vertical) 22%, transparent);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+}
+
+.search input::placeholder {
+  color: var(--text-muted);
+}
+
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--canvas);
+  box-shadow: inset 0 -1px 0 var(--stone-2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.clear {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+.clear:hover {
+  background: var(--stone);
+}
+
+/* the platforms on the contract, by their own icons */
+.platforms {
+  display: inline-flex;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--stone);
+}
+
+.platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px 0 9px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition:
+    background-color var(--t) var(--ease-out),
+    color var(--t) var(--ease-out),
+    box-shadow var(--t) var(--ease-out);
+}
+
+.platform svg {
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition:
+    filter var(--t) var(--ease-out),
+    opacity var(--t) var(--ease-out),
+    transform 300ms var(--ease-out);
+}
+
+.platform:hover {
+  color: var(--ink);
+}
+
+.platform:hover svg {
+  opacity: 0.85;
+}
+
+.platform[aria-pressed="true"] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.06),
+    0 6px 14px -8px rgb(11 11 12 / 0.28);
+}
+
+.platform[aria-pressed="true"] svg {
+  filter: none;
+  opacity: 1;
+  transform: rotate(-6deg);
+}
+
+.n {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dir {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition: box-shadow var(--t-fast) var(--ease-out);
+}
+
+.dir:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--stone-2),
+    0 8px 18px -12px rgb(11 11 12 / 0.35);
+}
+
+.dir svg {
+  transition: transform 420ms var(--ease-out);
+}
+
+.dir[data-dir="asc"] svg {
+  transform: rotate(180deg);
+}
+
+.view {
+  margin-left: auto;
+}
+
+/* what is applied, as a sentence */
+.applied {
+  min-height: 24px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.applied strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.part {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+  border-radius: 6px;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--vertical-deep) 30%, transparent);
+  text-underline-offset: 4px;
+}
+
+.part svg {
+  opacity: 0;
+  width: 0;
+  transition:
+    opacity 160ms var(--ease-out),
+    width 160ms var(--ease-out);
+}
+
+.part:hover {
+  color: var(--danger);
+  text-decoration-color: currentColor;
+}
+
+.part:hover svg {
+  opacity: 1;
+  width: 14px;
+}
+
+.clearAll {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .view {
+    margin-left: 0;
+  }
+
+  .platform span:not(.n) {
+    display: none;
+  }
+}

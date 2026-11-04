@@ -1,0 +1,39 @@
+/* performance beside its trend, one above the other when the tray is narrow */
+.rows {
+  container-type: inline-size;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 20px;
+}
+
+.pace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@container (max-width: 720px) {
+  .top,
+  .pace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.calendar {
+  min-height: 100%;
+}
+
+/* the calendar comes into the tray where the window has no right-hand column */
+.inlineCalendar {
+  display: none;
+}
+
+@media (max-width: 1359px) {
+  .inlineCalendar {
+    display: block;
+  }
+}

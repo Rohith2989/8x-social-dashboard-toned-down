@@ -1,0 +1,40 @@
+.number {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.chars {
+  display: inline-flex;
+  align-items: flex-start;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+  /* room for the figures' tops and feet, clipped evenly */
+  padding: 0.06em 0;
+  margin: -0.06em 0;
+  box-sizing: content-box;
+}
+
+.col {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 1100ms var(--ease-out);
+}
+
+.strip > span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+}
+
+.sep {
+  display: inline-block;
+  line-height: 1;
+}

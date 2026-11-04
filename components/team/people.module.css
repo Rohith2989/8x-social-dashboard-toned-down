@@ -1,0 +1,309 @@
+.people {
+  container-type: inline-size;
+}
+
+/* a section's head: its title, and the line that counts it */
+.head h2 {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.head p {
+  margin-top: 4px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+}
+
+.empty {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* four across where they fit, two by two narrower, one under another on a phone */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  display: flex;
+  min-width: 0;
+}
+
+.grid > li > * {
+  flex: 1;
+}
+
+/* a card lit for a moment: the one a refusal points at */
+.grid > li[data-flash] > section {
+  animation: lit 1.6s var(--ease-out);
+}
+
+@keyframes lit {
+  0%,
+  35% {
+    box-shadow:
+      0 0 0 3px var(--vertical),
+      0 18px 36px -22px color-mix(in srgb, var(--vertical-deep) 60%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid > li[data-flash] > section {
+    animation: none;
+  }
+}
+
+@container (max-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (max-width: 540px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 18px 20px 16px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* their initials on a disc of the vertical's colours, lit from its top left, with the grain */
+.disc {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  overflow: hidden;
+  border-radius: 50%;
+  font-family: var(--font-num);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: #fff;
+  box-shadow: 0 12px 22px -14px color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+}
+
+.disc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 120px 120px;
+  opacity: 0.32;
+}
+
+.disc[data-tone="sky"] {
+  background: radial-gradient(100% 100% at 28% 18%, color-mix(in srgb, var(--vertical-glow) 80%, #fff), var(--vertical) 72%);
+}
+
+.disc[data-tone="lilac"] {
+  background: radial-gradient(100% 100% at 28% 18%, color-mix(in srgb, var(--vertical-accent) 85%, #fff), color-mix(in srgb, var(--vertical-deep) 55%, var(--vertical-accent)) 76%);
+}
+
+.disc[data-tone="blue"] {
+  background: radial-gradient(100% 100% at 28% 18%, var(--vertical), var(--vertical-deep) 74%);
+}
+
+.disc[data-tone="pearl"] {
+  background: radial-gradient(100% 100% at 28% 18%, color-mix(in srgb, var(--vertical-ink) 50%, var(--vertical)), var(--vertical-ink) 80%);
+}
+
+/* the member signed in: a white ring, and a halo of the vertical's colour */
+.disc[data-you] {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px color-mix(in srgb, var(--vertical) 30%, transparent),
+    0 12px 22px -14px color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+}
+
+/* the role, in words: an owner's with the shield, in the vertical's colour */
+.role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.role[data-role="owner"] {
+  color: var(--vertical-deep);
+}
+
+.name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.you {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+}
+
+.you i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.email {
+  margin-top: 2px;
+  overflow: hidden;
+  font-size: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+}
+
+/* what they see, and what they did on the plan */
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, var(--vertical-ink) 9%, transparent);
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+}
+
+.facts dt {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.facts dd {
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.access {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* the brand's three campaigns, lit in each one's colour for the ones this person sees */
+.marks {
+  display: inline-flex;
+  flex: none;
+  gap: 3px;
+  transform: translateY(1px);
+}
+
+.marks i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--vertical-ink) 18%, transparent);
+}
+
+.marks i[data-on] {
+  box-shadow: none;
+}
+
+.marks i[data-on][data-tone="deep"] {
+  background: var(--vertical-deep);
+}
+
+.marks i[data-on][data-tone="glow"] {
+  background: var(--vertical-glow);
+}
+
+.marks i[data-on][data-tone="accent"] {
+  background: var(--vertical-accent);
+}
+
+.trail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.step {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.step svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--vertical-deep);
+}
+
+.step:hover span {
+  color: var(--vertical-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.when {
+  padding-left: 21px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.quiet {
+  color: var(--text-muted);
+}
+
+.since {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}

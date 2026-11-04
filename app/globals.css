@@ -1,0 +1,257 @@
+/*
+  The 8x theme (brand kit v6, references/tokens.css): the parts the dashboard uses. Ink for the one action that
+  matters, stone for quiet, one vertical colour for the moment that matters (the lit dots, the active marks, the aura).
+  The vertical is set once, on <html data-vertical="...">; every other vertical's dashboard reskins by changing it.
+*/
+
+:root {
+  --ink: #0b0b0c;
+  --paper: #ffffff;
+  --stone: #eceae6;
+  --stone-2: #e2dfd9;
+  --graphite: #57554f;
+  --mist: #9a978f;
+  --canvas: #f4f2ee; /* the kit's defaults; [data-vertical] below replaces the grounds and greys */
+  --border: #e6e2db;
+  --text: #3a3935;
+  --text-muted: #6b6862;
+  --success: #138a57;
+  --warning: #b86a00;
+  --danger: #d12e3b;
+
+  /* the fine dot (v6 p93-106): every place a dot could be is ghost, other values quiet, the one that matters lit */
+  --dot-ghost: #e6e2db;
+  --dot-quiet: #c9c5bd;
+
+  --font-num: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-text: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --r-chip: 8px;
+  --r-item: 12px;
+  --r-input: 14px;
+  --r-card: 20px;
+  --r-dialog: 24px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-current: cubic-bezier(0.36, 0.06, 0.3, 1); /* the brand's current: slow to start, long to settle */
+  --t-fast: 180ms;
+  --t: 320ms;
+  --t-resolve: 640ms;
+  --t-fill: 1150ms;
+
+  --shadow-card: 0 1px 2px rgb(11 11 12 / 0.04), 0 14px 32px -20px rgb(11 11 12 / 0.16);
+  --shadow-float: 0 2px 6px rgb(11 11 12 / 0.06), 0 24px 48px -18px rgb(11 11 12 / 0.24);
+}
+
+/* the five verticals' colours (kit colours.json); --vertical-ink is each one's darkest shade */
+[data-vertical="social"] {
+  --vertical: #3d7bff;
+  --vertical-deep: #2350ff;
+  --vertical-glow: #86b4ff;
+  --vertical-light: #e4eeff;
+  --vertical-tint: #e8eeff;
+  --vertical-accent: #a79bff;
+  --vertical-ink: #082159;
+}
+[data-vertical="linkedin"] {
+  --vertical: #ff5a4f;
+  --vertical-deep: #f2295f;
+  --vertical-glow: #ff9a7a;
+  --vertical-light: #ffe9de;
+  --vertical-tint: #ffe9e3;
+  --vertical-accent: #ffb35c;
+  --vertical-ink: #441410;
+}
+[data-vertical="research"] {
+  --vertical: #14bf7a;
+  --vertical-deep: #00a066;
+  --vertical-glow: #86edb4;
+  --vertical-light: #f0fce2;
+  --vertical-tint: #e2f7ec;
+  --vertical-accent: #d3f45c;
+  --vertical-ink: #092e1c;
+}
+[data-vertical="sales"] {
+  --vertical: #7a5cff;
+  --vertical-deep: #5530f5;
+  --vertical-glow: #b79cff;
+  --vertical-light: #f6e8ff;
+  --vertical-tint: #eee9ff;
+  --vertical-accent: #ff8ad0;
+  --vertical-ink: #25135f;
+}
+[data-vertical="hiring"] {
+  --vertical: #ffb01f;
+  --vertical-deep: #ff7a00;
+  --vertical-glow: #ffd465;
+  --vertical-light: #fff6d6;
+  --vertical-tint: #fff2d6;
+  --vertical-accent: #ff8f6b;
+  --vertical-ink: #322217;
+}
+
+/*
+  The grounds and the greys take the vertical's own light and ink, never the kit's warm stone: a warm stone beside
+  white read as "skin and white, they don't go well" (the user, 2026-11-04). Mixed from the vertical's tokens, so
+  every vertical's dashboard gets its own pale ground and its own greys from the same rule.
+*/
+[data-vertical] {
+  --canvas: color-mix(in srgb, var(--vertical-light) 52%, #fff);
+  --stone: color-mix(in srgb, var(--vertical-light) 78%, #dfe5f0);
+  --stone-2: color-mix(in srgb, var(--vertical-light) 55%, #cfd7e6);
+  --border: color-mix(in srgb, var(--vertical-ink) 9%, #fff);
+  --text: color-mix(in srgb, var(--vertical-ink) 30%, #2a2c33);
+  --text-muted: color-mix(in srgb, var(--vertical-ink) 25%, #6a6f7c);
+  --mist: color-mix(in srgb, var(--vertical-ink) 18%, #9ba1ad);
+  --graphite: color-mix(in srgb, var(--vertical-ink) 22%, #565b66);
+  --dot-ghost: color-mix(in srgb, var(--vertical-light) 70%, #dfe4ee);
+  --dot-quiet: color-mix(in srgb, var(--vertical-glow) 30%, #c6cdda);
+
+  /* a card's subtle colour of its own (the user, 2026-11-04: "subtle, not vibrant, so every card has some character"):
+     four pale grounds mixed from the vertical's own tokens, each lit softly from its top right */
+  --tint-sky: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 26%, transparent), transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-glow) 16%, #fff), color-mix(in srgb, var(--vertical-glow) 6%, #fff));
+  --tint-lilac: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 24%, transparent), transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 15%, #fff), color-mix(in srgb, var(--vertical-accent) 5%, #fff));
+  --tint-blue: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 14%, transparent), transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 9%, #fff), color-mix(in srgb, var(--vertical) 3%, #fff));
+  --tint-pearl: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-light) 80%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-ink) 5%, #fff), color-mix(in srgb, var(--vertical-ink) 2%, #fff));
+}
+
+/* a tinted card: its colour, and the colour blocks' grain, faint, behind its content */
+[data-tint] {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-tint="sky"] {
+  background: var(--tint-sky) !important;
+}
+
+[data-tint="lilac"] {
+  background: var(--tint-lilac) !important;
+}
+
+[data-tint="blue"] {
+  background: var(--tint-blue) !important;
+}
+
+[data-tint="pearl"] {
+  background: var(--tint-pearl) !important;
+}
+
+[data-tint]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-width: none;
+}
+
+/* nothing in the dashboard shows a scroll bar; everything still scrolls */
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video,
+svg {
+  display: block;
+}
+
+/* focus: an ink line and a 3 px halo in the vertical colour (kit, inputs) */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--vertical) 32%, transparent);
+}
+
+/* numbers are Archivo 900 at width 62; their digits keep one width so a rolling number never jitters */
+.num {
+  font-family: var(--font-num);
+  font-weight: 900;
+  font-stretch: 62%;
+  font-variation-settings: "wdth" 62;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.004em;
+  line-height: 0.86;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}

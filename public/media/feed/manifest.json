@@ -1,0 +1,167 @@
+{
+ "aastha": {
+  "stills": 14,
+  "loops": []
+ },
+ "carla": {
+  "stills": 15,
+  "loops": [
+   1,
+   2
+  ]
+ },
+ "sevda": {
+  "stills": 16,
+  "loops": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16
+  ]
+ },
+ "pooja": {
+  "stills": 13,
+  "loops": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "mariana": {
+  "stills": 13,
+  "loops": []
+ },
+ "sultan": {
+  "stills": 13,
+  "loops": [
+   1,
+   2,
+   3
+  ]
+ },
+ "heloisa": {
+  "stills": 16,
+  "loops": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "kristine": {
+  "stills": 14,
+  "loops": [
+   1
+  ]
+ },
+ "sila": {
+  "stills": 15,
+  "loops": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "manisha": {
+  "stills": 13,
+  "loops": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "gizem": {
+  "stills": 14,
+  "loops": [
+   1,
+   2,
+   3
+  ]
+ },
+ "bhavishay": {
+  "stills": 13,
+  "loops": [
+   1
+  ]
+ },
+ "ozlem": {
+  "stills": 13,
+  "loops": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ]
+ },
+ "kubra": {
+  "stills": 12,
+  "loops": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "nicole": {
+  "stills": 12,
+  "loops": [
+   1,
+   2,
+   3
+  ]
+ },
+ "krishna": {
+  "stills": 4,
+  "loops": [
+   1,
+   2
+  ]
+ },
+ "shreya": {
+  "stills": 3,
+  "loops": [
+   1,
+   2
+  ]
+ },
+ "aleyna": {
+  "stills": 2,
+  "loops": [
+   1,
+   2
+  ]
+ }
+}

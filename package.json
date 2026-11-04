@@ -1,0 +1,27 @@
+{
+  "name": "8x-social-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "8x Social, fully managed: the brand dashboard's reference build (placeholder data and media)",
+  "scripts": {
+    "dev": "next dev --port 3012",
+    "build": "next build",
+    "start": "next start --port 3012",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "geist": "1.7.2",
+    "next": "16.4.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "typescript": "^5.9"
+  }
+}

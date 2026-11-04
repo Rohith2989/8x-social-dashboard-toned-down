@@ -1,0 +1,443 @@
+/* the blocks lay themselves out by the room the tray gives them */
+.holder {
+  container-type: inline-size;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+@container (max-width: 1080px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .roster {
+    grid-column: 1 / -1;
+  }
+}
+
+@container (max-width: 620px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 22px 24px 22px;
+  border-radius: 26px;
+  overflow: hidden;
+  transition:
+    opacity 520ms var(--ease-out),
+    transform 760ms var(--ease-out);
+}
+
+.block:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.block:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.holder[data-arrive="wait"] .block {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.block > * {
+  position: relative;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.head h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.head p {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.head p :global(.num) {
+  font-size: 30px;
+}
+
+/* the roster: deep blue, the people as faces */
+.roster {
+  color: #fff;
+  background: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--vertical) 85%, #fff) 0%, var(--vertical-deep) 55%, color-mix(in srgb, var(--vertical-deep) 80%, var(--vertical-ink)) 120%);
+  box-shadow: 0 26px 44px -28px color-mix(in srgb, var(--vertical-deep) 90%, transparent);
+}
+
+.roster .head p span {
+  color: rgb(255 255 255 / 0.75);
+}
+
+.wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wall li {
+  animation: face-in 420ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 26ms + 180ms);
+}
+
+.holder[data-arrive="wait"] .wall li {
+  animation-play-state: paused;
+}
+
+@keyframes face-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+.face {
+  position: relative;
+  display: block;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.9);
+  transition: transform 260ms var(--ease-out);
+}
+
+.face[data-dropped="true"] {
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.35);
+}
+
+.face:hover,
+.face:focus-visible {
+  z-index: 2;
+  transform: translateY(-3px) scale(1.12);
+}
+
+/* the name over a face, on hover */
+.tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 10px 22px -10px rgb(8 33 89 / 0.6);
+  transform: translateX(-50%) translateY(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 160ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.face:hover .tip,
+.face:focus-visible .tip {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+/* a place the plan still has, as a ring of fine dots */
+.place svg {
+  display: block;
+  width: 38px;
+  height: 38px;
+  overflow: visible;
+}
+
+.place circle {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.7);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0 5.2;
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: auto 0 0;
+  padding-top: 20px;
+}
+
+.figures div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  padding-top: 14px;
+  border-top: 1px solid rgb(255 255 255 / 0.22);
+}
+
+.figures dt {
+  font-size: 13px;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.figures dd {
+  margin: 0;
+  font-size: 26px;
+}
+
+/* who is posting: the pale tint, a dot a person */
+.posting {
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--vertical-light), color-mix(in srgb, var(--vertical-glow) 40%, var(--vertical-light)));
+}
+
+.people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 16px;
+}
+
+.people i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: dot-in 380ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 22ms + 260ms);
+}
+
+.holder[data-arrive="wait"] .people i {
+  animation-play-state: paused;
+}
+
+@keyframes dot-in {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+.people i[data-status="active"] {
+  background: var(--vertical-deep);
+}
+
+.people i[data-status="idle"] {
+  background: #e3a13a;
+}
+
+.people i[data-status="dropped"] {
+  background: var(--dot-quiet);
+}
+
+.statuses {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 16px;
+  text-align: left;
+  color: var(--ink);
+  background: rgb(255 255 255 / 0.45);
+  transition:
+    background-color var(--t-fast) var(--ease-out),
+    box-shadow var(--t-fast) var(--ease-out);
+}
+
+.status:hover {
+  background: rgb(255 255 255 / 0.8);
+}
+
+.status[aria-pressed="true"] {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.status > i {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status > i[data-status="active"] {
+  background: var(--vertical-deep);
+}
+
+.status > i[data-status="idle"] {
+  background: #e3a13a;
+}
+
+.status > i[data-status="dropped"] {
+  background: var(--dot-quiet);
+}
+
+.count {
+  min-width: 26px;
+  font-size: 24px;
+}
+
+.statusText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.statusText strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.statusText span {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status > svg {
+  flex: none;
+  color: var(--text-muted);
+}
+
+/* the creator of the week: the accent, with grain */
+.spotlight {
+  color: var(--vertical-ink);
+  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 25%, #fff) 0%, color-mix(in srgb, var(--vertical-accent) 70%, var(--vertical-light)) 70%);
+}
+
+.star {
+  display: flex;
+  gap: 14px;
+  margin-top: 16px;
+  flex: 1;
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  flex: 1;
+}
+
+.name {
+  margin-top: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.where {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--vertical-ink) 75%, transparent);
+}
+
+.weekViews {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 13px;
+}
+
+.weekViews :global(.num) {
+  font-size: 32px;
+}
+
+.openLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vertical-ink);
+}
+
+.openLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.post {
+  position: relative;
+  flex: none;
+  align-self: flex-start;
+  width: 96px;
+  aspect-ratio: 9 / 16;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 28px -16px rgb(8 33 89 / 0.7);
+  transform: rotate(3deg);
+  transition: transform 500ms var(--ease-out);
+}
+
+.post:hover,
+.playing {
+  transform: rotate(0deg) scale(1.04);
+}
+
+.post video,
+.post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.postViews {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 7px;
+  border-radius: 8px;
+  background: rgb(11 11 12 / 0.55);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #fff;
+}

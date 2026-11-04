@@ -1,0 +1,553 @@
+/* the two blocks side by side, one above the other when the tray is narrow */
+.rows {
+  container-type: inline-size;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+@container (max-width: 1080px) {
+  .summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.head h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.head p {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---- the plans: the vertical's deep blue, lit from its top right, with grain ---- */
+
+.plans[aria-label] {
+  container: plans / inline-size;
+  background: radial-gradient(
+    120% 150% at 100% 0%,
+    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    var(--vertical-deep) 50%,
+    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
+  );
+}
+
+.plans::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.plans > div {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 22px 20px;
+}
+
+.plans .head h2 {
+  color: #fff;
+}
+
+.plans .head p {
+  color: rgb(255 255 255 / 0.78);
+}
+
+/* beside a taller What works, the columns take the height, the days keeping to their foot */
+.laneWrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin-top: 16px;
+}
+
+.lane {
+  flex: 1;
+  display: grid;
+  margin: 0 -22px;
+  padding: 0 22px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 22px;
+  scrollbar-width: none;
+}
+
+.lane::-webkit-scrollbar {
+  display: none;
+}
+
+.lane[data-dragging] {
+  scroll-snap-type: none;
+  cursor: grabbing;
+}
+
+.lane[data-dragging] .plan {
+  pointer-events: none;
+}
+
+/* a whole number of plans to a view (as many as fit at 136 px or more), so the row always rests on whole columns */
+.grid {
+  --fit: 5;
+  --n: min(var(--plans), var(--fit));
+  display: grid;
+  grid-template-columns: repeat(var(--plans), calc((100% - (var(--n) - 1) * 10px) / var(--n)));
+  grid-template-rows: auto 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+@container plans (max-width: 763px) {
+  .grid {
+    --fit: 4;
+  }
+}
+
+@container plans (max-width: 617px) {
+  .grid {
+    --fit: 3;
+  }
+}
+
+@container plans (max-width: 471px) {
+  .grid {
+    --fit: 2;
+  }
+}
+
+/* the product's stages over the plans they hold */
+.eras,
+.track {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.eras span {
+  padding: 0 2px 7px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.24);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.eras span[data-stage="live"],
+.eras span[data-stage="review"] {
+  color: #fff;
+  border-bottom-color: rgb(255 255 255 / 0.6);
+}
+
+/* a plan's parts share rows with its neighbours', so names, marks and lines line up across the row */
+.track {
+  grid-template-rows: repeat(4, auto) 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.track > li {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* ---- a plan: a glass column; the open one white ---- */
+
+.plan {
+  position: relative;
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  width: 100%;
+  padding: 12px 12px 12px;
+  border-radius: 16px;
+  text-align: left;
+  color: #fff;
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14);
+  cursor: pointer;
+  transition:
+    background-color var(--t) var(--ease-out),
+    box-shadow var(--t) var(--ease-out),
+    transform var(--t) var(--ease-out);
+}
+
+.plan:hover {
+  background: rgb(255 255 255 / 0.15);
+}
+
+.plan:active {
+  transform: scale(0.985);
+}
+
+.plan:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.plan[aria-pressed="true"] {
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 0 14px 28px -16px rgb(4 12 40 / 0.7);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  padding-right: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* something from Maya the brand has not seen */
+.unread {
+  position: absolute;
+  top: 12px;
+  right: 11px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vertical-accent);
+  box-shadow: 0 0 0 2px var(--vertical-deep);
+}
+
+.plan[aria-pressed="true"] .unread {
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.window {
+  font-size: 13px;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.plan[aria-pressed="true"] .window {
+  color: var(--text-muted);
+}
+
+/* the scripts, numbered, each in its state */
+.marks {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 3px;
+  margin-top: 14px;
+}
+
+.marks i {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  font: 600 11px/1 var(--font-num);
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+}
+
+.marks svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.marks svg rect {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 0 3.6;
+}
+
+.marks [data-mark="approved"] {
+  color: var(--vertical-deep);
+  background: rgb(255 255 255 / 0.92);
+}
+
+.marks [data-mark="updated"] {
+  color: #fff;
+  background: rgb(255 255 255 / 0.26);
+}
+
+.marks [data-mark="flagged"] {
+  color: #fff;
+  background: color-mix(in srgb, var(--danger) 88%, #fff);
+}
+
+.marks [data-mark="waiting"] {
+  color: rgb(255 255 255 / 0.86);
+}
+
+.plan[aria-pressed="true"] [data-mark="approved"] {
+  color: #fff;
+  background: var(--vertical-deep);
+}
+
+.plan[aria-pressed="true"] [data-mark="updated"] {
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}
+
+.plan[aria-pressed="true"] [data-mark="waiting"] {
+  color: var(--vertical-deep);
+}
+
+.line {
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.under {
+  margin-top: 1px;
+  font-size: 13px;
+  line-height: 1.25;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.plan[aria-pressed="true"] .under {
+  color: var(--text-muted);
+}
+
+/* its days, the ones gone filled, today lit */
+.days {
+  display: flex;
+  align-self: end;
+  gap: 3px;
+  padding-top: 12px;
+}
+
+.days i {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.2);
+}
+
+.days [data-day="done"] {
+  background: rgb(255 255 255 / 0.66);
+}
+
+.days [data-day="today"] {
+  background: #fff;
+  animation: today 2.4s var(--ease-current) infinite;
+}
+
+.plan[aria-pressed="true"] .days i {
+  background: var(--vertical-light);
+}
+
+.plan[aria-pressed="true"] .days [data-day="done"] {
+  background: color-mix(in srgb, var(--vertical-deep) 55%, var(--vertical-glow));
+}
+
+.plan[aria-pressed="true"] .days [data-day="today"] {
+  background: var(--vertical-deep);
+}
+
+@keyframes today {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* the arrows at the row's ends, only where there is more to see */
+.arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-top: -6px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: rgb(255 255 255 / 0.94);
+  box-shadow: 0 10px 22px -10px rgb(4 12 40 / 0.6);
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 260ms var(--ease-out);
+}
+
+.prev {
+  left: -12px;
+}
+
+.next {
+  right: -12px;
+}
+
+.laneWrap:hover .arrow,
+.arrow:focus-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.laneWrap[data-start] .prev,
+.laneWrap[data-end] .next {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ---- what works: a pale ground with grain, the scripts best a post ---- */
+
+.works[aria-label] {
+  container-type: inline-size;
+  background: linear-gradient(
+    158deg,
+    color-mix(in srgb, var(--vertical-light) 70%, #fff) 0%,
+    color-mix(in srgb, var(--vertical-glow) 22%, var(--vertical-light)) 100%
+  );
+}
+
+.works::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.works > div {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 18px;
+}
+
+.works .head h2 {
+  color: var(--ink);
+}
+
+.works .head p {
+  color: var(--text-muted);
+}
+
+.workList {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@container (min-width: 640px) {
+  .workList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.work {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 7px 14px 7px 7px;
+  border-radius: 16px;
+  text-align: left;
+  background: rgb(255 255 255 / 0.6);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.7);
+  cursor: pointer;
+  transition:
+    background-color var(--t) var(--ease-out),
+    transform var(--t) var(--ease-out);
+}
+
+.work:hover {
+  background: #fff;
+}
+
+.work:active {
+  transform: scale(0.985);
+}
+
+.poster {
+  overflow: hidden;
+  width: 36px;
+  height: 64px;
+  border-radius: 10px;
+  background: var(--vertical-light);
+}
+
+.poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.workText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.workText strong {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.workText span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.figure b {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.figure span {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}

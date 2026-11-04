@@ -1,0 +1,770 @@
+/* one script: a white card, the reference in its own column beside the words, above them when narrow */
+.sheet {
+  container: sheet / inline-size;
+  margin-top: 20px;
+  padding: 22px;
+  border-radius: 26px;
+  background: var(--paper);
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.04),
+    0 18px 36px -26px rgb(11 11 12 / 0.22);
+  animation: sheet-in 560ms var(--ease-out) both;
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+}
+
+@container sheet (min-width: 720px) {
+  .layout {
+    grid-template-columns: clamp(220px, 30cqi, 300px) minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .layout[data-ref="none"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* the reference stays in view while the words below it are read */
+  .refColumn {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+  }
+}
+
+/* ---- the reference ---- */
+
+.refColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+@container sheet (max-width: 719px) {
+  .refColumn {
+    width: min(100%, 240px);
+    margin: 0 auto;
+  }
+}
+
+.refFrame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 22px;
+  background: #0b0d14;
+  box-shadow:
+    0 2px 6px rgb(11 11 12 / 0.12),
+    0 30px 50px -30px color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+}
+
+.refFrame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playToggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgb(11 13 20 / 0.42);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity var(--t) var(--ease-out);
+}
+
+.refFrame:hover .playToggle,
+.playToggle:focus-visible {
+  opacity: 1;
+}
+
+.progress {
+  position: absolute;
+  inset: auto 14px 12px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.28);
+}
+
+.progress i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #fff;
+  transform-origin: left;
+}
+
+/* a reference that cannot play here: a card in fine dots with the way to it */
+.refBlank {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 210px;
+  padding: 26px 18px;
+  text-align: center;
+  color: var(--vertical-deep);
+}
+
+.refBlank svg:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.refBlank rect {
+  fill: color-mix(in srgb, var(--vertical-light) 55%, #fff);
+  stroke: color-mix(in srgb, var(--vertical-deep) 55%, var(--vertical-glow));
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 0 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.refBlank p {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.refBlank > span {
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.outLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.page {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--stone);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.page:hover {
+  background: var(--stone-2);
+}
+
+.refWord {
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.refCaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  background: var(--canvas);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.refCaption:hover {
+  background: color-mix(in srgb, var(--vertical-light) 70%, #fff);
+}
+
+.refCaption strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.refWho {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.refWho :global(.num) {
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+/* ---- who and what, and the decision ---- */
+
+.body {
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px 20px;
+}
+
+.who {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.who h2 {
+  margin-top: 2px;
+  font-size: clamp(26px, 4.4cqi, 34px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.meta {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.meta :global(.mono) {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.state > :first-child {
+  flex: none;
+}
+
+.state[data-tone="waiting"] {
+  color: var(--vertical-deep);
+}
+
+.state[data-tone="approved"] {
+  color: color-mix(in srgb, var(--vertical-deep) 72%, var(--vertical-ink));
+}
+
+.state[data-tone="flagged"] {
+  color: var(--danger);
+}
+
+.state[data-tone="updated"] {
+  color: var(--vertical);
+}
+
+.decide {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.approveWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* blocked reads as quietly unavailable (its title says why); approved reads as done, not as a dimmed button */
+.blocked:disabled {
+  opacity: 1;
+  color: var(--mist);
+  background: var(--stone);
+}
+
+.approved:disabled {
+  opacity: 1;
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}
+
+.flaggedButton:disabled {
+  opacity: 1;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 9%, #fff);
+}
+
+.heart {
+  overflow: visible;
+}
+
+.pop {
+  animation: pop 520ms var(--ease-out);
+}
+
+@keyframes pop {
+  35% {
+    transform: scale(1.38);
+  }
+}
+
+/* the burst when an approval lands: a ring and eight sparks of the vertical's light, from the heart */
+.burst {
+  position: absolute;
+  top: 50%;
+  left: 29px;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--vertical);
+  border-radius: 50%;
+  animation: ring 640ms var(--ease-out) forwards;
+}
+
+.spark {
+  --a: calc(var(--k) * 45deg);
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vertical);
+  opacity: 0;
+  animation: spark 700ms var(--ease-out) 60ms forwards;
+}
+
+.spark:nth-child(odd) {
+  background: var(--vertical-glow);
+}
+
+@keyframes ring {
+  from {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes spark {
+  0% {
+    transform: rotate(var(--a)) translateY(-10px) scale(1);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--a)) translateY(-36px) scale(0.35);
+    opacity: 0;
+  }
+}
+
+/* the conversation, below 1360 px where the right-hand column is folded away */
+.talk {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--stone);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.talk:hover {
+  background: var(--stone-2);
+}
+
+.talk i {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--vertical-accent);
+  box-shadow: 0 0 0 2px var(--stone);
+}
+
+@media (min-width: 1360px) {
+  .talk {
+    display: none;
+  }
+}
+
+/* an open flag: who, when, and the note */
+.flagNote {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--danger) 6%, #fff);
+}
+
+.flagNote p {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.flagNote blockquote {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.angle {
+  max-width: 64ch;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* ---- the sections under it ---- */
+
+.section {
+  margin-top: 28px;
+}
+
+.label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.all {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+}
+
+.all:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.none {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* how it did: the product's four figures, then its posts */
+.four {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+}
+
+.four > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0 0 14px;
+  border-top: 1px solid var(--border);
+}
+
+.four > div:first-child {
+  padding-left: 0;
+}
+
+.four > div + div {
+  border-left: 1px solid var(--border);
+}
+
+.four dt {
+  font-size: 13.5px;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.four dd {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+@container sheet (max-width: 520px) {
+  .four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 12px;
+  }
+
+  .four > div:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+.posts {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.posts::-webkit-scrollbar {
+  display: none;
+}
+
+.post {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 68px;
+  height: 120px;
+  border-radius: 12px;
+  background: var(--vertical-light);
+  transition: transform var(--t) var(--ease-out);
+}
+
+.post:hover {
+  transform: translateY(-3px);
+}
+
+.post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post span {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 18px 7px 6px;
+  font-size: 12.5px;
+  color: #fff;
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
+}
+
+/* how it goes: the beats in the order they are filmed, each by the reference's own frame at that moment */
+.beats {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.beat {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.beats[data-frames] .beat {
+  grid-template-columns: 64px auto minmax(0, 1fr);
+}
+
+.frame {
+  overflow: hidden;
+  width: 64px;
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  background: var(--vertical-light);
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: frame-in 480ms var(--ease-out);
+}
+
+@keyframes frame-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.step {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font: 600 13px/1 var(--font-num);
+  color: var(--vertical-deep);
+  background: var(--vertical-light);
+}
+
+.beatText {
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.beatLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.beatText p {
+  margin-top: 3px;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* wide, the beats stand side by side as a storyboard, each frame above its words */
+@container sheet (min-width: 1040px) {
+  .beats[data-frames] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .beats[data-frames] .beat {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .beats[data-frames] .frame {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 150px;
+  }
+}
+
+/* do and do not, told apart before they are read */
+.rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px 28px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.ruleColumn .label {
+  margin-bottom: 10px;
+}
+
+.ruleColumn ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ruleColumn li {
+  display: flex;
+  gap: 9px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.ruleColumn svg {
+  flex: none;
+  margin-top: 3px;
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ruleColumn[data-tone="do"] svg {
+  stroke: var(--vertical-deep);
+}
+
+.ruleColumn[data-tone="dont"] svg {
+  stroke: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .frame img,
+  .pop,
+  .ring,
+  .spark {
+    animation: none;
+  }
+
+  .spark,
+  .ring {
+    display: none;
+  }
+}

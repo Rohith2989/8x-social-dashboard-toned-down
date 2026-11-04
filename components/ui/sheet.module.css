@@ -1,0 +1,50 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  visibility: hidden;
+  transition: visibility 0s linear 380ms;
+}
+
+.layer[data-open="true"] {
+  visibility: visible;
+  transition: none;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--vertical-ink) 22%, transparent);
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+}
+
+.layer[data-open="true"] .scrim {
+  opacity: 1;
+}
+
+.panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  width: min(380px, calc(100vw - 20px));
+  overflow-y: auto;
+  scrollbar-width: none;
+  border-radius: 28px;
+  background: var(--paper);
+  box-shadow: -20px 0 60px -30px color-mix(in srgb, var(--vertical-ink) 60%, transparent);
+  transform: translateX(calc(100% + 20px));
+  transition: transform 420ms var(--ease-out);
+}
+
+.layer[data-open="true"] .panel {
+  transform: none;
+}
+
+/* a wide screen has the column instead */
+@media (min-width: 1360px) {
+  .layer {
+    display: none;
+  }
+}

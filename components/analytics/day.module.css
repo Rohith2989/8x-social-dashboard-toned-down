@@ -1,0 +1,305 @@
+/* the open day, in the right-hand column or a sheet */
+.day {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px 24px;
+  animation: day-in 440ms var(--ease-out);
+}
+
+@keyframes day-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.head {
+  position: relative;
+  padding: 0 4px;
+}
+
+.eyebrow {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+}
+
+.head h2 {
+  margin-top: 2px;
+  padding-right: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.loose {
+  margin-top: 6px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.close {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--stone);
+}
+
+/* the day's figure, on a block of the vertical's colour */
+.lead {
+  position: relative;
+  isolation: isolate;
+  margin-top: 16px;
+  padding: 16px 18px 18px;
+  border-radius: 20px;
+  color: #fff;
+  background: radial-gradient(
+    130% 150% at 100% 0%,
+    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    var(--vertical-deep) 55%,
+    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
+  );
+}
+
+.lead::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.45;
+}
+
+.big {
+  font-size: 15px;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.big :global(.num) {
+  display: block;
+  font-size: 40px;
+  line-height: 1;
+  color: #fff;
+}
+
+.vs {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(255 255 255 / 0.85);
+}
+
+.vs span {
+  font-weight: 400;
+  color: rgb(255 255 255 / 0.66);
+}
+
+.three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 14px 0 0;
+}
+
+.three > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 0 0 12px;
+  border-left: 1px solid var(--border);
+}
+
+.three > div:first-child {
+  padding-left: 4px;
+  border-left: 0;
+}
+
+.three dt {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.three dd {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.section {
+  margin-top: 24px;
+  padding: 0 4px;
+}
+
+.label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.all {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--vertical-deep);
+}
+
+.all:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* one bar, the day's sessions by channel */
+.bar {
+  display: flex;
+  gap: 2px;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.bar i {
+  flex-basis: 0;
+  min-width: 2px;
+  animation: grow 700ms var(--ease-current) both;
+  transform-origin: left;
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.channels {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.channels li {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto 40px;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.channels li[data-lead] {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.channels i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.channels :global(.num) {
+  font-size: 14px;
+}
+
+.share {
+  font-size: 13px;
+  text-align: right;
+  color: var(--text-muted);
+}
+
+.note,
+.earned,
+.none {
+  margin-top: 10px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.earned {
+  margin: -2px 0 12px;
+}
+
+.earned strong {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+/* the posts that went out, best first */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+  background: var(--vertical-light);
+  transition: transform var(--t) var(--ease-out);
+}
+
+.post:hover {
+  transform: translateY(-3px);
+}
+
+.post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blank {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, color-mix(in srgb, var(--vertical-deep) 30%, transparent) 1.1px, transparent 1.5px) 0 0 / 7px 7px;
+}
+
+.postFoot {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 8px 7px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: rgb(255 255 255 / 0.85);
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.6));
+}
+
+.postFoot :global(.num) {
+  font-size: 15px;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .day,
+  .bar i {
+    animation: none;
+  }
+}

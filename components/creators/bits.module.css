@@ -1,0 +1,38 @@
+.mark {
+  padding: 0 1px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--vertical) 22%, transparent);
+  color: inherit;
+}
+
+.spark {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 3px;
+}
+
+.col i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--dot-ghost);
+  transition: background-color 360ms var(--ease-out);
+}
+
+.col i.lit {
+  background: var(--vertical);
+}
+
+.ink .col i {
+  background: rgb(255 255 255 / 0.16);
+}
+
+.ink .col i.lit {
+  background: var(--vertical-glow);
+}

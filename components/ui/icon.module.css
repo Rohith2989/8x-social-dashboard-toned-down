@@ -1,0 +1,440 @@
+/*
+  Each icon's own motion, once, when the element around it ([data-anim-host]) is hovered or focused. Parts move
+  about their own boxes (transform-box: fill-box). Icons marked to play on show do so when their card arrives
+  ([data-arrive="in"]). Reduced motion stops all of it (globals.css).
+*/
+
+.icon {
+  flex: none;
+  overflow: visible;
+}
+
+.icon :is(g, path, rect, circle) {
+  transform-box: fill-box;
+}
+
+/* layout-dashboard: the panes trade heights */
+.paneA,
+.paneC {
+  transform-origin: 50% 0;
+}
+.paneB,
+.paneD {
+  transform-origin: 50% 100%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .paneA {
+  animation: pane-shrink 520ms var(--ease-out);
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .paneC {
+  animation: pane-shrink 520ms var(--ease-out) 60ms;
+}
+@keyframes pane-shrink {
+  45% {
+    transform: scaleY(0.62);
+  }
+}
+
+/* users, users-round: the one behind steps out */
+:global([data-anim-host]):is(:hover, :focus-visible) .behind {
+  animation: step-out 480ms var(--ease-out);
+}
+@keyframes step-out {
+  40% {
+    transform: translateX(2.5px);
+  }
+}
+
+/* clapperboard: it claps */
+.clapper {
+  transform-origin: 0% 100%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .clapper {
+  animation: clap 460ms var(--ease-out);
+}
+@keyframes clap {
+  35% {
+    transform: rotate(-14deg);
+  }
+  70% {
+    transform: rotate(2deg);
+  }
+}
+
+/* file-text: its lines write themselves */
+.write {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 0;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .write {
+  animation: write 520ms var(--ease-out) both;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .write:nth-of-type(4) {
+  animation-delay: 80ms;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .write:nth-of-type(5) {
+  animation-delay: 160ms;
+}
+@keyframes write {
+  from {
+    stroke-dashoffset: 10;
+  }
+}
+
+/* chart-spline: the line draws */
+.draw {
+  stroke-dasharray: 30;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .draw {
+  animation: draw 560ms var(--ease-out);
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 30;
+  }
+}
+
+/* circle-help: the question nods */
+.nod {
+  transform-origin: 50% 100%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .nod {
+  animation: nod 520ms var(--ease-out);
+}
+@keyframes nod {
+  30% {
+    transform: rotate(-12deg);
+  }
+  65% {
+    transform: rotate(6deg);
+  }
+}
+
+/* settings: a quarter turn */
+.turn {
+  transform-origin: 50% 50%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .turn {
+  animation: turn 600ms var(--ease-out);
+}
+@keyframes turn {
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+/* bell: it swings from its top, the clapper a beat behind */
+.swing {
+  transform-origin: 50% 8%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .swing {
+  animation: swing 620ms var(--ease-out);
+}
+@keyframes swing {
+  20% {
+    transform: rotate(14deg);
+  }
+  45% {
+    transform: rotate(-10deg);
+  }
+  70% {
+    transform: rotate(5deg);
+  }
+  90% {
+    transform: rotate(-2deg);
+  }
+}
+.clapperBell {
+  transform-origin: 50% 0;
+}
+
+/* download: the arrow drops in */
+:global([data-anim-host]):is(:hover, :focus-visible) .drop {
+  animation: drop 520ms var(--ease-out);
+}
+@keyframes drop {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  35% {
+    transform: translateY(5px);
+    opacity: 0;
+  }
+  36% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* search: it leans in */
+.look {
+  transform-origin: 40% 40%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .look {
+  animation: look 480ms var(--ease-out);
+}
+@keyframes look {
+  45% {
+    transform: rotate(-12deg) scale(1.06);
+  }
+}
+
+/* chevrons-up-down: they open */
+:global([data-anim-host]):is(:hover, :focus-visible) .downHalf {
+  animation: open-down 420ms var(--ease-out);
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .upHalf {
+  animation: open-up 420ms var(--ease-out);
+}
+@keyframes open-down {
+  45% {
+    transform: translateY(1.5px);
+  }
+}
+@keyframes open-up {
+  45% {
+    transform: translateY(-1.5px);
+  }
+}
+
+:global([data-anim-host]):is(:hover, :focus-visible) .dip {
+  animation: dip 420ms var(--ease-out);
+}
+@keyframes dip {
+  45% {
+    transform: translateY(2px);
+  }
+}
+
+:global([data-anim-host]):is(:hover, :focus-visible) .nudge {
+  animation: nudge 420ms var(--ease-out);
+}
+@keyframes nudge {
+  45% {
+    transform: translateX(3px);
+  }
+}
+
+/* arrow-up-right: out and back in */
+:global([data-anim-host]):is(:hover, :focus-visible) .out {
+  animation: out 560ms var(--ease-out);
+}
+@keyframes out {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(6px, -6px);
+    opacity: 0;
+  }
+  41% {
+    transform: translate(-6px, 6px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* trending-up: it rises when its number shows */
+:global([data-arrive="in"]) .rise {
+  animation: rise 560ms var(--ease-out) 700ms both;
+}
+@keyframes rise {
+  from {
+    transform: translate(-3px, 3px);
+    opacity: 0;
+  }
+}
+
+/* eye: a blink */
+.blink {
+  transform-origin: 50% 50%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .blink {
+  animation: blink 360ms var(--ease-out);
+}
+@keyframes blink {
+  45% {
+    transform: scaleY(0.12);
+  }
+}
+
+/* heart: it beats */
+.beat {
+  transform-origin: 50% 60%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .beat {
+  animation: beat 520ms var(--ease-out);
+}
+@keyframes beat {
+  25% {
+    transform: scale(1.18);
+  }
+  50% {
+    transform: scale(0.94);
+  }
+  75% {
+    transform: scale(1.06);
+  }
+}
+
+/* send: it flies out and comes back */
+:global([data-anim-host]):is(:hover, :focus-visible) .fly {
+  animation: fly 600ms var(--ease-out);
+}
+@keyframes fly {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(9px, -9px);
+    opacity: 0;
+  }
+  41% {
+    transform: translate(-7px, 7px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* circle-check and a ready plan: the check draws itself when its card arrives */
+.tick {
+  stroke-dasharray: 9;
+}
+:global([data-arrive="in"]) .tick {
+  animation: tick 520ms var(--ease-out) 600ms both;
+}
+@keyframes tick {
+  from {
+    stroke-dashoffset: 9;
+  }
+}
+
+.plus {
+  transform-origin: 50% 50%;
+}
+
+/* flag: the cloth ripples */
+.cloth {
+  transform-origin: 0% 50%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .cloth {
+  animation: ripple 620ms var(--ease-out);
+}
+@keyframes ripple {
+  30% {
+    transform: skewY(-6deg) scaleX(0.94);
+  }
+  65% {
+    transform: skewY(4deg);
+  }
+}
+
+/* copy: the front sheet lifts */
+:global([data-anim-host]):is(:hover, :focus-visible) .sheet {
+  animation: lift 460ms var(--ease-out);
+}
+@keyframes lift {
+  45% {
+    transform: translate(-2px, -2px);
+  }
+}
+
+.tickLong {
+  stroke-dasharray: 24;
+}
+:global([data-arrive="in"]) .tickLong {
+  animation: tick-long 560ms var(--ease-out) 700ms both;
+}
+@keyframes tick-long {
+  from {
+    stroke-dashoffset: 24;
+  }
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .plus {
+  animation: plus 480ms var(--ease-out);
+}
+@keyframes plus {
+  50% {
+    transform: rotate(90deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+/* chevron-left: the nudge, the other way */
+:global([data-anim-host]):is(:hover, :focus-visible) .nudgeBack {
+  animation: nudge-back 420ms var(--ease-out);
+}
+@keyframes nudge-back {
+  45% {
+    transform: translateX(-3px);
+  }
+}
+
+/* zap: a quick flash, filled for a beat */
+.flash {
+  transform-origin: 50% 50%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .flash {
+  animation: flash 460ms var(--ease-out);
+}
+@keyframes flash {
+  35% {
+    fill: currentColor;
+    transform: scale(1.08) rotate(-6deg);
+  }
+}
+
+/* link: the two halves close in on each other */
+:global([data-anim-host]):is(:hover, :focus-visible) .linkA {
+  animation: link-a 440ms var(--ease-out);
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .linkB {
+  animation: link-b 440ms var(--ease-out);
+}
+@keyframes link-a {
+  45% {
+    transform: translate(-1.5px, 1.5px);
+  }
+}
+@keyframes link-b {
+  45% {
+    transform: translate(1.5px, -1.5px);
+  }
+}
+
+/* trash: the lid lifts off and settles back */
+.lid {
+  transform-origin: 20% 100%;
+}
+:global([data-anim-host]):is(:hover, :focus-visible) .lid {
+  animation: lid 480ms var(--ease-out);
+}
+@keyframes lid {
+  45% {
+    transform: translateY(-2px) rotate(-10deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nudgeBack,
+  .flash,
+  .linkA,
+  .linkB,
+  .lid {
+    animation: none !important;
+  }
+}

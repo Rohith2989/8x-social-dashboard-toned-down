@@ -1,0 +1,4 @@
+/* the view switch keeps its labels here: Feed and Table are words the reader looks for */
+.view {
+  margin-left: auto;
+}

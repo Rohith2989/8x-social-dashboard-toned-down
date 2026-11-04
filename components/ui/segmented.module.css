@@ -1,0 +1,95 @@
+.track {
+  --h: 40px;
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--stone);
+  /* never wider than its place: on the narrowest phones it tightens (below), and as a last resort slides */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.small {
+  --h: 36px;
+}
+
+.pill {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: var(--h);
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.06),
+    0 6px 14px -8px rgb(11 11 12 / 0.28);
+  transition:
+    transform 440ms var(--ease-out),
+    width 440ms var(--ease-out);
+}
+
+.seg {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: var(--h);
+  padding: 0 15px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--text-muted);
+  transition: color var(--t) var(--ease-out);
+}
+
+.seg:hover,
+.seg[aria-checked="true"] {
+  color: var(--ink);
+}
+
+.seg:has(svg):not(:has(span)) {
+  padding: 0 11px;
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--t) var(--ease-out);
+}
+
+.seg[aria-checked="true"] .count {
+  color: var(--vertical-deep);
+}
+
+/* a phone: a segment with words drops its icon and tightens, so every option stays in view */
+@media (max-width: 420px) {
+  .seg {
+    gap: 5px;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+
+  .seg:has(> span:not(.count)) > svg {
+    display: none;
+  }
+
+  .count {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 340px) {
+  .seg {
+    padding: 0 8px;
+    font-size: 13.5px;
+  }
+}

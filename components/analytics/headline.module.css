@@ -1,0 +1,179 @@
+/* four across where they fit, two by two on a laptop, one under another on a phone */
+.headline {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@container (max-width: 1060px) {
+  .headline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (max-width: 520px) {
+  .headline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.revenue > div,
+.tile > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 18px 20px 18px;
+}
+
+/* revenue: the vertical's deep blue, lit from its top right, with grain */
+.revenue[aria-label] {
+  background: radial-gradient(
+    130% 150% at 100% 0%,
+    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    var(--vertical-deep) 52%,
+    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
+  );
+}
+
+.revenue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.revenue .top h2 {
+  color: #fff;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  color: var(--vertical-deep);
+  background: rgb(255 255 255 / 0.85);
+  box-shadow: 0 4px 10px -6px color-mix(in srgb, var(--vertical-ink) 40%, transparent);
+}
+
+.revenue .icon {
+  color: #fff;
+  background: rgb(255 255 255 / 0.16);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.22);
+}
+
+.big {
+  margin-top: 16px;
+  font-size: clamp(36px, 3vw, 46px);
+  line-height: 0.95;
+  color: var(--ink);
+  cursor: help;
+}
+
+.revenue .big {
+  color: #fff;
+}
+
+.na {
+  font-family: var(--font-num);
+  color: var(--mist);
+}
+
+/* the move, against the days before */
+.move {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 6px;
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: var(--danger);
+  cursor: help;
+}
+
+.move[data-good] {
+  color: var(--success);
+}
+
+.move strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.move span {
+  color: var(--text-muted);
+}
+
+.move[data-tone="aura"] {
+  color: #fff;
+}
+
+.move[data-tone="aura"] span {
+  color: rgb(255 255 255 / 0.72);
+}
+
+.still {
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+/* the figures that explain it */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+  margin: auto 0 0;
+  padding-top: 16px;
+}
+
+.facts > div {
+  min-width: 0;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--vertical-ink) 10%, transparent);
+  cursor: help;
+}
+
+.revenue .facts > div {
+  border-top-color: rgb(255 255 255 / 0.2);
+}
+
+.facts dt {
+  overflow: hidden;
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+}
+
+.revenue .facts dt {
+  color: rgb(255 255 255 / 0.72);
+}
+
+.facts dd {
+  margin: 3px 0 0;
+  font-size: 18px;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.revenue .facts dd {
+  color: #fff;
+}

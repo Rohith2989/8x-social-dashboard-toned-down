@@ -1,0 +1,223 @@
+.menu {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 48px;
+  padding: 0 14px 0 16px;
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition: box-shadow var(--t-fast) var(--ease-out);
+}
+
+.trigger:hover,
+.open {
+  box-shadow:
+    inset 0 0 0 1px var(--stone-2),
+    0 8px 18px -12px rgb(11 11 12 / 0.35);
+}
+
+.trigger > svg:last-child {
+  color: var(--text-muted);
+  transition: transform var(--t) var(--ease-out);
+}
+
+.open > svg:last-child {
+  transform: rotate(180deg);
+}
+
+.value {
+  min-width: 0;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 40;
+  min-width: 240px;
+  max-height: 340px;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  border-radius: 20px;
+  background: var(--paper);
+  box-shadow:
+    0 2px 6px rgb(11 11 12 / 0.06),
+    0 24px 48px -20px color-mix(in srgb, var(--vertical-ink) 45%, transparent);
+  animation: drop 220ms var(--ease-out);
+}
+
+.end {
+  left: auto;
+  right: 0;
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+
+.find {
+  height: 40px;
+  margin: 2px 2px 6px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--canvas);
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+}
+
+.find:focus {
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  text-align: left;
+  color: var(--ink);
+}
+
+.option.hi {
+  background: var(--canvas);
+}
+
+.option[aria-selected="true"] {
+  font-weight: 600;
+}
+
+.option:disabled {
+  color: var(--mist);
+  cursor: default;
+}
+
+.label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  color: var(--vertical-deep);
+}
+
+.none {
+  padding: 12px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* the multi-select's trigger wears the first faces picked */
+.leads {
+  display: inline-flex;
+  align-items: center;
+}
+
+.leads > * {
+  display: inline-flex;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--paper);
+}
+
+.leads > * + * {
+  margin-left: -8px;
+}
+
+/* the multi-select's box: a soft square that fills with ink and draws its check, as the brand's checkbox does */
+.box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1.5px var(--stone-2);
+  transition:
+    background-color 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
+}
+
+.box svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 14;
+  stroke-dashoffset: 14;
+  transition: stroke-dashoffset 240ms var(--ease-out) 40ms;
+}
+
+.box[data-on="true"] {
+  background: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+.box[data-on="true"] svg {
+  stroke-dashoffset: 0;
+}
+
+.option:hover .box[data-on="false"] {
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+/* drawn as a card's title: what the card shows, read first */
+.trigger.titleTrigger {
+  height: auto;
+  gap: 6px;
+  padding: 2px 6px 2px 0;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  background: none;
+  box-shadow: none;
+}
+
+.trigger.titleTrigger:hover,
+.trigger.titleTrigger.open {
+  box-shadow: none;
+  color: var(--vertical-deep);
+}
+
+.trigger.titleTrigger > svg:last-child {
+  color: var(--vertical-deep);
+}

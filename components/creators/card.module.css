@@ -1,0 +1,308 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  min-width: 0;
+  animation: card-in 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 45ms + 100ms);
+}
+
+:global([data-arrive="wait"]) .grid > li {
+  animation-play-state: paused;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.card {
+  --card-bg: var(--paper);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 6px 16px 14px;
+  border-radius: 24px;
+  background: var(--card-bg);
+  cursor: pointer;
+  outline: none;
+  box-shadow:
+    0 1px 2px rgb(11 11 12 / 0.04),
+    0 16px 32px -26px rgb(11 11 12 / 0.3);
+  transition:
+    transform 320ms var(--ease-out),
+    box-shadow 320ms var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgb(11 11 12 / 0.05),
+    0 26px 40px -24px color-mix(in srgb, var(--vertical-ink) 45%, transparent);
+}
+
+.card:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 0 0 6px color-mix(in srgb, var(--vertical) 28%, transparent);
+}
+
+/* the open one, outlined in ink */
+.open {
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 22px 36px -24px color-mix(in srgb, var(--vertical-ink) 45%, transparent);
+}
+
+.selected {
+  --card-bg: color-mix(in srgb, var(--vertical-light) 55%, #fff);
+}
+
+/* the banner runs nearly edge to edge, the card's white a thin frame round it */
+.banner {
+  margin: 0 -10px;
+}
+
+/* the banner's light drifts a little under the pointer, beneath its grain */
+.card:hover .banner [data-light] {
+  transform: scale(1.14) translate(-3%, 3%);
+}
+
+/* the check, over the banner's top corner: there when the pointer is on the card, or once anything is picked */
+.check {
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  left: 10px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.card:hover .check,
+.card:focus-within .check,
+.selected .check,
+.grid[data-selecting="true"] .check {
+  opacity: 1;
+  transform: none;
+}
+
+/* where they post, in the banner's lower corner */
+.platforms {
+  position: absolute;
+  z-index: 3;
+  left: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  gap: 4px;
+}
+
+.platforms svg {
+  border-radius: 6px;
+  box-shadow: 0 3px 8px -3px rgb(8 32 88 / 0.45);
+}
+
+/* the face sits on a plate of the card's own white, over the banner's lower edge */
+.person {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -44px;
+  text-align: center;
+}
+
+.plate {
+  display: grid;
+  place-items: center;
+  padding: 7px;
+  border-radius: 50%;
+  background: var(--card-bg);
+}
+
+.name {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.where {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.figures {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.views {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.views :global(.num) {
+  font-size: 30px;
+  color: var(--ink);
+}
+
+.sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.sub :global(.mono) {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.sub i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--mist);
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 9 / 13;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 600ms var(--ease-out),
+    filter 300ms var(--ease-out);
+}
+
+.card:hover .tile img {
+  transform: scale(1.06);
+}
+
+/* a post with no picture to show: its platform on the brand's dots */
+.blank {
+  background:
+    radial-gradient(circle, var(--dot-ghost) 1.2px, transparent 1.6px) 0 0 / 7px 7px,
+    var(--canvas);
+}
+
+.blank svg {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.foot > svg {
+  color: var(--mist);
+  transition:
+    transform 300ms var(--ease-out),
+    color 300ms var(--ease-out);
+}
+
+.card:hover .foot > svg {
+  color: var(--ink);
+  transform: translateX(3px);
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.state i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.state i[data-status="active"] {
+  background: var(--vertical);
+}
+
+.state i[data-status="idle"] {
+  background: #e3a13a;
+}
+
+.state i[data-status="dropped"] {
+  background: var(--dot-quiet);
+}
+
+.card[data-status="idle"] .state {
+  color: #a26b14;
+}
+
+.flagLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+/* a flagged or dropped creator keeps their place, greyed (the plate stays white) */
+.card[data-flagged="true"] .plate > *,
+.card[data-flagged="true"] .name,
+.card[data-flagged="true"] .where,
+.card[data-flagged="true"] .figures,
+.card[data-flagged="true"] .sub,
+.card[data-flagged="true"] .posts,
+.card[data-status="dropped"] .figures,
+.card[data-status="dropped"] .sub,
+.card[data-status="dropped"] .posts {
+  opacity: 0.55;
+}
