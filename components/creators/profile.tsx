@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { MANAGER, PLATFORM_LABELS } from "@/lib/demo";
-import { ACTIVE_HOURS, FLAG_REASONS, NOW, STATUS_LABELS, since, stamp, type RosterCreator, type RosterPost } from "@/lib/roster";
+import { ACTIVE_HOURS, FLAG_REASONS, STATUS_LABELS, since, stamp, type RosterCreator, type RosterPost } from "@/lib/roster";
 import { compact, day } from "@/lib/format";
 import { ArrivalProvider } from "../ui/arrival";
 import { Button } from "../ui/button";
@@ -93,25 +93,10 @@ export function Profile({ creator: c, onFlag, onUnflag, onClose }: { creator: Ro
             <dd className="num">{compact(c.views)}</dd>
           </div>
           <div>
-            <dt>Avg / post</dt>
-            <dd className="num">{compact(c.avgPerPost)}</dd>
-          </div>
-          <div>
             <dt>Videos</dt>
             <dd className="num">{c.videos}</dd>
           </div>
-          <div>
-            <dt>Engagement</dt>
-            <dd className="num">{c.engagement.toFixed(1)}%</dd>
-          </div>
         </dl>
-
-        <div className={styles.section}>
-          <p className={styles.label}>
-            Last 14 days <span>by the day posts went out</span>
-          </p>
-          <Days daily={c.daily} />
-        </div>
 
         <div className={styles.section}>
           <p className={styles.label}>
@@ -180,49 +165,6 @@ export function Profile({ creator: c, onFlag, onUnflag, onClose }: { creator: Ro
         </div>
       </div>
     </ArrivalProvider>
-  );
-}
-
-/*
-  Their last fourteen days across the column's width: a column of fine dots for each day, lit from the foot by the
-  views of the posts that went out that day (the busiest day lit to the top), today at the right. Pointing at a day
-  dims the others and says its date and views.
-*/
-const DAY_ROWS = 8;
-
-function Days({ daily }: { daily: number[] }) {
-  const [over, setOver] = useState<number | null>(null);
-  const max = Math.max(...daily, 1);
-  const first = new Date(NOW - 13 * 86_400_000).toISOString().slice(0, 10);
-  const total = daily.reduce((a, v) => a + v, 0);
-  return (
-    <div className={styles.days} data-pointing={over !== null || undefined} onPointerLeave={() => setOver(null)}>
-      <div className={styles.dayCols} role="img" aria-label={`${compact(total)} views from posts in the last 14 days, by the day they went out`}>
-        {daily.map((v, d) => {
-          const lit = v > 0 ? Math.max(1, Math.round((v / max) * DAY_ROWS)) : 0;
-          const at = new Date(NOW - (13 - d) * 86_400_000).toISOString().slice(0, 10);
-          const edge = d < 3 ? "start" : d > 10 ? "end" : "middle";
-          return (
-            <span key={d} className={styles.dayCol} data-over={over === d || undefined} onPointerEnter={() => setOver(d)}>
-              {Array.from({ length: DAY_ROWS * 2 }, (_, k) => {
-                const level = DAY_ROWS - 1 - Math.floor(k / 2);
-                return <i key={k} className={level < lit ? styles.dayLit : undefined} style={{ "--delay": `${d * 28 + level * 22}ms` } as React.CSSProperties} />;
-              })}
-              {over === d && (
-                <span className={styles.dayTip} data-edge={edge} role="tooltip">
-                  <strong>{d === 13 ? "Today" : day(at, true)}</strong>
-                  <span>{v ? `${compact(v)} views` : "No post"}</span>
-                </span>
-              )}
-            </span>
-          );
-        })}
-      </div>
-      <p className={styles.dayAxis} aria-hidden>
-        <span>{day(first)}</span>
-        <span>Today</span>
-      </p>
-    </div>
   );
 }
 

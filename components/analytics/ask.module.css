@@ -37,7 +37,7 @@
   max-width: 80%;
   padding: 9px 13px;
   border-radius: 16px 16px 4px 16px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   color: var(--ink);
   background: var(--vertical-light);
 }
@@ -47,7 +47,7 @@
   gap: 8px;
   padding: 12px 14px;
   border-radius: 4px 16px 16px 16px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   line-height: 1.5;
   color: var(--text);
   background: var(--canvas);
@@ -70,7 +70,7 @@
 }
 
 .caveat {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -87,7 +87,7 @@
   gap: 10px;
   padding: 11px 14px;
   border-radius: 14px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 600;
   text-align: left;
   color: var(--ink);
@@ -128,7 +128,7 @@
   outline: 0;
   box-shadow: none;
   font: inherit;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--ink);
   background: transparent;
 }

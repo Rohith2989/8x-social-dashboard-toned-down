@@ -292,26 +292,14 @@ export function PostCard({
         <span className={styles.name}>
           <Marked text={p.creator.name} q={q} />
         </span>
-        <time className="mono" dateTime={p.postedAt}>
-          {time}
-        </time>
+        {dated && (
+          <time className="mono" dateTime={p.postedAt}>
+            {time}
+          </time>
+        )}
       </div>
       <p className={styles.caption}>
         <Marked text={p.caption} q={q} />
-      </p>
-      <p className={styles.counts}>
-        <span title="Likes">
-          <Icon name="heart" size={15} />
-          <span className="mono">{compact(p.likes)}</span>
-        </span>
-        <span title="Comments">
-          <Icon name="comment" size={15} />
-          <span className="mono">{compact(p.comments)}</span>
-        </span>
-        <span title={p.shares == null ? "Instagram has not reported this post's shares yet" : "Shares"}>
-          <Icon name="share" size={15} />
-          <span className={`mono ${p.shares == null ? styles.na : ""}`}>{p.shares == null ? "N/A" : compact(p.shares)}</span>
-        </span>
       </p>
       {p.flag ? (
         <p className={styles.flagLine}>

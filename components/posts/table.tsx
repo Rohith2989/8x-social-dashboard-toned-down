@@ -9,7 +9,6 @@ import { reasonLabel, type FeedPost, type PostSort } from "@/lib/posts";
 import { Check } from "../ui/check";
 import { Icon } from "../ui/icon";
 import { PlatformIcon } from "../ui/platform-icon";
-import { CountryFlag } from "../ui/country-flag";
 import { Marked } from "../creators/bits";
 import { useFlip } from "../creators/flip";
 import { Mark } from "./mark";
@@ -35,11 +34,8 @@ const COLUMNS: Col[] = [
   { id: "views", label: "Views", sort: "views", num: true },
   { id: "likes", label: "Likes", sort: "likes", num: true, hide: "md" },
   { id: "comments", label: "Comments", sort: "comments", num: true, hide: "md" },
-  { id: "shares", label: "Shares", sort: "shares", num: true, hide: "lg" },
-  { id: "engagement", label: "Eng. rate", sort: "engagement", num: true, hide: "lg" },
   { id: "status", label: "Status", sort: "status", text: true, hide: "xs" },
   { id: "sparkCode", label: "Spark code", sort: "sparkCode", text: true, hide: "lg" },
-  { id: "country", label: "Country", sort: "country", text: true, hide: "lg" },
 ];
 
 export function PostTable({
@@ -254,10 +250,6 @@ function Row({
       <td className={`${base.num} ${styles.md}`} title={full(p.comments)}>
         {compact(p.comments)}
       </td>
-      <td className={`${base.num} ${styles.lg} ${p.shares == null ? styles.na : ""}`} title={p.shares == null ? "Instagram has not reported this post's shares yet" : full(p.shares)}>
-        {p.shares == null ? "N/A" : compact(p.shares)}
-      </td>
-      <td className={`${base.num} ${styles.lg}`}>{p.engagement.toFixed(1)}%</td>
       <td className={`${styles.status} ${styles.xs}`}>
         <span className={styles.state} data-status={p.status}>
           <i />
@@ -287,12 +279,6 @@ function Row({
             {p.platform === "tiktok" ? "Not yet" : "–"}
           </span>
         )}
-      </td>
-      <td className={styles.lg}>
-        <span className={styles.country} title={p.creator.country.name}>
-          <CountryFlag country={p.creator.country} size={18} />
-          <span className="mono">{p.creator.country.code}</span>
-        </span>
       </td>
     </tr>
   );

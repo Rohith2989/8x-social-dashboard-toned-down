@@ -157,3 +157,13 @@ A typed question is matched to what the figures can answer; anything else is tol
 - A window with no campaign days has no spend: cost per sale says N/A and why.
 - A metric's split that has one series draws no legend controls.
 - The last series showing cannot be switched off (the product's rule).
+
+## Calm pass (2026-11-04)
+
+- Revenue, and the ad views' lead figure, on the vertical's colour made subtle (pale light, dark words).
+- Each headline figure keeps the two facts that explain it most.
+- Top sources: the six with the most.
+- The open day: the five channels that brought the most (its bar still shows all).
+- The ad views: the four figures, views by day, the boosted posts (the five most spent on, all on asking), creators by
+  cost, who saw them. The delivery rates and the two platforms side by side went.
+- Room: 44 px between parts, 20 px between cards, a step smaller words.

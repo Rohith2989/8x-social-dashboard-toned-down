@@ -96,3 +96,7 @@ Nothing on any page is drawn without doing what it says:
 
 - A name saved empty cannot be; a phone may be cleared.
 - Every source connected: the card says so and offers nothing to connect.
+
+## Calm pass (2026-11-04)
+
+The workspace card no longer says when the workspace opened (it was on the brand's card too); the cards sit 44 px apart.

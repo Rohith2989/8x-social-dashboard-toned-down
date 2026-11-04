@@ -5,7 +5,7 @@
 .intro {
   max-width: 82ch;
   margin-bottom: 16px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   line-height: 1.5;
   color: var(--text-muted);
 }
@@ -15,7 +15,7 @@
 .tiles {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: var(--cards, 20px);
 }
 
 @container (max-width: 1060px) {
@@ -49,12 +49,7 @@
 }
 
 .lead[aria-label] {
-  background: radial-gradient(
-    130% 150% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
-    var(--vertical-deep) 52%,
-    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
-  );
+  background: var(--accent-ground);
 }
 
 .lead::before {
@@ -63,19 +58,19 @@
   inset: 0;
   border-radius: inherit;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.5;
+  opacity: 0.18;
   pointer-events: none;
 }
 
 .lead h2,
 .tile h2 {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
 
 .lead h2 {
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .big {
@@ -86,30 +81,30 @@
 }
 
 .lead .big {
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .hint {
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--ink);
 }
 
 .lead .hint {
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .detail {
   margin-top: 0;
   padding-top: 8px;
-  font-size: 13.5px;
+  font-size: 12.5px;
   line-height: 1.4;
   color: var(--text-muted);
 }
 
 .lead .detail {
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 .inline {
@@ -121,8 +116,8 @@
 /* ---- the white cards ---- */
 
 .card {
-  margin-top: 20px;
-  padding: 20px 22px 20px;
+  margin-top: var(--section, 44px);
+  padding: 26px 28px 26px;
   border-radius: 26px;
   background: var(--paper);
   box-shadow:
@@ -131,7 +126,7 @@
 }
 
 .title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -139,7 +134,7 @@
 
 .sub {
   margin-top: 4px;
-  font-size: 13.5px;
+  font-size: 12.5px;
   line-height: 1.45;
   color: var(--text-muted);
 }
@@ -169,21 +164,21 @@
 }
 
 .rates dt {
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-muted);
 }
 
 .rates dd {
   margin: 6px 0 0;
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1;
   color: var(--ink);
 }
 
 .rates p {
   margin-top: 6px;
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.4;
   color: var(--text-muted);
 }
@@ -200,7 +195,7 @@
 .key {
   display: flex;
   gap: 14px;
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: var(--text);
 }
 
@@ -293,7 +288,7 @@
   gap: 2px;
   padding: 10px 12px;
   border-radius: 14px;
-  font-size: 13px;
+  font-size: 12.5px;
   white-space: nowrap;
   color: rgb(255 255 255 / 0.8);
   background: color-mix(in srgb, var(--float) 94%, var(--vertical-ink));
@@ -307,7 +302,7 @@
 
 .trendFoot {
   margin-top: 10px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -323,7 +318,7 @@
 .postHead {
   margin-top: 14px;
   padding: 0 14px 6px 8px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -383,7 +378,7 @@
 
 .postText strong {
   overflow: hidden;
-  font-size: 15px;
+  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: var(--ink);
@@ -391,7 +386,7 @@
 
 .postText > span:nth-child(2) {
   margin-top: 1px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -423,7 +418,7 @@
   justify-content: space-between;
   gap: 10px;
   margin-top: 4px;
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
@@ -432,7 +427,7 @@
 }
 
 .fig b {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--ink);
 }
 
@@ -492,7 +487,26 @@
 .pair {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 0 16px;
+  gap: 0 var(--cards, 20px);
+}
+
+/* the rest of the boosted posts, on asking */
+.showAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--link);
+  background: color-mix(in srgb, var(--vertical) 8%, transparent);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.showAll:hover {
+  background: color-mix(in srgb, var(--vertical) 14%, transparent);
 }
 
 @container (min-width: 900px) {
@@ -540,13 +554,13 @@
 }
 
 .creatorText strong {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--ink);
 }
 
 .creatorText span {
   overflow: hidden;
-  font-size: 12.5px;
+  font-size: 12px;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: var(--text-muted);
@@ -560,7 +574,7 @@
 @container (max-width: 380px) {
   .creatorText strong {
     overflow: hidden;
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
@@ -585,12 +599,12 @@
 }
 
 .cost b {
-  font-size: 18px;
+  font-size: 17px;
   color: var(--ink);
 }
 
 .cost span {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
@@ -610,7 +624,7 @@
 }
 
 .dimension h3 {
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -635,7 +649,7 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text);
 }
 
@@ -716,7 +730,7 @@
 
 .compare th {
   padding: 9px 10px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   text-align: right;
   white-space: nowrap;
@@ -726,7 +740,7 @@
 
 .compare td {
   padding: 11px 10px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   text-align: right;
   white-space: nowrap;
   color: var(--text);
@@ -749,7 +763,7 @@
   align-items: center;
   gap: 4px;
   margin-top: 10px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 

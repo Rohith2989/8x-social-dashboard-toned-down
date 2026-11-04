@@ -55,7 +55,7 @@
 .num {
   text-align: right !important;
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 13px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -73,7 +73,7 @@
   padding: 0 8px;
   margin: 0 -8px;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
   transition:
@@ -115,7 +115,7 @@
 }
 
 .plain {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -182,7 +182,7 @@
 }
 
 .name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   text-align: left;
   color: var(--ink);
@@ -194,7 +194,7 @@
 }
 
 .accounts {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -251,7 +251,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--danger);
 }
@@ -270,7 +270,7 @@
 .account td {
   height: 56px;
   background: color-mix(in srgb, var(--canvas) 60%, #fff);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .accountWho {
@@ -290,7 +290,7 @@
 }
 
 .followers {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 

@@ -81,7 +81,7 @@ export function Invite({ invites, waiting, onSent }: { invites: Request[]; waiti
                 }}
               />
             </label>
-            <Button type="submit" variant="paper" className={styles.submit} disabled={busy} icon={busy ? undefined : <Icon name="plus" size={18} />}>
+            <Button type="submit" variant="ink" className={styles.submit} disabled={busy} icon={busy ? undefined : <Icon name="plus" size={18} />}>
               {busy ? <Sending /> : "Request access"}
             </Button>
           </form>

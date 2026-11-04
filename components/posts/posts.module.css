@@ -1,5 +1,5 @@
 .list {
-  margin-top: 18px;
+  margin-top: 24px;
   transition: padding-bottom 420ms var(--ease-out);
 }
 
@@ -10,7 +10,7 @@
 
 .note {
   margin-top: 22px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 

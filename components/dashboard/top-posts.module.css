@@ -1,6 +1,6 @@
 .section {
   container-type: inline-size;
-  margin-top: 34px;
+  margin-top: var(--section, 44px);
 }
 
 .head {
@@ -12,7 +12,7 @@
 }
 
 .head h2 {
-  font-size: 22px;
+  font-size: 20.5px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -20,13 +20,13 @@
 
 .head p {
   margin-top: 2px;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
 }
 
 .list {
   display: grid;
-  gap: 16px;
+  gap: var(--cards, 20px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -99,7 +99,7 @@
   border-radius: 8px;
   background: rgb(11 11 12 / 0.55);
   backdrop-filter: blur(8px);
-  font-size: 13px;
+  font-size: 12.5px;
   color: #fff;
   transition: opacity var(--t) var(--ease-out);
 }
@@ -154,7 +154,7 @@
 }
 
 .rank {
-  font-size: 26px;
+  font-size: 24px;
   color: var(--mist);
 }
 
@@ -163,19 +163,19 @@
 }
 
 .views {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
   white-space: nowrap;
 }
 
 .views :global(.num) {
-  font-size: 26px;
+  font-size: 24px;
   color: var(--ink);
 }
 
 .caption {
   margin-top: 10px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.4;
   color: var(--text);
   display: -webkit-box;
@@ -190,7 +190,7 @@
   align-items: center;
   gap: 8px;
   margin-top: 12px;
-  font-size: 15px;
+  font-size: 14px;
   min-width: 0;
 }
 
@@ -223,7 +223,7 @@
 
 .metrics dd {
   margin: 0;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--ink);
 }
 
@@ -289,7 +289,7 @@
   }
 
   .metrics dd {
-    font-size: 12.5px;
+    font-size: 12px;
   }
 }
 
@@ -332,11 +332,11 @@ a.caption:hover {
   }
 
   .rank {
-    font-size: 21px;
+    font-size: 19.5px;
   }
 
   .views :global(.num) {
-    font-size: 23px;
+    font-size: 21.5px;
   }
 
   .metrics > div {

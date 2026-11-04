@@ -13,7 +13,7 @@
 
 .head h2 {
   margin-top: 14px;
-  font-size: 22px;
+  font-size: 20.5px;
   font-weight: 700;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -22,7 +22,7 @@
 
 .head p {
   margin-top: 6px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--text-muted);
 }
@@ -64,7 +64,7 @@
 .reasons legend {
   margin-bottom: 10px;
   padding: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -121,13 +121,13 @@
 }
 
 .reasonText strong {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
 
 .reasonText span {
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -176,7 +176,7 @@
 }
 
 .noteLabel {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -195,7 +195,7 @@
   border-radius: 16px;
   background: var(--canvas);
   font: inherit;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--ink);
   resize: vertical;
@@ -236,7 +236,7 @@
 }
 
 .fieldLabel {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -270,7 +270,7 @@
 
 .stepper output {
   min-width: 44px;
-  font-size: 26px;
+  font-size: 24px;
   text-align: center;
   color: var(--ink);
 }
@@ -287,7 +287,7 @@
   height: 44px;
   padding: 0 14px 0 10px;
   border-radius: 999px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-muted);
   box-shadow: inset 0 0 0 1px var(--border);
@@ -328,7 +328,7 @@
   height: 48px;
   padding: 0 20px;
   border-radius: 999px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--ink);
   transition: background-color var(--t-fast) var(--ease-out);
@@ -353,7 +353,7 @@
   border-radius: 999px;
   background: var(--action);
   color: var(--on-action);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   transition:
     background-color var(--t) var(--ease-out),
@@ -453,7 +453,7 @@
 
 .done h2 {
   margin-top: 18px;
-  font-size: 22px;
+  font-size: 20.5px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -461,7 +461,7 @@
 .done p {
   max-width: 340px;
   margin-top: 6px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--text-muted);
 }
@@ -472,7 +472,7 @@
   padding: 0 28px;
   border-radius: 999px;
   background: var(--canvas);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--ink);
 }

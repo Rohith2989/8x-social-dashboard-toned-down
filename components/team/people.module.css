@@ -4,7 +4,7 @@
 
 /* a section's head: its title, and the line that counts it */
 .head h2 {
-  font-size: 20px;
+  font-size: 18.5px;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.012em;
@@ -13,13 +13,13 @@
 
 .head p {
   margin-top: 4px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   color: var(--text-muted);
 }
 
 .empty {
   margin-top: 14px;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
 }
 
@@ -103,7 +103,7 @@
   overflow: hidden;
   border-radius: 50%;
   font-family: var(--font-num);
-  font-size: 19px;
+  font-size: 17.5px;
   font-weight: 800;
   letter-spacing: 0.01em;
   color: #fff;
@@ -159,7 +159,7 @@
   align-items: center;
   gap: 6px;
   padding-top: 4px;
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -174,7 +174,7 @@
   align-items: baseline;
   gap: 2px 8px;
   margin-top: 16px;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.25;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -185,7 +185,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--link);
 }
@@ -200,7 +200,7 @@
 .email {
   margin-top: 2px;
   overflow: hidden;
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: var(--text-muted);
@@ -225,7 +225,7 @@
 
 .facts dt {
   padding-top: 1px;
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1.45;
   color: var(--text-muted);
 }
@@ -233,7 +233,7 @@
 .facts dd {
   min-width: 0;
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.35;
   color: var(--text);
 }
@@ -305,7 +305,7 @@
 
 .when {
   padding-left: 21px;
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
@@ -316,7 +316,7 @@
 .since {
   margin-top: auto;
   padding-top: 16px;
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 

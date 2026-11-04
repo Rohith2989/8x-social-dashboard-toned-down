@@ -2,7 +2,7 @@
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: var(--section, 44px);
 }
 
 /* the 8x team comes into the tray where the window has no right-hand column (scoped under the stack, so its own

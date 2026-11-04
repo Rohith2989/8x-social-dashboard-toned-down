@@ -56,12 +56,12 @@ keys without one.
 | Part | File | What it shows |
 |---|---|---|
 | Greeting | `dashboard/overview.tsx` | Hello, the day, where the campaign is, and the one action (Start a campaign). |
-| Performance | `dashboard/performance.tsx` | On ink: views and engagement rate, then what the people behind it just did, each with its check drawn in one of the vertical's colours. |
-| Activity | `dashboard/activity.tsx` | On the vertical's palest tint: views, likes or posts by day over a week, two or the whole campaign. A white line over a field of fine dots; one day picked out with an ink marker, a line of dots down to its name in an ink pill, and one tooltip. Pointing moves the pick. |
-| Engagement | `dashboard/engagement.tsx` | A strip of the accent's tint with grain: this week's likes, comments, shares and rate, each tile with its icon on a square half above it. The last card (the hooks waiting for review, with Social's bubble) breaks out past the strip. |
-| Coming up | `dashboard/coming-up.tsx` | The content plan's next three days: each post at its time, a bar for where it stands, the creator and platform over its title; the account manager at the foot. |
-| Your campaigns | `dashboard/campaigns.tsx` | The campaigns as blocks of the vertical's colours: faces, name, posts against the plan; a place for the next one outlined in fine dots. |
-| Top-performing posts | `dashboard/top-posts.tsx` | The best posts in 9:16, playing on hover, their progress in dots. |
+| Performance | `dashboard/performance.tsx` | On ink: views and engagement rate, then the two latest things the people behind it did, each with its check drawn in one of the vertical's colours. |
+| Activity | `dashboard/activity.tsx` | On a whisper of the vertical's sky: views, likes or posts by day over a week, two or the whole campaign. A white line over a field of fine dots; one day picked out with an ink marker, a line of dots down to its name in an ink pill, and one tooltip. Pointing moves the pick. |
+| Engagement | `dashboard/engagement.tsx` | A strip of the accent's faintest tint with grain: this week's likes, comments and shares, three across, each tile with its icon on a pale square half above it. The last card (the hooks waiting for review, with Social's bubble) breaks out past the strip. |
+| Coming up | `dashboard/coming-up.tsx` | The content plan's next three days: each post at its time, a bar for where it stands, the creator and platform over its title (only "In review" is said in words); the account manager at the foot. |
+| Your campaigns | `dashboard/campaigns.tsx` | The campaigns as soft tints of the vertical's colours (blue, sky, lilac): faces, name, posts against the plan as words and a bar; a place for the next one outlined in fine dots. |
+| Top-performing posts | `dashboard/top-posts.tsx` | The best posts in 9:16, playing on hover, their progress in dots; each its views, caption and creator. |
 | Pace | `dashboard/pace.tsx` | A block of the vertical's colour with grain: posts against the plan as rings of white dots, a white tick where the plan says it should be today; beside them how far ahead, the rate so far, the rate the rest needs, and what is left. |
 | Posting calendar | `dashboard/rhythm.tsx` | The campaign as a compact month on a pale grain ground: each day a low tile filled on the vertical's six steps by its posts (white to deepest, graded across the campaign's own range), date left, count right; today ringed in ink; days to come outlined in dots, a hollow dot per planned post; the days either side only their faint dates; the key beside the title; the day's creators on hover. |
 
@@ -75,9 +75,9 @@ what it is now, and every state it has. In short:
 | The page | `creators/creators.tsx` | Search, filters, sort, view and the open creator live in the URL; picks and new flags live with the page. Export (CSV of the list as filtered) and Ask for creators. |
 | Roster summary | `creators/summary.tsx` | The roster as a wall of faces with the plan's open places in dotted rings; who is posting, a dot a person, each status a filter; the creator of the week. |
 | Toolbar | `creators/toolbar.tsx` | Search (`/` to reach it, Esc to clear), status with counts, platforms by their icons, countries by their flags with counts in scope, sort and direction, cards or table; what is applied as a sentence whose parts remove themselves. |
-| Cards | `creators/card.tsx` | A creator per card: their banner (8x's own, `creators/banner.tsx`: soft lights in the vertical's colours over one of six grounds, placed from their name, with grain) and their platforms, the face in its status ring on a plate over the banner's edge, views with a dot sparkline, best posts; hover lifts it, lets the banner's light drift and shows its check; the open one is outlined in ink. Cards glide to their new places on a sort or a filter (`flip.ts`). |
+| Cards | `creators/card.tsx` | A creator per card: their banner (8x's own, `creators/banner.tsx`: soft lights in the vertical's colours over one of six grounds, placed from their name, with grain) and their platforms, the face in its status ring on a plate over the banner's edge, views, best posts; hover lifts it, lets the banner's light drift and shows its check; the open one is outlined in ink. Cards glide to their new places on a sort or a filter (`flip.ts`). |
 | Table | `creators/table.tsx` | The same columns as the product; heads cycle highest, lowest, default; a creator opens to their accounts, an account to its posts. |
-| Profile | `creators/profile.tsx` | The open creator in the right-hand column (a sheet when narrow): their banner and face, status in words, four figures, fourteen days across the column (a day's views on hover), accounts with their figures and live links, best posts, flag or lift a flag. |
+| Profile | `creators/profile.tsx` | The open creator in the right-hand column (a sheet when narrow): their banner and face, status in words, views and videos, accounts with their figures and live links, best posts, flag or lift a flag. |
 | Selection bar | `ui/selection-bar.tsx` | Rises with the first pick: copy profile links, export, flag for the account manager, clear (Esc). |
 | Dialogs | `creators/flag-dialog.tsx`, `ask-dialog.tsx` | Flag: the five reasons as rows, a note, Send waits for a reason, the dot loader, then the dialog's own confirmation and an Undo toast. Ask: how many, platforms, market, a note. |
 | Empty states | `creators/empty.tsx` | Nothing matches, nobody posted lately, nobody cast yet: why, and the one thing to do, over a ring of empty places in dots. |
@@ -93,7 +93,7 @@ The product's Posts and Feed tabs as one page with two views, part by part: [doc
 | Toolbar | `posts/toolbar.tsx` | Search, creators by their faces (several at once), platforms, the day, Feed or Table; what is applied as a sentence. |
 | Feed | `posts/feed.tsx` | The days, newest first, each heading sticky, its posts in a sideways row that rests on whole cards; a card plays its post on hover. Sparse results read as one dated grid. |
 | Table | `posts/table.tsx` | The product's columns, two folded into their cells so it always fits; sortable heads; spark codes to copy; a day taken to from the feed, tinted. |
-| Post | `posts/post.tsx` | The open post in the right-hand column (a sheet when narrow): playing in its platform's dress, its five figures, the next milestone in dots, its views by day, copy link, spark code, download, flag. |
+| Post | `posts/post.tsx` | The open post in the right-hand column (a sheet when narrow): playing in its platform's dress, its views with likes and comments, the next milestone in dots, copy link, spark code, download, flag. |
 | Milestone mark | `posts/mark.tsx` | A ring of five steps filled to the post's tier, in the vertical's ramp. |
 | Empty state | `posts/empty.tsx` | Three empty posters outlined in dots, why nothing matches, Clear. |
 
@@ -105,8 +105,8 @@ brand approves them, creators film them. In short:
 | Part | File | What it does |
 |---|---|---|
 | The page | `plan/plan.tsx` | The open plan, script, filter and the conversation's sheet live in the URL (the browser's own history, so it changes at once). Export (the open plan's scripts as CSV) and Suggest an idea (to Maya). |
-| Summary | `plan/summary.tsx` | The plans in time on the deep blue, a column a plan under the product's stages (Past plans, Live, For approval): scripts as numbered marks in their state, what it came to, its days with today lit; the open one white. What works: the scripts with the most views a post, across every plan they ran in. |
-| The open plan | `plan/open-plan.tsx` | Name, dates, who shared it and when, last changed and reviewed, where it stands; Show (the product's filter); Approve the ones waiting; the scripts as tiles with a picture of what each asks for, its state in words, its results once creators have it. |
+| Summary | `plan/summary.tsx` | The plans in time on the vertical's colour made subtle, a column a plan under the product's stages (Past plans, Live, For approval): scripts as numbered marks in their state, what it came to; the open one white, ringed in the vertical. What works: the scripts with the most views a post, across every plan they ran in. |
+| The open plan | `plan/open-plan.tsx` | Name, dates, who shared it and when, where it stands; Show (the product's filter); Approve the ones waiting; the scripts as tiles with a picture of what each asks for, its state in words, its results once creators have it. |
 | The script | `plan/script.tsx` | The reference playing in its own column; the name large, hashtag, due date, state; Approve (the heart and its burst) and Flag, disabled with the product's reasons; context; how it did with its posts; how it goes as a storyboard of the reference's own frames; do and do not. |
 | Activity | `plan/activity.tsx` | The script's thread with Maya in the right-hand column (a sheet when narrow): comments and every change, approval, flag and send-back, oldest first, opening on the newest; the box to write in. |
 | Guidelines | `plan/guidelines.tsx` | What every plan is written to: the brief and the posting guidelines, read from Maya's markdown (`lib/brief.ts`). |
@@ -121,11 +121,11 @@ brand's business, one source at a time (the website, TikTok Ads, Meta Ads), neve
 | Part | File | What it does |
 |---|---|---|
 | The page | `analytics/analytics.tsx` | The source, the window (since 8x, 14 or 7 days, each against the days before it), the metric, split, open day and the dialogs live in the URL. |
-| Headline figures | `analytics/headline.tsx` | Revenue on the deep blue, visitors, sessions and cost per sale, each moved as an arrow and a figure (on cost, down is good) over the facts that explain it. |
+| Headline figures | `analytics/headline.tsx` | Revenue on the vertical's colour made subtle, visitors, sessions and cost per sale, each moved as an arrow and a figure (on cost, down is good) over the two facts that explain it most. |
 | The chart | `analytics/chart.tsx` | The website with 8x on it: the window lit beside the days before it, a named seam, a split's lines in the vertical's ramp with a legend that switches them, the posts as dots under the days and the creators' faces on the jumps; a day's card on hover; pressing a day opens it. |
 | The open day | `analytics/day.tsx` | The right-hand column: the day against a usual day before 8x, its channels as one bar, the views the campaign earned and the posts that went out. |
 | Sources | `analytics/sources.tsx` | Top sources by name and how the visit came (Google Analytics' source / medium on hover), the routes 8x's creators bring marked with the 8x mark; sortable and shaded by value, folding to fit; the share through social in dots; devices as one bar. |
-| Ad views | `analytics/ads.tsx`, `ad-post.tsx` | TikTok Ads and Meta Ads: four figures, delivery rates, views by day, the boosted posts (the open one plays on the right), creators by cost, who saw them, the two side by side. |
+| Ad views | `analytics/ads.tsx`, `ad-post.tsx` | TikTok Ads and Meta Ads: four figures, views by day, the boosted posts (the five most spent on, all on asking; the open one plays on the right), creators by cost, who saw them. |
 | Dialogs | `analytics/connect.tsx`, `ask.tsx` | Connect your data: every source and its state, a key to connect the rest. Ask about this data: the product's three openers, answered from the window's figures. |
 
 ## Team (`/team`)
@@ -137,7 +137,7 @@ not a campaign's. In short:
 | Part | File | What it does |
 |---|---|---|
 | The page | `team/team.tsx` | The line says how many people and how many requests are with 8x; a request just sent opens the product's "Request sent to 8x" and lights its row. |
-| Add your team-mates | `team/invite.tsx` | A work email and Request access on the deep blue, with the way every request goes beside it (you ask, 8x reviews, they sign in; the 8x stop counts the requests with 8x now). The product's refusals word for word, each pointing at the row it means. |
+| Add your team-mates | `team/invite.tsx` | A work email and Request access on the vertical's colour made subtle, with the way every request goes beside it (you ask, 8x reviews, they sign in; the 8x stop counts the requests with 8x now). The product's refusals word for word, each pointing at the row it means. |
 | People | `team/people.tsx` | Every member a card of its own subtle colour: their face on a disc (initials where there is none), the role in words, the campaigns they see lit among the brand's three, their latest on the content plan (it opens the script, and follows the visit's approvals), since when. |
 | Access requests | `team/requests.tsx` | Each request in the product's words, its way drawn as a short track (asked, 8x, signed in); withdraw (the product's dialog) and ask again. Who at 8x decided is never shown. |
 | Your 8x team | `team/eightx.tsx` | The right-hand column (in the tray below 1360 px): Maya · 8x, the campaigns she runs, her latest on the plan, the way to write to her (the plan's thread); the creators making the posts. |
@@ -192,7 +192,8 @@ Every vertical colour on the page reads `--vertical`, `--vertical-deep`, `--vert
 the attribute and the whole dashboard is that vertical's.
 
 **Type.** Archivo 900 at width 62 for numbers (`.num`), Hanken Grotesk for everything you read, Geist Mono for values
-(`.mono`). Nothing you need to read is under 15 px; chart ticks and small values are 12.5 to 14 px in Geist Mono.
+(`.mono`). Inside the cards the words run a step smaller than the page's titles and tabs (body 14 px, details 12 to 13 px,
+never under 12), so every card has room round its words; the tabs, the sidebar and the page titles keep their size.
 
 **Shape.** The window radius 38, the tray 30, cards 26 and tiles 22, soft shadows instead of hairlines (Halo Lab's).
 Buttons are pills; the period menu and icon buttons are rounded squares.
@@ -201,6 +202,15 @@ Buttons are pills; the period menu and icon buttons are rounded squares.
 lilac, blue or pearl, each mixed from the vertical's own tokens and lit softly from its top right, with the colour
 blocks' grain faint behind the content (`app/globals.css`). Subtle, never vibrant: the headline tiles, the sources and
 every Team card wear one.
+
+**Calm, with room** (2026-11-04, "tone it down ... give every element some breathing room"). One rhythm on every page,
+the one Team had: 44 px between a page's parts and 20 px between the cards of a part (`--section` and `--cards` on the
+tray), with wider margins round the page. Bright colour is made subtle, never removed: where a page had a cobalt block it
+has the accent's pale light with dark words (`--accent-*` tokens; at Night the colour breathed into the paper), each card's
+tint is about half what it was, the campaign cards keep their own hue as soft tints, the calendar's ramp tops out at a mid
+blue and the creators' banners sit under a veil of the card's light. Every part says less: second figures, repeated
+facts, footnotes and whole secondary blocks (the ad views' delivery rates and the two platforms side by side, a
+creator's fourteen days, a post's views by day) were taken off, and long lists show their top few.
 
 **Readable in both looks.** Every word on every page, in Daybreak and in Night, open menus and dialogs too, is
 measured against what is really drawn behind it (`scripts/contrast.py`): 4.5:1 for small words, 3:1 for large ones. A flagged, deleted or
@@ -226,7 +236,7 @@ dots shine, the creators' banners become auroras.
   day, the moon and the stars at night.
 - **The change** (`shell/theme.ts`): the new look spreads from the switch as a soft-edged pool (a view transition;
   instant with reduced motion).
-- **Saved and early.** The choice is saved (`localStorage`, `8x-theme`), and the first visit follows the device. A
+- **Saved and early.** The choice is saved (`localStorage`, `8x-theme`); a first visit always opens in Daybreak, whatever the device's setting. A
   script sets the look before the first paint.
 
 ## The dots

@@ -6,7 +6,7 @@
 .row {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1fr);
-  gap: 18px;
+  gap: var(--cards, 20px);
 }
 
 @container (max-width: 1080px) {
@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 22px 24px 22px;
+  padding: 26px 28px 26px;
   border-radius: 26px;
   overflow: hidden;
   transition:
@@ -56,7 +56,7 @@
   position: absolute;
   inset: 0;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.5;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .head h2 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
@@ -81,22 +81,24 @@
   display: flex;
   align-items: baseline;
   gap: 6px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .head p :global(.num) {
-  font-size: 30px;
+  font-size: 28px;
 }
 
-/* the roster: deep blue, the people as faces */
+/* the roster: the vertical's colour, subtle, the people as faces */
 .roster {
-  color: #fff;
-  background: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%, var(--vertical-deep) 55%, color-mix(in srgb, var(--vertical-deep) 80%, var(--vertical-ink)) 120%);
-  box-shadow: 0 26px 44px -28px color-mix(in srgb, var(--vertical-deep) 90%, transparent);
+  color: var(--accent-ink);
+  background: var(--accent-ground);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical) 10%, transparent),
+    0 18px 36px -26px color-mix(in srgb, var(--vertical-deep) 30%, transparent);
 }
 
 .roster .head p span {
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .wall {
@@ -133,7 +135,7 @@
 }
 
 .face[data-dropped="true"] {
-  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.35);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--vertical) 22%, transparent);
 }
 
 .face:hover,
@@ -151,7 +153,7 @@
   border-radius: 10px;
   background: #fff;
   color: #0b0b0c;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
   box-shadow: 0 10px 22px -10px rgb(8 33 89 / 0.6);
@@ -179,7 +181,7 @@
 
 .place circle {
   fill: none;
-  stroke: rgb(255 255 255 / 0.7);
+  stroke: color-mix(in srgb, var(--vertical) 40%, transparent);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 0 5.2;
@@ -187,7 +189,7 @@
 
 .figures {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin: auto 0 0;
   padding-top: 20px;
@@ -198,23 +200,23 @@
   flex-direction: column-reverse;
   gap: 4px;
   padding-top: 14px;
-  border-top: 1px solid rgb(255 255 255 / 0.22);
+  border-top: 1px solid var(--accent-line);
 }
 
 .figures dt {
-  font-size: 13px;
-  color: rgb(255 255 255 / 0.92);
+  font-size: 12.5px;
+  color: var(--accent-quiet);
 }
 
 .figures dd {
   margin: 0;
-  font-size: 26px;
+  font-size: 24px;
 }
 
 /* who is posting: the pale tint, a dot a person */
 .posting {
   color: var(--ink);
-  background: linear-gradient(160deg, var(--vertical-light), color-mix(in srgb, var(--vertical-glow) 40%, var(--vertical-light)));
+  background: linear-gradient(160deg, color-mix(in srgb, var(--vertical-light) 55%, #fff), color-mix(in srgb, var(--vertical-light) 90%, #fff));
 }
 
 .people {
@@ -308,7 +310,7 @@
 
 .count {
   min-width: 26px;
-  font-size: 24px;
+  font-size: 22.5px;
 }
 
 .statusText {
@@ -320,12 +322,12 @@
 }
 
 .statusText strong {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .statusText span {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
   text-wrap: pretty;
 }
@@ -335,10 +337,15 @@
   color: var(--text-muted);
 }
 
-/* the creator of the week: the accent, with grain */
+/* the creator of the week: the vertical's lilac, subtle, with a whisper of grain */
 .spotlight {
   color: var(--vertical-ink);
-  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 25%, #fff) 0%, color-mix(in srgb, var(--vertical-accent) 70%, var(--vertical-light)) 70%);
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 22%, transparent) 0%, transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 12%, #fff), color-mix(in srgb, var(--vertical-accent) 5%, #fff));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical-accent) 16%, transparent),
+    0 18px 34px -26px color-mix(in srgb, var(--vertical-accent) 50%, transparent);
 }
 
 .star {
@@ -358,7 +365,7 @@
 
 .name {
   margin-top: 12px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -368,7 +375,7 @@
   align-items: center;
   gap: 7px;
   margin-top: 4px;
-  font-size: 14px;
+  font-size: 13px;
   color: color-mix(in srgb, var(--vertical-ink) 75%, transparent);
 }
 
@@ -377,11 +384,11 @@
   flex-direction: column;
   margin-top: auto;
   padding-top: 12px;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .weekViews :global(.num) {
-  font-size: 32px;
+  font-size: 30px;
 }
 
 .openLink {
@@ -389,7 +396,7 @@
   align-items: center;
   gap: 4px;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--vertical-ink);
 }
@@ -455,8 +462,17 @@
 
 :global([data-theme="dark"]) .roster {
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.15),
-    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 26px 50px -30px color-mix(in srgb, var(--vertical) 40%, transparent);
+}
+
+:global([data-theme="dark"]) .face[data-dropped="true"] {
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.3);
+}
+
+:global([data-theme="dark"]) .place circle {
+  stroke: rgb(255 255 255 / 0.5);
 }
 
 /* who is posting: the vertical's night, a dot a person, the active ones lit */
@@ -501,10 +517,12 @@
 /* the creator of the week: the accent, deep, its words white */
 :global([data-theme="dark"]) .spotlight {
   color: #fff;
-  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 50%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-accent) 18%, var(--paper)) 70%);
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 24%, transparent) 0%, transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 14%, var(--paper)), color-mix(in srgb, var(--vertical-accent) 5%, var(--paper)));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.12),
-    0 28px 56px -34px color-mix(in srgb, var(--vertical-accent) 60%, transparent);
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    0 24px 44px -30px color-mix(in srgb, var(--vertical-accent) 40%, transparent);
 }
 
 :global([data-theme="dark"]) .where {

@@ -26,7 +26,7 @@ const SORTS: { key: SourceSort; label: string }[] = [
   { key: "share", label: "Share" },
 ];
 
-const TOP = 10;
+const TOP = 6;
 const PAID = new Set(CHANNELS.filter((c) => c.paid).map((c) => c.key));
 
 // Google Analytics' source / medium, said the way a person would; the routes 8x's creators bring visits by are ours

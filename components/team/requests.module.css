@@ -3,7 +3,7 @@
 }
 
 .head h2 {
-  font-size: 20px;
+  font-size: 18.5px;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.012em;
@@ -12,7 +12,7 @@
 
 .head p {
   margin-top: 4px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   color: var(--text-muted);
 }
 
@@ -75,7 +75,7 @@
 .email {
   display: block;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -84,7 +84,7 @@
 
 .state {
   margin-top: 3px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.45;
   color: var(--text);
 }
@@ -99,7 +99,7 @@
 
 .by {
   margin-top: 2px;
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
@@ -261,7 +261,7 @@
 }
 
 .track span {
-  font-size: 12.5px;
+  font-size: 12px;
   white-space: nowrap;
   color: var(--text-muted);
 }

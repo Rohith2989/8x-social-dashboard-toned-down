@@ -87,7 +87,6 @@ function Workspace() {
           <Fact icon="shield" label="Your role" value={ROLE_LABELS[YOU.role]} line={YOU.role === "owner" ? "You can withdraw any access request" : "You can withdraw the requests you sent"} />
           <Fact icon="team" label="People" value={`${MEMBERS.length} on the workspace`} line={waiting ? `${waiting} ${waiting === 1 ? "request" : "requests"} with 8x` : "No requests with 8x"} href="/team" go="Open Team" />
           <Fact icon="dollar" label="Currency" value="US dollars (USD)" line="What Analytics’ revenue and spend are in" />
-          <Fact icon="calendar" label="On 8x since" value={`${day("2026-06-02")} 2026`} line={`When ${BRAND.name}’s workspace opened`} />
           <div className={`${styles.fact} ${styles.campaignsFact}`}>
             <dt>
               <span className={styles.factIcon}>

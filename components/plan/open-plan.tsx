@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { day } from "@/lib/format";
 import { FILTER_EMPTY, FILTER_LABELS, MAYA, filtersFor, matchesFilter, type Filter, type Plan, type Script } from "@/lib/plan";
 import { Button } from "../ui/button";
 import { Icon } from "../ui/icon";
@@ -69,8 +68,6 @@ export function OpenPlan({
             <span>
               {MAYA} shared it {when(plan.shared)}
             </span>
-            {plan.lastModified && <span>Last changed {day(plan.lastModified.slice(0, 10))}</span>}
-            {plan.lastReviewed && <span>Last reviewed {day(plan.lastReviewed.slice(0, 10))}</span>}
           </p>
           <p className={styles.where} data-stage={plan.stage}>
             {planState(plan, waiting.length, flagged.length)}

@@ -148,3 +148,11 @@ never edited, in two columns with the product beside them. "Not written yet." fo
 - A filter that leaves none: the product's lines ("Nothing in this plan is flagged.").
 - A reference that cannot play here: "This one opens on TikTok", with Open the reference.
 - The guidelines not written: "Maya has not written the campaign guidelines yet."
+
+## Calm pass (2026-11-04)
+
+- The plans: the vertical's colour made subtle, its plans pale tiles, the open one white ringed in the vertical; the
+  marks quiet (approved a pale chip, updated outlined, flagged red, waiting dotted). The strip of a plan's days went.
+- What works: each script's name and its views a post (its posts and plans are in its title).
+- The open plan's head: its dates and who shared it; when it last changed and was reviewed went.
+- Room: the open plan, its script and the brief each a section of their own.

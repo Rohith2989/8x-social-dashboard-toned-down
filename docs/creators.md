@@ -142,3 +142,17 @@ reading order and each active ring pulses once. The overview's cards resolve beh
 Once, short, when something happens: the card resolve, the numbers rolling, the status ring's pulse, rows and
 cards gliding to their new places on a sort or a filter, the selection bar rising, the check drawing. Nothing
 loops. Reduced motion makes all of it instant.
+
+## Calm pass (2026-11-04)
+
+Toned down for room, on the user's word ("tone it down ... give every element some breathing room ... remove some
+information"):
+
+- The roster is the vertical's colour made subtle (pale light, dark words); under the faces, two figures: videos and
+  views (the creators' count is in its heading).
+- Who is posting: each status its dot, count and word; what the word means is in its title.
+- The creator of the week keeps its lilac, as a soft tint.
+- A creator's card: banner, face, name, country, views, three posts, status. The dot sparkline and the averages went.
+  The banners sit under a veil of the card's light, so they keep their hue but stay soft.
+- The open creator: views and videos, accounts, best posts. The fourteen days of dots went.
+- Room: 44 px between the page's parts, 20 px between cards, a step smaller words inside them.

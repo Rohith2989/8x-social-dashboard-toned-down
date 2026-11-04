@@ -38,7 +38,6 @@ export function Summary({
   const [ref, state] = useArrival<HTMLElement>(0.2);
   const faces = [...roster].sort((a, b) => (a.status === "dropped" ? 1 : 0) - (b.status === "dropped" ? 1 : 0) || b.views - a.views);
   const open = Math.max(0, PLANNED_CREATORS - roster.length);
-  const accounts = roster.reduce((a, c) => a + c.accounts.length, 0);
   const videos = roster.reduce((a, c) => a + c.videos, 0);
   const views = roster.reduce((a, c) => a + c.views, 0);
   const week = (c: RosterCreator) => c.daily.slice(-7).reduce((a, v) => a + v, 0);
@@ -62,7 +61,7 @@ export function Summary({
               {faces.map((c, i) => (
                 <li key={c.id} style={{ "--i": i } as React.CSSProperties}>
                   <button type="button" className={styles.face} onClick={() => onOpen(c.id)} data-dropped={c.status === "dropped"} aria-label={`Open ${c.name}`}>
-                    <Face creator={c} size={38} tone="deep" />
+                    <Face creator={c} size={38} />
                     <span className={styles.tip} role="tooltip">
                       {c.name}
                     </span>
@@ -78,14 +77,6 @@ export function Summary({
               ))}
             </ul>
             <dl className={styles.figures}>
-              <div>
-                <dt>Creators</dt>
-                <dd className="num">{roster.length}</dd>
-              </div>
-              <div>
-                <dt>Accounts</dt>
-                <dd className="num">{accounts}</dd>
-              </div>
               <div>
                 <dt>Videos</dt>
                 <dd className="num">{videos}</dd>
@@ -119,9 +110,8 @@ export function Summary({
                 >
                   <i data-status={s} aria-hidden />
                   <span className={`num ${styles.count}`}>{by(s).length}</span>
-                  <span className={styles.statusText}>
+                  <span className={styles.statusText} title={LINES[s]}>
                     <strong>{STATUS_LABELS[s]}</strong>
-                    <span>{LINES[s]}</span>
                   </span>
                   <Icon name={status === s ? "close" : "right"} size={16} />
                 </button>

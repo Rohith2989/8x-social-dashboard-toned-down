@@ -111,29 +111,6 @@ function PostCard({ post, rank, order }: { post: Post; rank: number; order: numb
           <Avatar src={post.creator.avatar} size={26} />
           <span className={styles.name}>{post.creator.name}</span>
         </div>
-        <dl className={styles.metrics}>
-          <div title="Likes">
-            <dt>
-              <Icon name="heart" size={16} />
-              <span className="sr-only">Likes</span>
-            </dt>
-            <dd className="mono">{compact(post.likes)}</dd>
-          </div>
-          <div title="Comments">
-            <dt>
-              <Icon name="comment" size={16} />
-              <span className="sr-only">Comments</span>
-            </dt>
-            <dd className="mono">{compact(post.comments)}</dd>
-          </div>
-          <div title="Shares">
-            <dt>
-              <Icon name="share" size={16} />
-              <span className="sr-only">Shares</span>
-            </dt>
-            <dd className="mono">{post.shares === null ? "N/A" : compact(post.shares)}</dd>
-          </div>
-        </dl>
       </div>
     </Card>
   );

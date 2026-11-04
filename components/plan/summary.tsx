@@ -131,11 +131,6 @@ function PlanColumn({ plan, open, states, unread, onOpen }: { plan: Plan; open: 
       </span>
       <span className={styles.line}>{line}</span>
       <span className={styles.under}>{under}</span>
-      <span className={styles.days} aria-hidden>
-        {Array.from({ length: plan.days }, (_, d) => (
-          <i key={d} data-day={d < today ? "done" : d === today ? "today" : "to-come"} />
-        ))}
-      </span>
     </button>
   );
 }
@@ -155,11 +150,8 @@ function Works({ onScript }: { onScript: (id: string) => void }) {
               <span className={styles.poster} aria-hidden>
                 {w.best.poster && <img src={w.best.poster} alt="" width={45} height={80} loading="lazy" />}
               </span>
-              <span className={styles.workText}>
+              <span className={styles.workText} title={`${w.posts} posts over ${w.plans} ${w.plans === 1 ? "plan" : "plans"}`}>
                 <strong>{w.name}</strong>
-                <span>
-                  {w.posts} posts over {w.plans} {w.plans === 1 ? "plan" : "plans"}
-                </span>
               </span>
               <span className={styles.figure}>
                 <b className="num">{compact(w.avg)}</b>

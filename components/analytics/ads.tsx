@@ -23,6 +23,7 @@ const pct = (part: number, whole: number, digits = 1) => (whole ? `${((part / wh
 const who = (id: string) => ROSTER.find((c) => c.id === id);
 
 export function AdsView({ provider, openId, onOpen }: { provider: AdsProvider; openId: string; onOpen: (id: string) => void }) {
+  const [allPosts, setAllPosts] = useState(false);
   const p = ADS[provider];
   const t = p.totals;
   const ev = EVENTS[provider];
@@ -86,24 +87,6 @@ export function AdsView({ provider, openId, onOpen }: { provider: AdsProvider; o
         </Card>
       </section>
 
-      <section className={styles.card} aria-label="Delivery rates" data-tint="pearl">
-        <h2 className={styles.title}>Delivery rates</h2>
-        <dl className={styles.rates}>
-          <Rate label="CTR" value={pct(t.clicks, t.impressions, 2)} detail={`${full(t.clicks)} clicks from ${compact(t.impressions)} impressions`} />
-          <Rate label="CPM" value={cpm == null ? "N/A" : price(cpm)} detail="What a thousand impressions cost" />
-          <Rate
-            label="Blended CPM"
-            value={t.impressions + t.organicViews ? price((t.spendCents / (t.impressions + t.organicViews)) * 1000) : "N/A"}
-            detail={`The same spend over the impressions and the ${compact(t.organicViews)} organic views beside them`}
-          />
-          <Rate
-            label="Frequency"
-            value={p.reach ? `${(t.impressions / p.reach).toFixed(1)}×` : "N/A"}
-            detail={p.reach ? `Times the average person met these ads` : "TikTok estimates reach rather than counting it, so a frequency here would not add up"}
-          />
-        </dl>
-      </section>
-
       <Trend provider={provider} />
 
       <section className={styles.card} aria-label="The boosted posts">
@@ -118,7 +101,7 @@ export function AdsView({ provider, openId, onOpen }: { provider: AdsProvider; o
           <span>Each</span>
         </div>
         <ul className={styles.posts}>
-          {p.posts.map((b) => {
+          {(allPosts || p.posts.findIndex((b) => b.post.id === openId) >= 5 ? p.posts : p.posts.slice(0, 5)).map((b) => {
             const c = who(b.post.creatorId);
             const whole = b.organicViews + b.paidViews;
             return (
@@ -157,6 +140,12 @@ export function AdsView({ provider, openId, onOpen }: { provider: AdsProvider; o
             );
           })}
         </ul>
+        {p.posts.length > 5 && (
+          <button type="button" className={styles.showAll} onClick={() => setAllPosts((v) => !v)} data-anim-host>
+            {allPosts ? "Show the five most spent on" : `Show all ${p.posts.length}`}
+            <Icon name={allPosts ? "up" : "down"} size={16} />
+          </button>
+        )}
       </section>
 
       <div className={styles.pair}>
@@ -195,24 +184,9 @@ export function AdsView({ provider, openId, onOpen }: { provider: AdsProvider; o
               <Audience key={d} provider={provider} dimension={d} />
             ))}
           </div>
-          <p className={styles.sub}>
-            Shares of impressions over the campaign, each counted on its own (so a share of 25 to 34s and a share of women cannot be crossed). {PROVIDER_LABELS[provider]}{" "}
-            reports who it could not classify as unspecified, shown rather than dropped.
-          </p>
         </section>
       </div>
 
-      <SideBySide />
-    </div>
-  );
-}
-
-function Rate({ label, value, detail }: { label: string; value: string; detail: string }) {
-  return (
-    <div>
-      <dt>{label}</dt>
-      <dd className="num">{value}</dd>
-      <p>{detail}</p>
     </div>
   );
 }
@@ -300,49 +274,3 @@ function Trend({ provider }: { provider: AdsProvider }) {
 }
 
 // TikTok and Meta in one table: each counts its own event, so read the direction, not the exact price
-function SideBySide() {
-  return (
-    <section className={styles.card} aria-label="TikTok and Meta, side by side" data-tint="pearl">
-      <h2 className={styles.title}>TikTok and Meta, side by side</h2>
-      <p className={styles.sub}>Each platform counts its own conversion event, so compare the direction rather than the exact price.</p>
-      <div className={styles.compare}>
-        <table>
-          <thead>
-            <tr>
-              <th>Platform</th>
-              <th>Spend</th>
-              <th>Per 1,000 shown</th>
-              <th>Per click</th>
-              <th>Converted</th>
-              <th>Cost per conversion</th>
-              <th>Counted event</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(["tiktok", "meta"] as AdsProvider[]).map((k) => {
-              const t = ADS[k].totals;
-              return (
-                <tr key={k}>
-                  <td>
-                    <strong>{PROVIDER_LABELS[k]}</strong>
-                  </td>
-                  <td className="num">{money(t.spendCents)}</td>
-                  <td className="num">{t.paidViews ? price((t.spendCents / t.paidViews) * 1000) : "N/A"}</td>
-                  <td className="num">{t.clicks ? price(t.spendCents / t.clicks) : "N/A"}</td>
-                  <td className="num">{pct(t.conversions, t.clicks)}</td>
-                  <td className="num">
-                    <strong>{t.conversions ? price(t.spendCents / t.conversions) : "N/A"}</strong>
-                  </td>
-                  <td>{EVENTS[k].label}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <p className={styles.link}>
-          <Icon name="right" size={14} /> Per 1,000 shown counts {PAID_LABELS.tiktok.toLowerCase()} on TikTok and {PAID_LABELS.meta.toLowerCase()} on Meta.
-        </p>
-      </div>
-    </section>
-  );
-}

@@ -66,9 +66,7 @@ export function Campaigns() {
                 </p>
                 <h3>{c.name}</h3>
                 <p className={styles.meta}>
-                  <span className="mono">{c.posts}</span> posts
-                  <i aria-hidden />
-                  <span className="mono">{pct}%</span>
+                  <span className="mono">{c.posts}</span> of <span className="mono">{c.planned}</span> posts
                 </p>
                 <span className={styles.bar} role="img" aria-label={`${c.posts} of ${c.planned} posts`}>
                   <i />

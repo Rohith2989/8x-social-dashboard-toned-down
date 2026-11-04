@@ -146,3 +146,13 @@ The flagged posts grey and gain their flag line; a toast offers Undo for five se
 - A day the post ceiling cut short says "first N posts" rather than a count it does not have (the product's rule;
   the sample never reaches it).
 - A post that has only been synced once: its views over time are said ("One day of views so far"), not drawn.
+
+## Calm pass (2026-11-04)
+
+- The posts: the vertical's colour made subtle; views, then likes, comments and engagement (shares, with their
+  unreported count, went).
+- A feed card: the poster with its views and length, who made it, the caption. The counts went (they are the open
+  post's), and the time shows only where the cards are not under a day.
+- The table: post, posted, views, likes, comments, status, spark code. Shares, the engagement rate and the country went.
+- The open post: its views with likes and comments, the next milestone, the actions. Its views by day went.
+- Room: 40 px between days, 20 px between cards, a step smaller words.

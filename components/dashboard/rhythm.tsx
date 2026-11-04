@@ -129,7 +129,6 @@ export function Rhythm() {
               aria-label={`${today ? "Today, " : ""}${day(iso, true)}: ${posts} posts, ${compact(dayViews(d))} views. Open the feed at this day`}
             >
               <span className={`${styles.date} mono`}>{date}</span>
-              <span className={`num ${styles.count}`}>{posts}</span>
               {over === i && (
                 <span className={styles.pop} role="tooltip">
                   <strong>{today ? `Today, ${day(iso)}` : day(iso, true)}</strong>

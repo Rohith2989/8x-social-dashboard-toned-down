@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { CAMPAIGNS } from "@/lib/demo";
-import { day } from "@/lib/format";
 import { since } from "@/lib/roster";
 import { MEMBERS, ROLE_LABELS, accessLabel, sees, type Member } from "@/lib/team";
 import { Card } from "../ui/card";
@@ -121,7 +120,6 @@ function Person({ member, tint, order, trail }: { member: Member; tint: (typeof 
           </div>
         </dl>
 
-        <p className={styles.since}>On the workspace since {day(m.since)}</p>
       </div>
     </Card>
   );

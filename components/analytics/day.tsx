@@ -86,7 +86,7 @@ export function OpenDay({ date, metric, onClose }: { date: string; metric: Metri
           ))}
         </div>
         <ul className={styles.channels}>
-          {channels.map((c) => (
+          {channels.slice(0, 5).map((c) => (
             <li key={c.key} data-lead={c.key === "organicSocial" || undefined}>
               <i style={{ background: SHADES[c.key] }} aria-hidden />
               <span>{c.label}</span>

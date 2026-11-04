@@ -37,7 +37,6 @@ function Totals({ list, total }: { list: FeedPost[]; total: number }) {
   const likes = sum((p) => p.likes);
   const comments = sum((p) => p.comments);
   const shares = sum((p) => p.shares ?? 0);
-  const unreported = list.filter((p) => p.shares == null).length;
   const engagement = views ? ((likes + comments + shares) / views) * 100 : 0;
   return (
     <Card tone="aura" order={0} className={styles.totals} label="The posts">
@@ -60,14 +59,6 @@ function Totals({ list, total }: { list: FeedPost[]; total: number }) {
           <dt>Comments</dt>
           <dd>
             <RollingNumber value={compact(comments)} className="num" />
-          </dd>
-        </div>
-        <div title={unreported ? `${unreported} Instagram ${unreported === 1 ? "post has" : "posts have"} not reported shares yet; ${unreported === 1 ? "it counts" : "they count"} as none` : undefined}>
-          <dt>
-            Shares{unreported ? <span className={styles.na}> · {unreported} N/A</span> : null}
-          </dt>
-          <dd>
-            <RollingNumber value={compact(shares)} className="num" />
           </dd>
         </div>
         <div>

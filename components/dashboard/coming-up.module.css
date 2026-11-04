@@ -21,7 +21,7 @@
 }
 
 .head h2 {
-  font-size: 22px;
+  font-size: 20.5px;
   font-weight: 700;
   letter-spacing: -0.015em;
   color: var(--ink);
@@ -78,7 +78,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
@@ -114,7 +114,7 @@
 
 .time {
   padding-top: 1px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -147,7 +147,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
@@ -157,7 +157,7 @@
 
 .state {
   margin-left: auto;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -167,7 +167,7 @@
 }
 
 .what strong {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
   color: var(--ink);
@@ -183,7 +183,7 @@
   border-radius: 20px;
   background:
     url("/media/grain-coarse.webp") repeat 0 0 / 160px 160px,
-    linear-gradient(150deg, var(--vertical-light), color-mix(in srgb, var(--vertical-glow) 45%, var(--vertical-light)));
+    linear-gradient(150deg, color-mix(in srgb, var(--vertical-light) 60%, #fff), color-mix(in srgb, var(--vertical-glow) 18%, var(--vertical-light)));
 }
 
 .inline .manager {
@@ -226,13 +226,13 @@
 }
 
 .managerText strong {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
 
 .managerText span {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text);
 }
 
@@ -311,8 +311,8 @@
 :global([data-theme="dark"]) .manager {
   background:
     url("/media/grain-coarse.webp") repeat 0 0 / 160px 160px,
-    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical) 30%, transparent), transparent 64%),
-    linear-gradient(150deg, color-mix(in srgb, var(--vertical-deep) 22%, var(--paper)), color-mix(in srgb, var(--vertical-ink) 40%, var(--paper)));
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical) 16%, transparent), transparent 64%),
+    linear-gradient(150deg, color-mix(in srgb, var(--vertical-deep) 12%, var(--paper)), color-mix(in srgb, var(--vertical-ink) 30%, var(--paper)));
   background-blend-mode: soft-light, normal, normal;
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
 }

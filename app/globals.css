@@ -152,16 +152,29 @@
   --dot-ghost: color-mix(in srgb, var(--vertical-light) 70%, #dfe4ee);
   --dot-quiet: color-mix(in srgb, var(--vertical-glow) 30%, #c6cdda);
 
+  /* the accent block, made subtle (the user, 2026-11-04: "wherever there are bright colours, make them really, really
+     subtle", each card keeping its hue): the vertical's own pale light, its colour glowing faintly at the top right,
+     dark words on it. Where a page once had a cobalt block, it has this */
+  --accent-ground:
+    radial-gradient(130% 150% at 100% 0%, color-mix(in srgb, var(--vertical) 17%, transparent) 0%, transparent 58%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 10%, #fff) 0%, color-mix(in srgb, var(--vertical-glow) 13%, #fff) 100%);
+  --accent-ink: var(--vertical-ink);
+  --accent-quiet: color-mix(in srgb, var(--vertical-ink) 78%, #fff);
+  --accent-line: color-mix(in srgb, var(--vertical) 18%, transparent);
+  --accent-tile: rgb(255 255 255 / 0.66);
+  --accent-mark: var(--vertical);
+
   /* a card's subtle colour of its own (the user, 2026-11-04: "subtle, not vibrant, so every card has some character"):
      four pale grounds mixed from the vertical's own tokens, each lit softly from its top right */
-  --tint-sky: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 26%, transparent), transparent 62%),
-    linear-gradient(160deg, color-mix(in srgb, var(--vertical-glow) 16%, #fff), color-mix(in srgb, var(--vertical-glow) 6%, #fff));
-  --tint-lilac: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 24%, transparent), transparent 62%),
-    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 15%, #fff), color-mix(in srgb, var(--vertical-accent) 5%, #fff));
-  --tint-blue: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 14%, transparent), transparent 62%),
-    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 9%, #fff), color-mix(in srgb, var(--vertical) 3%, #fff));
-  --tint-pearl: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-light) 80%, transparent), transparent 60%),
-    linear-gradient(160deg, color-mix(in srgb, var(--vertical-ink) 5%, #fff), color-mix(in srgb, var(--vertical-ink) 2%, #fff));
+  /* a breath of colour each, never a coloured card: the page reads as paper (2026-11-04, "reduce the colour") */
+  --tint-sky: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 12%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-glow) 6%, #fff), color-mix(in srgb, var(--vertical-glow) 2%, #fff));
+  --tint-lilac: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 10%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 5%, #fff), color-mix(in srgb, var(--vertical-accent) 2%, #fff));
+  --tint-blue: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 7%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 4%, #fff), color-mix(in srgb, var(--vertical) 1.5%, #fff));
+  --tint-pearl: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-light) 50%, transparent), transparent 58%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-ink) 3%, #fff), color-mix(in srgb, var(--vertical-ink) 1%, #fff));
 }
 
 /*
@@ -197,15 +210,25 @@
   --link: color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical));
   --link-quiet: color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical));
 
+  /* the subtle accent block at night: the window's paper with the vertical's colour breathed into it, white words */
+  --accent-ground:
+    radial-gradient(130% 150% at 100% 0%, color-mix(in srgb, var(--vertical) 24%, transparent) 0%, transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 16%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-deep) 9%, var(--paper)) 100%);
+  --accent-ink: #fff;
+  --accent-quiet: rgb(255 255 255 / 0.8);
+  --accent-line: rgb(255 255 255 / 0.12);
+  --accent-tile: rgb(255 255 255 / 0.06);
+  --accent-mark: color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical));
+
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 18px 40px -24px rgb(0 0 0 / 0.8);
   --shadow-float: 0 2px 6px rgb(0 0 0 / 0.4), 0 28px 56px -18px rgb(0 0 0 / 0.85);
 
-  --tint-sky: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 15%, transparent), transparent 62%),
-    linear-gradient(160deg, color-mix(in srgb, var(--vertical-glow) 7%, var(--paper)), color-mix(in srgb, var(--vertical-glow) 2%, var(--paper)));
-  --tint-lilac: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 16%, transparent), transparent 62%),
-    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 7%, var(--paper)), color-mix(in srgb, var(--vertical-accent) 2%, var(--paper)));
-  --tint-blue: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 18%, transparent), transparent 62%),
-    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 8%, var(--paper)), color-mix(in srgb, var(--vertical) 3%, var(--paper)));
+  --tint-sky: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 8%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-glow) 4%, var(--paper)), color-mix(in srgb, var(--vertical-glow) 1%, var(--paper)));
+  --tint-lilac: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 8%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 4%, var(--paper)), color-mix(in srgb, var(--vertical-accent) 1%, var(--paper)));
+  --tint-blue: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 9%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 4%, var(--paper)), color-mix(in srgb, var(--vertical) 1.5%, var(--paper)));
   --tint-pearl: radial-gradient(120% 100% at 100% 0%, rgb(255 255 255 / 0.07), transparent 60%),
     linear-gradient(160deg, color-mix(in srgb, var(--vertical-light) 4%, var(--paper)), var(--paper));
 }

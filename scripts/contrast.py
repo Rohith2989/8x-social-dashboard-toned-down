@@ -121,6 +121,7 @@ def run(out_path, pages):
         for theme in THEMES:
             for w in WIDTHS:
                 ctx = b.new_context(viewport={"width": w, "height": 900}, color_scheme=theme, device_scale_factor=1, reduced_motion="reduce")
+                ctx.add_init_script(f"try {{ localStorage.setItem('8x-theme', '{theme}') }} catch (e) {{}}")
                 pg = ctx.new_page()
                 for entry in pages:
                     url, _, act = entry.partition("|")

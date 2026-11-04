@@ -56,15 +56,26 @@
   opacity: 1;
 }
 
-/* a hairline edge, so the palest banner still holds its shape on the white card */
+/* a hairline edge, so the palest banner still holds its shape on the white card; and a veil of the card's own light
+   over the colours, so every banner keeps its hue but stays soft (the user, 2026-11-04: "make the bright colours really,
+   really subtle") */
 .banner::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
   border-radius: inherit;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vertical-ink) 7%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical-ink) 7%, transparent),
+    inset 0 0 0 999px rgb(255 255 255 / 0.5);
   pointer-events: none;
+}
+
+/* at night the veil is the night's: the aurora stays, dimmed */
+:global([data-theme="dark"]) .banner::before {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.06),
+    inset 0 0 0 999px rgb(8 12 30 / 0.38);
 }
 
 /* the grain the colour blocks carry, laid over the light so it reads as print, not as dust */
@@ -74,7 +85,7 @@
   inset: 0;
   z-index: 2;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.55;
+  opacity: 0.35;
   mix-blend-mode: overlay;
   pointer-events: none;
 }

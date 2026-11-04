@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#071C4D" };
 
 // Daybreak or Night before the first paint, so the page never shows one look and then the other: the member's own
-// choice (components/shell/theme.ts), else the device's
-const THEME = `(function(){var d=document.documentElement,t;try{t=localStorage.getItem("8x-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}d.dataset.theme=t})()`;
+// choice (components/shell/theme.ts), else Daybreak, the default, whatever the device's setting
+const THEME = `(function(){var d=document.documentElement,t;try{t=localStorage.getItem("8x-theme")}catch(e){}d.dataset.theme=t==="dark"?"dark":"light"})()`;
 
 // data-vertical sets the one colour on the whole dashboard; every other vertical reskins it by changing this alone. The
 // window (the shell) is the dashboard group's layout, so the sign-in page stands outside it

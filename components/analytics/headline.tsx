@@ -136,7 +136,7 @@ function Move({ now, was, against, tone = "paper", lowerIsBetter }: { now: numbe
 function Facts({ facts }: { facts: { label: string; value: string; hint?: string }[] }) {
   return (
     <dl className={styles.facts}>
-      {facts.map((f) => (
+      {facts.slice(0, 2).map((f) => (
         <div key={f.label} title={f.hint}>
           <dt>{f.label}</dt>
           <dd className="num">{f.value}</dd>

@@ -45,7 +45,7 @@ export function EightX({
   className?: string;
 }) {
   const plan = usePlanState();
-  const steps = managerTrail(plan, 3);
+  const steps = managerTrail(plan, 2);
   const thread = defaultPlan();
   const faces = ROSTER.filter(
     (c) => c.status === "active" && !c.flag && c.avatar,

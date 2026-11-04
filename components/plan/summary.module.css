@@ -6,7 +6,7 @@
 .summary {
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
-  gap: 20px;
+  gap: var(--cards, 20px);
 }
 
 @container (max-width: 1080px) {
@@ -25,27 +25,22 @@
 
 /* the title keeps its words together; a narrow block puts the line beside it under it */
 .head h2 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
 
 .head p {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
-/* ---- the plans: the vertical's deep blue, lit from its top right, with grain ---- */
+/* ---- the plans: the vertical's colour, subtle, lit from its top right, with a whisper of grain ---- */
 
 .plans[aria-label] {
   container: plans / inline-size;
-  background: radial-gradient(
-    120% 150% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
-    var(--vertical-deep) 50%,
-    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
-  );
+  background: var(--accent-ground);
 }
 
 .plans::before {
@@ -54,7 +49,7 @@
   inset: 0;
   border-radius: inherit;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.5;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -65,11 +60,11 @@
 }
 
 .plans .head h2 {
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .plans .head p {
-  color: #fff;
+  color: var(--accent-quiet);
 }
 
 /* beside a taller What works, the columns take the height, the days keeping to their foot */
@@ -162,17 +157,17 @@
 
 .eras span {
   padding: 0 2px 7px;
-  border-bottom: 1px solid rgb(255 255 255 / 0.24);
-  font-size: 13px;
+  border-bottom: 1px solid var(--accent-line);
+  font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 .eras span[data-stage="live"],
 .eras span[data-stage="review"] {
-  color: #fff;
-  border-bottom-color: rgb(255 255 255 / 0.6);
+  color: var(--accent-ink);
+  border-bottom-color: color-mix(in srgb, var(--vertical) 45%, transparent);
 }
 
 /* a plan's parts share rows with its neighbours', so names, dates, marks and lines line up across the row (a name on
@@ -192,7 +187,7 @@
   scroll-snap-align: start;
 }
 
-/* ---- a plan: a glass column; the open one white ---- */
+/* ---- a plan: a pale tile on the colour; the open one white, ringed in the vertical ---- */
 
 .plan {
   position: relative;
@@ -204,9 +199,9 @@
   padding: 12px 12px 12px;
   border-radius: 16px;
   text-align: left;
-  color: #fff;
-  background: rgb(255 255 255 / 0.08);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14);
+  color: var(--accent-ink);
+  background: var(--accent-tile);
+  box-shadow: inset 0 0 0 1px var(--accent-line);
   cursor: pointer;
   transition:
     background-color var(--t) var(--ease-out),
@@ -215,7 +210,7 @@
 }
 
 .plan:hover {
-  background: rgb(255 255 255 / 0.15);
+  background: rgb(255 255 255 / 0.9);
 }
 
 .plan:active {
@@ -223,14 +218,16 @@
 }
 
 .plan:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid var(--vertical-deep);
   outline-offset: 2px;
 }
 
 .plan[aria-pressed="true"] {
   color: var(--ink);
   background: #fff;
-  box-shadow: 0 14px 28px -16px rgb(4 12 40 / 0.7);
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 12px 24px -16px rgb(4 12 40 / 0.35);
 }
 
 .title {
@@ -239,7 +236,7 @@
 
 .name {
   padding-right: 10px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -255,17 +252,13 @@
   height: 8px;
   border-radius: 50%;
   background: var(--vertical-accent);
-  box-shadow: 0 0 0 2px var(--vertical-deep);
-}
-
-.plan[aria-pressed="true"] .unread {
   box-shadow: 0 0 0 2px #fff;
 }
 
 .window {
   margin-top: 2px;
-  font-size: 13px;
-  color: rgb(255 255 255 / 0.97);
+  font-size: 12.5px;
+  color: var(--accent-quiet);
 }
 
 .plan[aria-pressed="true"] .window {
@@ -307,14 +300,17 @@
   stroke-dasharray: 0 3.6;
 }
 
+/* quiet marks, told apart by shape as much as colour: approved a pale chip, updated an outlined one, flagged red,
+   waiting dotted */
 .marks [data-mark="approved"] {
   color: var(--vertical-deep);
-  background: rgb(255 255 255 / 0.92);
+  background: color-mix(in srgb, var(--vertical) 14%, #fff);
 }
 
 .marks [data-mark="updated"] {
-  color: #fff;
-  background: color-mix(in srgb, var(--vertical-ink) 48%, transparent);
+  color: var(--link);
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--vertical);
 }
 
 .marks [data-mark="flagged"] {
@@ -323,35 +319,21 @@
 }
 
 .marks [data-mark="waiting"] {
-  color: #fff;
-}
-
-.plan[aria-pressed="true"] [data-mark="approved"] {
-  color: #fff;
-  background: var(--vertical-deep);
-}
-
-.plan[aria-pressed="true"] [data-mark="updated"] {
-  color: var(--link);
-  background: var(--vertical-light);
-}
-
-.plan[aria-pressed="true"] [data-mark="waiting"] {
-  color: var(--link);
+  color: var(--accent-quiet);
 }
 
 .line {
   margin-top: 12px;
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 700;
   line-height: 1.25;
 }
 
 .under {
   margin-top: 1px;
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.25;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 .plan[aria-pressed="true"] .under {
@@ -370,28 +352,16 @@
   flex: 1;
   height: 4px;
   border-radius: 2px;
-  background: rgb(255 255 255 / 0.2);
+  background: color-mix(in srgb, var(--vertical) 16%, transparent);
 }
 
 .days [data-day="done"] {
-  background: rgb(255 255 255 / 0.66);
+  background: color-mix(in srgb, var(--vertical-deep) 50%, var(--vertical-glow));
 }
 
 .days [data-day="today"] {
-  background: #fff;
-  animation: today 2.4s var(--ease-current) infinite;
-}
-
-.plan[aria-pressed="true"] .days i {
-  background: var(--vertical-light);
-}
-
-.plan[aria-pressed="true"] .days [data-day="done"] {
-  background: color-mix(in srgb, var(--vertical-deep) 55%, var(--vertical-glow));
-}
-
-.plan[aria-pressed="true"] .days [data-day="today"] {
   background: var(--vertical-deep);
+  animation: today 2.4s var(--ease-current) infinite;
 }
 
 @keyframes today {
@@ -412,8 +382,10 @@
   margin-top: -6px;
   border-radius: 50%;
   color: #0b0b0c;
-  background: rgb(255 255 255 / 0.94);
-  box-shadow: 0 10px 22px -10px rgb(4 12 40 / 0.6);
+  background: rgb(255 255 255 / 0.96);
+  box-shadow:
+    inset 0 0 0 1px var(--accent-line),
+    0 10px 22px -12px rgb(4 12 40 / 0.4);
   opacity: 0;
   transform: scale(0.85);
   pointer-events: none;
@@ -449,8 +421,8 @@
   container-type: inline-size;
   background: linear-gradient(
     158deg,
-    color-mix(in srgb, var(--vertical-light) 70%, #fff) 0%,
-    color-mix(in srgb, var(--vertical-glow) 22%, var(--vertical-light)) 100%
+    color-mix(in srgb, var(--vertical-light) 45%, #fff) 0%,
+    color-mix(in srgb, var(--vertical-light) 85%, #fff) 100%
   );
 }
 
@@ -541,14 +513,14 @@
 }
 
 .workText strong {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--ink);
 }
 
 .workText span {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -560,48 +532,56 @@
 }
 
 .figure b {
-  font-size: 24px;
+  font-size: 22.5px;
   font-weight: 600;
   line-height: 1;
   color: var(--ink);
 }
 
 .figure span {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
 /* ---- Night ---- */
 
-:global([data-theme="dark"]) .plans {
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.15),
-    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
+:global([data-theme="dark"]) .plan:hover {
+  background: rgb(255 255 255 / 0.1);
 }
 
-/* the open plan is a window into the night cut in the blue, ringed in white */
+/* the open plan is the night's paper, ringed in the vertical's light */
 :global([data-theme="dark"]) .plan[aria-pressed="true"] {
   color: var(--ink);
   background: var(--paper);
   box-shadow:
-    inset 0 0 0 1.5px rgb(255 255 255 / 0.85),
+    inset 0 0 0 1.5px color-mix(in srgb, var(--vertical-glow) 70%, transparent),
     0 14px 30px -16px rgb(0 0 0 / 0.75);
 }
 
-:global([data-theme="dark"]) .plan[aria-pressed="true"] .unread {
+:global([data-theme="dark"]) .unread {
   box-shadow: 0 0 0 2px var(--paper);
 }
 
-:global([data-theme="dark"]) .plan[aria-pressed="true"] [data-mark="updated"] {
+:global([data-theme="dark"]) .marks [data-mark="approved"] {
   color: #fff;
-  background: color-mix(in srgb, var(--vertical) 32%, var(--paper));
+  background: color-mix(in srgb, var(--vertical) 34%, var(--paper));
 }
 
-:global([data-theme="dark"]) .plan[aria-pressed="true"] .days i {
+:global([data-theme="dark"]) .marks [data-mark="updated"] {
+  color: var(--vertical-glow);
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .days i {
   background: rgb(255 255 255 / 0.12);
 }
 
-:global([data-theme="dark"]) .plan[aria-pressed="true"] .days [data-day="today"] {
+:global([data-theme="dark"]) .days [data-day="done"] {
+  background: color-mix(in srgb, var(--vertical-glow) 60%, transparent);
+}
+
+:global([data-theme="dark"]) .days [data-day="today"] {
   background: var(--vertical-glow);
 }
 

@@ -1,5 +1,5 @@
 .section {
-  margin-top: 34px;
+  margin-top: var(--section, 44px);
 }
 
 .head {
@@ -10,7 +10,7 @@
 }
 
 .head h2 {
-  font-size: 22px;
+  font-size: 20.5px;
   font-weight: 700;
   letter-spacing: -0.015em;
   color: var(--ink);
@@ -20,7 +20,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--link);
 }
@@ -28,7 +28,7 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 0.62fr);
-  gap: 18px;
+  gap: var(--cards, 20px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -61,7 +61,7 @@
   position: absolute;
   inset: 0;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.55;
+  opacity: 0.16;
   pointer-events: none;
 }
 
@@ -73,22 +73,27 @@
   transform: translateY(-3px);
 }
 
-.deep {
-  color: #fff;
-  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%, var(--vertical-deep) 55%);
-  box-shadow: 0 24px 40px -26px color-mix(in srgb, var(--vertical-deep) 90%, transparent);
+/* each campaign keeps a colour of its own, made subtle: the live one the vertical's blue, the ended one its sky, the
+   paused one its lilac, each a soft tint lit from its top right, dark words on all three */
+.deep,
+.glow,
+.accent {
+  --hue: var(--vertical);
+  color: var(--vertical-ink);
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--hue) 20%, transparent) 0%, transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--hue) 12%, #fff), color-mix(in srgb, var(--hue) 4%, #fff));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--hue) 14%, transparent),
+    0 18px 34px -26px color-mix(in srgb, var(--hue) 55%, transparent);
 }
 
 .glow {
-  color: var(--vertical-ink);
-  background: radial-gradient(120% 120% at 100% 0%, var(--vertical-light) 0%, var(--vertical-glow) 60%);
-  box-shadow: 0 24px 40px -28px color-mix(in srgb, var(--vertical-glow) 90%, transparent);
+  --hue: var(--vertical-glow);
 }
 
 .accent {
-  color: var(--vertical-ink);
-  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 30%, #fff) 0%, var(--vertical-accent) 62%);
-  box-shadow: 0 24px 40px -28px color-mix(in srgb, var(--vertical-accent) 90%, transparent);
+  --hue: var(--vertical-accent);
 }
 
 .top {
@@ -116,9 +121,9 @@
   padding: 0 8px 0 10px;
   border-radius: 999px;
   background: var(--ink-block);
-  box-shadow: 0 0 0 2px currentColor;
+  box-shadow: 0 0 0 2px var(--paper);
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: #fff;
 }
@@ -135,7 +140,7 @@
 }
 
 .kebab:hover {
-  background: rgb(255 255 255 / 0.18);
+  background: color-mix(in srgb, currentColor 8%, transparent);
 }
 
 .status {
@@ -144,7 +149,7 @@
   gap: 7px;
   margin-top: auto;
   padding-top: 18px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   opacity: 0.85;
 }
@@ -157,15 +162,15 @@
 }
 
 .status i[data-status="live"] {
-  background: #fff;
-  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.3);
+  background: var(--vertical);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--vertical) 22%, transparent);
 }
 
 .card h3 {
   display: flex;
   align-items: flex-end;
   margin-top: 6px;
-  font-size: 23px;
+  font-size: 21.5px;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -176,7 +181,7 @@
   align-items: center;
   gap: 6px;
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .meta i {
@@ -206,8 +211,9 @@
   transition: transform 1200ms var(--ease-current) calc(var(--i) * 80ms + 300ms);
 }
 
-.deep .bar i {
-  background: #fff;
+/* the bar in the campaign's own colour, deep enough to read on its tint */
+.bar i {
+  background: color-mix(in srgb, var(--hue, currentColor) 78%, var(--vertical-ink));
 }
 
 .section[data-arrive="wait"] .bar i {
@@ -249,7 +255,7 @@
   justify-content: space-between;
   height: 100%;
   padding: 22px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.25;
   color: var(--text);
@@ -361,13 +367,13 @@
 }
 
 .rowText strong {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--ink);
 }
 
 .rowText > span:not(.rowBar) {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -394,12 +400,12 @@
 }
 
 .rowFigure strong {
-  font-size: 24px;
+  font-size: 22.5px;
   color: var(--ink);
 }
 
 .rowFigure span {
-  font-size: 12.5px;
+  font-size: 12px;
   white-space: nowrap;
   color: var(--text-muted);
 }
@@ -417,32 +423,28 @@
 
 /* ---- Night ---- */
 
-/* the live one is the night's light; the ended and the paused ones become the glow and the accent, deep, their
-   words white, each throwing its own colour on the tray */
-:global([data-theme="dark"]) .deep {
+/* at night each keeps its colour as a faint breath in the paper, words white */
+:global([data-theme="dark"]) :is(.deep, .glow, .accent) {
+  color: #fff;
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--hue) 26%, transparent) 0%, transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--hue) 15%, var(--paper)), color-mix(in srgb, var(--hue) 6%, var(--paper)));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.16),
-    0 28px 56px -30px color-mix(in srgb, var(--vertical) 85%, transparent);
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 24px 44px -30px color-mix(in srgb, var(--hue) 40%, transparent);
 }
 
-:global([data-theme="dark"]) .glow {
-  color: #fff;
-  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 52%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-glow) 20%, var(--paper)) 64%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.12),
-    0 28px 50px -32px color-mix(in srgb, var(--vertical-glow) 55%, transparent);
+:global([data-theme="dark"]) .bar i {
+  background: color-mix(in srgb, var(--hue, currentColor) 80%, #fff);
 }
 
-:global([data-theme="dark"]) .accent {
-  color: #fff;
-  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 52%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-accent) 20%, var(--paper)) 64%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.12),
-    0 28px 50px -32px color-mix(in srgb, var(--vertical-accent) 55%, transparent);
+:global([data-theme="dark"]) .status i[data-status="live"] {
+  background: var(--vertical-glow);
 }
 
 :global([data-theme="dark"]) .card::before {
-  opacity: 0.5;
+  opacity: 0.3;
   mix-blend-mode: soft-light;
 }
 

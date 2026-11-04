@@ -9,10 +9,9 @@ import { useArrived } from "../ui/arrival";
 import styles from "./pace.module.css";
 
 /*
-  The pace against the plan, as one block of the vertical's colour. Rings of fine white dots fill clockwise from the
-  top (the kit's progress, never a pie or a gauge), the posts out lit; a white tick across the rings is where the
-  plan says the campaign should be today, so ahead or behind reads at a glance. Beside the rings, the three figures
-  that say how the rest will go: the rate so far, the rate the rest needs, and what is left.
+  The pace against the plan, on the vertical's colour made subtle. Rings of fine dots fill clockwise from the top (the
+  kit's progress, never a pie or a gauge), the posts out lit; a tick across the rings is where the plan says the
+  campaign should be today, so ahead or behind reads at a glance. Beside the rings, how far ahead (or behind) it is.
 */
 
 const RINGS = [100, 89, 78, 67];
@@ -22,9 +21,6 @@ export function Pace() {
   const p = pace();
   const done = p.delivered / p.planned;
   const due = p.expected / p.planned;
-  const toGo = Math.max(0, p.planned - p.delivered);
-  const daysLeft = CAMPAIGN.days - CAMPAIGN.day;
-  const needed = daysLeft > 0 ? toGo / daysLeft : 0;
 
   return (
     <Card tone="aura" order={0} className={styles.card} label="Pace">
@@ -54,20 +50,6 @@ export function Pace() {
             <Change value={p.ahead} unit="" digits={0} tone="aura" />
             <span>{p.ahead >= 0 ? "posts ahead of the plan" : "posts behind the plan"}</span>
           </p>
-          <dl className={styles.facts}>
-            <div>
-              <dt>A day so far</dt>
-              <dd className="mono">{p.perDay.toFixed(1)}</dd>
-            </div>
-            <div>
-              <dt>A day to finish</dt>
-              <dd className="mono">{needed.toFixed(1)}</dd>
-            </div>
-            <div>
-              <dt>Posts to go</dt>
-              <dd className="mono">{toGo}</dd>
-            </div>
-          </dl>
         </div>
       </div>
     </Card>

@@ -66,9 +66,6 @@ export function Activity() {
           </div>
           <RangeMenu value={span} onChange={(v) => { setSpan(v); setPick(null); }} />
         </div>
-        <p className={styles.note}>
-          Your numbers update every <strong>3 hours</strong>
-        </p>
 
         <Chart
           key={`${metric}-${span}`}

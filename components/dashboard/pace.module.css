@@ -1,12 +1,7 @@
-/* one block of the vertical's colour, lit from its top right corner, with the grain the campaign cards carry */
+/* the vertical's colour, made subtle: its pale light lit faintly from the top right, with a whisper of grain */
 .card[aria-label] {
   container-type: inline-size;
-  background: radial-gradient(
-    120% 140% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
-    var(--vertical-deep) 52%,
-    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
-  );
+  background: var(--accent-ground);
 }
 
 .card::before {
@@ -15,7 +10,7 @@
   inset: 0;
   border-radius: inherit;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.5;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -33,20 +28,20 @@
 }
 
 .head h2 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .head p {
-  font-size: 14px;
-  color: #fff;
+  font-size: 13px;
+  color: var(--accent-quiet);
 }
 
 .head :global(.mono) {
-  font-size: 13.5px;
-  color: #fff;
+  font-size: 12.5px;
+  color: var(--accent-ink);
 }
 
 /* the rings, and beside them what they mean */
@@ -84,11 +79,11 @@
 }
 
 .lit {
-  fill: #fff;
+  fill: var(--accent-mark);
 }
 
 .ghost {
-  fill: rgb(255 255 255 / 0.26);
+  fill: color-mix(in srgb, var(--vertical) 20%, transparent);
 }
 
 @keyframes dot-in {
@@ -97,13 +92,13 @@
   }
 }
 
-/* where the plan says it should be today: white, cut clear of the dots around it */
+/* where the plan says it should be today: in ink, cut clear of the dots around it */
 .plan {
-  stroke: #fff;
+  stroke: var(--accent-ink);
   stroke-width: 3;
   stroke-linecap: round;
   /* in the ring's own units (224 across): about 12 px on the smallest ring, 16 on the largest */
-  font-size: 19px;
+  font-size: 17.5px;
   font-weight: 600;
   opacity: 0;
   transition: opacity 500ms var(--ease-out) 900ms;
@@ -114,13 +109,13 @@
 }
 
 .plan .halo {
-  stroke: var(--vertical-deep);
+  stroke: var(--paper);
   stroke-width: 9;
 }
 
 .plan text {
   stroke: none;
-  fill: rgb(255 255 255 / 0.9);
+  fill: var(--accent-quiet);
 }
 
 .center {
@@ -132,7 +127,7 @@
   justify-content: center;
   gap: 2cqi;
   font-size: max(12px, 6.4cqi);
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 .center > span:last-child {
@@ -143,14 +138,14 @@
 
 .center :global(.mono) {
   font-size: 1em;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 /* the count keeps its place inside the rings at any size */
 .big {
   font-size: 23.5cqi;
   line-height: 1;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .read {
@@ -160,9 +155,9 @@
 
 /* the change and its words flow as one line of text, wrapping like one */
 .ahead {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.45;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-ink);
 }
 
 .ahead > span:first-child {
@@ -180,19 +175,19 @@
   justify-content: space-between;
   gap: 12px;
   padding: 9px 0;
-  border-top: 1px solid rgb(255 255 255 / 0.16);
+  border-top: 1px solid var(--accent-line);
 }
 
 .facts dt {
-  font-size: 14px;
-  color: rgb(255 255 255 / 0.92);
+  font-size: 13px;
+  color: var(--accent-quiet);
 }
 
 .facts dd {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 /* a narrow card puts the figures under the rings */
@@ -211,8 +206,6 @@
 
 /* ---- Night ---- */
 
-:global([data-theme="dark"]) .card[aria-label] {
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.15),
-    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
+:global([data-theme="dark"]) .card::before {
+  opacity: 0.3;
 }

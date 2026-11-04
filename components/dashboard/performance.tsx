@@ -68,7 +68,7 @@ export function Performance() {
         </div>
 
         <ul className={styles.done}>
-          {UPDATES.slice(0, 3).map((u, i) => (
+          {UPDATES.filter((u) => u.kind !== "plan").slice(0, 2).map((u, i) => (
             <li key={u.id}>
               <span className={styles.check} data-tone={TONES[i]}>
                 <Icon name="tick" size={17} stroke={2.6} />

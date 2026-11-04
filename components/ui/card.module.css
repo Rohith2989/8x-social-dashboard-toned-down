@@ -17,9 +17,15 @@
     0 18px 36px -26px rgb(11 11 12 / 0.22);
 }
 
+/* the chart's sky, subtle: the vertical's light, its glow faint at the top right */
 .pastel {
-  background: color-mix(in srgb, var(--vertical-glow) 46%, var(--vertical-light));
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 24%, transparent) 0%, transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-glow) 14%, #fff), color-mix(in srgb, var(--vertical-light) 66%, #fff));
   color: var(--ink);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical) 9%, transparent),
+    0 18px 36px -28px color-mix(in srgb, var(--vertical-deep) 30%, transparent);
 }
 
 .ink {
@@ -29,11 +35,15 @@
   box-shadow: 0 24px 44px -28px rgb(11 11 12 / 0.7);
 }
 
+/* the accent block, subtle: the vertical's pale light with dark words (at night, its colour breathed into the paper) */
 .aura {
-  --band-dot: #fff;
-  background: var(--vertical-deep);
-  color: #fff;
-  box-shadow: 0 2px 6px rgb(11 11 12 / 0.06), 0 28px 56px -24px color-mix(in srgb, var(--vertical-deep) 60%, transparent);
+  --band-dot: var(--vertical);
+  background: var(--accent-ground);
+  color: var(--accent-ink);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical) 10%, transparent),
+    0 1px 2px rgb(11 11 12 / 0.04),
+    0 18px 36px -26px color-mix(in srgb, var(--vertical-deep) 30%, transparent);
 }
 
 .body {
@@ -110,9 +120,9 @@
 /* the pale block becomes the vertical's night sky: deep blue, its glow high on the right */
 :global([data-theme="dark"]) .pastel {
   background:
-    radial-gradient(120% 100% at 88% -12%, color-mix(in srgb, var(--vertical) 36%, transparent), transparent 62%),
-    radial-gradient(80% 70% at 0% 110%, color-mix(in srgb, var(--vertical-accent) 16%, transparent), transparent 70%),
-    linear-gradient(168deg, color-mix(in srgb, var(--vertical-deep) 30%, var(--paper)), color-mix(in srgb, var(--vertical-ink) 50%, var(--paper)));
+    radial-gradient(120% 100% at 88% -12%, color-mix(in srgb, var(--vertical) 20%, transparent), transparent 62%),
+    radial-gradient(80% 70% at 0% 110%, color-mix(in srgb, var(--vertical-accent) 8%, transparent), transparent 70%),
+    linear-gradient(168deg, color-mix(in srgb, var(--vertical-deep) 14%, var(--paper)), color-mix(in srgb, var(--vertical-ink) 34%, var(--paper)));
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.07),
     inset 0 0 0 1px rgb(255 255 255 / 0.04),
@@ -129,9 +139,10 @@
     0 24px 44px -28px rgb(0 0 0 / 0.9);
 }
 
-/* the deep blue is the light in the night: it glows on the tray beneath it */
+/* the accent block at night: a faint rim of light, a soft glow of its colour on the tray beneath */
 :global([data-theme="dark"]) .aura {
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.14),
-    0 30px 70px -32px color-mix(in srgb, var(--vertical) 70%, transparent);
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 26px 50px -30px color-mix(in srgb, var(--vertical) 40%, transparent);
 }

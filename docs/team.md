@@ -121,3 +121,9 @@ The people at 8x and in its network working for this brand, as the brand may see
 - Asking for an address already on the page says which list it is on (the refusals above), and points at its row.
 - The product's stale withdrawals ("This request has changed") cannot happen in the sample: one visit is the only
   writer.
+
+## Calm pass (2026-11-04)
+
+Team was the page the others were measured against for room. Its invite is now the vertical's colour made subtle (dark
+words, Request access in ink, the way's stops white with a halo of the vertical); a person's card no longer says since
+when they have been on the workspace; Your 8x team shows the latest two things Maya did.

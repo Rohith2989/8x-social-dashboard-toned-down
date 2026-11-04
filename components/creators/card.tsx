@@ -9,7 +9,7 @@ import { PlatformIcon } from "../ui/platform-icon";
 import { CountryFlag } from "../ui/country-flag";
 import { Face } from "./face";
 import { Banner } from "./banner";
-import { Marked, Spark } from "./bits";
+import { Marked } from "./bits";
 import { useFlip } from "./flip";
 import styles from "./card.module.css";
 
@@ -115,17 +115,7 @@ function CreatorCard({
           <span className="num">{compact(c.views)}</span>
           <span>views</span>
         </div>
-        <Spark daily={c.daily} />
       </div>
-      <p className={styles.sub}>
-        <span>
-          <span className="mono">{compact(c.avgPerPost)}</span> avg / post
-        </span>
-        <i aria-hidden />
-        <span>
-          <span className="mono">{c.videos}</span> {c.videos === 1 ? "video" : "videos"}
-        </span>
-      </p>
 
       <div className={styles.posts} aria-hidden>
         {c.posts.length

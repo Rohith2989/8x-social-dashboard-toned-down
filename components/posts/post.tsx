@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { MANAGER, NOW, PLATFORM_LABELS } from "@/lib/demo";
+import { MANAGER, PLATFORM_LABELS } from "@/lib/demo";
 import { since, stamp } from "@/lib/roster";
 import { compact, day as dayLabel, full } from "@/lib/format";
-import { milestoneLabel, milestoneOf, nextMilestone, postUrl, reasonLabel, viewSeries, type FeedPost } from "@/lib/posts";
+import { milestoneLabel, milestoneOf, nextMilestone, postUrl, reasonLabel, type FeedPost } from "@/lib/posts";
 import { planOf, scriptOfPost } from "@/lib/plan";
 import { ArrivalProvider } from "../ui/arrival";
 import { Button } from "../ui/button";
@@ -100,14 +100,6 @@ export function PostPanel({ post, actions, onUnflag, busy, onClose }: { post: Fe
               <dt>Comments</dt>
               <dd className="num">{compact(p.comments)}</dd>
             </div>
-            <div title={p.shares == null ? `${PLATFORM_LABELS[p.platform]} has not reported this post's shares yet; they arrive a day or two after it goes out` : undefined}>
-              <dt>Shares</dt>
-              <dd className={`num ${p.shares == null ? styles.na : ""}`}>{p.shares == null ? "N/A" : compact(p.shares)}</dd>
-            </div>
-            <div>
-              <dt>Engagement</dt>
-              <dd className="num">{p.engagement.toFixed(1)}%</dd>
-            </div>
           </dl>
         </div>
 
@@ -123,12 +115,6 @@ export function PostPanel({ post, actions, onUnflag, busy, onClose }: { post: Fe
           </p>
         </section>
 
-        <section className={styles.section} aria-label="Views over time">
-          <p className={styles.label}>
-            Views by day <span>since it went out</span>
-          </p>
-          <Growth post={p} />
-        </section>
 
         <div className={styles.actions}>
           <div className={styles.quick}>
@@ -287,50 +273,6 @@ function Track({ views }: { views: number }) {
         <i key={i} className={i < lit ? styles.trackOn : undefined} style={{ "--k": i } as React.CSSProperties} />
       ))}
     </span>
-  );
-}
-
-// what each day since it went out added: a column of fine dots a day, lit to that day's views (the busiest day to the
-// top), so its shape shows; pointing at a day says what it added and the total by then
-const ROWS = 8;
-
-function Growth({ post }: { post: FeedPost }) {
-  const series = viewSeries(post);
-  const [over, setOver] = useState<number | null>(null);
-  if (series.length < 2) {
-    return <p className={styles.oneDay}>One day of views so far: {compact(post.views)}. The line starts tomorrow.</p>;
-  }
-  const max = Math.max(...series.map((s) => s.added), 1);
-  const today = new Date(NOW).toISOString().slice(0, 10);
-  return (
-    <div className={styles.growth} data-pointing={over !== null || undefined} onPointerLeave={() => setOver(null)}>
-      <div className={styles.cols} style={{ "--n": series.length } as React.CSSProperties} role="img" aria-label={`${compact(post.views)} views over ${series.length} days, most in the first days`}>
-        {series.map((s, d) => {
-          const lit = s.added > 0 ? Math.max(1, Math.round((s.added / max) * ROWS)) : 0;
-          const edge = d < 2 ? "start" : d > series.length - 3 ? "end" : "middle";
-          return (
-            <span key={s.date} className={styles.col} data-over={over === d || undefined} onPointerEnter={() => setOver(d)}>
-              {Array.from({ length: ROWS * 2 }, (_, k) => {
-                const level = ROWS - 1 - Math.floor(k / 2);
-                return <i key={k} className={level < lit ? styles.colOn : undefined} style={{ "--delay": `${d * 30 + level * 24}ms` } as React.CSSProperties} />;
-              })}
-              {over === d && (
-                <span className={styles.tip} data-edge={edge} role="tooltip">
-                  <strong>{s.date === today ? "Today" : dayLabel(s.date, true)}</strong>
-                  <span>
-                    {s.added > 0 ? `+${compact(s.added)}` : "No new"} views; {compact(s.views)} in all
-                  </span>
-                </span>
-              )}
-            </span>
-          );
-        })}
-      </div>
-      <p className={styles.axis} aria-hidden style={{ "--n": series.length } as React.CSSProperties}>
-        <span>{dayLabel(series[0].date)}</span>
-        <span>{post.status === "deleted" ? `Deleted ${dayLabel(series[series.length - 1].date)}` : "Today"}</span>
-      </p>
-    </div>
   );
 }
 

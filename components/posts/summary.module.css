@@ -6,7 +6,7 @@
 .summary {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-  gap: 20px;
+  gap: var(--cards, 20px);
 }
 
 @container (max-width: 760px) {
@@ -23,7 +23,7 @@
 }
 
 .head h2 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
@@ -32,12 +32,7 @@
 
 .totals[aria-label] {
   container-type: inline-size;
-  background: radial-gradient(
-    120% 140% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
-    var(--vertical-deep) 52%,
-    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
-  );
+  background: var(--accent-ground);
 }
 
 .totals::before {
@@ -46,24 +41,24 @@
   inset: 0;
   border-radius: inherit;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.5;
+  opacity: 0.18;
   pointer-events: none;
 }
 
 .totals > div {
   display: flex;
   flex-direction: column;
-  padding: 20px 24px 22px;
+  padding: 26px 28px 26px;
 }
 
 .totals .head h2 {
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .totals .head p {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .views {
@@ -71,19 +66,19 @@
   align-items: baseline;
   gap: 10px;
   margin: 18px 0 0;
-  color: rgb(255 255 255 / 0.92);
-  font-size: 15px;
+  color: var(--accent-quiet);
+  font-size: 14px;
 }
 
 .big {
   font-size: clamp(54px, 14cqi, 76px);
   line-height: 0.9;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .figures {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: auto 0 0;
   padding-top: 18px;
 }
@@ -93,7 +88,7 @@
   flex-direction: column;
   gap: 4px;
   padding: 12px 0 0 14px;
-  border-top: 1px solid rgb(255 255 255 / 0.18);
+  border-top: 1px solid var(--accent-line);
 }
 
 .figures > div:first-child {
@@ -101,36 +96,39 @@
 }
 
 .figures > div + div {
-  border-left: 1px solid rgb(255 255 255 / 0.14);
+  border-left: 1px solid var(--accent-line);
 }
 
 .figures dt {
-  font-size: 13.5px;
+  font-size: 12.5px;
   white-space: nowrap;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 .na {
   font-size: 12px;
-  color: rgb(255 255 255 / 0.82);
+  color: var(--accent-quiet);
 }
 
 .figures dd {
   margin: 0;
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
+/* a narrow block: the three stay in one row, closer */
 @container (max-width: 420px) {
-  .figures {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 12px;
+  .figures > div {
+    padding-left: 10px;
   }
 
-  .figures > div:nth-child(3) {
+  .figures > div:first-child {
     padding-left: 0;
-    border-left: 0;
+  }
+
+  .figures dd {
+    font-size: 20.5px;
   }
 }
 
@@ -140,8 +138,8 @@
   container-type: inline-size;
   background: linear-gradient(
     158deg,
-    color-mix(in srgb, var(--vertical-light) 70%, #fff) 0%,
-    color-mix(in srgb, var(--vertical-glow) 22%, var(--vertical-light)) 100%
+    color-mix(in srgb, var(--vertical-light) 45%, #fff) 0%,
+    color-mix(in srgb, var(--vertical-light) 85%, #fff) 100%
   );
 }
 
@@ -169,7 +167,7 @@
 .ladderCard > div {
   display: flex;
   flex-direction: column;
-  padding: 20px 22px 16px;
+  padding: 26px 28px 22px;
 }
 
 .ladderCard .head h2 {
@@ -177,7 +175,7 @@
 }
 
 .all {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--link);
   text-decoration: underline;
@@ -187,7 +185,7 @@
 .line {
   min-height: 2.6em;
   margin-top: 4px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.3;
   color: var(--text-muted);
 }
@@ -240,7 +238,7 @@
 }
 
 .count {
-  font-size: 22px;
+  font-size: 20.5px;
   line-height: 1;
   min-height: 22px;
   color: var(--ink);
@@ -330,7 +328,7 @@
   align-items: center;
   gap: 1px;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
   color: var(--ink);
@@ -351,7 +349,7 @@
 
 .under {
   margin-top: 6px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -367,7 +365,7 @@
   }
 
   .count {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .label {
@@ -390,7 +388,7 @@
   }
 
   .count {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .label {
@@ -412,8 +410,9 @@
 
 :global([data-theme="dark"]) .posts {
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.15),
-    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 26px 50px -30px color-mix(in srgb, var(--vertical) 40%, transparent);
 }
 
 /* how far they got: the ladder on the vertical's night, its rungs brighter the higher they reach */

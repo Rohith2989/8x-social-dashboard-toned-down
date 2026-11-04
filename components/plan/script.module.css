@@ -1,8 +1,8 @@
 /* one script: a white card, the reference in its own column beside the words, above them when narrow */
 .sheet {
   container: sheet / inline-size;
-  margin-top: 20px;
-  padding: 22px;
+  margin-top: var(--cards, 20px);
+  padding: 28px;
   border-radius: 26px;
   background: var(--paper);
   box-shadow:
@@ -151,13 +151,13 @@
 
 .refBlank p {
   margin-top: 4px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
 
 .refBlank > span {
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -165,7 +165,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--link);
   text-decoration: underline;
@@ -177,7 +177,7 @@
   align-items: center;
   gap: 14px;
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--text);
 }
@@ -199,7 +199,7 @@
 
 .refWord {
   margin-top: 12px;
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -213,7 +213,7 @@
   margin-top: 10px;
   padding: 10px 12px;
   border-radius: 14px;
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: var(--text-muted);
   background: var(--canvas);
   transition: background-color var(--t-fast) var(--ease-out);
@@ -236,7 +236,7 @@
 }
 
 .refWho :global(.num) {
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: var(--ink);
 }
 
@@ -260,7 +260,7 @@
 }
 
 .eyebrow {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -277,12 +277,12 @@
 
 .meta {
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
 .meta :global(.mono) {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text);
 }
 
@@ -291,7 +291,7 @@
   align-items: center;
   gap: 6px;
   margin-top: 10px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -433,7 +433,7 @@
   height: 46px;
   padding: 0 16px;
   border-radius: 999px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ink);
   background: var(--stone);
@@ -470,13 +470,13 @@
 }
 
 .flagNote p {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text);
 }
 
 .flagNote blockquote {
   margin: 6px 0 0;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--ink);
 }
@@ -484,7 +484,7 @@
 .angle {
   max-width: 64ch;
   margin-top: 16px;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.55;
   color: var(--text);
 }
@@ -502,7 +502,7 @@
   flex-wrap: wrap;
   gap: 4px 12px;
   margin-bottom: 12px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -511,7 +511,7 @@
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--link);
 }
@@ -522,7 +522,7 @@
 }
 
 .none {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
 }
 
@@ -550,14 +550,14 @@
 }
 
 .four dt {
-  font-size: 13.5px;
+  font-size: 12.5px;
   white-space: nowrap;
   color: var(--text-muted);
 }
 
 .four dd {
   margin: 0;
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1;
   color: var(--ink);
 }
@@ -613,7 +613,7 @@
   position: absolute;
   inset: auto 0 0;
   padding: 18px 7px 6px;
-  font-size: 12.5px;
+  font-size: 12px;
   color: #fff;
   background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
 }
@@ -678,14 +678,14 @@
 }
 
 .beatLabel {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--ink);
 }
 
 .beatText p {
   margin-top: 3px;
-  font-size: 15.5px;
+  font-size: 14.5px;
   line-height: 1.5;
   color: var(--text);
 }
@@ -733,7 +733,7 @@
 .ruleColumn li {
   display: flex;
   gap: 9px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--text);
 }

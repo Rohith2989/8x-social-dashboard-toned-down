@@ -17,6 +17,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+  margin-bottom: 56px;
 }
 
 /* tabs as words, the current one underlined in the vertical colour */
@@ -72,7 +73,7 @@
   border-radius: 13px;
   background: var(--action);
   color: var(--on-action);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -106,7 +107,7 @@
   height: 40px;
   padding: 0 12px;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--ink);
 }
 
@@ -124,7 +125,7 @@
   z-index: 1;
   margin-top: 14px;
   margin-bottom: 26px;
-  font-size: 15px;
+  font-size: 14px;
   color: color-mix(in srgb, var(--vertical-ink) 70%, transparent);
 }
 
@@ -240,7 +241,7 @@
   height: 30px;
   padding: 0 11px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
   color: color-mix(in srgb, var(--vertical-ink) 72%, transparent);
@@ -341,13 +342,13 @@
 }
 
 .tipText strong {
-  font-size: 22px;
+  font-size: 20.5px;
   color: var(--ink);
 }
 
 .tipText span {
   margin-top: 3px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
 }
 
@@ -366,7 +367,7 @@
 
   .days span {
     padding: 0 8px;
-    font-size: 13px;
+    font-size: 12.5px;
   }
 
   .chart {

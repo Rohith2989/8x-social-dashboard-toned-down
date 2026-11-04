@@ -96,9 +96,13 @@ export function ComingUp({ className, inline }: { className?: string; inline?: b
                       <PlatformIcon platform={s.platform} size={16} className={styles.platform} />
                       {CREATORS[s.creator].name.split(" ")[0]}
                       <span className="sr-only">on {PLATFORM_LABELS[s.platform]}</span>
-                      <span className={styles.state} data-status={s.status}>
-                        {STATUS[s.status]}
-                      </span>
+                      {s.status === "review" ? (
+                        <span className={styles.state} data-status={s.status}>
+                          {STATUS[s.status]}
+                        </span>
+                      ) : (
+                        <span className="sr-only">, {STATUS[s.status]}</span>
+                      )}
                     </span>
                     <strong>{s.title}</strong>
                   </div>

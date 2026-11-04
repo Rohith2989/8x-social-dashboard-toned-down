@@ -22,7 +22,7 @@
   color: color-mix(in srgb, var(--danger) 45%, #fff);
 }
 .change.aura {
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .figure {
@@ -41,7 +41,7 @@
   color: rgb(255 255 255 / 0.62);
 }
 .aura .caption {
-  color: rgb(255 255 255 / 0.72);
+  color: var(--accent-quiet);
 }
 
 /* avatar */

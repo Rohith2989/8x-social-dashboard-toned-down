@@ -63,7 +63,7 @@
 }
 
 .head h2 {
-  font-size: 20px;
+  font-size: 18.5px;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.012em;
@@ -72,7 +72,7 @@
 
 .head p {
   margin-top: 4px;
-  font-size: 14.5px;
+  font-size: 13.5px;
   color: var(--text-muted);
 }
 
@@ -126,7 +126,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: rgb(255 255 255 / 0.72);
 }
@@ -158,7 +158,7 @@
   overflow: hidden;
   border-radius: 50%;
   font-family: var(--font-num);
-  font-size: 24px;
+  font-size: 22.5px;
   font-weight: 800;
   color: #fff;
   background: radial-gradient(100% 100% at 28% 18%, var(--vertical), var(--vertical-deep) 70%);
@@ -184,13 +184,13 @@
 }
 
 .whoText strong {
-  font-size: 20px;
+  font-size: 18.5px;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
 .whoText > span {
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: rgb(255 255 255 / 0.7);
 }
 
@@ -211,7 +211,7 @@
   grid-template-columns: 10px minmax(0, 1fr);
   align-items: center;
   gap: 1px 10px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .campaigns i {
@@ -241,7 +241,7 @@
 
 .campaignState {
   grid-column: 2;
-  font-size: 12.5px;
+  font-size: 12px;
   color: rgb(255 255 255 / 0.62);
 }
 
@@ -253,7 +253,7 @@
   margin-top: 18px;
   padding-top: 14px;
   border-top: 1px solid rgb(255 255 255 / 0.12);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: rgb(255 255 255 / 0.62);
 }
@@ -298,13 +298,13 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .when {
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 400;
   color: rgb(255 255 255 / 0.58);
 }
@@ -319,7 +319,7 @@
   margin-top: 16px;
   padding: 0 20px;
   border-radius: 999px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #0b0b0c;
   text-decoration: none;
@@ -336,7 +336,7 @@
 
 .writeNote {
   margin-top: 8px;
-  font-size: 12.5px;
+  font-size: 12px;
   text-align: center;
   color: rgb(255 255 255 / 0.58);
 }
@@ -349,7 +349,7 @@
 }
 
 .creatorsInner h3 {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -377,7 +377,7 @@
   width: 38px;
   height: 38px;
   font-family: var(--font-num);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--link);
   background: var(--vertical-light);
@@ -385,7 +385,7 @@
 
 .count {
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
   color: var(--text);
 }
@@ -400,7 +400,7 @@
   align-items: center;
   gap: 6px;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--link);
   text-decoration: none;

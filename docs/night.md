@@ -78,7 +78,7 @@ The new look spreads out from the switch as a soft-edged pool over the old, abou
 so the page swaps at once underneath and nothing is drawn twice. With reduced motion, or where the browser has no
 view transitions, the look simply changes.
 
-The choice is kept in `localStorage` (`8x-theme`). The first visit follows the device's setting. A script in
+The choice is kept in `localStorage` (`8x-theme`). A first visit always opens in Daybreak, whatever the device's setting; Night is a choice. A script in
 `app/layout.tsx` sets the look before the first paint, so a page never shows one look and then the other.
 
 ## Checked
@@ -91,3 +91,9 @@ The choice is kept in `localStorage` (`8x-theme`). The first visit follows the d
   for large. Night's muted words are a step lighter than they first were, so they read on the raised panels too; a
   flagged or dropped item's words take the quiet colour instead of fading; the calendar's figures stay white only on
   steps deep enough for them.
+
+## Calm pass (2026-11-04)
+
+The cobalt blocks became the accent made subtle in both looks: at Night the vertical's colour breathed into the paper,
+white words on it, a faint rim of light and a soft glow beneath (no longer a bright blue block). The calendar's ramp
+rises from a faint tint to a calm blue, every figure white. Night is a choice: a first visit opens in Daybreak.

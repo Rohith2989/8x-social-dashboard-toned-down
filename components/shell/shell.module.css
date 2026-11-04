@@ -69,10 +69,12 @@
 /* it scrolls without a bar: the wheel, the trackpad and the keys still move it. Its width is what the page's parts
    answer to (the selection bar folds its labels by it) */
 .scroll {
+  --section: 44px;
+  --cards: 20px;
   container: tray / inline-size;
   height: 100%;
   overflow-y: auto;
-  padding: 30px 32px 30px;
+  padding: 36px 40px 36px;
   scrollbar-width: none;
 }
 
@@ -99,7 +101,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px 24px;
-  margin-bottom: 26px;
+  margin-bottom: 34px;
 }
 
 .header > div:first-child {
@@ -219,6 +221,8 @@
   }
 
   .scroll {
+    --section: 32px;
+    --cards: 14px;
     height: auto;
     overflow: visible;
     padding: 0 16px 28px;
@@ -308,5 +312,14 @@
 @media (max-width: 767px) {
   :global([data-theme="dark"]) .tray {
     box-shadow: none;
+  }
+}
+
+/* a tablet's tray: room round the page, a little less than a laptop's */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .scroll {
+    --section: 38px;
+    --cards: 16px;
+    padding: 30px 28px;
   }
 }

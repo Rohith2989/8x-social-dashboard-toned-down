@@ -27,7 +27,6 @@ export function Engagement() {
     { label: "Likes", value: compact(week.likes), up: change.likes >= 0, by: `${Math.abs(change.likes).toFixed(1)}%`, icon: "heart" },
     { label: "Comments", value: compact(week.comments), up: change.comments >= 0, by: `${Math.abs(change.comments).toFixed(1)}%`, icon: "comment" },
     { label: "Shares", value: compact(week.shares), up: change.shares >= 0, by: `${Math.abs(change.shares).toFixed(1)}%`, icon: "share" },
-    { label: "Rate", value: `${week.engagement.toFixed(1)}%`, up: change.engagement >= 0, by: `${Math.abs(change.engagement).toFixed(1)} pts`, icon: "percent" },
   ];
 
   return (
@@ -37,7 +36,7 @@ export function Engagement() {
           <div className={styles.intro}>
             <h2 id="engagement-title">Engagement</h2>
             <p>
-              Likes, comments and shares on every post, <strong>this week</strong>.
+              On every post, <strong>this week</strong>.
             </p>
           </div>
 

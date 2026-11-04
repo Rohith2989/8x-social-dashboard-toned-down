@@ -6,8 +6,8 @@
   container-type: inline-size;
   background: linear-gradient(
     158deg,
-    color-mix(in srgb, var(--vertical-light) 70%, #fff) 0%,
-    color-mix(in srgb, var(--vertical-glow) 22%, var(--vertical-light)) 100%
+    color-mix(in srgb, var(--vertical-light) 40%, #fff) 0%,
+    color-mix(in srgb, var(--vertical-light) 80%, #fff) 100%
   );
 }
 
@@ -17,7 +17,7 @@
   inset: 0;
   border-radius: inherit;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.32;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -26,12 +26,13 @@
   and darker than the ground, so even a quiet day reads as a tile. The text flips to white where the fill is deep.
 */
 .card {
+  /* a soft ramp: white to a mid blue, the busiest days still the deepest, every figure dark */
   --s1: #fff;
-  --s2: color-mix(in srgb, var(--vertical-glow) 50%, #fff);
-  --s3: var(--vertical-glow);
-  --s4: color-mix(in srgb, var(--vertical) 55%, var(--vertical-glow));
-  --s5: color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep));
-  --s6: var(--vertical-deep);
+  --s2: color-mix(in srgb, var(--vertical-glow) 20%, #fff);
+  --s3: color-mix(in srgb, var(--vertical-glow) 38%, #fff);
+  --s4: color-mix(in srgb, var(--vertical-glow) 58%, #fff);
+  --s5: color-mix(in srgb, var(--vertical-glow) 82%, #fff);
+  --s6: color-mix(in srgb, var(--vertical) 58%, var(--vertical-glow));
   --tile: 28px;
 }
 
@@ -51,7 +52,7 @@
 }
 
 .head h2 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -59,7 +60,7 @@
 
 .head p {
   margin-top: 3px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
@@ -70,7 +71,7 @@
   align-items: flex-end;
   gap: 7px;
   padding-top: 2px;
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1;
   color: var(--text-muted);
 }
@@ -222,12 +223,10 @@
 
 .day[data-step="5"] {
   background: var(--s5);
-  color: #fff;
 }
 
 .day[data-step="6"] {
   background: var(--s6);
-  color: #fff;
 }
 
 .day[data-step] {
@@ -247,7 +246,7 @@
 }
 
 .count {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1;
 }
 
@@ -312,7 +311,7 @@
   border-radius: 16px;
   background: var(--float);
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
   box-shadow: 0 18px 30px -14px rgb(11 11 12 / 0.6);
   transform: translateX(-50%);
@@ -349,7 +348,7 @@
 }
 
 .popLine :global(.num) {
-  font-size: 17px;
+  font-size: 16px;
   color: #fff;
 }
 
@@ -400,7 +399,7 @@
   }
 
   .count {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -422,7 +421,7 @@
   }
 
   .count {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .week span {
@@ -440,8 +439,8 @@
    tint to the glow */
 :global([data-theme="dark"]) .card[aria-label] {
   background:
-    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 20%, transparent), transparent 62%),
-    linear-gradient(158deg, color-mix(in srgb, var(--vertical-deep) 16%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-ink) 42%, var(--paper)) 100%);
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 12%, transparent), transparent 62%),
+    linear-gradient(158deg, color-mix(in srgb, var(--vertical-deep) 9%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-ink) 30%, var(--paper)) 100%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.06),
     inset 0 0 0 1px rgb(255 255 255 / 0.04);
@@ -451,13 +450,14 @@
   opacity: 0.2;
 }
 
+/* at night the ramp rises from a faint tint to a calm blue, every figure white */
 :global([data-theme="dark"]) .card {
-  --s1: color-mix(in srgb, var(--vertical-glow) 22%, var(--paper));
-  --s2: color-mix(in srgb, var(--vertical) 32%, var(--paper));
-  --s3: color-mix(in srgb, var(--vertical) 46%, var(--paper));
-  --s4: color-mix(in srgb, var(--vertical) 64%, var(--paper));
-  --s5: color-mix(in srgb, var(--vertical) 84%, var(--paper));
-  --s6: color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical));
+  --s1: color-mix(in srgb, var(--vertical-glow) 14%, var(--paper));
+  --s2: color-mix(in srgb, var(--vertical) 24%, var(--paper));
+  --s3: color-mix(in srgb, var(--vertical) 34%, var(--paper));
+  --s4: color-mix(in srgb, var(--vertical) 46%, var(--paper));
+  --s5: color-mix(in srgb, var(--vertical) 58%, var(--paper));
+  --s6: color-mix(in srgb, var(--vertical) 72%, var(--paper));
 }
 
 :global([data-theme="dark"]) .day {
@@ -465,12 +465,7 @@
 }
 
 :global([data-theme="dark"]) .day[data-step="6"] {
-  color: var(--vertical-ink);
-  box-shadow: 0 0 16px -4px color-mix(in srgb, var(--vertical-glow) 70%, transparent);
-}
-
-:global([data-theme="dark"]) .day[data-step="5"] {
-  box-shadow: 0 0 12px -5px color-mix(in srgb, var(--vertical) 80%, transparent);
+  box-shadow: 0 0 12px -6px color-mix(in srgb, var(--vertical) 50%, transparent);
 }
 
 :global([data-theme="dark"]) .day[data-step]:hover,

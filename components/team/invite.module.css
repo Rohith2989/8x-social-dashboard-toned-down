@@ -1,15 +1,10 @@
-/* the deep blue, lit from its top right, with grain (the revenue tile's recipe): the page's one action */
+/* the vertical's colour, subtle, lit from its top right, with a whisper of grain: the page's one action */
 .invite {
   container-type: inline-size;
 }
 
 .invite[aria-label] {
-  background: radial-gradient(
-    130% 160% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
-    var(--vertical-deep) 50%,
-    color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
-  );
+  background: var(--accent-ground);
 }
 
 .invite::before {
@@ -18,7 +13,7 @@
   inset: 0;
   border-radius: inherit;
   background: url("/media/grain-coarse.webp") repeat 0 0 / 180px 180px;
-  opacity: 0.5;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -35,15 +30,15 @@
   line-height: 1.05;
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .lede {
   margin-top: 8px;
   max-width: 46ch;
-  font-size: 15.5px;
+  font-size: 14.5px;
   line-height: 1.45;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 /* the address and the button, side by side until the block is narrow */
@@ -65,21 +60,23 @@
   border-radius: 999px;
   background: #fff;
   color: var(--text-muted);
-  box-shadow: 0 12px 26px -16px rgb(4 12 40 / 0.6);
+  box-shadow:
+    inset 0 0 0 1px var(--accent-line),
+    0 10px 22px -16px rgb(4 12 40 / 0.3);
   transition: box-shadow var(--t) var(--ease-out);
 }
 
 .field:focus-within {
   color: var(--link);
   box-shadow:
-    0 0 0 4px rgb(255 255 255 / 0.3),
-    0 12px 26px -16px rgb(4 12 40 / 0.6);
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 16%, transparent);
 }
 
 .field[data-invalid] {
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--danger) 60%, #fff),
-    0 12px 26px -16px rgb(4 12 40 / 0.6);
+    inset 0 0 0 1.5px var(--danger),
+    0 0 0 4px color-mix(in srgb, var(--danger) 16%, transparent);
 }
 
 .field input {
@@ -90,7 +87,7 @@
   outline: 0;
   background: transparent;
   font: inherit;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--ink);
 }
 
@@ -102,9 +99,9 @@
   flex: none;
 }
 
-/* the dot loader inside the white button */
+/* the dot loader inside the button */
 .submit span[role="status"] i {
-  background: var(--vertical-deep);
+  background: currentColor;
 }
 
 .note {
@@ -114,29 +111,29 @@
   gap: 6px 8px;
   min-height: 22px;
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 .note[data-error] {
   font-weight: 600;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .note[data-error] svg {
-  color: color-mix(in srgb, var(--danger) 55%, #fff);
+  color: var(--danger);
 }
 
 .note button {
   font-weight: 700;
-  color: #fff;
+  color: var(--link);
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
 
-/* the way a request goes: three stops on one line, 8x the one in white */
+/* the way a request goes: three stops on one line, 8x the one in white with a halo of the vertical */
 .way {
   position: relative;
   display: grid;
@@ -155,7 +152,7 @@
   right: 16.6%;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, rgb(255 255 255 / 0.62), rgb(255 255 255 / 0.5) 50%, rgb(255 255 255 / 0.22));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--vertical) 45%, transparent), color-mix(in srgb, var(--vertical) 30%, transparent) 50%, color-mix(in srgb, var(--vertical) 12%, transparent));
 }
 
 .way li {
@@ -175,9 +172,11 @@
   height: 54px;
   margin-bottom: 10px;
   border-radius: 50%;
-  color: #fff;
-  background: color-mix(in srgb, var(--vertical-deep) 86%, #fff);
-  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.34);
+  color: var(--vertical-deep);
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 1.5px color-mix(in srgb, var(--vertical) 26%, transparent),
+    0 8px 16px -12px rgb(4 12 40 / 0.3);
 }
 
 .way li[data-ours] .stop {
@@ -187,28 +186,28 @@
   margin-bottom: 5px;
   background: #fff;
   box-shadow:
-    0 0 0 6px rgb(255 255 255 / 0.14),
-    0 16px 30px -14px rgb(4 12 40 / 0.65);
+    0 0 0 6px color-mix(in srgb, var(--vertical) 12%, transparent),
+    0 14px 26px -14px rgb(4 12 40 / 0.35);
 }
 
 .way strong {
-  font-size: 15.5px;
+  font-size: 14.5px;
   font-weight: 700;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .way li > span:last-child {
   max-width: 17ch;
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.35;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--accent-quiet);
 }
 
 /* the 8x stop's count: the requests with 8x now, its dot beating at the start of its words */
 .way .live {
   display: inline;
   font-weight: 600;
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 .live i {
@@ -218,17 +217,17 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--vertical);
   animation: beat 1.8s var(--ease-out) infinite;
 }
 
 @keyframes beat {
   0% {
-    box-shadow: 0 0 0 0 rgb(255 255 255 / 0.6);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--vertical) 50%, transparent);
   }
   70%,
   100% {
-    box-shadow: 0 0 0 7px rgb(255 255 255 / 0);
+    box-shadow: 0 0 0 7px transparent;
   }
 }
 
@@ -247,7 +246,7 @@
 
   .way {
     padding-top: 22px;
-    border-top: 1px solid rgb(255 255 255 / 0.16);
+    border-top: 1px solid var(--accent-line);
   }
 
   .way::before {
@@ -279,7 +278,7 @@
   }
 
   .way strong {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .way li > span:last-child {
@@ -289,36 +288,36 @@
 
 /* ---- Night ---- */
 
-:global([data-theme="dark"]) .invite[aria-label] {
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.15),
-    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
-}
-
-/* the address field stays white on the blue: its words stay dark */
+/* at night the field is the night's glass, its words light; the stops are lit steps of the night */
 :global([data-theme="dark"]) .field {
-  color: #5c6478;
+  color: var(--text-muted);
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
 }
 
 :global([data-theme="dark"]) .field input {
-  color: #0b0b0c;
-}
-
-:global([data-theme="dark"]) .field input::placeholder {
-  color: #6a7184;
+  color: var(--ink);
 }
 
 :global([data-theme="dark"]) .field:focus-within {
-  color: var(--vertical-deep);
+  color: var(--link);
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical-glow),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 22%, transparent);
 }
 
-/* its button stays white beside the white field */
-:global([data-theme="dark"]) button.submit {
-  --current-fill: var(--vertical-light);
-  --current-dot: var(--vertical);
-  color: #0b0b0c;
+:global([data-theme="dark"]) .stop {
+  color: var(--vertical-glow);
+  background: color-mix(in srgb, var(--vertical) 18%, var(--paper));
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--vertical-glow) 30%, transparent);
+}
+
+:global([data-theme="dark"]) .way li[data-ours] .stop {
   background: #fff;
-  box-shadow: none;
+}
+
+:global([data-theme="dark"]) .live i {
+  background: var(--vertical-glow);
 }
 
 /* the narrowest block: the stops and their words close up so each name keeps one line */
@@ -341,11 +340,11 @@
   }
 
   .way strong {
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;
   }
 
   .way li > span:last-child {
-    font-size: 12.5px;
+    font-size: 12px;
   }
 }
