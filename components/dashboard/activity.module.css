@@ -31,7 +31,7 @@
   font-size: 21px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: color-mix(in srgb, var(--vertical-ink) 38%, transparent);
+  color: color-mix(in srgb, var(--vertical-ink) 72%, transparent);
   transition: color var(--t) var(--ease-out);
 }
 
@@ -70,8 +70,8 @@
   height: 38px;
   padding: 0 14px 0 16px;
   border-radius: 13px;
-  background: var(--ink);
-  color: #fff;
+  background: var(--action);
+  color: var(--on-action);
   font-size: 14px;
   font-weight: 600;
 }
@@ -86,7 +86,7 @@
   padding: 6px;
   list-style: none;
   border-radius: 16px;
-  background: var(--paper);
+  background: var(--popover);
   box-shadow: var(--shadow-float);
   animation: menu 200ms var(--ease-out);
 }
@@ -116,13 +116,14 @@
 
 .menu button[aria-selected="true"] {
   font-weight: 600;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .note {
   position: relative;
   z-index: 1;
   margin-top: 14px;
+  margin-bottom: 26px;
   font-size: 15px;
   color: color-mix(in srgb, var(--vertical-ink) 70%, transparent);
 }
@@ -209,7 +210,7 @@
 }
 
 .marker {
-  fill: var(--ink);
+  fill: var(--ink-block);
   stroke: #fff;
   stroke-width: 3.5;
   transition:
@@ -218,7 +219,7 @@
 }
 
 .drop {
-  fill: var(--ink);
+  fill: var(--ink-block);
   opacity: 0.85;
 }
 
@@ -249,8 +250,8 @@
 }
 
 .days .dayOn {
-  background: var(--ink);
-  color: #fff;
+  background: var(--action);
+  color: var(--on-action);
   font-weight: 600;
 }
 
@@ -356,14 +357,86 @@
   }
 
   .tabs {
-    gap: 18px;
+    gap: 14px;
   }
 
   .tab {
-    font-size: 18px;
+    font-size: 17px;
+  }
+
+  .days span {
+    padding: 0 8px;
+    font-size: 13px;
   }
 
   .chart {
     margin: 44px -18px 0;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .tab {
+  color: rgb(255 255 255 / 0.62);
+}
+
+:global([data-theme="dark"]) .tab:hover,
+:global([data-theme="dark"]) .tab[aria-selected="true"] {
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .tab::after {
+  background: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .note {
+  color: rgb(255 255 255 / 0.7);
+}
+
+:global([data-theme="dark"]) .note strong {
+  color: #fff;
+}
+
+/* the line is light in the night: it glows */
+:global([data-theme="dark"]) .line {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--vertical-glow) 75%, transparent)) drop-shadow(0 0 16px color-mix(in srgb, var(--vertical) 60%, transparent));
+}
+
+:global([data-theme="dark"]) .drop {
+  fill: #fff;
+  opacity: 0.55;
+}
+
+:global([data-theme="dark"]) .days span {
+  color: rgb(255 255 255 / 0.6);
+}
+
+:global([data-theme="dark"]) .days .dayOn {
+  color: var(--on-action);
+}
+
+/* the tooltip is the night's glass over the sky */
+:global([data-theme="dark"]) .tip,
+:global([data-theme="dark"]) .tip::after {
+  background: var(--float);
+}
+
+:global([data-theme="dark"]) .tip {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.1),
+    0 14px 32px -12px rgb(0 0 0 / 0.75);
+}
+
+:global([data-theme="dark"]) .menu {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.07),
+    0 24px 52px -20px rgb(0 0 0 / 0.85);
+}
+
+:global([data-theme="dark"]) .menu button:hover {
+  background: rgb(255 255 255 / 0.05);
+}
+
+:global([data-theme="dark"]) .menu button[aria-selected="true"] {
+  color: var(--vertical-glow);
 }

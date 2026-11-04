@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { BannerPalette, RosterCreator } from "@/lib/roster";
+import { useTheme } from "../shell/theme";
 import styles from "./banner.module.css";
 
 /*
@@ -9,8 +10,10 @@ import styles from "./banner.module.css";
   six grounds, drawn the way the window's aura is (ellipses falling off like a Gaussian, on a small canvas the browser
   smooths as it scales up), with the grain the colour blocks carry. The ground is the creator's palette; where the
   lights stand comes from their name, so every creator's banner is their own and stays the same wherever it shows.
-  The colours are read from the vertical's tokens, so every vertical's creators get its own banners. Pointing at the
-  card lets the light drift a little under the grain. It greys with the creator when they are dropped or flagged.
+  The colours are read from the vertical's tokens, so every vertical's creators get its own banners. At night the same
+  lights stand in the dark (the ground sinks toward the vertical's ink, white light turns to its glow), an aurora
+  rather than a pale sky, so no banner glares on the dark cards. Pointing at the card lets the light drift a little
+  under the grain. It greys with the creator when they are dropped or flagged.
   Anything placed inside (the card's check and platforms, the sheet's close) sits over it.
 */
 
@@ -64,7 +67,7 @@ const rgb = (hex: string, fallback: RGB): RGB => {
 
 const mix = (a: RGB, b: RGB, t: number): RGB => [0, 1, 2].map((i) => Math.round(a[i] * (1 - t) + b[i] * t)) as RGB;
 
-function draw(canvas: HTMLCanvasElement, palette: BannerPalette, id: string) {
+function draw(canvas: HTMLCanvasElement, palette: BannerPalette, id: string, night: boolean) {
   const host = canvas.parentElement;
   const g = canvas.getContext("2d");
   if (!host || !g || !host.offsetWidth || !host.offsetHeight) return;
@@ -84,7 +87,10 @@ function draw(canvas: HTMLCanvasElement, palette: BannerPalette, id: string) {
   const h = (canvas.height = Math.max(4, Math.round(host.offsetHeight * SCALE)));
   const p = PALETTES[palette];
   const r = seeded(id);
-  g.fillStyle = `rgb(${mix(tones[p.ground[0]], tones[p.ground[1]], p.ground[2]).join(",")})`;
+  const ground = mix(tones[p.ground[0]], tones[p.ground[1]], p.ground[2]);
+  // at night the ground sinks toward the ink and the white light becomes the glow
+  const dark = mix(tones.ink, [5, 9, 24], 0.55);
+  g.fillStyle = `rgb(${(night ? mix(ground, dark, 0.66) : ground).join(",")})`;
   g.fillRect(0, 0, w, h);
   const flip = r() < 0.5;
   p.lights.forEach(([tone, strength, size], i) => {
@@ -99,8 +105,10 @@ function draw(canvas: HTMLCanvasElement, palette: BannerPalette, id: string) {
     g.rotate((rot * Math.PI) / 180);
     g.scale(rx * w, ry * h);
     const grad = g.createRadialGradient(0, 0, 0, 0, 0, R);
-    const [cr, cg, cb] = tones[tone];
-    FALL.forEach((f, j) => grad.addColorStop(j / (FALL.length - 1), `rgba(${cr},${cg},${cb},${(strength * f).toFixed(4)})`));
+    const lit = night && (tone === "white" || tone === "light") ? "glow" : tone;
+    const [cr, cg, cb] = tones[lit];
+    const a = night ? strength * (lit === tone ? 0.82 : 0.5) : strength;
+    FALL.forEach((f, j) => grad.addColorStop(j / (FALL.length - 1), `rgba(${cr},${cg},${cb},${(a * f).toFixed(4)})`));
     g.fillStyle = grad;
     g.fillRect(-R, -R, 2 * R, 2 * R);
     g.restore();
@@ -121,23 +129,24 @@ export function Banner({
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const { id, banner } = creator;
+  const night = useTheme() === "dark";
 
   useEffect(() => {
     const canvas = ref.current;
     const host = canvas?.parentElement;
     if (!canvas || !host) return;
-    draw(canvas, banner, id);
+    draw(canvas, banner, id, night);
     // redrawn when the banner changes shape (a column more or less in the grid, the window resized)
     let last = `${host.offsetWidth}x${host.offsetHeight}`;
     const watch = new ResizeObserver(() => {
       const now = `${host.offsetWidth}x${host.offsetHeight}`;
       if (now === last) return;
       last = now;
-      draw(canvas, banner, id);
+      draw(canvas, banner, id, night);
     });
     watch.observe(host);
     return () => watch.disconnect();
-  }, [banner, id]);
+  }, [banner, id, night]);
 
   return (
     <div className={`${styles.banner} ${styles[size]} ${className ?? ""}`} data-palette={banner} data-muted={creator.status === "dropped" || !!creator.flag}>

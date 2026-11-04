@@ -68,3 +68,13 @@
 .media .label {
   color: #fff;
 }
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .mark {
+  --t1: color-mix(in srgb, var(--vertical) 34%, var(--paper));
+  --t2: color-mix(in srgb, var(--vertical) 62%, var(--paper));
+  --t3: var(--vertical);
+  --t4: color-mix(in srgb, var(--vertical-glow) 55%, var(--vertical));
+  --t5: color-mix(in srgb, var(--vertical-glow) 70%, #fff);
+}

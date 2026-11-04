@@ -64,15 +64,20 @@ export function ActionMenu({
     const t = trigger.current?.getBoundingClientRect();
     const p = panel.current;
     if (!open || !t || !p) return;
-    const w = Math.min(width, window.innerWidth - 16);
+    // drawn at the window's scale on very wide screens (--z): its own sizes are multiplied by it, so it is placed in
+    // the screen's pixels and written back divided by it
+    const z = parseFloat(getComputedStyle(p).zoom) || 1;
+    const w = Math.min(width, (window.innerWidth - 16) / z);
     // its width first: its words wrap to it, and only then is its height its own
     p.style.width = `${w}px`;
-    const h = p.offsetHeight;
-    const left = Math.max(8, Math.min(align === "end" ? t.right - w : t.left, window.innerWidth - w - 8));
+    // its laid-out height (the opening animation scales it a little), at the screen's scale
+    const h = parseFloat(getComputedStyle(p).height) * z;
+    const span = w * z;
+    const left = Math.max(8, Math.min(align === "end" ? t.right - span : t.left, window.innerWidth - span - 8));
     const below = t.bottom + 8;
     const top = below + h > window.innerHeight - 8 && t.top - 8 - h > 8 ? t.top - 8 - h : Math.min(below, window.innerHeight - h - 8);
-    p.style.left = `${left}px`;
-    p.style.top = `${Math.max(8, top)}px`;
+    p.style.left = `${left / z}px`;
+    p.style.top = `${Math.max(8, top) / z}px`;
     p.querySelector<HTMLElement>("[role=menuitem]")?.focus({ preventScroll: true });
   }, [open, width, align]);
 

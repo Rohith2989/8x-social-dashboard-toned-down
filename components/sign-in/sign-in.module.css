@@ -99,7 +99,7 @@
 .eyebrow {
   font-size: 14px;
   font-weight: 600;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .card h1 {
@@ -133,7 +133,7 @@
 .notice svg {
   flex: none;
   margin-top: 2px;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .notice[data-tone="bad"] {
@@ -207,8 +207,8 @@
 
 .primary {
   margin-top: 4px;
-  color: #fff;
-  background: var(--ink);
+  color: var(--on-action);
+  background: var(--action);
 }
 
 .primary:not(:disabled):hover {
@@ -272,7 +272,7 @@
   border-radius: 999px;
   font-size: 14.5px;
   font-weight: 600;
-  color: var(--vertical-deep);
+  color: var(--link);
   transition: background-color var(--t-fast) var(--ease-out);
 }
 
@@ -355,7 +355,7 @@
 
 .signup a {
   font-weight: 700;
-  color: var(--vertical-deep);
+  color: var(--link);
   text-decoration: none;
 }
 
@@ -382,4 +382,84 @@
     height: 52px;
     font-size: 22px;
   }
+}
+
+/* a finger-sized target round .home, the part itself unmoved */
+.home {
+  position: relative;
+}
+
+.home::before {
+  content: "";
+  position: absolute;
+  inset: -9px -6px;
+}
+
+/* a finger-sized target round .back, the part itself unmoved */
+.back {
+  position: relative;
+}
+
+.back::before {
+  content: "";
+  position: absolute;
+  inset: -11px -6px;
+}
+
+/* ---- Night ---- */
+
+/* at night the card is the night's glass on its own aura */
+:global([data-theme="dark"]) .card {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    inset 0 0 0 1px rgb(255 255 255 / 0.08),
+    0 40px 90px -40px rgb(0 0 0 / 0.9);
+}
+
+:global([data-theme="dark"]) .notice {
+  background: color-mix(in srgb, var(--vertical) 18%, var(--paper));
+}
+
+:global([data-theme="dark"]) .notice[data-tone="bad"] {
+  background: color-mix(in srgb, var(--danger) 15%, var(--paper));
+}
+
+:global([data-theme="dark"]) .field input,
+:global([data-theme="dark"]) .slots span {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+}
+
+:global([data-theme="dark"]) .field input:focus,
+:global([data-theme="dark"]) .slots span[data-filled],
+:global([data-theme="dark"]) .code:focus-within .slots span[data-on] {
+  background: color-mix(in srgb, #fff 5%, var(--paper));
+}
+
+:global([data-theme="dark"]) .field input:focus,
+:global([data-theme="dark"]) .code:focus-within .slots span[data-on] {
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 26%, transparent);
+}
+
+:global([data-theme="dark"]) .primary:not(:disabled):hover {
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .google {
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+}
+
+:global([data-theme="dark"]) .google:not(:disabled):hover {
+  background: rgb(255 255 255 / 0.09);
+}
+
+:global([data-theme="dark"]) .or i {
+  background: rgb(255 255 255 / 0.1);
+}
+
+/* the field's example address: quiet, readable */
+.field input::placeholder {
+  color: var(--text-muted);
 }

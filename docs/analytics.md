@@ -34,7 +34,7 @@ come on top.
 
 ## 1. Header (was: the tab's top row)
 
-- **Title** "Analytics", and one line under it that says what happened: "Since 8x started on 11 Oct, meridian.app made
+- **Title** "Analytics", and one line under it that says what happened: "Since 8x started on 11 Oct, ematura.si made
   $69,085, 40% more than in the 24 days before."
 - **Connect your data** (stone): the panel of every source this page can read, connected or not.
 - **Ask about this data** (the one ink action): the product's assistant, which answers from the figures on screen.
@@ -124,8 +124,11 @@ What the brand's own ads did on the creators' posts (Spark Ads on TikTok, partne
 
 - **The open boosted post** (the right-hand column on the ad views, the product's ad post panel): the post playing,
   who made it and when it was boosted, its paid against organic views as one bar, spend, conversions and their cost,
-  impressions, clicks and CTR, its paid delivery a day at a time, and the way to it on Posts & feed, with its spark code
-  on TikTok. The boosted posts list opens it; the most spent on opens first.
+  impressions, clicks and CTR, its paid delivery a day at a time, and the way to it on Posts & feed, with Copy spark
+  code on TikTok (the code itself in its title). The boosted posts list opens it; the most spent on opens first.
+  - **Paid delivery by day**: a bar a day. Up to five days, each bar carries its figure and its day; more, the peak's
+    figure and the span's first and last days. The line under it says the day that took the most and its share,
+    worked out from the figures; pointing at a bar says that day's paid views, spend and clicks.
 
 ## 8. Connect your data (was: the connect panel)
 

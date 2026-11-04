@@ -123,7 +123,7 @@ function CreatorCard({
         </span>
         <i aria-hidden />
         <span>
-          <span className="mono">{c.videos}</span> videos
+          <span className="mono">{c.videos}</span> {c.videos === 1 ? "video" : "videos"}
         </span>
       </p>
 

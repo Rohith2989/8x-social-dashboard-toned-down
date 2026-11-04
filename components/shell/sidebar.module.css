@@ -1,12 +1,29 @@
 .sidebar {
+  --foot-space: 132px;
   position: relative;
   z-index: 30;
   display: flex;
   flex-direction: column;
   min-height: 0;
   padding: 30px 22px 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
   background: var(--paper);
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* a screen too short for the whole sidebar (a phone held sideways): it scrolls, and the blob gives way so nothing is
+   ever under it (sidebar.tsx sets data-overflow when the pages, the switch and the foot do not fit above the blob) */
+.sidebar[data-overflow] .foot {
+  padding-bottom: 18px;
+}
+
+.sidebar[data-overflow] .blob {
+  display: none;
 }
 
 .top {
@@ -14,6 +31,18 @@
   align-items: center;
   justify-content: space-between;
   padding-left: 12px;
+}
+
+/* the logo is the way home: a finger-sized target round it, the logo itself unmoved */
+.lockup {
+  position: relative;
+  display: block;
+}
+
+.lockup::before {
+  content: "";
+  position: absolute;
+  inset: -10px -8px;
 }
 
 .lockup img {
@@ -38,7 +67,7 @@
   text-align: center;
 }
 
-/* the brand's logo is the avatar: its own rounded square, on a soft shadow of its navy */
+/* the brand's picture is the avatar: its own rounded square, on a soft shadow of its navy */
 .avatar {
   position: relative;
   display: grid;
@@ -47,15 +76,46 @@
   height: 88px;
 }
 
-.avatar img {
+.pic {
+  position: relative;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 14px 16px rgb(13 24 56 / 0.28)) drop-shadow(0 2px 3px rgb(13 24 56 / 0.18));
   transition: transform 520ms var(--ease-out);
 }
 
-.profile:hover .avatar img {
+.pic img {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 14px 16px rgb(13 24 56 / 0.28)) drop-shadow(0 2px 3px rgb(13 24 56 / 0.18));
+}
+
+.profile:hover .pic {
   transform: translateY(-2px) scale(1.03);
+}
+
+/* a sheen crossing the logo on hover: a band of light, seen only where it passes over the mark */
+.glint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.32) 47%, rgb(255 255 255 / 0.6) 50%, rgb(255 255 255 / 0.32) 53%, transparent 62%) no-repeat;
+  background-size: 320% 100%;
+  background-position: 100% 0;
+  -webkit-mask: url("/media/ematura-icon.webp") center / 100% 100% no-repeat;
+  mask: url("/media/ematura-icon.webp") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.profile:hover .glint {
+  animation: glint 1200ms var(--ease-current) both;
+}
+
+@keyframes glint {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
 }
 
 .badge {
@@ -101,7 +161,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin-top: 2px;
+  margin-top: 1px;
   font-size: 15px;
   color: var(--text-muted);
 }
@@ -146,7 +206,7 @@
 }
 
 .item.current svg {
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .label {
@@ -165,7 +225,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--vertical-deep);
+  color: var(--link);
   font-weight: 600;
 }
 
@@ -182,7 +242,7 @@
   flex-direction: column;
   gap: 2px;
   margin-top: auto;
-  padding-bottom: 132px;
+  padding-bottom: var(--foot-space);
 }
 
 .blob {
@@ -199,7 +259,7 @@
 }
 
 /* a shorter screen: the blob and the gaps shrink so nothing sits under it */
-@media (max-height: 860px) and (min-width: 768px) {
+@media (max-height: 900px) and (min-width: 768px) {
   .profile {
     margin-top: 26px;
   }
@@ -218,12 +278,44 @@
     height: 42px;
   }
 
-  .foot {
-    padding-bottom: 96px;
+  .sidebar {
+    --foot-space: 96px;
   }
 
   .blob {
     height: 104px;
+  }
+}
+
+/* a short laptop screen: the brand and the pages close up, so the switch, Settings and Log out stay clear of the blob */
+@media (max-height: 800px) and (min-width: 768px) {
+  .profile {
+    margin-top: 16px;
+  }
+
+  .avatar {
+    width: 68px;
+    height: 68px;
+  }
+
+  .profile strong {
+    margin-top: 10px;
+  }
+
+  .nav {
+    margin-top: 16px;
+  }
+
+  .item {
+    height: 40px;
+  }
+
+  .sidebar {
+    --foot-space: 72px;
+  }
+
+  .blob {
+    height: 78px;
   }
 }
 
@@ -286,12 +378,38 @@
     margin-top: 28px;
   }
 
-  .foot {
-    padding-bottom: 110px;
+  .sidebar {
+    --foot-space: 110px;
   }
 
   .blob {
     height: 110px;
+  }
+}
+
+/* the rail on a short screen */
+@media (max-width: 1199px) and (min-width: 768px) and (max-height: 800px) {
+  .sidebar {
+    --foot-space: 72px;
+  }
+
+  .blob {
+    height: 78px;
+  }
+}
+
+/* the shortest screens: the blob gives way, so the foot is never under it */
+@media (max-height: 640px) and (min-width: 768px) {
+  .item {
+    height: 38px;
+  }
+
+  .sidebar {
+    --foot-space: 16px;
+  }
+
+  .blob {
+    display: none;
   }
 }
 
@@ -374,5 +492,40 @@
     justify-content: flex-start;
     width: auto;
     padding: 0 16px;
+  }
+}
+
+/* ---- Night ---- */
+
+/* the brand's photograph keeps its edge on the night: a hairline of light round it, its shadow deeper */
+:global([data-theme="dark"]) .pic img {
+  filter: drop-shadow(0 0 0.6px rgb(255 255 255 / 0.5)) drop-shadow(0 14px 18px rgb(0 0 0 / 0.65));
+}
+
+:global([data-theme="dark"]) .item:hover {
+  background: rgb(255 255 255 / 0.045);
+}
+
+/* the current page: a step of the vertical's light, its icon lit */
+:global([data-theme="dark"]) .item.current {
+  background: color-mix(in srgb, var(--vertical) 15%, var(--paper));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vertical) 24%, transparent);
+}
+
+:global([data-theme="dark"]) .item.current svg {
+  color: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .count.fresh {
+  color: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .badge {
+  box-shadow: 0 4px 10px -4px rgb(0 0 0 / 0.7);
+}
+
+@media (max-width: 767px) {
+  :global([data-theme="dark"]) .scrim {
+    background: rgb(0 2 10 / 0.6);
   }
 }

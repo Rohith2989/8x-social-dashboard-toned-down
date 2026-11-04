@@ -61,8 +61,8 @@ export type GaDay = Totals & {
 };
 
 export const PROPERTY = {
-  name: "meridian.app · GA4",
-  account: "analytics@meridian.app",
+  name: "ematura.si · GA4",
+  account: "analytics@ematura.si",
   currency: "USD",
 };
 

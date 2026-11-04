@@ -16,7 +16,7 @@ const [first, ...rest] = BRAND.member.name.split(" ");
 // a fictional number (555-01xx is set aside for fiction)
 export const ACCOUNT_DEFAULT: Account = { first, last: rest.join(" "), phone: "+1 415 555 0142" };
 
-export const ACCOUNT_EMAIL = "alex@meridian.app";
+export const ACCOUNT_EMAIL = "alex@ematura.si";
 
 let state: Account = ACCOUNT_DEFAULT;
 const listeners = new Set<() => void>();

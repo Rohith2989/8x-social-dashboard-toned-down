@@ -22,7 +22,7 @@ export function Change({ value, unit = "%", digits = 1, tone = "paper", caption 
 export function Avatar({ src, initials, size = 32, ring, className }: { src?: string; initials?: string; size?: number; ring?: string; className?: string }) {
   return (
     <span className={`${styles.avatar} ${className ?? ""}`} style={{ width: size, height: size, "--ring": ring } as React.CSSProperties}>
-      {src ? <img src={src} alt="" width={size} height={size} loading="lazy" /> : <span className={styles.initials} style={{ fontSize: size * 0.38 }}>{initials}</span>}
+      {src ? <img src={src} alt="" width={size} height={size} loading="lazy" /> : <span className={styles.initials} style={{ fontSize: Math.max(10.5, size * 0.4) }}>{initials}</span>}
     </span>
   );
 }

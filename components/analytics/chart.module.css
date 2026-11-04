@@ -239,7 +239,7 @@
   padding: 12px 14px;
   border-radius: 16px;
   color: #fff;
-  background: color-mix(in srgb, var(--ink) 94%, var(--vertical-ink));
+  background: color-mix(in srgb, var(--float) 94%, var(--vertical-ink));
   box-shadow: 0 18px 36px -16px rgb(11 11 12 / 0.55);
   pointer-events: none;
 }
@@ -392,4 +392,26 @@
   .face {
     animation: none;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .tick line {
+  stroke: rgb(255 255 255 / 0.06);
+}
+
+:global([data-theme="dark"]) .base {
+  stroke: rgb(255 255 255 / 0.14);
+}
+
+/* the open day: a column of the vertical's light, not a white bar */
+:global([data-theme="dark"]) .openBand {
+  fill: var(--vertical);
+  opacity: 0.2;
+}
+
+:global([data-theme="dark"]) .tip {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.1),
+    0 18px 40px -16px rgb(0 0 0 / 0.85);
 }

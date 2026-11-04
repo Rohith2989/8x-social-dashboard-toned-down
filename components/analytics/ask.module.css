@@ -101,7 +101,7 @@
 
 .openers svg {
   flex: none;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .box {
@@ -139,11 +139,21 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  color: #fff;
-  background: var(--ink);
+  color: var(--on-action);
+  background: var(--action);
 }
 
 .box button:disabled {
   color: var(--mist);
   background: var(--stone);
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .creator {
+  background: color-mix(in srgb, var(--vertical) 24%, var(--popover));
+}
+
+:global([data-theme="dark"]) .openers button:hover {
+  background: color-mix(in srgb, var(--vertical) 14%, var(--popover));
 }

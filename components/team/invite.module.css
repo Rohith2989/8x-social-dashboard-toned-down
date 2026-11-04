@@ -6,7 +6,7 @@
 .invite[aria-label] {
   background: radial-gradient(
     130% 160% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
     var(--vertical-deep) 50%,
     color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
   );
@@ -43,7 +43,7 @@
   max-width: 46ch;
   font-size: 15.5px;
   line-height: 1.45;
-  color: rgb(255 255 255 / 0.8);
+  color: rgb(255 255 255 / 0.92);
 }
 
 /* the address and the button, side by side until the block is narrow */
@@ -70,7 +70,7 @@
 }
 
 .field:focus-within {
-  color: var(--vertical-deep);
+  color: var(--link);
   box-shadow:
     0 0 0 4px rgb(255 255 255 / 0.3),
     0 12px 26px -16px rgb(4 12 40 / 0.6);
@@ -116,7 +116,7 @@
   margin-top: 12px;
   font-size: 14px;
   line-height: 1.4;
-  color: rgb(255 255 255 / 0.74);
+  color: rgb(255 255 255 / 0.92);
 }
 
 .note[data-error] {
@@ -201,19 +201,20 @@
   max-width: 17ch;
   font-size: 13px;
   line-height: 1.35;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(255 255 255 / 0.92);
 }
 
-/* the 8x stop's count: the requests with 8x now, its dot beating */
+/* the 8x stop's count: the requests with 8x now, its dot beating at the start of its words */
 .way .live {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
+  display: inline;
   font-weight: 600;
   color: #fff;
 }
 
 .live i {
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: 1px;
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -283,5 +284,68 @@
 
   .way li > span:last-child {
     font-size: 12px;
+  }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .invite[aria-label] {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.15),
+    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
+}
+
+/* the address field stays white on the blue: its words stay dark */
+:global([data-theme="dark"]) .field {
+  color: #5c6478;
+}
+
+:global([data-theme="dark"]) .field input {
+  color: #0b0b0c;
+}
+
+:global([data-theme="dark"]) .field input::placeholder {
+  color: #6a7184;
+}
+
+:global([data-theme="dark"]) .field:focus-within {
+  color: var(--vertical-deep);
+}
+
+/* its button stays white beside the white field */
+:global([data-theme="dark"]) button.submit {
+  --current-fill: var(--vertical-light);
+  --current-dot: var(--vertical);
+  color: #0b0b0c;
+  background: #fff;
+  box-shadow: none;
+}
+
+/* the narrowest block: the stops and their words close up so each name keeps one line */
+@container (max-width: 380px) {
+  .way .stop {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 8px;
+  }
+
+  .way li[data-ours] .stop {
+    width: 54px;
+    height: 54px;
+    margin-top: -5px;
+    margin-bottom: 3px;
+  }
+
+  .way::before {
+    top: 21px;
+  }
+
+  .way strong {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .way li > span:last-child {
+    font-size: 12.5px;
   }
 }

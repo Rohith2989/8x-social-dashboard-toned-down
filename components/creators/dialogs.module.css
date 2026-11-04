@@ -108,8 +108,8 @@
 }
 
 .reason[aria-checked="true"] .reasonIcon {
-  background: var(--ink);
-  color: #fff;
+  background: var(--action);
+  color: var(--on-action);
 }
 
 .reasonText {
@@ -148,7 +148,7 @@
   width: 20px;
   height: 20px;
   fill: none;
-  stroke: #fff;
+  stroke: var(--on-action);
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -351,8 +351,8 @@
   height: 48px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--ink);
-  color: #fff;
+  background: var(--action);
+  color: var(--on-action);
   font-size: 15px;
   font-weight: 600;
   transition:
@@ -381,7 +381,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fff;
+  background: currentColor;
   animation: rise 900ms var(--ease-out) infinite;
 }
 
@@ -489,4 +489,22 @@
   .field {
     flex-wrap: wrap;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .reason:hover {
+  background: rgb(255 255 255 / 0.04);
+}
+
+:global([data-theme="dark"]) .reason[aria-checked="true"] {
+  background: color-mix(in srgb, var(--vertical) 14%, var(--popover));
+}
+
+:global([data-theme="dark"]) .send:not(:disabled):hover {
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .note textarea:focus {
+  background: color-mix(in srgb, #fff 4%, var(--popover));
 }

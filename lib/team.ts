@@ -42,6 +42,8 @@ export type Member = {
   you?: boolean;
   // who they are on the content plan's threads, where the product names each approval, flag and comment
   plan?: PersonKey;
+  // their face (the sample's invented people, scripts/team.py); the initials stand in where there is none
+  photo?: string;
 };
 
 export type Invite = {
@@ -56,18 +58,18 @@ export type Invite = {
 
 // the owner first, then by when they joined (the product's list order)
 export const MEMBERS: Member[] = [
-  { id: "alex", name: BRAND.member.name, initials: BRAND.member.initials, email: "alex@meridian.app", role: "owner", campaigns: null, since: "2026-06-02", you: true, plan: "you" },
-  { id: "jordan", name: TEAMMATES[0].name, initials: TEAMMATES[0].initials, email: "jordan@meridian.app", role: "member", campaigns: null, since: "2026-06-02", plan: "jordan" },
-  { id: "sam", name: "Sam Whitaker", initials: "SW", email: "sam@meridian.app", role: "member", campaigns: ["campus-week", "autumn-launch"], since: "2026-09-08" },
-  { id: "nina", name: "Nina Okafor", initials: "NO", email: "nina@meridian.app", role: "member", campaigns: ["autumn-launch"], since: "2026-10-06" },
+  { id: "alex", name: BRAND.member.name, initials: BRAND.member.initials, email: "alex@ematura.si", role: "owner", campaigns: null, since: "2026-06-02", you: true, plan: "you", photo: "/media/team/alex.webp" },
+  { id: "jordan", name: TEAMMATES[0].name, initials: TEAMMATES[0].initials, email: "jordan@ematura.si", role: "member", campaigns: null, since: "2026-06-02", plan: "jordan", photo: "/media/team/jordan.webp" },
+  { id: "sam", name: "Sam Whitaker", initials: "SW", email: "sam@ematura.si", role: "member", campaigns: ["campus-week", "autumn-launch"], since: "2026-09-08", photo: "/media/team/sam.webp" },
+  { id: "nina", name: "Nina Okafor", initials: "NO", email: "nina@ematura.si", role: "member", campaigns: ["autumn-launch"], since: "2026-10-06", photo: "/media/team/nina.webp" },
 ];
 
 export const YOU = MEMBERS.find((m) => m.you) as Member;
 
 // every request the brand has sent, newest first; an approved one stays until its first sign-in
 export const INVITES: Invite[] = [
-  { id: "r-lena", email: "lena@meridian.app", status: "pendingApproval", by: "jordan", at: "2026-11-01T09:40:00Z", decidedAt: null },
-  { id: "r-omar", email: "omar@meridian.app", status: "approved", by: "alex", at: "2026-10-28T15:10:00Z", decidedAt: "2026-10-30T11:05:00Z" },
+  { id: "r-lena", email: "lena@ematura.si", status: "pendingApproval", by: "jordan", at: "2026-11-01T09:40:00Z", decidedAt: null },
+  { id: "r-omar", email: "omar@ematura.si", status: "approved", by: "alex", at: "2026-10-28T15:10:00Z", decidedAt: "2026-10-30T11:05:00Z" },
   { id: "r-northfield", email: "hello@northfield.studio", status: "declined", by: "jordan", at: "2026-10-20T10:00:00Z", decidedAt: "2026-10-22T12:00:00Z" },
 ];
 

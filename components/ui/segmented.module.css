@@ -67,7 +67,7 @@
 }
 
 .seg[aria-checked="true"] .count {
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 /* a phone: a segment with words drops its icon and tightens, so every option stays in view */
@@ -92,4 +92,23 @@
     padding: 0 8px;
     font-size: 13.5px;
   }
+}
+
+/* ---- Night ---- */
+
+/* a well in the night, the picked option a lit step raised in it */
+:global([data-theme="dark"]) .track {
+  background: var(--canvas);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+:global([data-theme="dark"]) .pill {
+  background: color-mix(in srgb, var(--vertical-glow) 12%, var(--stone));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.09),
+    0 6px 14px -8px rgb(0 0 0 / 0.7);
+}
+
+:global([data-theme="dark"]) .seg[aria-checked="true"] .count {
+  color: var(--vertical-glow);
 }

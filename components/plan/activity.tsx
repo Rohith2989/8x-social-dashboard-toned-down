@@ -117,7 +117,7 @@ function Comment({ e }: { e: Extract<ThreadEvent, { kind: "comment" }> }) {
   return (
     <div className={styles.comment} data-side={who.side} data-you={e.who === "you" || undefined}>
       <span className={styles.disc} aria-hidden>
-        {who.initials}
+        {who.photo ? <img src={who.photo} alt="" width={256} height={256} /> : who.initials}
       </span>
       <div className={styles.text}>
         <p className={styles.by}>

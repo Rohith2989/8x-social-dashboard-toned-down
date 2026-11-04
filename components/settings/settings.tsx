@@ -73,7 +73,7 @@ function Workspace() {
   const waiting = withEightX(invites);
   const campaigns = [...CAMPAIGNS].sort((a, b) => ORDER[a.status] - ORDER[b.status]);
   return (
-    <Card order={0} tint="lilac" className={styles.workspace} label={`${BRAND.name}'s workspace`}>
+    <Card order={0} tint="lilac" className={styles.workspace} label={`${BRAND.name}’s workspace`}>
       <div className={styles.workspaceInner}>
         <div className={styles.brand}>
           <img src={CAMPAIGN.product.logo} alt="" width={512} height={512} className={styles.logo} />
@@ -86,8 +86,8 @@ function Workspace() {
         <dl className={styles.facts}>
           <Fact icon="shield" label="Your role" value={ROLE_LABELS[YOU.role]} line={YOU.role === "owner" ? "You can withdraw any access request" : "You can withdraw the requests you sent"} />
           <Fact icon="team" label="People" value={`${MEMBERS.length} on the workspace`} line={waiting ? `${waiting} ${waiting === 1 ? "request" : "requests"} with 8x` : "No requests with 8x"} href="/team" go="Open Team" />
-          <Fact icon="dollar" label="Currency" value="US dollars (USD)" line="What Analytics' revenue and spend are in" />
-          <Fact icon="calendar" label="On 8x since" value={`${day("2026-06-02")} 2026`} line={`When ${BRAND.name}'s workspace opened`} />
+          <Fact icon="dollar" label="Currency" value="US dollars (USD)" line="What Analytics’ revenue and spend are in" />
+          <Fact icon="calendar" label="On 8x since" value={`${day("2026-06-02")} 2026`} line={`When ${BRAND.name}’s workspace opened`} />
           <div className={`${styles.fact} ${styles.campaignsFact}`}>
             <dt>
               <span className={styles.factIcon}>
@@ -177,6 +177,7 @@ function YourAccount() {
         <div className={styles.who}>
           <span className={styles.disc} aria-hidden>
             {initialsOf(saved)}
+            {YOU.photo && <img src={YOU.photo} alt="" width={256} height={256} />}
           </span>
           <div>
             <h2>{fullName(saved)}</h2>
@@ -206,7 +207,7 @@ function YourAccount() {
               <input value={ACCOUNT_EMAIL} readOnly aria-describedby="email-note" />
               <Icon name="shield" size={16} />
             </span>
-            <em id="email-note">You sign in with a 6-digit code sent here. No passwords.</em>
+            <em id="email-note">You sign in with a 6‑digit code sent here. No passwords.</em>
           </label>
           <label className={styles.field} data-invalid={phoneBad || undefined}>
             <span>
@@ -338,7 +339,7 @@ function ThisBrowser({ order }: { order: number }) {
         </p>
         <h2>Signed in</h2>
         <p className={styles.as}>
-          as <strong>{ACCOUNT_EMAIL}</strong>, with a 6-digit code sent there. No passwords to change.
+          as <strong>{ACCOUNT_EMAIL}</strong>, with a 6‑digit code sent there. No passwords to change.
         </p>
         <Link href="/sign-in?out=1" className={styles.signOut} data-anim-host>
           <Icon name="logout" size={18} />

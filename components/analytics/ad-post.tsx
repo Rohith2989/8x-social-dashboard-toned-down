@@ -122,9 +122,9 @@ export function AdPost({ provider, id, onClose }: { provider: AdsProvider; id: s
           Open on Posts &amp; feed
         </Link>
         {tiktok && p.sparkCode && (
-          <button type="button" className={styles.action} onClick={copy} title={`Spark code ${p.sparkCode}: press to copy`} data-anim-host>
+          <button type="button" className={styles.action} onClick={copy} title={`Spark code ${p.sparkCode}`} data-anim-host>
             <Icon name="spark" size={18} />
-            <span className="mono">{p.sparkCode.slice(0, 6)}…</span>
+            Copy spark code
           </button>
         )}
       </div>
@@ -134,25 +134,44 @@ export function AdPost({ provider, id, onClose }: { provider: AdsProvider; id: s
 
 function Days({ b }: { b: BoostedPost }) {
   const [hover, setHover] = useState<number | null>(null);
+  const n = b.days.length;
   const max = Math.max(1, ...b.days.map((d) => d.paid));
+  const total = Math.max(1, b.days.reduce((a, d) => a + d.paid, 0));
+  const peak = b.days.reduce((best, d, i) => (d.paid > b.days[best].paid ? i : best), 0);
+  // up to five days, every bar carries its figure and its day; more, the peak's figure and the span's two ends
+  const few = n <= 5;
   const h = hover != null ? b.days[hover] : null;
   return (
     <div className={styles.days} onPointerLeave={() => setHover(null)}>
       <div className={styles.cols}>
         {b.days.map((d, i) => (
-          <span key={d.date} className={styles.col} onPointerEnter={() => setHover(i)} style={{ "--i": i } as React.CSSProperties}>
-            <i style={{ height: `${Math.max(4, (d.paid / max) * 100)}%` }} />
+          <span
+            key={d.date}
+            className={styles.col}
+            onPointerEnter={() => setHover(i)}
+            data-edge={few ? undefined : i === 0 ? "start" : i === n - 1 ? "end" : undefined}
+            data-on={hover === i || undefined}
+            style={{ "--i": i, "--h": d.paid / max } as React.CSSProperties}
+          >
+            {(few || i === peak) && <b className="num">{compact(d.paid)}</b>}
+            <i />
           </span>
         ))}
       </div>
+      <p className={styles.axis} data-few={few || undefined} aria-hidden>
+        {(few ? b.days : [b.days[0], b.days[n - 1]]).map((d) => (
+          <span key={d.date}>{dayLabel(d.date)}</span>
+        ))}
+      </p>
       <p className={styles.daysNote}>
         {h ? (
           <>
-            <strong>{dayLabel(h.date)}</strong>: {compact(h.paid)} paid, {money(h.spendCents)}, {full(h.clicks)} clicks
+            <strong>{dayLabel(h.date, true)}</strong>: {compact(h.paid)} paid, {money(h.spendCents)}, {full(h.clicks)} clicks
           </>
         ) : (
           <>
-            {dayLabel(b.days[0].date)} to {dayLabel(b.days[b.days.length - 1].date)}: front-loaded, as the platforms spend
+            The most on <strong>{dayLabel(b.days[peak].date, true)}</strong>: {Math.round((b.days[peak].paid / total) * 100)}% of the{" "}
+            {PAID_LABELS[b.provider].toLowerCase()}
           </>
         )}
       </p>

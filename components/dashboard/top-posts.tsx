@@ -85,7 +85,7 @@ function PostCard({ post, rank, order }: { post: Post; rank: number; order: numb
           <Icon name={playing ? "pause" : "play"} size={18} />
         </button>
         <span className={`${styles.duration} mono`}>
-          {day(post.postedAt)}
+          <span className={styles.posted}>{day(post.postedAt)}</span>
           <i aria-hidden />
           {post.duration}
         </span>
@@ -100,7 +100,8 @@ function PostCard({ post, rank, order }: { post: Post; rank: number; order: numb
         <div className={styles.top}>
           <span className={`num ${styles.rank} ${rank === 1 ? styles.first : ""}`}>{String(rank).padStart(2, "0")}</span>
           <p className={styles.views}>
-            <span className="num">{compact(post.views)}</span> views
+            <span className="num">{compact(post.views)}</span>
+            <span className={styles.viewsWord}> views</span>
           </p>
         </div>
         <Link className={styles.caption} href={`/posts?open=${POSTS.find((x) => x.top && x.creatorId === post.creator.id)?.id ?? ""}`} title="Open this post in Posts & feed">

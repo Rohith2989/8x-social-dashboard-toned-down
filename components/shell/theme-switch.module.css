@@ -1,0 +1,221 @@
+/*
+  A small toggle above Settings, in line with the pages' icons: its track a sliver of sky, its knob the sun by day and
+  the moon at night. Its look follows <html data-theme>, so it is right from the first paint.
+*/
+.switch {
+  --w: 46px;
+  --h: 26px;
+  --orb: 20px;
+  --pad: 3px;
+  --run: 560ms;
+  --spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  position: relative;
+  display: block;
+  flex: none;
+  align-self: flex-start;
+  width: var(--w);
+  height: var(--h);
+  margin: 2px 0 10px 15px;
+  border-radius: var(--h);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* a finger-sized target round the small switch */
+.switch::before {
+  content: "";
+  position: absolute;
+  inset: -6px -8px;
+}
+
+.track {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: inherit;
+  /* by day: the vertical's clear blue overhead, paling toward the horizon, warm where the sun stands */
+  background:
+    radial-gradient(circle at calc(var(--pad) + var(--orb) / 2) 50%, rgb(255 238 204 / 0.7), rgb(255 238 204 / 0) 22px),
+    linear-gradient(180deg, color-mix(in srgb, var(--vertical) 50%, var(--vertical-glow)) 0%, var(--vertical-glow) 55%, color-mix(in srgb, var(--vertical-light) 55%, #fff) 100%);
+  box-shadow:
+    inset 0 1px 2px rgb(4 12 40 / 0.25),
+    0 0 0 1px color-mix(in srgb, var(--vertical-ink) 10%, transparent);
+}
+
+/* the night: the vertical's deepest navy, its glow low on the horizon */
+.night {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(80% 90% at 70% 130%, color-mix(in srgb, var(--vertical) 70%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--vertical-ink) 45%, #01030a), var(--vertical-ink));
+  opacity: 0;
+  transition: opacity var(--run) var(--ease-out);
+}
+
+.stars i {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 3px rgb(200 220 255 / 0.8);
+  opacity: 0;
+  transform: scale(0.2);
+  transition:
+    opacity 360ms var(--ease-out) calc(160ms + var(--i) * 70ms),
+    transform 360ms var(--ease-out) calc(160ms + var(--i) * 70ms);
+}
+
+/* one small cloud, by day */
+.cloud {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 11px;
+  height: 4px;
+  border-radius: 4px;
+  background: #fff;
+  opacity: 0.9;
+  transition:
+    transform var(--run) var(--ease-out),
+    opacity 300ms var(--ease-out);
+}
+
+.cloud::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  bottom: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+/* the knob: the sun, running across to become the moon */
+.orb {
+  position: absolute;
+  z-index: 2;
+  top: var(--pad);
+  left: var(--pad);
+  width: var(--orb);
+  height: var(--orb);
+  border-radius: 50%;
+  transition:
+    transform var(--run) var(--spring),
+    scale 200ms var(--ease-out);
+}
+
+.sun,
+.moon {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transition: opacity calc(var(--run) * 0.7) var(--ease-out);
+}
+
+.sun {
+  background: radial-gradient(circle at 36% 34%, #fffefa 0%, #fff0cc 45%, #ffd27c 100%);
+  box-shadow:
+    0 0 0 2.5px rgb(255 242 214 / 0.35),
+    0 0 9px 2px rgb(255 214 140 / 0.65),
+    0 1px 2px rgb(150 90 10 / 0.25);
+}
+
+.moon {
+  overflow: hidden;
+  background: radial-gradient(circle at 36% 32%, #fff 0%, #e8edff 50%, #b9c6ee 100%);
+  box-shadow:
+    0 0 8px 1px color-mix(in srgb, var(--vertical-glow) 55%, transparent),
+    inset -2px -2px 3px rgb(70 90 160 / 0.3);
+  opacity: 0;
+}
+
+.moon i {
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(120 138 196 / 0.32);
+}
+
+.moon i:nth-child(1) {
+  top: 24%;
+  left: 54%;
+  width: 26%;
+  height: 26%;
+}
+
+.moon i:nth-child(2) {
+  top: 58%;
+  left: 26%;
+  width: 20%;
+  height: 20%;
+}
+
+.switch:hover .orb {
+  scale: 1.06;
+}
+
+.switch:active .orb {
+  scale: 1.18 1;
+}
+
+/* ---- Night ---- */
+:global([data-theme="dark"]) .orb {
+  transform: translateX(calc(var(--w) - var(--orb) - var(--pad) * 2));
+}
+
+:global([data-theme="dark"]) .night {
+  opacity: 1;
+}
+
+:global([data-theme="dark"]) .track {
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / 0.5),
+    0 0 0 1px rgb(255 255 255 / 0.1),
+    0 0 14px -4px color-mix(in srgb, var(--vertical) 50%, transparent);
+}
+
+:global([data-theme="dark"]) .stars i {
+  opacity: 1;
+  transform: scale(1);
+  animation: twinkle 3.2s ease-in-out calc(1s + var(--i) * 0.6s) infinite;
+}
+
+@keyframes twinkle {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+:global([data-theme="dark"]) .cloud {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+:global([data-theme="dark"]) .sun {
+  opacity: 0;
+}
+
+:global([data-theme="dark"]) .moon {
+  opacity: 1;
+}
+
+/* the rail: centred under the icons */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .switch {
+    align-self: center;
+    margin: 2px auto 10px;
+  }
+}
+
+/* a short screen: it sits a little closer to Settings */
+@media (max-height: 800px) and (min-width: 768px) {
+  .switch {
+    margin-bottom: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global([data-theme="dark"]) .stars i {
+    animation: none;
+  }
+}

@@ -49,7 +49,7 @@
   flex-direction: column;
   padding: 6px;
   border-radius: 20px;
-  background: var(--paper);
+  background: var(--popover);
   box-shadow:
     0 2px 6px rgb(11 11 12 / 0.06),
     0 24px 48px -20px color-mix(in srgb, var(--vertical-ink) 45%, transparent);
@@ -134,7 +134,7 @@
   display: grid;
   place-items: center;
   width: 16px;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .none {
@@ -177,7 +177,7 @@
   width: 18px;
   height: 18px;
   fill: none;
-  stroke: #fff;
+  stroke: var(--on-action);
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -215,9 +215,32 @@
 .trigger.titleTrigger:hover,
 .trigger.titleTrigger.open {
   box-shadow: none;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .trigger.titleTrigger > svg:last-child {
-  color: var(--vertical-deep);
+  color: var(--link);
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .panel {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.07),
+    0 24px 52px -20px rgb(0 0 0 / 0.85);
+}
+
+:global([data-theme="dark"]) .trigger:hover,
+:global([data-theme="dark"]) .open {
+  box-shadow:
+    inset 0 0 0 1px var(--stone-2),
+    0 8px 22px -12px rgb(0 0 0 / 0.8);
+}
+
+:global([data-theme="dark"]) .option.hi {
+  background: color-mix(in srgb, #fff 6%, var(--popover));
+}
+
+:global([data-theme="dark"]) .find {
+  background: var(--canvas);
 }

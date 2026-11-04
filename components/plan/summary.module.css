@@ -17,15 +17,18 @@
 
 .head {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 2px 12px;
 }
 
+/* the title keeps its words together; a narrow block puts the line beside it under it */
 .head h2 {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .head p {
@@ -39,7 +42,7 @@
   container: plans / inline-size;
   background: radial-gradient(
     120% 150% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
     var(--vertical-deep) 50%,
     color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
   );
@@ -66,7 +69,7 @@
 }
 
 .plans .head p {
-  color: rgb(255 255 255 / 0.78);
+  color: #fff;
 }
 
 /* beside a taller What works, the columns take the height, the days keeping to their foot */
@@ -104,12 +107,16 @@
   pointer-events: none;
 }
 
-/* a whole number of plans to a view (as many as fit at 136 px or more), so the row always rests on whole columns */
+/* a whole number of plans to a view (as many as fit at 136 px or more), so the row always rests on whole columns. The
+   columns are sized from the block (its width less its padding), so the row is as wide as its plans and the lane's
+   own padding stays after the last one: it never runs into the block's edge */
 .grid {
   --fit: 5;
   --n: min(var(--plans), var(--fit));
+  width: max-content;
+  min-width: 100%;
   display: grid;
-  grid-template-columns: repeat(var(--plans), calc((100% - (var(--n) - 1) * 10px) / var(--n)));
+  grid-template-columns: repeat(var(--plans), calc((100cqi - 44px - (var(--n) - 1) * 10px) / var(--n)));
   grid-template-rows: auto 1fr;
   column-gap: 10px;
   row-gap: 10px;
@@ -131,6 +138,18 @@
   .grid {
     --fit: 2;
   }
+
+  /* two plans to a narrow block: the five script marks close up, so they stay one row */
+  .track .marks {
+    gap: 2px;
+  }
+
+  .track .marks i {
+    width: 17px;
+    height: 17px;
+    border-radius: 5px;
+    font-size: 11.5px;
+  }
 }
 
 /* the product's stages over the plans they hold */
@@ -147,7 +166,7 @@
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(255 255 255 / 0.92);
 }
 
 .eras span[data-stage="live"],
@@ -156,9 +175,10 @@
   border-bottom-color: rgb(255 255 255 / 0.6);
 }
 
-/* a plan's parts share rows with its neighbours', so names, marks and lines line up across the row */
+/* a plan's parts share rows with its neighbours', so names, dates, marks and lines line up across the row (a name on
+   two lines moves every plan's date down with it) */
 .track {
-  grid-template-rows: repeat(4, auto) 1fr;
+  grid-template-rows: repeat(5, auto) 1fr;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -166,7 +186,7 @@
 
 .track > li {
   display: grid;
-  grid-row: span 5;
+  grid-row: span 6;
   grid-template-rows: subgrid;
   min-width: 0;
   scroll-snap-align: start;
@@ -214,9 +234,7 @@
 }
 
 .title {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  display: contents;
 }
 
 .name {
@@ -245,8 +263,9 @@
 }
 
 .window {
+  margin-top: 2px;
   font-size: 13px;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(255 255 255 / 0.97);
 }
 
 .plan[aria-pressed="true"] .window {
@@ -269,7 +288,7 @@
   width: 20px;
   height: 20px;
   border-radius: 6px;
-  font: 600 11px/1 var(--font-num);
+  font: 600 12px/1 var(--font-num);
   font-style: normal;
   font-variant-numeric: tabular-nums;
 }
@@ -295,16 +314,16 @@
 
 .marks [data-mark="updated"] {
   color: #fff;
-  background: rgb(255 255 255 / 0.26);
+  background: color-mix(in srgb, var(--vertical-ink) 48%, transparent);
 }
 
 .marks [data-mark="flagged"] {
   color: #fff;
-  background: color-mix(in srgb, var(--danger) 88%, #fff);
+  background: #d12e3b;
 }
 
 .marks [data-mark="waiting"] {
-  color: rgb(255 255 255 / 0.86);
+  color: #fff;
 }
 
 .plan[aria-pressed="true"] [data-mark="approved"] {
@@ -313,12 +332,12 @@
 }
 
 .plan[aria-pressed="true"] [data-mark="updated"] {
-  color: var(--vertical-deep);
+  color: var(--link);
   background: var(--vertical-light);
 }
 
 .plan[aria-pressed="true"] [data-mark="waiting"] {
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .line {
@@ -332,7 +351,7 @@
   margin-top: 1px;
   font-size: 13px;
   line-height: 1.25;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(255 255 255 / 0.92);
 }
 
 .plan[aria-pressed="true"] .under {
@@ -392,7 +411,7 @@
   height: 38px;
   margin-top: -6px;
   border-radius: 50%;
-  color: var(--ink);
+  color: #0b0b0c;
   background: rgb(255 255 255 / 0.94);
   box-shadow: 0 10px 22px -10px rgb(4 12 40 / 0.6);
   opacity: 0;
@@ -550,4 +569,65 @@
 .figure span {
   font-size: 12.5px;
   color: var(--text-muted);
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .plans {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.15),
+    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
+}
+
+/* the open plan is a window into the night cut in the blue, ringed in white */
+:global([data-theme="dark"]) .plan[aria-pressed="true"] {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow:
+    inset 0 0 0 1.5px rgb(255 255 255 / 0.85),
+    0 14px 30px -16px rgb(0 0 0 / 0.75);
+}
+
+:global([data-theme="dark"]) .plan[aria-pressed="true"] .unread {
+  box-shadow: 0 0 0 2px var(--paper);
+}
+
+:global([data-theme="dark"]) .plan[aria-pressed="true"] [data-mark="updated"] {
+  color: #fff;
+  background: color-mix(in srgb, var(--vertical) 32%, var(--paper));
+}
+
+:global([data-theme="dark"]) .plan[aria-pressed="true"] .days i {
+  background: rgb(255 255 255 / 0.12);
+}
+
+:global([data-theme="dark"]) .plan[aria-pressed="true"] .days [data-day="today"] {
+  background: var(--vertical-glow);
+}
+
+/* what works: the vertical's night, its scripts on glass */
+:global([data-theme="dark"]) .works[aria-label] {
+  background:
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 20%, transparent), transparent 62%),
+    linear-gradient(158deg, color-mix(in srgb, var(--vertical-deep) 16%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-ink) 42%, var(--paper)) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04);
+}
+
+:global([data-theme="dark"]) .works::before {
+  opacity: 0.2;
+}
+
+:global([data-theme="dark"]) .work {
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+:global([data-theme="dark"]) .work:hover {
+  background: rgb(255 255 255 / 0.1);
+}
+
+:global([data-theme="dark"]) .poster {
+  background: var(--stone);
 }

@@ -15,8 +15,8 @@
   --border: #e6e2db;
   --text: #3a3935;
   --text-muted: #6b6862;
-  --success: #138a57;
-  --warning: #b86a00;
+  --success: #0e7a4c; /* 5.4:1 on paper, 4.5:1 on stone: a gain or a connection reads as words, not a tint */
+  --warning: #9a5800;
   --danger: #d12e3b;
 
   /* the fine dot (v6 p93-106): every place a dot could be is ghost, other values quiet, the one that matters lit */
@@ -42,6 +42,50 @@
 
   --shadow-card: 0 1px 2px rgb(11 11 12 / 0.04), 0 14px 32px -20px rgb(11 11 12 / 0.16);
   --shadow-float: 0 2px 6px rgb(11 11 12 / 0.06), 0 24px 48px -18px rgb(11 11 12 / 0.24);
+
+  /* the one action that matters (an ink pill, white words), and the ink blocks (8x's own card, the dark panels) */
+  --action: var(--ink);
+  --on-action: #fff;
+  --ink-block: #0b0b0c;
+  /* what floats over the page: menus and dialogs (paper), and the small dark chips (tooltips, toasts, the bar) */
+  --popover: #fff;
+  --float: #0b0b0c;
+}
+
+/* the vertical's blue as words (links, states, the lit counts): its deep blue by day */
+[data-vertical] {
+  --link: var(--vertical-deep);
+  --link-quiet: color-mix(in srgb, var(--vertical-deep) 72%, var(--vertical-ink));
+}
+
+/*
+  The window is drawn larger on very wide screens rather than stretched thin (a 2560 px screen shows the layout the
+  1920 one does, at its proportions); what opens over it (menus, the brand's card) is drawn at the same scale.
+*/
+@supports (zoom: 1) {
+  @media (min-width: 2100px) {
+    :root {
+      --z: 1.15;
+    }
+  }
+
+  @media (min-width: 2400px) {
+    :root {
+      --z: 1.3;
+    }
+  }
+
+  @media (min-width: 2900px) {
+    :root {
+      --z: 1.5;
+    }
+  }
+
+  @media (min-width: 3500px) {
+    :root {
+      --z: 1.8;
+    }
+  }
 }
 
 /* the five verticals' colours (kit colours.json); --vertical-ink is each one's darkest shade */
@@ -120,6 +164,88 @@
     linear-gradient(160deg, color-mix(in srgb, var(--vertical-ink) 5%, #fff), color-mix(in srgb, var(--vertical-ink) 2%, #fff));
 }
 
+/*
+  Night: 8x at night, the dashboard's dark look (the user, 2026-11-04: "unique to 8x ... even in the dark mode, they
+  have this kind of polish"). Not grey on black: the window becomes the night itself, a navy-black pane in the lit
+  aura, its tray a deeper well, its cards raised a step and lit faintly from above, their tints now coloured light in
+  their top corners; the vertical's colour is the light in it (the lead blocks glow, the lit dots shine). The one
+  action turns to the night's white; the ink blocks go deeper than the window. Mixed from the vertical's tokens like
+  the day, so every vertical gets its own night from the same rule. <html data-theme="dark">, components/shell/theme.ts.
+*/
+[data-vertical][data-theme="dark"] {
+  color-scheme: dark;
+  --ink: color-mix(in srgb, var(--vertical-light) 30%, #fff);
+  --paper: color-mix(in srgb, var(--vertical-ink) 22%, #0b0f1d);
+  --canvas: color-mix(in srgb, var(--vertical-ink) 16%, #05070f);
+  --stone: color-mix(in srgb, var(--vertical-ink) 34%, #11162a);
+  --stone-2: color-mix(in srgb, var(--vertical-ink) 40%, #181e36);
+  --border: color-mix(in srgb, var(--vertical-glow) 11%, var(--paper));
+  --text: color-mix(in srgb, var(--vertical-light) 18%, #b8bed0);
+  --text-muted: color-mix(in srgb, var(--vertical-glow) 16%, #949aaf);
+  --mist: color-mix(in srgb, var(--vertical-glow) 14%, #5b6176);
+  --graphite: color-mix(in srgb, var(--vertical-light) 14%, #a2a8bb);
+  --dot-ghost: color-mix(in srgb, var(--vertical-ink) 46%, #151b33);
+  --dot-quiet: color-mix(in srgb, var(--vertical-glow) 26%, #2a3150);
+  --success: #3fd08f;
+  --warning: #f2a948;
+  --danger: #ff6370;
+  --action: var(--ink);
+  --on-action: #070a14;
+  --ink-block: color-mix(in srgb, var(--vertical-ink) 10%, #020308);
+  --popover: color-mix(in srgb, var(--vertical-ink) 26%, #10142a);
+  --float: color-mix(in srgb, var(--vertical-ink) 34%, #1a1f36);
+  --link: color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical));
+  --link-quiet: color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical));
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 18px 40px -24px rgb(0 0 0 / 0.8);
+  --shadow-float: 0 2px 6px rgb(0 0 0 / 0.4), 0 28px 56px -18px rgb(0 0 0 / 0.85);
+
+  --tint-sky: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-glow) 15%, transparent), transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-glow) 7%, var(--paper)), color-mix(in srgb, var(--vertical-glow) 2%, var(--paper)));
+  --tint-lilac: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical-accent) 16%, transparent), transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-accent) 7%, var(--paper)), color-mix(in srgb, var(--vertical-accent) 2%, var(--paper)));
+  --tint-blue: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 18%, transparent), transparent 62%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical) 8%, var(--paper)), color-mix(in srgb, var(--vertical) 3%, var(--paper)));
+  --tint-pearl: radial-gradient(120% 100% at 100% 0%, rgb(255 255 255 / 0.07), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--vertical-light) 4%, var(--paper)), var(--paper));
+}
+
+/* the ink marks (the lockup, the 8x) turn to the night's white; one that stands on a white disc keeps its ink */
+[data-theme="dark"] img[src$="-ink.svg"]:not([data-ink-stays]) {
+  filter: invert(1);
+}
+
+/*
+  The change between the looks: the new one spreads from the switch as a soft-edged pool over the old (a view
+  transition, so nothing is drawn twice); its edge is feathered wide, so it reads as light (or dark) spreading.
+*/
+@property --vt-r {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:root[data-theme-to]::view-transition-new(root) {
+  -webkit-mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - 220px), transparent var(--vt-r));
+  mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - 220px), transparent var(--vt-r));
+  animation: theme-spread 1100ms cubic-bezier(0.42, 0, 0.2, 1) both;
+}
+
+@keyframes theme-spread {
+  from {
+    --vt-r: 0px;
+  }
+  to {
+    --vt-r: calc(var(--vt-reach) + 240px);
+  }
+}
+
 /* a tinted card: its colour, and the colour blocks' grain, faint, behind its content */
 [data-tint] {
   position: relative;
@@ -188,6 +314,22 @@ p {
   margin: 0;
 }
 
+/* lines break well at every width: a heading's lines balanced, a paragraph never leaving one word alone on its last */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+p,
+li,
+dd,
+dt,
+figcaption {
+  text-wrap: pretty;
+}
+
 button {
   font: inherit;
   color: inherit;
@@ -213,6 +355,13 @@ svg {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--vertical) 32%, transparent);
+}
+
+/* a field to type in shows its focus on its own box (the search, the invite, the composer, the forms): the ring is
+   never drawn again round the bare input inside it */
+:where(input:not([type="checkbox"], [type="radio"]), textarea):focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 /* numbers are Archivo 900 at width 62; their digits keep one width so a rolling number never jitters */
@@ -254,4 +403,10 @@ svg {
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;
   }
+}
+
+/* a field's example words: the muted words' colour in either look (the browser's own grey fell under 4.5:1 at night) */
+::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
 }

@@ -141,8 +141,9 @@ export function WebsiteChart({
   const firstLoose = days.findIndex((d) => !d.settled);
   const openIndex = days.findIndex((d) => d.date === openDay);
   const ticks = scale.ticks.filter((v) => v <= max);
-  // the dates: every so many days, and always the last, the one before it dropped if they would touch
-  const every = Math.max(1, Math.ceil(days.length / Math.max(4, Math.floor(plotW / 64))));
+  // the dates: every so many days (a date and its room take about 76 px), and always the last, the one before it
+  // dropped if they would touch
+  const every = Math.max(1, Math.ceil(days.length / Math.max(3, Math.floor(plotW / 76))));
   const labelled = new Set(days.map((_, i) => i).filter((i) => i % every === 0));
   const lastLabel = Math.max(...labelled);
   if ((days.length - 1 - lastLabel) * col < 56) labelled.delete(lastLabel);
@@ -161,13 +162,15 @@ export function WebsiteChart({
         out.push({ id: best.id, src: who.avatar, name: who.name.split(" ")[0], views: best.views, x: x(i), y: y(values[i][lead?.key ?? "total"] ?? 0) - 26, date: d.date });
       }
     });
-    // a narrow plot keeps room for the biggest few, in the order of their days
+    // the biggest first, each kept only where it has room of its own (a face never sits on another, nor stacks over
+    // the peak and hides it); a narrow plot keeps fewer
     const room = col >= 14 ? 6 : col >= 9 ? 4 : 3;
-    const keep = new Set([...out].sort((a, b) => b.views - a.views).slice(0, room).map((f) => f.id));
-    out.splice(0, out.length, ...out.filter((f) => keep.has(f.id)));
-    // two faces a column apart stand one above the other rather than on top of each other
-    for (let i = 1; i < out.length; i++) if (Math.abs(out[i].x - out[i - 1].x) < 30) out[i].y = Math.min(out[i].y, out[i - 1].y - 30);
-    return out.map((f) => ({ ...f, y: Math.max(16, f.y) }));
+    const kept: typeof out = [];
+    for (const f of [...out].sort((a, b) => b.views - a.views)) {
+      if (kept.length >= room) break;
+      if (kept.every((k) => Math.hypot(k.x - f.x, k.y - f.y) >= 38)) kept.push(f);
+    }
+    return kept.sort((a, b) => a.x - b.x).map((f) => ({ ...f, y: Math.max(16, f.y) }));
   })();
 
   const pick = (clientX: number) => {

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Archivo, Geist_Mono, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -15,14 +16,23 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export const viewport: Viewport = { themeColor: "#071C4D", colorScheme: "light" };
+export const viewport: Viewport = { themeColor: "#071C4D" };
+
+// Daybreak or Night before the first paint, so the page never shows one look and then the other: the member's own
+// choice (components/shell/theme.ts), else the device's
+const THEME = `(function(){var d=document.documentElement,t;try{t=localStorage.getItem("8x-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}d.dataset.theme=t})()`;
 
 // data-vertical sets the one colour on the whole dashboard; every other vertical reskins it by changing this alone. The
 // window (the shell) is the dashboard group's layout, so the sign-in page stands outside it
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-vertical="social" className={`${archivo.variable} ${hanken.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" data-vertical="social" className={`${archivo.variable} ${hanken.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <body>
+        <Script id="theme" strategy="beforeInteractive">
+          {THEME}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

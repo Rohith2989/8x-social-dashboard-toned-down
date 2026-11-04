@@ -24,8 +24,8 @@
 
 .ink {
   --band-dot: var(--vertical-glow);
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--ink-block);
+  color: #fff;
   box-shadow: 0 24px 44px -28px rgb(11 11 12 / 0.7);
 }
 
@@ -95,4 +95,43 @@
     opacity: 0;
     mask-position: 0 0;
   }
+}
+
+/* ---- Night ---- */
+
+/* a card is a step up from the tray, its rim catching a little light from above */
+:global([data-theme="dark"]) .paper {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.045),
+    inset 0 0 0 1px rgb(255 255 255 / 0.035),
+    0 18px 36px -26px rgb(0 0 0 / 0.8);
+}
+
+/* the pale block becomes the vertical's night sky: deep blue, its glow high on the right */
+:global([data-theme="dark"]) .pastel {
+  background:
+    radial-gradient(120% 100% at 88% -12%, color-mix(in srgb, var(--vertical) 36%, transparent), transparent 62%),
+    radial-gradient(80% 70% at 0% 110%, color-mix(in srgb, var(--vertical-accent) 16%, transparent), transparent 70%),
+    linear-gradient(168deg, color-mix(in srgb, var(--vertical-deep) 30%, var(--paper)), color-mix(in srgb, var(--vertical-ink) 50%, var(--paper)));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 24px 50px -30px color-mix(in srgb, var(--vertical-deep) 60%, transparent);
+}
+
+/* ink goes deeper than the window, a faint light of the vertical in its far corner and a hairline round it */
+:global([data-theme="dark"]) .ink {
+  background:
+    radial-gradient(110% 80% at 100% 0%, color-mix(in srgb, var(--vertical-deep) 20%, transparent), transparent 62%),
+    var(--ink-block);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.06),
+    0 24px 44px -28px rgb(0 0 0 / 0.9);
+}
+
+/* the deep blue is the light in the night: it glows on the tray beneath it */
+:global([data-theme="dark"]) .aura {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.14),
+    0 30px 70px -32px color-mix(in srgb, var(--vertical) 70%, transparent);
 }

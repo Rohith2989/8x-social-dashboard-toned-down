@@ -61,14 +61,14 @@ export type PlanSeed = { start: string; end: string; shared: string; published: 
 export const FORMATS: Format[] = [
   {
     code: "AUTUMN01",
-    name: "The app I open first",
+    name: "The lesson I do first",
     media: "reel",
     angle:
-      "The first minute of the day. Before coffee and before messages, the creator opens Meridian and the day is laid out. The calm of a planned morning, never a lecture about productivity.",
-    hook: "In bed, phone in hand: “The first app I open every morning isn't Instagram.” Show the lock screen widget, then open Meridian.",
-    middle: "Scroll today on screen: the three things that matter, one reminder, the money left for the week. A line about each, in your own words.",
-    close: "Get up and start the first thing on the list. “My day, handled.”",
-    dos: ["Film in your real morning light", "Show today's plan for at least three seconds", "Keep it under 30 seconds"],
+      "The first ten minutes of the day. Before messages, the creator does one e‑Matura lesson and its quiz, and the day starts with something done. The calm of a head start, never a lecture about discipline.",
+    hook: "In bed, phone in hand: “The first app I open every morning isn't Instagram.” Open e‑Matura on today's lesson.",
+    middle: "Play a minute of the lesson, then the quiz after it, answered on screen. A line about each question, in your own words.",
+    close: "Show the quiz score and get up. “One subject done before breakfast.”",
+    dos: ["Film in your real morning light", "Show the quiz for at least three seconds", "Keep it under 30 seconds"],
     donts: ["No alarm or snooze jokes", "No notifications from other apps on screen"],
   },
   {
@@ -76,66 +76,66 @@ export const FORMATS: Format[] = [
     name: "Plan my week with me",
     media: "reel",
     angle:
-      "A Sunday ritual people save: the whole week planned in five minutes. Meridian does the remembering; the creator does the deciding.",
-    hook: "“It's Sunday, and this is the only planning I do all week.” Coffee, phone, a five-minute timer on screen.",
-    middle: "Add the week's plans by voice, move two of them, let Meridian find an hour for the gym. Speed the footage up; keep your voice as it was.",
-    close: "Swipe through the finished week in one go. “Five minutes. Done until next Sunday.”",
-    dos: ["Use your real week and blur anything private", "Show adding a plan by voice", "Say how long it took"],
-    donts: ["Don't call it a to-do list", "No paper planners in frame"],
+      "A Sunday ritual people save: the week's revision lined up in five minutes. e‑Matura has the lessons; the creator decides which go on which day.",
+    hook: "“It's Sunday, and this is the only planning I do all week.” Coffee, laptop, a five-minute timer on screen.",
+    middle: "Pick the week's subjects, line up a lesson for each day and add the week's live webinar. Speed the footage up; keep your voice as it was.",
+    close: "Scroll the week in one go. “Five minutes. Done until next Sunday.”",
+    dos: ["Use your real subjects and blur anything private", "Show a lesson being picked", "Say how long it took"],
+    donts: ["Don't call it homework", "No paper planners in frame"],
   },
   {
     code: "AUTUMN03",
     name: "Give me 60 days",
     media: "reel",
     angle:
-      "A promise with a date on it. The creator commits on camera and tracks it in Meridian, so every post after it is a check-in people come back for.",
-    hook: "The promise as text over your face: “Give me 60 days and you won't recognise me.” Say the day you start.",
-    middle: "Quick cuts of the habit, a different day in each, with your streak in Meridian on screen between them.",
+      "A promise with a date on it. The creator commits on camera to a lesson a day until the matura, so every post after it is a check-in people come back for.",
+    hook: "The promise as text over your face: “Give me 60 days and you won't recognise my grades.” Say the day you start.",
+    middle: "Quick cuts of the habit, a different day in each, with that day's lesson and its quiz score on screen between them.",
     close: "Turn to the side and hold it. “Day one is tomorrow. Follow along.”",
-    dos: ["Put the start date in the text", "Show the streak in the app", "Frame every cut the same way"],
-    donts: ["No before-and-after body claims", "No skincare or diet advice as fact"],
+    dos: ["Put the start date in the text", "Show a quiz score in each check-in", "Frame every cut the same way"],
+    donts: ["Don't promise a grade", "No before-and-after claims about marks"],
   },
   {
     code: "AUTUMN04",
-    name: "Three apps I can't work without",
+    name: "Three apps I can't study without",
     media: "reel",
-    angle: "A list people save. Three apps, each named on screen as it comes up, and Meridian kept for last, where the list lands.",
-    hook: "To camera, with the list's promise on screen: “Three apps I can't believe people still don't know.”",
-    middle: "Name each app as a label while you show what it does. Meridian is the third: open your week in it.",
-    close: "“Save this before you forget it.” Hold on Meridian's name.",
-    dos: ["Name each app on screen as you say it", "Keep Meridian third", "Give Meridian the longest turn"],
-    donts: ["No other planner or calendar apps in the list", "Don't rank the three"],
+    angle: "A list people save. Three study tools, each named on screen as it comes up, and e‑Matura kept for last, where the list lands.",
+    hook: "To camera, with the list's promise on screen: “Three study apps I can't believe people still don't know.”",
+    middle: "Name each one as a label while you show what it does. e‑Matura is the third: open a lesson and its quiz.",
+    close: "“Save this before the matura.” Hold on e‑Matura's name.",
+    dos: ["Name each app on screen as you say it", "Keep e‑Matura third", "Give e‑Matura the longest turn"],
+    donts: ["No other matura prep platforms in the list", "Don't rank the three"],
   },
   {
     code: "AUTUMN05",
     name: "Study with me",
     media: "reel",
-    angle: "How a student gets through five subjects in an afternoon: the plan on screen does the thinking. Calm, never a grind.",
+    angle: "How a student gets through five subjects in an afternoon: a short lesson for each does the explaining. Calm, never a grind.",
     hook: "To camera, a snack in hand: “This is how I study five subjects in under three hours.”",
-    middle: "Screen-record Meridian making the plan: pick the subjects, let it set the blocks, start the first timer.",
+    middle: "Screen-record e‑Matura: pick a subject, play the lesson, do its exercises, take the quiz, on to the next.",
     close: "Back to camera: “Then I just repeat it. Every day.”",
-    dos: ["Show the plan being made, not only the result", "Real subjects and real exam dates", "Hold the phone or laptop steady"],
+    dos: ["Show the lesson and the quiz, not only the score", "Real subjects and the real matura date", "Hold the phone or laptop steady"],
     donts: ["Don't promise grades", "No music with words under the voice"],
   },
   {
     code: "AUTUMN06",
-    name: "No budget? Try this",
+    name: "Stuck? Try this",
     media: "reel",
-    angle: "A money tip that starts with a real receipt. The creator logs what they spent and Meridian shows what is left for the week.",
-    hook: "A line people say out loud, on screen: “No budget for takeaway this week?” Your hands busy with something satisfying from the first frame.",
-    middle: "Put the receipt down, log it in Meridian in two taps, show the money left for the week.",
-    close: "Show the category's total and say what you'll do with the rest.",
-    dos: ["Use a real receipt", "Log it in two taps, on screen", "Say the amount out loud"],
-    donts: ["No investment or loan advice", "No card numbers or bank balances on screen"],
+    angle: "A tip for the exercise everyone gets stuck on: the creator's real one, and the e‑Matura lesson that got them through it.",
+    hook: "A line people say out loud, on screen: “Stuck on the same exercise for an hour?” Your hands busy with your notes from the first frame.",
+    middle: "Show the exercise you were stuck on, then the minute of the lesson that explains it, then the same exercise done.",
+    close: "Show the quiz after the lesson and say your score.",
+    dos: ["Use a real exercise from your subject", "Show the explanation on screen", "Say the score out loud"],
+    donts: ["Don't knock teachers or tutors", "No prices or discounts unless 8x gives them to you"],
   },
   {
     code: "AUTUMN07",
     name: "Storytime",
     media: "reel",
-    angle: "A story told to camera in one take, the kind people stay to the end for. Meridian is how the story turns, never how it starts.",
-    hook: "Start mid-story with the line on screen: “My friends call me the stingy one. Here's why.”",
-    middle: "Tell it to camera in one take. Cut away once, to the moment Meridian changed what happened.",
-    close: "Ask the audience to judge it: “Stingy, or just organised?” Put the question in the caption too.",
+    angle: "A story told to camera in one take, the kind people stay to the end for. e‑Matura is how the story turns, never how it starts.",
+    hook: "Start mid-story with the line on screen: “My friends laughed at my study plan. Here's what happened.”",
+    middle: "Tell it to camera in one take. Cut away once, to the moment e‑Matura changed what happened.",
+    close: "Ask the audience to judge it: “Who was right?” Put the question in the caption too.",
     dos: ["One take for the story", "Show the app once, where the story turns", "A real story, in your own words"],
     donts: ["Don't read from a script", "No other apps by name"],
   },
@@ -143,44 +143,44 @@ export const FORMATS: Format[] = [
     code: "AUTUMN08",
     name: "My exact stack",
     media: "reel",
-    angle: "The tools behind a result people want, built up as a numbered list on screen. Meridian is the one that holds the plan together.",
-    hook: "The goal as a title on screen: “How to win a hackathon.” Say it like someone who has.",
-    middle: "Build the list a line at a time, up to five, Meridian among them, each with one line of why.",
+    angle: "The tools behind a result people want, built up as a numbered list on screen. e‑Matura is the one that holds the revision together.",
+    hook: "The goal as a title on screen: “How I got through mock exam season.” Say it like someone who has.",
+    middle: "Build the list a line at a time, up to five, e‑Matura among them, each with one line of why.",
     close: "Show the whole list and say which one you'd keep if you could only keep one.",
     dos: ["Number the list on screen", "One line of why for each tool", "Your own result, said plainly"],
-    donts: ["No paid links in the list", "Don't put Meridian first: let it land"],
+    donts: ["No paid links in the list", "Don't put e‑Matura first: let it land"],
   },
   {
     code: "AUTUMN09",
-    name: "What I saved this month",
+    name: "What I covered this month",
     media: "reel",
-    angle: "The month in one number. The creator keeps their hands busy, talks through how they spent, and ends on what Meridian says is left.",
-    hook: "On screen: “How I save as a freelancer.” Your hands at work from the first frame.",
-    middle: "Talk through the one change that saved the most while you keep working; no cutaways.",
-    close: "Show Meridian's left-to-spend number and say it out loud.",
-    dos: ["Say a real number", "Keep your hands in frame", "Show the money tab for three seconds"],
-    donts: ["No investment advice", "No bank logins or card numbers on screen"],
+    angle: "The month in one number. The creator keeps their hands busy, talks through how they studied, and ends on how many lessons they finished.",
+    hook: "On screen: “How I study with a part-time job.” Your hands at work from the first frame.",
+    middle: "Talk through the one change that saved the most time while you keep working; no cutaways.",
+    close: "Show the month's finished lessons in e‑Matura and say the number out loud.",
+    dos: ["Say a real number", "Keep your hands in frame", "Show your lessons for three seconds"],
+    donts: ["Don't promise grades", "No school logins or personal details on screen"],
   },
   {
     code: "AUTUMN10",
     name: "Before and after",
     media: "reel",
-    angle: "The mess, then the fix: two halves of one video. Life before Meridian, then the same moment with it.",
-    hook: "“My week before I planned it:” over the real chaos, a full wardrobe or a buried desk.",
-    middle: "Step by step on screen: “1. Add what you have to do.” “2. Let it find the time.”",
-    close: "End on the planned week, full screen: “And this is it after.”",
-    dos: ["Film before and after in the same place", "Number the steps on screen", "End on the week view"],
+    angle: "The mess, then the fix: two halves of one video. Revision before e‑Matura, then the same desk with it.",
+    hook: "“My revision before:” over the real chaos, a buried desk and five open tabs.",
+    middle: "Step by step on screen: “1. Pick the subject.” “2. Play the lesson.” “3. Take the quiz.”",
+    close: "End on the quiz result, full screen: “And this is it after.”",
+    dos: ["Film before and after in the same place", "Number the steps on screen", "End on the quiz result"],
     donts: ["Don't stage a mess", "No other apps in frame"],
   },
   {
     code: "AUTUMN11",
     name: "If this existed in real life",
     media: "reel",
-    angle: "A film or a show everybody remembers, and the gadget it promised. Meridian is that gadget, for real.",
+    angle: "A film everybody remembers where someone learns a whole subject in seconds. e‑Matura is the nearest thing to it, for real.",
     hook: "A still of the scene you mean, then your face: “If someone made this in real life, would you use it?”",
-    middle: "Do it in Meridian: add your week, let it plan, share it with a friend.",
-    close: "“Well, someone did.” Hold on the app.",
-    dos: ["Pick a scene people will name in the comments", "Show the app doing what the scene promised"],
+    middle: "Do it in e‑Matura: pick a subject, play a lesson, take the quiz.",
+    close: "“Well, someone nearly did.” Hold on the app.",
+    dos: ["Pick a scene people will name in the comments", "Show the lesson doing what the scene promised"],
     donts: ["A still only, never the film's clip or its sound", "Don't name the film in the caption"],
   },
   {
@@ -188,9 +188,9 @@ export const FORMATS: Format[] = [
     name: "Until I found this",
     media: "reel",
     angle: "A problem everyone has, said with feeling, then the find. The turn is the app on screen.",
-    hook: "Say the problem first: “Planning my week was a mess. Until I found this.” Point at the screen, the line on screen with you.",
-    middle: "Show three things it does for you, each a line on screen as you show it.",
-    close: "“Free to start. The link's in my bio.”",
+    hook: "Say the problem first: “Matura revision was a mess. Until I found this.” Point at the screen, the line on screen with you.",
+    middle: "Show three things it does for you, each a line on screen as you show it: the lessons, the quiz after each, the notes.",
+    close: "“Some webinars are even free. The link's in my bio.”",
     dos: ["Name the problem in the first two seconds", "Three features, three lines"],
     donts: ["Don't call it a game-changer", "No pretend surprise"],
   },
@@ -198,12 +198,12 @@ export const FORMATS: Format[] = [
     code: "AUTUMN13",
     name: "POV: the night before",
     media: "reel",
-    angle: "A POV students know: the night before an exam. Meridian planned the revision weeks ago, so the panic is the joke, not the story.",
-    hook: "POV text over your face, mid-panic: “POV: it's the night before and you planned nothing.”",
-    middle: "Cut to the screen: the revision plan in Meridian, already made, its first block running.",
+    angle: "A POV students know: the night before the matura. The revision was done with e‑Matura weeks ago, so the panic is the joke, not the story.",
+    hook: "POV text over your face, mid-panic: “POV: it's the night before the matura and you planned nothing.”",
+    middle: "Cut to the screen: the lessons you did, one after another, the last quiz's score on screen.",
     close: "Back to your face, calm now: “Sorted.”",
-    dos: ["Keep the POV line on screen the whole video", "Show the revision plan for three seconds"],
-    donts: ["No cheating jokes", "Don't name a real exam board"],
+    dos: ["Keep the POV line on screen the whole video", "Show your lessons for three seconds"],
+    donts: ["No cheating jokes", "Don't name a real school"],
   },
 ];
 
@@ -214,8 +214,8 @@ const added = (when: string): EventSeed => ({ kind: "added", who: "maya", at: wh
 const approved = (who: PersonKey, when: string): EventSeed => ({ kind: "approved", who, at: when });
 const comment = (who: PersonKey, when: string, body: string): EventSeed => ({ kind: "comment", who, at: when, body });
 
-const MERIDIAN_TIKTOK: ReferenceSeed = { link: "https://www.tiktok.com/@meridian.app/video/7425133590012741890", source: "tiktok" };
-const MERIDIAN_REEL: ReferenceSeed = { link: "https://www.instagram.com/reel/C8y2kQ1sR4p/", source: "instagram" };
+const MORNING_TIKTOK: ReferenceSeed = { link: "https://www.tiktok.com/@morning.lessons/video/7425133590012741890", source: "tiktok" };
+const SIXTY_DAYS_REEL: ReferenceSeed = { link: "https://www.instagram.com/reel/C8y2kQ1sR4p/", source: "instagram" };
 const STUDY_SHORT: ReferenceSeed = { link: "https://www.youtube.com/shorts/x8Qp2LkT0aE", source: "youtube" };
 
 export const PLAN_SEEDS: PlanSeed[] = [
@@ -227,7 +227,7 @@ export const PLAN_SEEDS: PlanSeed[] = [
     scripts: [
       {
         code: "AUTUMN01",
-        refs: [MERIDIAN_TIKTOK],
+        refs: [MORNING_TIKTOK],
         events: [
           added(at("2026-10-09", "14:05")),
           comment("you", at("2026-10-09", "16:40"), "Can it open on the lock screen widget? It's the part of the app people don't know about."),
@@ -237,7 +237,7 @@ export const PLAN_SEEDS: PlanSeed[] = [
         ],
       },
       { code: "AUTUMN02", refs: [], events: [added(at("2026-10-09", "14:05")), approved("jordan", at("2026-10-09", "17:20"))] },
-      { code: "AUTUMN03", refs: [MERIDIAN_REEL], events: [added(at("2026-10-09", "14:05")), approved("jordan", at("2026-10-09", "17:24"))] },
+      { code: "AUTUMN03", refs: [SIXTY_DAYS_REEL], events: [added(at("2026-10-09", "14:05")), approved("jordan", at("2026-10-09", "17:24"))] },
       { code: "AUTUMN04", refs: [], events: [added(at("2026-10-09", "14:05")), approved("you", at("2026-10-10", "09:10"))] },
       { code: "AUTUMN05", refs: [STUDY_SHORT], events: [added(at("2026-10-09", "14:05")), approved("you", at("2026-10-10", "09:12"))] },
     ],
@@ -270,7 +270,7 @@ export const PLAN_SEEDS: PlanSeed[] = [
           approved("jordan", at("2026-10-16", "14:20")),
         ],
       },
-      { code: "AUTUMN01", refs: [MERIDIAN_TIKTOK], events: [added(at("2026-10-16", "08:45")), approved("you", at("2026-10-16", "10:09"))] },
+      { code: "AUTUMN01", refs: [MORNING_TIKTOK], events: [added(at("2026-10-16", "08:45")), approved("you", at("2026-10-16", "10:09"))] },
     ],
   },
   {
@@ -407,26 +407,26 @@ export const PLAN_SEEDS: PlanSeed[] = [
 /* --- the campaign's standing rules, as Maya wrote them (the product stores them as markdown) --- */
 
 export const GUIDELINES = {
-  brief: `## Meridian, the app that plans your week
+  brief: `## e‑Matura, matura prep a lesson at a time
 
-Meridian puts a week on one screen: the plans, the money and the habits. This campaign brings it to students and people in their first jobs in the US, the UK and India, as the first app they open in the morning.
+e‑Matura gets students ready for the matura online: short video lessons with exercises and a quiz after each, notes to keep, live webinars and tutoring, across a dozen subjects. This campaign brings it to students in their last two years of school, as the first thing they open when they sit down to study.
 
 ### What people should feel
-That their week is handled. Calm, a little smug, and real: never a lecture about productivity.
+That the matura is handled, a lesson at a time. Calm, a little proud, and real: never a lecture about studying.
 
 ### What to show
-- The week view, for at least three seconds
-- Adding a plan by voice
-- The money tab: what is **left to spend**
-- A streak that kept going
+- A lesson playing, for at least three seconds
+- The quiz after it, and the score
+- The subject you are on
+- A live webinar, if you joined one
 
 ### The line
-**Your week, handled.** Say it in your own words; never read it out.`,
+**Ready for the matura.** Say it in your own words; never read it out.`,
   posting: `- Put the script's hashtag in the caption (**#AUTUMN07**), so the post counts toward its script.
-- Tag **@meridian.app** and turn on the platform's paid-partnership label.
-- Meridian is **free to start**, never free.
-- Show the app on screen for at least three seconds. No other planner or calendar apps in frame.
+- Tag e‑Matura's account (8x sends you the handle) and turn on the platform's paid-partnership label.
+- Some webinars are **free**; never call e‑Matura free.
+- Show the app on screen for at least three seconds. No other matura prep platforms in frame.
 - Keep it between 15 and 60 seconds, with music from the platform's commercial library.
 - Post between 7am and 10pm where you live, one post a day at most.
-- No health, money or legal advice as fact: say what worked for you.`,
+- No promises about grades or results: say what worked for you.`,
 };

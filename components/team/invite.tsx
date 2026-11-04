@@ -113,7 +113,7 @@ export function Invite({ invites, waiting, onSent }: { invites: Request[]; waiti
           </li>
           <li data-ours>
             <span className={styles.stop}>
-              <img src="/brand/8x-ink.svg" alt="" width={27} height={18} />
+              <img src="/brand/8x-ink.svg" alt="" width={27} height={18} data-ink-stays />
             </span>
             <strong>8x reviews</strong>
             <span className={styles.live}>

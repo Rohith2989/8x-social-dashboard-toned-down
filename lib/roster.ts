@@ -198,7 +198,7 @@ function build(s: Seed, index: number): RosterCreator {
     return {
       id: `${s.id}-${platform}`,
       platform,
-      handle: `${slug(s.name)}.meridian`,
+      handle: `${slug(s.name)}.ematura`,
       videos,
       views,
       likes: Math.max(Math.round(views * (0.042 + rnd(k + i + 7) * 0.012)), (pin?.likes ?? 0) + Math.round(rest * 0.036)),

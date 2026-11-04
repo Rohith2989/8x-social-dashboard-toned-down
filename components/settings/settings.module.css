@@ -152,7 +152,7 @@
   width: 28px;
   height: 28px;
   border-radius: 9px;
-  color: var(--vertical-deep);
+  color: var(--link);
   background: #fff;
   box-shadow: 0 4px 10px -6px color-mix(in srgb, var(--vertical-ink) 40%, transparent);
 }
@@ -184,7 +184,7 @@
   margin-top: 6px;
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--vertical-deep);
+  color: var(--link);
   text-decoration: none;
 }
 
@@ -209,6 +209,22 @@
   align-items: center;
   gap: 10px;
   font-size: 14px;
+}
+
+.campaignsFact {
+  container-type: inline-size;
+}
+
+@container (max-width: 300px) {
+  .campaigns li {
+    grid-template-columns: 10px minmax(0, 1fr);
+    row-gap: 0;
+  }
+
+  .campaigns li > :nth-child(3) {
+    grid-column: 2;
+    text-align: left;
+  }
 }
 
 .campaigns i {
@@ -245,7 +261,7 @@
 
 .campaigns li[data-status="live"] > span {
   font-weight: 600;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .setBy {
@@ -301,6 +317,16 @@
     0 0 0 3px #fff,
     0 0 0 6px color-mix(in srgb, var(--vertical) 26%, transparent),
     0 12px 22px -14px color-mix(in srgb, var(--vertical-ink) 70%, transparent);
+}
+
+.disc img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .disc::after {
@@ -495,7 +521,21 @@
 /* --- the sources --- */
 
 .connectionsInner {
+  container-type: inline-size;
   padding: 22px 24px 14px;
+}
+
+/* a narrow card: a source's Connect goes under its words, so the words keep the row's width */
+@container (max-width: 420px) {
+  .sources li:has(> .connect) {
+    grid-template-columns: 40px minmax(0, 1fr);
+    row-gap: 10px;
+  }
+
+  .sources li > .connect {
+    grid-column: 2;
+    justify-self: start;
+  }
 }
 
 .sources {
@@ -565,7 +605,7 @@
 
 .state[data-state="reading"] {
   font-weight: 600;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .state[data-state="reading"] i {
@@ -598,7 +638,7 @@
 }
 
 .sourceGo:hover {
-  color: var(--vertical-deep);
+  color: var(--link);
   background: rgb(255 255 255 / 0.85);
 }
 
@@ -611,7 +651,7 @@
 .browser[aria-label] {
   background:
     radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--vertical) 40%, transparent), transparent 62%),
-    var(--ink);
+    var(--ink-block);
 }
 
 .browser::before {
@@ -671,7 +711,7 @@
   border-radius: 999px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--ink);
+  color: #0b0b0c;
   text-decoration: none;
   background: #fff;
   transition:
@@ -726,7 +766,7 @@
   font-size: 18px;
   font-weight: 800;
   color: #fff;
-  background: radial-gradient(100% 100% at 28% 18%, color-mix(in srgb, var(--vertical-glow) 85%, #fff), var(--vertical) 70%);
+  background: radial-gradient(100% 100% at 28% 18%, var(--vertical), var(--vertical-deep) 70%);
   box-shadow: 0 10px 18px -12px color-mix(in srgb, var(--vertical) 80%, transparent);
 }
 
@@ -755,12 +795,87 @@
   border-radius: 999px;
   font-size: 14.5px;
   font-weight: 600;
-  color: #fff;
+  color: var(--on-action);
   text-decoration: none;
-  background: var(--ink);
+  background: var(--action);
   transition: background-color var(--t) var(--ease-out);
 }
 
 .write:hover {
   background: var(--vertical-deep);
+}
+
+/* a finger-sized target round .go, the part itself unmoved */
+.go {
+  position: relative;
+}
+
+.go::before {
+  content: "";
+  position: absolute;
+  inset: -8px -4px;
+}
+
+/* ---- Night ---- */
+
+/* the workspace's facts and the account's fields: glass on the tinted cards, not white */
+:global([data-theme="dark"]) .fact,
+:global([data-theme="dark"]) .factIcon,
+:global([data-theme="dark"]) .mark {
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+}
+
+:global([data-theme="dark"]) .logo {
+  filter: drop-shadow(0 0 0.6px rgb(255 255 255 / 0.5)) drop-shadow(0 14px 18px rgb(0 0 0 / 0.6));
+}
+
+:global([data-theme="dark"]) .field input {
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+}
+
+:global([data-theme="dark"]) .field input:focus {
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 26%, transparent);
+}
+
+:global([data-theme="dark"]) .field[data-invalid] input {
+  box-shadow: inset 0 0 0 1.5px var(--danger);
+}
+
+:global([data-theme="dark"]) .locked input {
+  background: rgb(255 255 255 / 0.025);
+}
+
+:global([data-theme="dark"]) .cancel:hover,
+:global([data-theme="dark"]) .sourceGo:hover {
+  background: rgb(255 255 255 / 0.07);
+}
+
+:global([data-theme="dark"]) .marks i {
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.22);
+}
+
+:global([data-theme="dark"]) .marks i[data-on] {
+  box-shadow: none;
+}
+
+:global([data-theme="dark"]) .state:not([data-state]) i {
+  background: rgb(255 255 255 / 0.25);
+}
+
+:global([data-theme="dark"]) .sources li {
+  border-top-color: rgb(255 255 255 / 0.07);
+}
+
+:global([data-theme="dark"]) .browser[aria-label] {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.07),
+    0 24px 50px -30px rgb(0 0 0 / 0.9);
+}
+
+:global([data-theme="dark"]) .write:hover {
+  color: #fff;
 }

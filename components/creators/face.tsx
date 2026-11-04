@@ -28,7 +28,7 @@ export function Face({
       {creator.avatar ? (
         <img src={creator.avatar} alt="" width={size} height={size} loading="lazy" />
       ) : (
-        <span className={styles.initials} style={{ fontSize: size * 0.36 }}>
+        <span className={styles.initials} style={{ fontSize: Math.max(10.5, size * 0.38) }}>
           {creator.initials}
         </span>
       )}

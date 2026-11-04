@@ -69,11 +69,19 @@
 }
 
 .table th button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 4px;
   color: inherit;
   font: inherit;
+}
+
+/* a finger-sized target round each sortable head, the head itself unmoved */
+.table th button::before {
+  content: "";
+  position: absolute;
+  inset: -12px -6px;
 }
 
 .table th button[data-on] {
@@ -169,15 +177,21 @@
 }
 
 .whoText strong {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  overflow: hidden;
+  min-width: 0;
   font-size: 14.5px;
   font-weight: 700;
   white-space: nowrap;
-  text-overflow: ellipsis;
   color: var(--ink);
+}
+
+/* a long name gives way to its ellipsis; ours keeps its 8x mark whole beside it */
+.whoName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .whoText > span {
@@ -189,7 +203,7 @@
 }
 
 .who[data-ours] .whoText > span {
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .eight {
@@ -285,6 +299,31 @@
   .table td:nth-child(5) {
     display: none;
   }
+
+  /* the totals' names take two lines rather than run into their figures */
+  .table tfoot .name {
+    max-width: 140px;
+  }
+
+  /* and a source's line takes two rather than end in an ellipsis */
+  .whoText > span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .table tfoot .kind {
+    align-items: baseline;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .table tfoot .kind i {
+    flex: none;
+    transform: translateY(-1px);
+  }
 }
 
 /* the narrowest phones: a smaller mark, tighter cells, a shorter name (its whole name stays on hover) */
@@ -296,11 +335,19 @@
   }
 
   .name {
-    max-width: 112px;
+    max-width: 126px;
   }
 
   .who {
     gap: 8px;
+  }
+
+  .whoText strong {
+    gap: 4px;
+  }
+
+  .eight {
+    width: 15px;
   }
 
   .mark {
@@ -329,13 +376,29 @@
   }
 }
 
+/* the two cards fill whatever height they are given (beside the long table, or side by side): their rows share the
+   extra room evenly rather than leaving it empty at the foot */
 .social,
 .devices {
+  display: flex;
+  flex-direction: column;
   padding: 20px 22px 20px;
 }
 
 .share {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 16px;
+}
+
+/* beside the table, the column runs the table's height: Through social takes the room, Devices stands at its foot */
+@container (min-width: 1040px) {
+  .side {
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-content: stretch;
+  }
 }
 
 .shareHead {
@@ -430,7 +493,10 @@
 }
 
 .devices ul {
-  display: grid;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-around;
   gap: 7px;
   margin: 14px 0 0;
   padding: 0;
@@ -463,4 +529,38 @@
   .deviceBar i {
     animation: none;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .table tbody tr:hover td {
+  background-color: rgb(255 255 255 / 0.035);
+}
+
+/* a figure's share, shaded in the vertical's own light */
+:global([data-theme="dark"]) .heat {
+  background: color-mix(in srgb, var(--vertical) calc(var(--heat) * 0.55), transparent);
+}
+
+:global([data-theme="dark"]) .table tbody tr:hover td.heat {
+  background: color-mix(in srgb, var(--vertical) calc(var(--heat) * 0.55 + 8%), transparent);
+}
+
+:global([data-theme="dark"]) .mark {
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+}
+
+:global([data-theme="dark"]) .who[data-ours] .mark {
+  background: color-mix(in srgb, var(--vertical) 22%, var(--paper));
+  box-shadow: inset 0 0 0 1.5px var(--vertical);
+}
+
+:global([data-theme="dark"]) .dots i {
+  background: rgb(255 255 255 / 0.12);
+}
+
+:global([data-theme="dark"]) .dots i[data-on] {
+  background: var(--vertical);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--vertical) 80%, transparent);
 }

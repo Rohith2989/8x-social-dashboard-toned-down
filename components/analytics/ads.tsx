@@ -277,7 +277,9 @@ function Trend({ provider }: { provider: AdsProvider }) {
               <i data-paid style={{ flexGrow: d.paidViews }} />
               <i style={{ flexGrow: d.organicViews }} />
             </span>
-            <span className={styles.colDate}>{i % 4 === 0 ? dayLabel(d.date) : ""}</span>
+            <span className={styles.colDate} data-every={i % 8 === 0 ? 8 : undefined}>
+              {i % 4 === 0 ? dayLabel(d.date) : ""}
+            </span>
           </button>
         ))}
         {h && (
@@ -337,10 +339,10 @@ function SideBySide() {
             })}
           </tbody>
         </table>
+        <p className={styles.link}>
+          <Icon name="right" size={14} /> Per 1,000 shown counts {PAID_LABELS.tiktok.toLowerCase()} on TikTok and {PAID_LABELS.meta.toLowerCase()} on Meta.
+        </p>
       </div>
-      <p className={styles.link}>
-        <Icon name="right" size={14} /> Per 1,000 shown counts {PAID_LABELS.tiktok.toLowerCase()} on TikTok and {PAID_LABELS.meta.toLowerCase()} on Meta.
-      </p>
     </section>
   );
 }

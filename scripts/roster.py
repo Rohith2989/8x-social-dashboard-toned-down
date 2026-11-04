@@ -17,7 +17,8 @@ PEOPLE = os.path.join(ROOT, "public", "media", "people")
 CASCADE = cv2.CascadeClassifier(os.path.join(cv2.data.haarcascades, "haarcascade_frontalface_default.xml"))
 
 # id: clips (the first gives the face); a face is only cut for the ones without one. Where the detector picks the
-# wrong face (a guest in the frame, a caption), the face is placed by hand: (time, size, left, top) in the clip's pixels.
+# wrong face (a guest in the frame), or its square takes in the creator's burned-in caption, the face is placed by hand:
+# (time, size, left, top) in the clip's pixels, and which of the creator's clips (the first unless a fifth number says).
 ROSTER = {
     "bhavishay": ["161_instagram_Bhavishay_Grover.mp4"],
     "heloisa": ["059_instagram_Heloisa_Yumi_de_Souza_Terui.mp4", "097_tiktok_Heloisa_Yumi_de_Souza_Terui.mp4"],
@@ -45,6 +46,11 @@ PLACED = {
     "shreya": (11.5, 900, 540, 480),  # a 1440 x 2560 clip
     "gizem": (32.1, 640, 90, 400),
     "nicole": (3.0, 700, 250, 570),
+    # clear of the captions across their videos (2026-11-04)
+    "aleyna": (4.3, 601, 275, 327, 1),
+    "kubra": (1.73, 695, 250, 458),
+    "manisha": (1.95, 797, 180, 605),
+    "bhavishay": (2.66, 1080, 0, 397),
 }
 
 
@@ -86,8 +92,8 @@ def main():
         paths = [os.path.join(CATALOG, c) for c in clips]
         av = os.path.join(PEOPLE, f"{cid}.webp")
         if not os.path.exists(av) and cid in PLACED:
-            t, size, left, top = PLACED[cid]
-            subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", str(t), "-i", paths[0], "-frames:v", "1",
+            t, size, left, top, *clip = PLACED[cid]
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", str(t), "-i", paths[clip[0] if clip else 0], "-frames:v", "1",
                             "-vf", f"crop={size}:{size}:{left}:{top},scale=160:160", "-c:v", "libwebp", "-quality", "86", av],
                            check=True)
         if not os.path.exists(av):

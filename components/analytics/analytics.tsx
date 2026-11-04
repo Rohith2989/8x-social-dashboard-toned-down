@@ -85,7 +85,7 @@ export function Analytics() {
           title="Analytics"
           line={
             <>
-              Since 8x started on {day(CAMPAIGN_START)}, meridian.app made <strong>{money(now.totals.revenueCents)}</strong>,{" "}
+              Since 8x started on {day(CAMPAIGN_START)}, ematura.si made <strong>{money(now.totals.revenueCents)}</strong>,{" "}
               {Math.round(Math.abs(up))}% {up >= 0 ? "more" : "less"} than in the {CAMPAIGN.day} days before.
             </>
           }

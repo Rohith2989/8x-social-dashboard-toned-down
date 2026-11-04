@@ -58,7 +58,7 @@
   place-items: center;
   border-radius: 50%;
   background: var(--canvas);
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .empty h3 {
@@ -81,8 +81,8 @@
   margin-top: 20px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--ink);
-  color: #fff;
+  background: var(--action);
+  color: var(--on-action);
   font-size: 15px;
   font-weight: 600;
   transition: background-color var(--t) var(--ease-out);
@@ -90,4 +90,14 @@
 
 .action:hover {
   background: var(--vertical-deep);
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .ring {
+  color: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .action:hover {
+  color: #fff;
 }

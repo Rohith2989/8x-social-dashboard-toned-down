@@ -30,7 +30,7 @@
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  color: var(--vertical-deep);
+  color: var(--link);
   background: var(--paper);
   box-shadow: inset 0 0 0 1px var(--border);
 }
@@ -81,7 +81,7 @@
 }
 
 .state[data-state="reading"] {
-  color: var(--vertical-deep) !important;
+  color: var(--link) !important;
 }
 
 .state[data-state="reading"] i {
@@ -146,7 +146,7 @@
 .reads svg {
   flex: none;
   margin-top: 2px;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .key {
@@ -194,4 +194,14 @@
   .form {
     padding-left: 16px;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .source[data-open] {
+  background: color-mix(in srgb, var(--vertical) 14%, var(--popover));
+}
+
+:global([data-theme="dark"]) .connect:hover {
+  color: #fff;
 }

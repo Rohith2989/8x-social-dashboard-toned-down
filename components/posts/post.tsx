@@ -143,10 +143,10 @@ export function PostPanel({ post, actions, onUnflag, busy, onClose }: { post: Fe
                 onClick={actions.copySpark}
                 disabled={!p.sparkCode}
                 data-anim-host
-                title={p.sparkCode ? `Spark code ${p.sparkCode}: press to copy` : "The creator has not shared this post's spark code yet"}
+                title={p.sparkCode ? `Spark code ${p.sparkCode}: press to copy it` : "The creator has not shared this post's spark code yet"}
               >
                 <Icon name="spark" size={18} />
-                {p.sparkCode ? <span className="mono">{p.sparkCode.slice(0, 5)}…</span> : "No code yet"}
+                {p.sparkCode ? "Spark code" : "No code yet"}
               </button>
             )}
             <button

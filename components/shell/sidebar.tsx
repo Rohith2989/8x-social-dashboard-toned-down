@@ -1,20 +1,22 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BRAND, CAMPAIGN } from "@/lib/demo";
 import { POSTS } from "@/lib/roster";
 import { MEMBERS } from "@/lib/team";
 import { Icon, type IconName } from "../ui/icon";
-import { ActionMenu } from "../ui/actions";
 import { usePlanState, waitingIn } from "../plan/store";
+import { ThemeSwitch } from "./theme-switch";
+import { WorkspaceCard } from "./workspace";
 import styles from "./sidebar.module.css";
 
 /*
-  The sidebar, as Halo Lab draws it: the logo, then who this is, large (the brand's own mark made solid, in a round
-  frame, with a live dot while a campaign runs), then the pages, quiet, the current one on a soft pill with its icon
-  in the vertical colour. At the foot, a blob of the vertical's colours with the grain on it.
+  The sidebar, as Halo Lab draws it: the logo, then who this is, large (the brand's own logo, e-Matura's mortarboard E,
+  with a live dot while a campaign runs; a sheen crosses it on hover, and a click opens the brand's card), then
+  the pages, quiet, the current one on a soft pill with its icon in the vertical colour. At the foot, a blob of the
+  vertical's colours with the grain on it.
 */
 
 // every page links. Content plan counts the scripts waiting for the brand (live); Team, the people on the workspace
@@ -30,10 +32,35 @@ const NAV: { href: string; label: string; icon: IconName; count?: string; fresh?
 export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   const path = usePathname();
   const waiting = waitingIn(usePlanState()).length;
+  const ref = useRef<HTMLElement>(null);
+
+  // on a screen too short for it all (a phone held sideways), the sidebar scrolls and its blob gives way: measured
+  // against the room the foot keeps for the blob (--foot-space), so taking the blob away never flips it back
+  useEffect(() => {
+    const side = ref.current;
+    if (!side) return;
+    const check = () => {
+      const foot = side.querySelector<HTMLElement>("[data-foot]");
+      if (!foot) return;
+      const room = parseFloat(getComputedStyle(side).getPropertyValue("--foot-space")) || 0;
+      const kept = parseFloat(getComputedStyle(foot).paddingBottom) || 0;
+      const need = side.scrollHeight - kept + room;
+      if (need > side.clientHeight + 1) side.dataset.overflow = "";
+      else delete side.dataset.overflow;
+    };
+    check();
+    const watch = new ResizeObserver(check);
+    watch.observe(side);
+    window.addEventListener("resize", check);
+    return () => {
+      watch.disconnect();
+      window.removeEventListener("resize", check);
+    };
+  }, []);
   return (
     <>
       <div className={`${styles.scrim} ${open ? styles.scrimOn : ""}`} onClick={onClose} aria-hidden />
-      <aside className={`${styles.sidebar} ${open ? styles.open : ""}`} aria-label="Workspace">
+      <aside ref={ref} className={`${styles.sidebar} ${open ? styles.open : ""}`} aria-label="Workspace">
         <div className={styles.top}>
           <Link href="/" className={styles.lockup} aria-label="Social, home" onClick={onClose}>
             <img src="/brand/social-lockup-ink.svg" alt="" width={110} height={25} className={styles.full} />
@@ -44,29 +71,19 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
           </button>
         </div>
 
-        <ActionMenu
-          label={`${BRAND.name}, ${BRAND.workspace.toLowerCase()} menu`}
-          className={styles.profile}
-          align="start"
-          title={`${BRAND.name} · ${BRAND.workspace}`}
-          items={[
-            { id: "settings", label: "Settings", icon: "settings", href: "/settings", onSelect: onClose },
-            { id: "team", label: "Team", icon: "team", href: "/team", onSelect: onClose },
-            { id: "out", label: "Sign out", icon: "logout", href: "/sign-in?out=1", tone: "danger" },
-          ]}
-        >
+        <WorkspaceCard className={styles.profile} onNavigate={onClose}>
           <span className={styles.avatar}>
-            <img src={CAMPAIGN.product.logo} alt="" width={512} height={512} />
+            <span className={styles.pic} data-pic>
+              <img src={CAMPAIGN.product.logo} alt="" width={512} height={512} />
+              <span className={styles.glint} aria-hidden />
+            </span>
             <span className={styles.badge} aria-hidden>
               <i />
             </span>
           </span>
           <strong>{BRAND.name}</strong>
-          <span className={styles.role}>
-            {BRAND.workspace}
-            <Icon name="updown" size={16} />
-          </span>
-        </ActionMenu>
+          <span className={styles.role}>{BRAND.workspace}</span>
+        </WorkspaceCard>
 
         <nav className={styles.nav} aria-label="Pages">
           {NAV.map((n) => ({ ...n, count: n.href === "/plan" ? (waiting ? String(waiting) : undefined) : n.count })).map((n) => (
@@ -91,7 +108,8 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
           ))}
         </nav>
 
-        <div className={styles.foot}>
+        <div className={styles.foot} data-foot>
+          <ThemeSwitch />
           <Link
             href="/settings"
             className={`${styles.item} ${path === "/settings" ? styles.current : ""}`}

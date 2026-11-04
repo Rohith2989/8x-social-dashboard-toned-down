@@ -32,7 +32,7 @@
   overflow-y: auto;
   scrollbar-width: none;
   border-radius: 28px;
-  background: var(--paper);
+  background: var(--popover);
   box-shadow: -20px 0 60px -30px color-mix(in srgb, var(--vertical-ink) 60%, transparent);
   transform: translateX(calc(100% + 20px));
   transition: transform 420ms var(--ease-out);
@@ -47,4 +47,16 @@
   .layer {
     display: none;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .scrim {
+  background: rgb(1 3 12 / 0.55);
+}
+
+:global([data-theme="dark"]) .panel {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.06),
+    -20px 0 60px -30px rgb(0 0 0 / 0.9);
 }

@@ -31,7 +31,7 @@
   height: 38px;
   border-radius: 50%;
   background: rgb(255 255 255 / 0.9);
-  color: var(--ink);
+  color: #0b0b0c;
   box-shadow: 0 4px 12px -4px rgb(8 32 88 / 0.4);
   transition: background-color var(--t-fast) var(--ease-out);
 }
@@ -110,7 +110,7 @@
 }
 
 .status[data-status="idle"] strong {
-  color: #a26b14;
+  color: #94600f;
 }
 
 .status[data-status="dropped"] > i {
@@ -135,10 +135,16 @@
     color var(--t-fast) var(--ease-out);
 }
 
+.what::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+}
+
 .what:hover,
 .what:focus-visible {
-  background: var(--ink);
-  color: #fff;
+  background: var(--action);
+  color: var(--on-action);
 }
 
 .whatTip {
@@ -354,6 +360,7 @@
 }
 
 .accounts {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -404,6 +411,14 @@
 
 .accountFigures > span {
   white-space: nowrap;
+}
+
+/* a narrow sheet: two figures to a line, the third under, on every account alike */
+@container (max-width: 400px) {
+  .accountFigures {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
 }
 
 .accountFigures b {
@@ -492,4 +507,47 @@
   font-size: 12.5px;
   text-align: center;
   color: var(--text-muted);
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .what {
+  background: rgb(255 255 255 / 0.07);
+}
+
+:global([data-theme="dark"]) .what:hover,
+:global([data-theme="dark"]) .what:focus-visible {
+  background: var(--action);
+}
+
+:global([data-theme="dark"]) .whatTip,
+:global([data-theme="dark"]) .dayTip {
+  background: var(--float);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.1),
+    0 14px 30px -12px rgb(0 0 0 / 0.8);
+}
+
+:global([data-theme="dark"]) .status[data-status="idle"] strong {
+  color: #eab052;
+}
+
+:global([data-theme="dark"]) .flagged {
+  background: color-mix(in srgb, var(--danger) 13%, var(--paper));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger) 32%, transparent);
+}
+
+/* the figures: raised steps of the night, not wells */
+:global([data-theme="dark"]) .figures div {
+  background: rgb(255 255 255 / 0.045);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+:global([data-theme="dark"]) .out {
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+:global([data-theme="dark"]) .out:hover {
+  background: rgb(255 255 255 / 0.09);
 }

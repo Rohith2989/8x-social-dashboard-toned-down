@@ -15,11 +15,11 @@ holds this browser's sign-in and the way to Maya; below 1360 px it comes into th
 
 ### 1. Header
 
-"Settings", and one line: "Your account, and Meridian's workspace on 8x."
+"Settings", and one line: "Your account, and e-Matura's workspace on 8x."
 
 ### 2. The workspace (new)
 
-The brand as 8x holds it, read-only, on a pale ground with grain: Meridian's logo large, its name, "Brand workspace on
+The brand as 8x holds it, read-only, on a pale ground with grain: e-Matura's logo large, its name, "Brand workspace on
 8x Social, fully managed", then the facts, each a line with its own mark:
 
 - **Your role**: Owner, and what it lets you do ("You can withdraw any access request").
@@ -60,7 +60,7 @@ is connected on the other ("Reading for the first time").
 The window's night aura behind one light card, as the product's sign-in sits on its brands art:
 
 - The 8x mark, "Welcome back", **Sign in to 8x**, "We email you a 6-digit code. No passwords."
-- Signed out on purpose, a line says so first ("You're signed out of Meridian's workspace").
+- Signed out on purpose, a line says so first ("You're signed out of e-Matura's workspace").
 - **Work email** ("you@example.com"), **Email me a code** ("Sending code…"); an address that is not whole says so.
 - The code step: "Sent to …" with **Change**; six slots in one field (paste fills them; typing moves along; Backspace
   goes back); **Verify and sign in** ("Signing in…"); **Send a new code** ("Sending…", then "A new code is on its way").
@@ -72,8 +72,16 @@ The window's night aura behind one light card, as the product's sign-in sits on 
 
 Nothing on any page is drawn without doing what it says:
 
-- **The sidebar**: Settings and Log out lead where they say; the brand's card opens a small menu (Settings, Team,
-  Sign out) instead of a workspace switch that has nothing to switch to.
+- **The sidebar**: Settings and Log out lead where they say. The brand's photograph opens the brand's card
+  (`shell/workspace.tsx`), the workspace at a glance (a workspace switch would have nothing to switch to):
+  - the brand's logo across the top (e-Matura's lockup in white on its blue);
+  - the live campaign with its day and a track of the posts out;
+  - Maya with Write;
+  - the people and the requests with 8x;
+  - Settings and Sign out.
+
+  A plain menu of Settings, Team and Sign out was "really lame" (the user, 2026-11-04). The small Night switch sits
+  above Settings (`docs/night.md`).
 - **Overview, Search**: a search across the workspace (creators, posts, scripts, people and pages), arrow keys and
   Enter to open.
 - **Start a campaign** (the header's and the campaigns' tile): the team's rule, both ways side by side: Self Service

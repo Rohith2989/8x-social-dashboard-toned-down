@@ -35,6 +35,7 @@
 .card {
   height: 100%;
   overflow: hidden;
+  container-type: inline-size;
 }
 
 .media {
@@ -76,7 +77,7 @@
   height: 38px;
   border-radius: 50%;
   background: rgb(255 255 255 / 0.9);
-  color: var(--ink);
+  color: #0b0b0c;
   box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.5);
   transition:
     transform var(--t) var(--ease-out),
@@ -154,7 +155,7 @@
 
 .rank {
   font-size: 26px;
-  color: var(--dot-quiet);
+  color: var(--mist);
 }
 
 .rank.first {
@@ -294,13 +295,60 @@
 
 /* the caption opens the post in Posts & feed */
 a.caption {
-  display: block;
+  display: -webkit-box;
   color: inherit;
   transition: color var(--t-fast) var(--ease-out);
 }
 
 a.caption:hover {
-  color: var(--vertical-deep);
+  color: var(--link);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) a.caption:hover {
+  color: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .media {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+/* a narrow card (two to a phone's row): the figure without its word, the poster's chip its length only (clear of the
+   play button), the three counts closed up and, where they would touch, two to a line */
+@container (max-width: 180px) {
+  .viewsWord,
+  .posted,
+  .duration i {
+    display: none;
+  }
+
+  .metrics {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5px 12px;
+  }
+
+  .rank {
+    font-size: 21px;
+  }
+
+  .views :global(.num) {
+    font-size: 23px;
+  }
+
+  .metrics > div {
+    gap: 3px;
+  }
+
+  .metrics dd {
+    font-size: 12px;
+  }
+
+  .metrics svg {
+    width: 14px;
+    height: 14px;
+  }
 }

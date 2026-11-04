@@ -26,9 +26,9 @@ export const TODAY = new Date(NOW).toISOString().slice(0, 10);
 
 /* --- who: the brand's side by first name, 8x's with "· 8x" (design.md: a brand never sees more of an 8x person) --- */
 
-export const PEOPLE: Record<PersonKey, { name: string; full: string; initials: string; side: "brand" | "team" }> = {
-  you: { name: "You", full: BRAND.member.name, initials: BRAND.member.initials, side: "brand" },
-  jordan: { name: TEAMMATES[0].name.split(" ")[0], full: TEAMMATES[0].name, initials: TEAMMATES[0].initials, side: "brand" },
+export const PEOPLE: Record<PersonKey, { name: string; full: string; initials: string; side: "brand" | "team"; photo?: string }> = {
+  you: { name: "You", full: BRAND.member.name, initials: BRAND.member.initials, side: "brand", photo: "/media/team/alex.webp" },
+  jordan: { name: TEAMMATES[0].name.split(" ")[0], full: TEAMMATES[0].name, initials: TEAMMATES[0].initials, side: "brand", photo: "/media/team/jordan.webp" },
   maya: { name: `${MANAGER.name.split(" ")[0]} · 8x`, full: `${MANAGER.name.split(" ")[0]} · 8x`, initials: MANAGER.name[0], side: "team" },
 };
 

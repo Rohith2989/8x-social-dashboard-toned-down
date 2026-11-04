@@ -155,7 +155,9 @@ function Ladder({ scope, passed, onPassed }: { scope: FeedPost[]; passed: Milest
                 onClick={() => onPassed(i === at ? null : r.m.key)}
                 aria-label={empty ? `${milestoneLabel(r.m)}: no post yet` : `${milestoneLabel(r.m)}: ${r.posts.length} posts. Show the ${reached(r.m)} that passed it`}
               >
-                <span className={`num ${styles.count}`}>{empty ? (unreached(i) || !scope.length ? "" : "0") : r.posts.length}</span>
+                <span className={`num ${styles.count}`}>
+                  {empty ? i === firstEmpty ? <em className={styles.next}>next</em> : unreached(i) || !scope.length ? "" : "0" : r.posts.length}
+                </span>
                 <span className={styles.dots} aria-hidden>
                   {empty ? (
                     unreached(i) ? (
@@ -167,10 +169,7 @@ function Ladder({ scope, passed, onPassed }: { scope: FeedPost[]; passed: Milest
                     r.posts.slice(0, DOTS_SHOWN).map((p, k) => <i key={p.id} style={{ "--k": k } as React.CSSProperties} />)
                   )}
                 </span>
-                <span className={styles.label}>
-                  {milestoneLabel(r.m)}
-                  {i === firstEmpty && <em>next</em>}
-                </span>
+                <span className={styles.label}>{milestoneLabel(r.m)}</span>
               </button>
             </li>
           );

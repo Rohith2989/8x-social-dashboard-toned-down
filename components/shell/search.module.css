@@ -18,7 +18,7 @@
 }
 
 .field:focus-within {
-  color: var(--vertical-deep);
+  color: var(--link);
   background: #fff;
   box-shadow:
     inset 0 0 0 1.5px var(--vertical),
@@ -96,7 +96,7 @@
 .hit > svg {
   flex: none;
   margin-left: auto;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .tile,
@@ -107,7 +107,7 @@
   width: 34px;
   height: 34px;
   border-radius: 11px;
-  color: var(--vertical-deep);
+  color: var(--link);
   background: #fff;
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vertical-ink) 9%, transparent);
 }
@@ -120,6 +120,13 @@
   color: #fff;
   background: radial-gradient(100% 100% at 28% 18%, color-mix(in srgb, var(--vertical-glow) 80%, #fff), var(--vertical) 72%);
   box-shadow: none;
+}
+
+.initials img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .text {
@@ -171,4 +178,41 @@
   .field kbd {
     display: none;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .field {
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+:global([data-theme="dark"]) .field:focus-within {
+  color: var(--vertical-glow);
+  background: color-mix(in srgb, #fff 4%, var(--popover));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical-glow) 45%, transparent),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 22%, transparent);
+}
+
+:global([data-theme="dark"]) .search kbd {
+  background: var(--stone);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+:global([data-theme="dark"]) .hit[aria-selected="true"] {
+  background: color-mix(in srgb, var(--vertical) 16%, var(--popover));
+}
+
+:global([data-theme="dark"]) .hit > svg {
+  color: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .tile {
+  color: var(--vertical-glow);
+  background: var(--stone);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+:global([data-theme="dark"]) .keys {
+  border-top-color: var(--border);
 }

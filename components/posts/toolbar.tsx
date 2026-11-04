@@ -159,7 +159,7 @@ function Search({ value, total, onChange }: { value: string; total: number; onCh
             input.current?.blur();
           }
         }}
-        placeholder={`Search ${total} posts, captions or @handles`}
+        placeholder={`Search ${total} posts or @handles`}
         aria-label="Search posts, captions or handles"
         maxLength={80}
       />

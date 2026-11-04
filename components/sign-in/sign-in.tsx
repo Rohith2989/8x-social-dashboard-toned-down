@@ -28,7 +28,7 @@ export function SignIn() {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState<"send" | "verify" | "again" | "google" | null>(null);
-  const [notice, setNotice] = useState<{ tone: "good" | "bad"; text: string } | null>(out ? { tone: "good", text: `You're signed out of ${BRAND.name}'s workspace.` } : null);
+  const [notice, setNotice] = useState<{ tone: "good" | "bad"; text: string } | null>(out ? { tone: "good", text: `You’re signed out of ${BRAND.name}’s workspace.` } : null);
   const codeField = useRef<HTMLInputElement>(null);
 
   const send = () => {
@@ -84,7 +84,7 @@ export function SignIn() {
       <section className={styles.card} aria-labelledby="sign-in-title">
         <p className={styles.eyebrow}>Welcome back</p>
         <h1 id="sign-in-title">Sign in to 8x</h1>
-        <p className={styles.lede}>We email you a 6-digit code. No passwords.</p>
+        <p className={styles.lede}>We email you a 6‑digit code. No passwords.</p>
 
         {notice && (
           <p className={styles.notice} data-tone={notice.tone} role={notice.tone === "bad" ? "alert" : "status"}>

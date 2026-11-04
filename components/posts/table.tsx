@@ -223,6 +223,18 @@ function Row({
                 @<Marked text={p.handle} q={q.replace(/^@/, "")} />
               </Link>
             </span>
+            {(p.flag || p.status === "deleted") && (
+              <span className={styles.why} data-flagged={!!p.flag || undefined}>
+                {p.flag ? (
+                  <>
+                    <Icon name="flag" size={12} stroke={2} />
+                    Flagged · {reasonLabel(p)}
+                  </>
+                ) : (
+                  `Deleted ${p.deletedAt ? dayLabel(p.deletedAt.slice(0, 10)) : ""}`
+                )}
+              </span>
+            )}
           </span>
         </span>
       </td>

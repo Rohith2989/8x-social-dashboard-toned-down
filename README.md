@@ -1,9 +1,10 @@
 # Social dashboard: reference build
 
 The brand's side of 8x Social, fully managed: its home (the newest campaign's overview), Creators, Posts & feed, the
-Content plan, Analytics, Team and Settings, and the sign-in page. It is a reference, not the product. Every control on
-every page does what it says. Every figure is sample data (the pages say so), and the media are placeholders. Build
-the real pages from it, and build the other verticals' dashboards by changing one attribute (below).
+Content plan, Analytics, Team and Settings, and the sign-in page, each in two looks: Daybreak and Night (the switch
+above Settings). It is a reference, not the product. Every control on every page does what it says. Every figure is
+sample data (the pages say so), and the media are placeholders. Build the real pages from it, and build the other
+verticals' dashboards by changing one attribute (below).
 
 ```bash
 npm install
@@ -29,10 +30,25 @@ keys without one.
   sidebar becomes a drawer. From 2100 px the window is drawn larger rather than stretched thin (`zoom`), so a 2560 px
   screen shows the layout a 1920 px one does. Every view is checked from 320 to 2560 px, open menus and dialogs
   included: on the narrowest phones the segmented controls drop their icons, the wide tables fold one more column,
-  and the selection bar keeps its count and every action's icon.
-- **Sidebar** (`shell/sidebar.tsx`): the logo, the brand as a profile (its logo, a live dot while a campaign runs; it
-  opens Settings, Team and Sign out), the pages, Settings and Log out, a blob of the vertical's colours with grain at
+  and the selection bar keeps its count and every action's icon. On short laptop screens the sidebar closes up, so the Night switch,
+  Settings and Log out stay clear of the blob (on the shortest the blob gives way); shorter still, or held sideways, the
+  sidebar scrolls. In a narrow tray a page's actions go under its title, and on a phone they fill their row. Headings
+  wrap evenly and paragraphs never end on a lone word; dates and figures never split across lines. Small controls keep a
+  finger's room (an invisible hit area round them). Each part was looked at, not only measured, at every width.
+- **Sidebar** (`shell/sidebar.tsx`): the logo, then the brand as a profile: its own logo, with a live dot while a
+  campaign runs. On hover a sheen crosses the mark. A click opens the brand's card (below). Then the pages,
+  the Night switch (small, above Settings), Settings and Log out, and a blob of the vertical's colours with grain at
   the foot.
+- **The brand's card** (`shell/workspace.tsx`): not a list of links the sidebar already has, but the workspace at a
+  glance.
+  - The brand's own logo across its top: e-Matura's lockup in white on its blue.
+  - The live campaign and how far along it is (its day, a track of the posts out of those planned).
+  - The 8x account manager, with Write.
+  - The people on the workspace and the requests with 8x.
+  - Settings and Sign out at its foot.
+
+  It grows out of the brand's photograph with a glint crossing the brass, and is drawn at the window's scale on a
+  2560 px screen.
 
 ## The overview (`/`)
 
@@ -121,7 +137,7 @@ not a campaign's. In short:
 |---|---|---|
 | The page | `team/team.tsx` | The line says how many people and how many requests are with 8x; a request just sent opens the product's "Request sent to 8x" and lights its row. |
 | Add your team-mates | `team/invite.tsx` | A work email and Request access on the deep blue, with the way every request goes beside it (you ask, 8x reviews, they sign in; the 8x stop counts the requests with 8x now). The product's refusals word for word, each pointing at the row it means. |
-| People | `team/people.tsx` | Every member a card of its own subtle colour: initials on a disc, the role in words, the campaigns they see lit among the brand's three, their latest on the content plan (it opens the script, and follows the visit's approvals), since when. |
+| People | `team/people.tsx` | Every member a card of its own subtle colour: their face on a disc (initials where there is none), the role in words, the campaigns they see lit among the brand's three, their latest on the content plan (it opens the script, and follows the visit's approvals), since when. |
 | Access requests | `team/requests.tsx` | Each request in the product's words, its way drawn as a short track (asked, 8x, signed in); withdraw (the product's dialog) and ask again. Who at 8x decided is never shown. |
 | Your 8x team | `team/eightx.tsx` | The right-hand column (in the tray below 1360 px): Maya · 8x, the campaigns she runs, her latest on the plan, the way to write to her (the plan's thread); the creators making the posts. |
 
@@ -135,7 +151,7 @@ The product has no brand Settings page; this one gathers what a member can see a
 
 | Part | File | What it does |
 |---|---|---|
-| The workspace | `settings/settings.tsx` | Meridian's logo and name, your role, the people, the currency, since when, the three campaigns and where each stands; set by 8x, so the way to Maya. |
+| The workspace | `settings/settings.tsx` | The brand's logo and name, your role, the people, the currency, since when, the three campaigns and where each stands; set by 8x, so the way to Maya. |
 | Your account | `settings/settings.tsx`, `account.ts` | First and last name and phone, editable (Save wakes on a change; an empty first name cannot be saved); the work email read-only, with the product's sign-in line. A saved name shows on the overview and on Team. Then what you reach: the campaigns you see, since when, the scripts you approved. |
 | Connected data | `settings/settings.tsx` | The six sources and where each stands; Connect opens the same dialog as Analytics, and one store keeps both pages agreeing. |
 | This browser | `settings/settings.tsx` | The right-hand column: signed in as whom and how, Sign out, and Need a change? with Maya. |
@@ -144,7 +160,7 @@ The product has no brand Settings page; this one gathers what a member can see a
 **Every control acts.** The window's own: search across the workspace (the overview's button, or ⌘K / Ctrl K
 anywhere: pages, creators, posts, scripts, people), and Start a campaign, which asks which way (Self Service: start a
 free trial on web.8x.social; Full Service: book a call), from the overview's header and the campaigns' empty place.
-The brand's card in the sidebar opens Settings, Team and Sign out. On the overview, See all and each campaign's ⋮ open
+The brand's card in the sidebar opens the workspace at a glance. On the overview, See all and each campaign's ⋮ open
 the campaigns (the live one's pages; what the paused and ended ones did), the bell opens the latest and marks it
 read, each day's ⋮ opens it on the content plan or copies its schedule, and Performance's ⋮ exports the days, opens
 Analytics or every post. The menus are one part, `components/ui/actions.tsx`: on the page's top layer, kept on screen,
@@ -185,8 +201,32 @@ lilac, blue or pearl, each mixed from the vertical's own tokens and lit softly f
 blocks' grain faint behind the content (`app/globals.css`). Subtle, never vibrant: the headline tiles, the sources and
 every Team card wear one.
 
+**Readable in both looks.** Every word on every page, in Daybreak and in Night, open menus and dialogs too, is
+measured against what is really drawn behind it (`scripts/contrast.py`): 4.5:1 for small words, 3:1 for large ones. A flagged, deleted or
+dropped item fades its pictures, never its words (they take the quiet colour instead). The cobalt blocks' corner light
+is the vertical deepened, not whitened, so the words in that corner read too.
+
 **No chips.** A change is an arrow and a figure (`Change` in `components/ui/bits.tsx`), a status is a dot and a word.
 Values never sit in small rounded badges.
+
+## Night
+
+Every page has a dark look of its own, Night, designed part by part (`docs/night.md`). It is not grey on black: the
+window becomes a navy-black pane in the lit aura and its tray a deeper well; the cards are a step up, lit faintly from
+above. The vertical's colour is the light in it: the lead blocks glow on the tray, the chart's line glows, the lit
+dots shine, the creators' banners become auroras.
+
+- **One ladder of surfaces.** Ink blocks, tray, window, popover, float, deepest first. A white tile in Daybreak becomes
+  glass at Night.
+- **Tokens.** Night redefines the day's tokens on `<html data-theme="dark">`, each mixed from the vertical's own, so
+  every vertical gets its own night. The new tokens hold Daybreak's old values, so Daybreak did not move.
+- **Each part.** Every component's stylesheet ends with its own Night block.
+- **The switch** (`shell/theme-switch.tsx`): a small toggle above Settings. Its track is a sliver of sky: the sun by
+  day, the moon and the stars at night.
+- **The change** (`shell/theme.ts`): the new look spreads from the switch as a soft-edged pool (a view transition;
+  instant with reduced motion).
+- **Saved and early.** The choice is saved (`localStorage`, `8x-theme`), and the first visit follows the device. A
+  script sets the look before the first paint.
 
 ## The dots
 
@@ -268,13 +308,22 @@ Placeholders, in `public/media`:
 - `people/`: real 8x creators' faces, cut from their own videos (`scripts/roster.py`). Generated people never stand in
   for a creator, and only creators in good standing are drawn from the catalog: the roster's idle, dropped and
   flagged creators are invented and shown by their initials.
-- `meridian-logo.webp` (and `-64`, the phone's top bar): the sample brand's logo, the sun at its highest over the
-  horizon (what a meridian is), navy and amber. Rendered flat with Gemini by `scripts/logo.py`, its line thickened
-  in code so it reads at 32 px, its rounded corners cut there as a superellipse. It is the sidebar's profile, the
-  workspace on Settings and the content plan's brief. The real page shows the brand's own logo here.
+- `ematura-icon.webp` (and `-96`, the phone's bar) and `ematura-banner.webp`: the sample brand, **e-Matura**, a real
+  client of 8x (ematura.si: online prep for the matura exam, by Procademy in Ljubljana), shown by its official logo.
+  - **The logo files** are e-Matura's own, as published on ematura.si (`scripts/assets/`): its mark, a mortarboard
+    whose board is an E, and the mark over the name. Its colours are the logo's: blue `#1b75bc` and grey `#58595b`.
+  - **The icon:** the mark in its colours on white. It is the sidebar's profile, the workspace on Settings and the
+    content plan's brief.
+  - **The banner:** the lockup in white on the brand's blue, softly lit, with the dashboard's fine grain, across the
+    top of the brand's card.
+  - **How:** `scripts/brand.py` lays the official files out; nothing is redrawn or generated. (The made-up brand
+    before it, Meridian, and its generated pictures are gone.)
+- `team/`: the faces of the four people on the brand's workspace. They are invented, so the faces are generated: one
+  real-looking headshot shoot (`scripts/team.py`). Generated faces never stand in for a creator.
 - `social-bubble.webp`: Social's own icon made solid (the card that asks the brand to act), rendered with Gemini on a
   chroma screen and keyed out by `scripts/objects.py`. Both scripts need a work folder with a `.env` holding the
   Gemini key; the key is never in this repo. `public/brand/`: the 8x logo, the Social lockup and the favicon from the
   brand kit.
 
-The sample brand (Meridian), the campaign, the account manager and the signed-in person are invented.
+The sample brand is real (e-Matura, a client of 8x, by its official logo); its campaign, its figures, the account
+manager, the brand's four people and the signed-in person are invented, and their addresses are the sample's.

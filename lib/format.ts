@@ -12,10 +12,10 @@ export const pct = (n: number, digits = 1) => `${n.toFixed(digits)}%`;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-// "2026-10-24" → "24 Oct"; with the weekday → "Sat, 24 Oct"
+// "2026-10-24" → "24 Oct"; with the weekday → "Sat, 24 Oct". The day and its month never part at a line's end
 export function day(iso: string, weekday = false) {
   const d = new Date(`${iso}T12:00:00Z`);
-  const s = `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
+  const s = `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
   return weekday ? `${WEEKDAYS[d.getUTCDay()]}, ${s}` : s;
 }
 

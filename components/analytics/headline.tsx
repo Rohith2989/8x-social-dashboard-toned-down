@@ -40,7 +40,7 @@ export function Headline({ now, was, win }: { now: Report; was: Report; win: Win
           facts={[
             { label: "Sales", value: full(t.transactions), hint: "Purchases Google Analytics recorded" },
             { label: "Buyers", value: compact(now.purchasers), hint: `${full(now.purchasers)} people who bought. ${UNIQUE}` },
-            { label: "First-time buyers", value: compact(now.firstTimePurchasers), hint: `${full(now.firstTimePurchasers)} buying from meridian.app for the first time ever` },
+            { label: "First-time buyers", value: compact(now.firstTimePurchasers), hint: `${full(now.firstTimePurchasers)} buying from ematura.si for the first time ever` },
             { label: "Non-paid / paid", value: `${moneyCompact(now.nonPaid.revenueCents)} / ${moneyCompact(now.paid.revenueCents)}`, hint: "Split by Google's own channel grouping" },
           ]}
         />

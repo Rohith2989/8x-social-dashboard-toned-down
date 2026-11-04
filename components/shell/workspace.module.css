@@ -1,0 +1,493 @@
+/* the brand's card: the brand's logo across the top, the workspace at a glance under it */
+.card {
+  position: fixed;
+  z-index: 60;
+  top: -9999px;
+  left: -9999px;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  max-height: calc((100vh - 16px) / var(--z, 1));
+  overflow: hidden auto;
+  border-radius: 28px;
+  background: var(--popover);
+  outline: none;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--vertical-ink) 8%, transparent),
+    0 44px 90px -34px rgb(8 20 60 / 0.55),
+    0 14px 28px -14px rgb(8 20 60 / 0.28);
+  zoom: var(--z, 1);
+  animation: grow 520ms var(--ease-out) both;
+  scrollbar-width: none;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+}
+
+/* the picture: the armillary in its beam, settling into place as the card opens, a glint crossing the brass */
+.banner {
+  position: relative;
+  flex: none;
+  isolation: isolate;
+  aspect-ratio: 1280 / 560;
+  overflow: hidden;
+  background: #1b75bc;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  animation: settle 1400ms var(--ease-out) both;
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.08);
+  }
+}
+
+/* the name's ground: the photograph's own dark, deepened toward the foot */
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgb(4 10 30 / 0.62), transparent 46%);
+  pointer-events: none;
+}
+
+.glint {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+      100deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.22) 47%,
+      rgb(255 255 255 / 0.42) 50%,
+      rgb(255 255 255 / 0.22) 53%,
+      transparent 60%
+    )
+    no-repeat;
+  background-size: 320% 100%;
+  background-position: 100% 0;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: glint 1500ms var(--ease-current) 260ms both;
+}
+
+@keyframes glint {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+.close {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgb(255 255 255 / 0.12);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.close:hover {
+  background: rgb(255 255 255 / 0.22);
+}
+
+.who {
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  right: 20px;
+  bottom: 14px;
+  color: #fff;
+}
+
+.who p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.who p img {
+  flex: none;
+  width: auto;
+  height: 12px;
+  opacity: 0.92;
+}
+
+/* what a member wants of the workspace */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 10px 6px;
+}
+
+.body > * {
+  animation: up 520ms var(--ease-out) both;
+}
+
+.body > :nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.body > :nth-child(3) {
+  animation-delay: 120ms;
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* the live campaign: its day, and how much of what was planned is out */
+.live {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 13px;
+  border-radius: 20px;
+  transition: box-shadow var(--t) var(--ease-out);
+}
+
+.live:hover {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vertical) 26%, transparent);
+}
+
+.liveTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.liveTop strong {
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--link);
+}
+
+.state i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--vertical);
+  animation: beat 1800ms var(--ease-out) 700ms 2;
+}
+
+@keyframes beat {
+  from {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--vertical) 55%, transparent);
+  }
+  to {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+.day {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.track {
+  position: relative;
+  height: 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--vertical) 14%, transparent);
+}
+
+.track span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--share) * 100%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--vertical-deep), var(--vertical));
+  transform-origin: left;
+  animation: fill 1100ms var(--ease-current) 200ms both;
+}
+
+/* where the campaign stands today */
+.track span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow:
+    0 0 0 3px var(--vertical),
+    0 2px 8px -2px color-mix(in srgb, var(--vertical-deep) 70%, transparent);
+  transform: translateY(-50%);
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.liveFoot {
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+/* a person: 8x's account manager, the people on the workspace */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 12px 10px 14px;
+  border-radius: 18px;
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.people:hover {
+  background: var(--canvas);
+}
+
+.people > svg {
+  flex: none;
+  color: var(--text-muted);
+  transition: transform var(--t) var(--ease-out);
+}
+
+.people:hover > svg {
+  transform: translateX(2px);
+}
+
+.disc {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  border-radius: 50%;
+  font-family: var(--font-num);
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+  background: radial-gradient(100% 100% at 28% 18%, var(--vertical), var(--vertical-deep) 70%);
+}
+
+.disc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/media/grain-coarse.webp") repeat 0 0 / 100px 100px;
+  opacity: 0.32;
+}
+
+.rowText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.rowText strong {
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.rowText > span {
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.write {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 36px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-action);
+  background: var(--action);
+  transition: transform var(--t-fast) var(--ease-out);
+}
+
+.write:hover {
+  transform: translateY(-1px);
+}
+
+.faces {
+  display: flex;
+  flex: none;
+  padding-left: 6px;
+}
+
+.faces span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-left: -6px;
+  border-radius: 50%;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--vertical-ink);
+  box-shadow: 0 0 0 2.5px var(--popover);
+}
+
+.faces span {
+  overflow: hidden;
+}
+
+.faces img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.faces [data-tone="0"] {
+  color: #fff;
+  background: var(--vertical-deep);
+}
+
+.faces [data-tone="1"] {
+  background: color-mix(in srgb, var(--vertical-accent) 45%, #fff);
+}
+
+.faces [data-tone="2"] {
+  background: color-mix(in srgb, var(--vertical-glow) 50%, #fff);
+}
+
+.faces [data-tone="3"] {
+  color: #fff;
+  background: var(--vertical-ink);
+}
+
+/* Settings and Sign out, side by side at the foot */
+.foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px 10px 10px;
+}
+
+.foot a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  border-radius: 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--canvas);
+  transition:
+    background-color var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+
+.foot a svg {
+  color: var(--text-muted);
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.foot a:hover {
+  background: color-mix(in srgb, var(--vertical) 10%, var(--canvas));
+}
+
+.foot .out:hover,
+.foot .out:hover svg {
+  color: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .photo,
+  .glint,
+  .body > *,
+  .track span,
+  .state i {
+    animation: none;
+  }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .card {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.07),
+    0 44px 90px -30px rgb(0 0 0 / 0.95),
+    0 0 60px -20px color-mix(in srgb, var(--vertical) 22%, transparent);
+}
+
+:global([data-theme="dark"]) .people:hover {
+  background: rgb(255 255 255 / 0.04);
+}
+
+:global([data-theme="dark"]) .state {
+  color: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .faces [data-tone="3"] {
+  background: color-mix(in srgb, var(--vertical-glow) 28%, var(--popover));
+}
+
+:global([data-theme="dark"]) .foot a {
+  background: rgb(255 255 255 / 0.045);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+:global([data-theme="dark"]) .foot a:hover {
+  background: color-mix(in srgb, var(--vertical) 18%, var(--popover));
+}

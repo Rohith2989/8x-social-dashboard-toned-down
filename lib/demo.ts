@@ -64,10 +64,12 @@ export type Update = {
 export const NOW = Date.parse("2026-11-03T16:00:00Z");
 
 export const BRAND = {
-  name: "Meridian",
+  // a real client of 8x, by its official logo: e-Matura (ematura.si), online prep for the matura exam
+  name: "e‑Matura",
   workspace: "Brand workspace",
-  // the sample brand's logo, small (the phone's top bar); the full one is CAMPAIGN.product.logo (scripts/logo.py)
-  mark: "/media/meridian-logo-64.webp",
+  // its mark, small (the phone's top bar): the mortarboard whose board is an E, in its own blue and grey on white
+  // (scripts/brand.py); the full one is CAMPAIGN.product.logo, and the lockup in white on its blue is the card's banner
+  mark: "/media/ematura-icon-96.webp",
   member: { name: "Alex Carter", role: "Head of growth", initials: "AC" } satisfies Person,
 };
 
@@ -80,7 +82,7 @@ export const CAMPAIGN = {
   id: "autumn-launch",
   name: "Autumn launch",
   status: "live" as "live" | "paused" | "ended",
-  country: "United States",
+  country: "Slovenia",
   startedAt: "2026-10-11",
   endsAt: "2026-11-09",
   day: 24, // today is its 24th day
@@ -90,7 +92,7 @@ export const CAMPAIGN = {
   creatorsTarget: 30,
   creators: 24,
   creatorsThisWeek: 3,
-  product: { name: "Meridian app", logo: "/media/meridian-logo.webp" },
+  product: { name: "e‑Matura", logo: "/media/ematura-icon.webp" },
 };
 
 // the brand's campaigns, newest first; each card takes one of the vertical's colours

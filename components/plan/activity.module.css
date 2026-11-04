@@ -53,11 +53,11 @@
 }
 
 .state[data-tone="waiting"] {
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .state[data-tone="approved"] {
-  color: color-mix(in srgb, var(--vertical-deep) 72%, var(--vertical-ink));
+  color: var(--link-quiet);
 }
 
 .state[data-tone="flagged"] {
@@ -65,7 +65,7 @@
 }
 
 .state[data-tone="updated"] {
-  color: var(--vertical);
+  color: var(--link);
 }
 
 .close {
@@ -162,18 +162,25 @@
 }
 
 .disc {
-  font: 600 11px/1 var(--font-num);
+  font: 600 12px/1 var(--font-num);
   letter-spacing: 0.02em;
 }
 
 /* 8x's side in ink, the brand's in the vertical's colours */
+.disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
 .comment[data-side="team"] .disc {
-  color: #fff;
-  background: var(--ink);
+  color: var(--on-action);
+  background: var(--action);
 }
 
 .comment[data-side="brand"] .disc {
-  color: var(--vertical-deep);
+  color: var(--link);
   background: var(--vertical-light);
 }
 
@@ -235,7 +242,7 @@
 }
 
 .line[data-kind="approved"] .mark {
-  color: var(--vertical-deep);
+  color: var(--link);
   background: var(--vertical-light);
 }
 
@@ -319,8 +326,8 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  color: #fff;
-  background: var(--ink);
+  color: var(--on-action);
+  background: var(--action);
   transition:
     background-color var(--t-fast) var(--ease-out),
     transform var(--t-fast) var(--ease-out);
@@ -344,4 +351,33 @@
   .entry {
     animation: none;
   }
+}
+
+/* ---- Night ---- */
+
+/* the brand's side in the vertical, deep; 8x's side is the night's white */
+:global([data-theme="dark"]) .comment[data-side="brand"] .disc {
+  background: color-mix(in srgb, var(--vertical) 26%, var(--paper));
+}
+
+:global([data-theme="dark"]) .comment[data-side="brand"] .words {
+  background: color-mix(in srgb, var(--vertical) 18%, var(--paper));
+}
+
+:global([data-theme="dark"]) .line[data-kind="approved"] .mark {
+  background: color-mix(in srgb, var(--vertical) 22%, var(--paper));
+}
+
+:global([data-theme="dark"]) .line[data-kind="flagged"] .mark {
+  background: color-mix(in srgb, var(--danger) 16%, var(--paper));
+}
+
+:global([data-theme="dark"]) .composer:focus-within {
+  box-shadow:
+    inset 0 0 0 1.5px var(--vertical),
+    0 0 0 4px color-mix(in srgb, var(--vertical) 26%, transparent);
+}
+
+:global([data-theme="dark"]) .composer button:hover:not(:disabled) {
+  color: #fff;
 }

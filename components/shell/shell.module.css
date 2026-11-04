@@ -30,37 +30,7 @@
   opacity: 0.9;
 }
 
-/*
-  The window fills the screen at every width. On very wide screens it is drawn larger rather than stretched thin, so
-  a 2560 px screen shows the layout the 1920 one does, at its proportions (zoom, where the browser has it; elsewhere
-  it simply fills).
-*/
-@supports (zoom: 1) {
-  @media (min-width: 2100px) {
-    .stage {
-      --z: 1.15;
-    }
-  }
-
-  @media (min-width: 2400px) {
-    .stage {
-      --z: 1.3;
-    }
-  }
-
-  @media (min-width: 2900px) {
-    .stage {
-      --z: 1.5;
-    }
-  }
-
-  @media (min-width: 3500px) {
-    .stage {
-      --z: 1.8;
-    }
-  }
-}
-
+/* the window fills the screen at every width; on very wide screens it is drawn larger (--z, app/globals.css) */
 .window {
   position: relative;
   z-index: 1;
@@ -128,8 +98,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 16px 24px;
   margin-bottom: 26px;
+}
+
+.header > div:first-child {
+  min-width: 0;
 }
 
 .header h1 {
@@ -151,11 +125,20 @@
   color: var(--text);
 }
 
+/* the page's actions keep to one row beside the title; a tray too narrow for both puts them under it, still one row */
 .actions {
   display: flex;
-  flex-wrap: wrap;
+  flex: none;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 10px 12px;
+}
+
+@container tray (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .square {
@@ -180,7 +163,7 @@
   flex-wrap: wrap;
   gap: 8px 24px;
   margin-top: 30px;
-  padding: 18px 4px 0;
+  padding: 18px 0 0;
   border-top: 1px solid var(--border);
   font-size: 15px;
   color: var(--text-muted);
@@ -278,12 +261,46 @@
     font-size: 28px;
   }
 
+  /* a phone: the actions share the width evenly, and one that drops to a line of its own fills it (the square search
+     keeps its shape) */
   .actions {
     width: 100%;
+    flex-wrap: wrap;
   }
 
-  /* the last action fills what is left of its line, and drops to a line of its own when there is not room */
-  .actions > :last-child {
-    flex: 1 0 auto;
+  .actions > :not(.square) {
+    flex: 1 1 auto;
+  }
+}
+
+/* ---- Night ---- */
+
+/* the window is a navy-black pane in the lit night, a hairline of light round its edge */
+:global([data-theme="dark"]) .window {
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.09),
+    0 70px 120px -60px rgb(0 0 0 / 0.9);
+}
+
+/* the tray is a well in it, a shade deeper, its top edge in shadow */
+:global([data-theme="dark"]) .tray {
+  box-shadow:
+    inset 0 1px 0 rgb(0 0 0 / 0.35),
+    inset 0 0 0 1px rgb(255 255 255 / 0.03);
+}
+
+:global([data-theme="dark"]) .square {
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+:global([data-theme="dark"]) .square:hover {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical-glow) 30%, var(--border)),
+    0 8px 20px -10px rgb(0 0 0 / 0.8);
+}
+
+@media (max-width: 767px) {
+  :global([data-theme="dark"]) .tray {
+    box-shadow: none;
   }
 }

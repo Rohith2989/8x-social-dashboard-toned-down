@@ -118,7 +118,7 @@
   border-radius: 999px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--vertical-deep);
+  color: var(--link);
   transition: background-color var(--t-fast) var(--ease-out);
 }
 
@@ -262,6 +262,7 @@
 
 .poster {
   position: relative;
+  container-type: inline-size;
   aspect-ratio: 9 / 16;
   border-radius: 16px;
   overflow: hidden;
@@ -389,7 +390,7 @@
 
 .viewsWord {
   font-size: 13px;
-  color: rgb(255 255 255 / 0.8);
+  color: rgb(255 255 255 / 0.9);
 }
 
 .duration {
@@ -403,6 +404,27 @@
 
 .playMark {
   fill: currentColor;
+}
+
+@container (max-width: 178px) {
+  .viewsWord {
+    display: none;
+  }
+}
+
+@container (max-width: 134px) {
+  .over {
+    inset: auto 8px 8px;
+    gap: 5px;
+  }
+
+  .over > :first-child {
+    display: none;
+  }
+
+  .views {
+    font-size: 18px;
+  }
 }
 
 .who {
@@ -446,7 +468,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: auto;
+  margin-top: 0;
   padding: 10px 4px 0;
   font-size: 12.5px;
   color: var(--text-muted);
@@ -486,20 +508,19 @@
   color: var(--text-muted);
 }
 
-/* a flagged or deleted post keeps its place, greyed (the flag line stays at full strength: it is the reason) */
-.card[data-flagged] .poster,
-.card[data-flagged] .who,
-.card[data-flagged] .caption,
-.card[data-flagged] .counts,
-.card[data-status="deleted"] .who,
-.card[data-status="deleted"] .caption,
-.card[data-status="deleted"] .counts {
+/* a flagged or deleted post keeps its place, greyed: its pictures fade and its words go quiet, readable still (the flag
+   line stays at full strength: it is the reason) */
+.card:is([data-flagged], [data-status="deleted"]) .poster :is(img, video, .blank) {
   opacity: 0.5;
+  filter: grayscale(1);
 }
 
-.card[data-status="deleted"] .poster {
-  opacity: 0.45;
+.card:is([data-flagged], [data-status="deleted"]) .who > :first-child {
   filter: grayscale(1);
+}
+
+.card:is([data-flagged], [data-status="deleted"]) :is(.name, .caption, .counts, .counts :global(.mono)) {
+  color: var(--text-muted);
 }
 
 /* the days before */
@@ -539,6 +560,31 @@
     0 12px 24px -16px rgb(11 11 12 / 0.35);
 }
 
+/* a phone: the counts may take two lines, the name takes the time's room, the days-before button stacks its words */
+@container (max-width: 360px) {
+  .counts {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+
+  .who time {
+    display: none;
+  }
+}
+
+@container (max-width: 420px) {
+  .more {
+    height: auto;
+    padding: 12px 16px;
+  }
+
+  .more > span {
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+}
+
 .end {
   padding: 8px 0;
   font-size: 14px;
@@ -561,4 +607,45 @@
   .row {
     scroll-behavior: auto;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .toTable {
+  color: var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .arrow {
+  background: color-mix(in srgb, var(--popover) 90%, transparent);
+  color: var(--ink);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.1),
+    0 16px 30px -14px rgb(0 0 0 / 0.8);
+}
+
+:global([data-theme="dark"]) .arrow:hover {
+  background: var(--popover);
+}
+
+:global([data-theme="dark"]) .card {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.045),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 16px 32px -26px rgb(0 0 0 / 0.8);
+}
+
+:global([data-theme="dark"]) .card[data-open] {
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 22px 40px -24px rgb(0 0 0 / 0.9);
+}
+
+:global([data-theme="dark"]) .card[data-selected] {
+  background: color-mix(in srgb, var(--vertical) 16%, var(--paper));
+}
+
+:global([data-theme="dark"]) .more:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--stone-2),
+    0 12px 26px -16px rgb(0 0 0 / 0.8);
 }

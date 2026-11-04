@@ -158,7 +158,7 @@
 .state {
   margin-left: auto;
   font-size: 13px;
-  color: var(--mist);
+  color: var(--text-muted);
 }
 
 .state[data-status="review"] {
@@ -208,8 +208,8 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: #fff;
-  background: var(--ink);
+  color: var(--on-action);
+  background: var(--action);
   transition: background-color var(--t) var(--ease-out);
 }
 
@@ -273,6 +273,71 @@
 }
 
 .noteIcon[data-kind="joined"] {
-  color: var(--vertical-deep);
+  color: var(--link);
   background: var(--vertical-light);
+}
+
+/* a finger-sized target round .dayMore, the part itself unmoved */
+.dayMore {
+  position: relative;
+}
+
+.dayMore::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .bell {
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+:global([data-theme="dark"]) .bell i {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 8px var(--vertical);
+}
+
+:global([data-theme="dark"]) .dayMore:hover {
+  background: rgb(255 255 255 / 0.05);
+}
+
+:global([data-theme="dark"]) .state[data-status="review"] {
+  color: color-mix(in srgb, var(--vertical-accent) 80%, #fff);
+}
+
+/* the way to Maya: the vertical, deep, with the grain */
+:global([data-theme="dark"]) .manager {
+  background:
+    url("/media/grain-coarse.webp") repeat 0 0 / 160px 160px,
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--vertical) 30%, transparent), transparent 64%),
+    linear-gradient(150deg, color-mix(in srgb, var(--vertical-deep) 22%, var(--paper)), color-mix(in srgb, var(--vertical-ink) 40%, var(--paper)));
+  background-blend-mode: soft-light, normal, normal;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+:global([data-theme="dark"]) .manager:hover {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--vertical-glow) 30%, transparent),
+    0 12px 30px -16px color-mix(in srgb, var(--vertical) 60%, transparent);
+}
+
+:global([data-theme="dark"]) .manager:hover .managerGo {
+  color: #fff;
+}
+
+/* a tablet: the days in two columns that fill down, so neither column ends far short of the other */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .inline .days {
+    display: block;
+    columns: 2;
+    column-gap: 28px;
+    margin-bottom: 4px;
+  }
+
+  .inline .day {
+    break-inside: avoid;
+    padding-bottom: 24px;
+  }
 }

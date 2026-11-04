@@ -21,7 +21,7 @@ character"): the people in turn sky, lilac, blue and pearl; the invite on the de
 
 ## 1. Header (was: the frame's header)
 
-- **Title** "Team", and one line that says where things stand: "4 people on Meridian's workspace, and 1 request with
+- **Title** "Team", and one line that says where things stand: "4 people on e-Matura's workspace, and 1 request with
   8x." It follows the visit (a new request counts at once).
 - No actions in the header: the page's one action, bringing someone in, opens the page.
 
@@ -43,7 +43,7 @@ The deep blue block with grain, the page's one action:
   on the page carry **Show it**, which brings that row into view and lights it. Typing clears the refusal.
 - An address 8x did not approve, asked again, reopens as a new request (the product's rule).
 - Requesting shows the dot loader, then the product's dialog: **Request sent to 8x**, "8x will review access for
-  lena@meridian.app. If it's approved, we'll email them how to sign in. You can withdraw the request until then."
+  lena@ematura.si. If it's approved, we'll email them how to sign in. You can withdraw the request until then."
   Done. The request lands at the top of Access requests.
 
 ## 3. People on this workspace (was: the member rows)
@@ -51,7 +51,10 @@ The deep blue block with grain, the page's one action:
 The head says how many and what they see ("4 people. 2 see every campaign; 2 the ones 8x opened to them"). Four
 across where they fit, two by two narrower, one under another on a phone. Each member is a card of its own colour:
 
-- **Their initials** on a disc of the vertical's colours (the brand's own people: no photos, never a generated face).
+- **Their face** on a disc. They are the sample's invented people, so their faces are generated (`scripts/team.py`):
+  one real-looking shoot, the same window light and wall. The user asked for faces over initials, 2026-11-04. Their
+  initials on the vertical's colours stand in where there is no face. The same faces show on the brand's card,
+  Settings, search and the content plan's thread.
   The member signed in wears a white ring and "you" (the product's "· you").
 - **Name**, **email**, and the **role** in words with its mark: Owner (the shield) or Member. Never a pill; never a
   select that cannot change (the product's is disabled: nothing on the server changes a role yet).

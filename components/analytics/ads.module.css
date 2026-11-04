@@ -30,18 +30,28 @@
   }
 }
 
+.lead,
+.tile {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
 .lead > div,
 .tile > div {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  height: auto;
   padding: 18px 20px 18px;
 }
 
 .lead[aria-label] {
   background: radial-gradient(
     130% 150% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
     var(--vertical-deep) 52%,
     color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
   );
@@ -91,7 +101,7 @@
 }
 
 .detail {
-  margin-top: auto;
+  margin-top: 0;
   padding-top: 8px;
   font-size: 13.5px;
   line-height: 1.4;
@@ -99,11 +109,11 @@
 }
 
 .lead .detail {
-  color: rgb(255 255 255 / 0.74);
+  color: rgb(255 255 255 / 0.92);
 }
 
 .inline {
-  color: var(--vertical-deep);
+  color: var(--link);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -147,6 +157,14 @@
 @container (max-width: 760px) {
   .rates {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* a phone: one rate to a row, its words the row's width */
+@container (max-width: 380px) {
+  .card .rates {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
   }
 }
 
@@ -205,6 +223,7 @@
 
 .columns {
   position: relative;
+  container-type: inline-size;
   display: flex;
   align-items: flex-end;
   gap: 4px;
@@ -277,7 +296,7 @@
   font-size: 13px;
   white-space: nowrap;
   color: rgb(255 255 255 / 0.8);
-  background: color-mix(in srgb, var(--ink) 94%, var(--vertical-ink));
+  background: color-mix(in srgb, var(--float) 94%, var(--vertical-ink));
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -448,6 +467,19 @@
     grid-template-columns: 36px minmax(0, 1fr) 64px;
   }
 
+  /* a phone: the title takes two lines, and the views' bar and its words run under both the title and the spend */
+  .postText strong {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .splitCell {
+    grid-column: 2 / -1;
+  }
+
   .postHead span:nth-child(5),
   .postHead span:nth-child(6),
   .post .fig:nth-of-type(5),
@@ -498,7 +530,7 @@
 .rank {
   font: 600 13px/1 var(--font-num);
   text-align: center;
-  color: var(--vertical-deep);
+  color: var(--link);
 }
 
 .creatorText {
@@ -518,6 +550,31 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   color: var(--text-muted);
+}
+
+/* a narrow list: the name keeps one line, its detail takes two rather than vanish into an ellipsis */
+.creators {
+  container-type: inline-size;
+}
+
+@container (max-width: 380px) {
+  .creatorText strong {
+    overflow: hidden;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .creatorText span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
+
+  .creators li {
+    gap: 8px;
+  }
 }
 
 .cost {
@@ -566,8 +623,12 @@
   list-style: none;
 }
 
-.dimension li[data-quiet] {
+.dimension li[data-quiet] .bar {
   opacity: 0.6;
+}
+
+.dimension li[data-quiet] .bucket {
+  color: var(--text-muted);
 }
 
 .bucket {
@@ -618,14 +679,16 @@
   border-collapse: collapse;
 }
 
-/* narrower, the rates the cost already sums up fold away, so the table fits whole */
+/* narrower, the rates the cost already sums up fold away, so the table fits whole (and the note on Per 1,000 shown
+   goes with its column) */
 @container (max-width: 620px) {
   .compare th:nth-child(3),
   .compare td:nth-child(3),
   .compare th:nth-child(4),
   .compare td:nth-child(4),
   .compare th:nth-child(5),
-  .compare td:nth-child(5) {
+  .compare td:nth-child(5),
+  .compare .link {
     display: none;
   }
 }
@@ -694,5 +757,35 @@
   .stack,
   .bar i {
     animation: none;
+  }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .post:hover {
+  background: color-mix(in srgb, var(--vertical) 12%, var(--paper));
+}
+
+:global([data-theme="dark"]) .poster {
+  background: var(--stone);
+}
+
+:global([data-theme="dark"]) .creators li:first-child:not([data-low]) {
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+}
+
+:global([data-theme="dark"]) .bar {
+  background: rgb(255 255 255 / 0.1);
+}
+
+:global([data-theme="dark"]) .bar i {
+  background: var(--vertical);
+}
+
+/* a narrow row of days: every eighth named, so the names never touch */
+@container (max-width: 420px) {
+  .colDate:not([data-every]) {
+    visibility: hidden;
   }
 }

@@ -36,3 +36,10 @@
 .ink .col i.lit {
   background: var(--vertical-glow);
 }
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .col i.lit {
+  background: var(--vertical);
+  box-shadow: 0 0 5px color-mix(in srgb, var(--vertical) 80%, transparent);
+}

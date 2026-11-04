@@ -30,7 +30,7 @@
   --s2: color-mix(in srgb, var(--vertical-glow) 50%, #fff);
   --s3: var(--vertical-glow);
   --s4: color-mix(in srgb, var(--vertical) 55%, var(--vertical-glow));
-  --s5: var(--vertical);
+  --s5: color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep));
   --s6: var(--vertical-deep);
   --tile: 28px;
 }
@@ -175,7 +175,7 @@
 
 /* the days either side of the campaign */
 .out {
-  color: color-mix(in srgb, var(--vertical-ink) 30%, transparent);
+  color: color-mix(in srgb, var(--vertical-ink) 66%, transparent);
 }
 
 .day {
@@ -242,13 +242,8 @@
 }
 
 .date {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
-  opacity: 0.7;
-}
-
-.out .date {
-  opacity: 1;
 }
 
 .count {
@@ -264,13 +259,12 @@
 
 .today .date {
   font-weight: 700;
-  opacity: 1;
 }
 
 /* the days to come: outlined in fine dots, a hollow dot for each post planned */
 .future {
   background: transparent;
-  color: color-mix(in srgb, var(--vertical-ink) 62%, transparent);
+  color: color-mix(in srgb, var(--vertical-ink) 74%, transparent);
 }
 
 .dotted {
@@ -316,7 +310,7 @@
   width: max-content;
   padding: 12px 14px;
   border-radius: 16px;
-  background: var(--ink);
+  background: var(--float);
   color: #fff;
   font-size: 14px;
   white-space: nowrap;
@@ -335,7 +329,7 @@
   height: 10px;
   margin-left: -5px;
   border-radius: 2px;
-  background: var(--ink);
+  background: var(--float);
   transform: rotate(45deg);
 }
 
@@ -402,7 +396,7 @@
   }
 
   .date {
-    font-size: 10.5px;
+    font-size: 11.5px;
   }
 
   .count {
@@ -438,4 +432,71 @@
   .key {
     align-items: flex-start;
   }
+}
+
+/* ---- Night ---- */
+
+/* at night the month sits on the vertical's dark, and a busy day is a bright one: the steps rise from a faint
+   tint to the glow */
+:global([data-theme="dark"]) .card[aria-label] {
+  background:
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--vertical) 20%, transparent), transparent 62%),
+    linear-gradient(158deg, color-mix(in srgb, var(--vertical-deep) 16%, var(--paper)) 0%, color-mix(in srgb, var(--vertical-ink) 42%, var(--paper)) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04);
+}
+
+:global([data-theme="dark"]) .card::before {
+  opacity: 0.2;
+}
+
+:global([data-theme="dark"]) .card {
+  --s1: color-mix(in srgb, var(--vertical-glow) 22%, var(--paper));
+  --s2: color-mix(in srgb, var(--vertical) 32%, var(--paper));
+  --s3: color-mix(in srgb, var(--vertical) 46%, var(--paper));
+  --s4: color-mix(in srgb, var(--vertical) 64%, var(--paper));
+  --s5: color-mix(in srgb, var(--vertical) 84%, var(--paper));
+  --s6: color-mix(in srgb, var(--vertical-glow) 70%, var(--vertical));
+}
+
+:global([data-theme="dark"]) .day {
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .day[data-step="6"] {
+  color: var(--vertical-ink);
+  box-shadow: 0 0 16px -4px color-mix(in srgb, var(--vertical-glow) 70%, transparent);
+}
+
+:global([data-theme="dark"]) .day[data-step="5"] {
+  box-shadow: 0 0 12px -5px color-mix(in srgb, var(--vertical) 80%, transparent);
+}
+
+:global([data-theme="dark"]) .day[data-step]:hover,
+:global([data-theme="dark"]) .day[data-step]:focus-visible {
+  box-shadow: 0 10px 22px -10px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 255 255 / 0.18);
+}
+
+:global([data-theme="dark"]) .out {
+  color: rgb(255 255 255 / 0.56);
+}
+
+:global([data-theme="dark"]) .future {
+  color: rgb(255 255 255 / 0.74);
+}
+
+:global([data-theme="dark"]) .dotted rect {
+  stroke: rgb(255 255 255 / 0.3);
+}
+
+:global([data-theme="dark"]) .slots i,
+:global([data-theme="dark"]) .keyPlan {
+  box-shadow: inset 0 0 0 1.6px var(--vertical-glow);
+}
+
+:global([data-theme="dark"]) .pop {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.1),
+    0 18px 34px -14px rgb(0 0 0 / 0.85);
 }

@@ -39,8 +39,9 @@ rolling to their new values.
   the engagement rate. Shares the platform does not report are left out of the sum and said so.
 - **How far they got** (pale ground): the product's milestone ladder (300, 1K, 5K, 10K, 50K, 100K, 500K, 750K, 1M+)
   as columns of fine dots, one dot a post, each post at the highest milestone it passed. The count sits over each
-  column and the milestone under it; the rungs nobody has reached yet are outlined in dots, the first marked next,
-  and a rung below the highest that no post stopped at reads a quiet 0. Pointing at a rung says what it holds;
+  column and the milestone under it; the rungs nobody has reached yet are outlined in dots, the first with "next"
+  where its count would be (so every milestone stays on one line), and a rung below the highest that no post stopped
+  at reads a quiet 0. Pointing at a rung says what it holds;
   pressing it shows the posts that passed it (the product's performance filter, every bucket from that rung up), and
   pressing it again shows them all.
 
@@ -92,11 +93,13 @@ likes, comments, shares, engagement rate, status, spark code, country (its flag 
 - **Status** is a dot and a word: Live, or Deleted with the day; a flag adds "Flagged · reason" in red under it.
 - **Spark code** is the code's first five characters with a copy button; Copied, with a drawn check, for a moment.
   A TikTok post whose creator has not shared it yet says Not yet; an Instagram post's cell is a quiet dash.
-- A deleted or flagged row dims, all but its status, which is the explanation.
+- A deleted or flagged row dims, all but its status, which is the explanation. On a phone, where the status column
+  has folded away, the reason sits under the post's name instead, at full strength.
 - A day taken to from the feed is tinted, its first row scrolled to the top.
 - Fifty rows at a time; **Show the next 50** at the foot.
 - Narrower, the less used columns fold away: below 1240 px shares, engagement, spark code and country; below 790 px
-  likes and comments; below 680 px posted; on a phone the status. The table never runs past the tray.
+  likes and comments; below 680 px posted; on a phone the status. On the narrowest phones the post's poster and words
+  close up and the views lose their ring, so the table never runs past the tray.
 
 ## 6. Post (was: the post panel)
 
@@ -114,8 +117,9 @@ The right column (a sheet below 1360 px):
 - **Views by day**: what each day since it went out added, a column of fine dots a day (the busiest day to the
   top), so its shape shows: a fast start, then a tail; pointing at a day says what it added and the total by then. A
   deleted post's days stop at its deletion; a short life sits together on the left; one day is said, not drawn.
-- **Actions**: Copy link, the spark code (TikTok only) with its copy, Download the video, Flag for Maya (or the open
-  flag, its reason and "Remove the flag"), and Open on TikTok (the one link that leaves the app).
+- **Actions**: Copy link, Spark code (TikTok only; it copies the code, which its title shows, or says No code yet),
+  Download the video, Flag for Maya (or the open flag, its reason and "Remove the flag"), and Open on TikTok (the one
+  link that leaves the app). In a narrow column the three quick buttons stand each icon over its word.
 
 ## 7. Selection bar (was: the brand selection bar, posts)
 

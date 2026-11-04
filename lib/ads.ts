@@ -159,7 +159,7 @@ function platform(provider: AdsProvider): AdsPlatform {
   return {
     provider,
     currency: "USD",
-    account: provider === "tiktok" ? "Meridian · TikTok Ads" : "Meridian · Meta Business",
+    account: provider === "tiktok" ? "e‑Matura · TikTok Ads" : "e‑Matura · Meta Business",
     posts,
     campaignPostCount: on.length,
     totals,

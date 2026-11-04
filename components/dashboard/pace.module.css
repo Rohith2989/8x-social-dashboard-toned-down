@@ -3,7 +3,7 @@
   container-type: inline-size;
   background: radial-gradient(
     120% 140% at 100% 0%,
-    color-mix(in srgb, var(--vertical) 78%, #fff) 0%,
+    color-mix(in srgb, var(--vertical) 60%, var(--vertical-deep)) 0%,
     var(--vertical-deep) 52%,
     color-mix(in srgb, var(--vertical-deep) 84%, var(--vertical-ink)) 100%
   );
@@ -41,7 +41,7 @@
 
 .head p {
   font-size: 14px;
-  color: rgb(255 255 255 / 0.72);
+  color: #fff;
 }
 
 .head :global(.mono) {
@@ -102,7 +102,8 @@
   stroke: #fff;
   stroke-width: 3;
   stroke-linecap: round;
-  font-size: 13px;
+  /* in the ring's own units (224 across): about 12 px on the smallest ring, 16 on the largest */
+  font-size: 19px;
   font-weight: 600;
   opacity: 0;
   transition: opacity 500ms var(--ease-out) 900ms;
@@ -130,12 +131,18 @@
   align-items: center;
   justify-content: center;
   gap: 2cqi;
-  font-size: max(11px, 6.4cqi);
-  color: rgb(255 255 255 / 0.74);
+  font-size: max(12px, 6.4cqi);
+  color: rgb(255 255 255 / 0.92);
+}
+
+.center > span:last-child {
+  max-width: 54%;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .center :global(.mono) {
-  font-size: 0.95em;
+  font-size: 1em;
   color: #fff;
 }
 
@@ -155,7 +162,7 @@
 .ahead {
   font-size: 15px;
   line-height: 1.45;
-  color: rgb(255 255 255 / 0.84);
+  color: rgb(255 255 255 / 0.92);
 }
 
 .ahead > span:first-child {
@@ -178,7 +185,7 @@
 
 .facts dt {
   font-size: 14px;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(255 255 255 / 0.92);
 }
 
 .facts dd {
@@ -200,4 +207,12 @@
     align-self: center;
     margin: 6px 0 0;
   }
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .card[aria-label] {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.15),
+    0 30px 70px -34px color-mix(in srgb, var(--vertical) 75%, transparent);
 }

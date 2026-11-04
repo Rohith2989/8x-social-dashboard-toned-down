@@ -225,7 +225,7 @@ function Source({ raw }: { raw: string }) {
       </span>
       <span className={styles.whoText}>
         <strong>
-          {w.name}
+          <span className={styles.whoName}>{w.name}</span>
           {w.ours && <img src="/brand/8x-ink.svg" alt="8x" width={18} height={12} className={styles.eight} />}
         </strong>
         <span>{w.how}</span>

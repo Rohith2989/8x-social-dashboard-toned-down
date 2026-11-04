@@ -283,7 +283,7 @@
 }
 
 .card[data-status="idle"] .state {
-  color: #a26b14;
+  color: #94600f;
 }
 
 .flagLine {
@@ -294,15 +294,62 @@
   color: var(--danger);
 }
 
-/* a flagged or dropped creator keeps their place, greyed (the plate stays white) */
-.card[data-flagged="true"] .plate > *,
-.card[data-flagged="true"] .name,
-.card[data-flagged="true"] .where,
-.card[data-flagged="true"] .figures,
-.card[data-flagged="true"] .sub,
+/* a flagged or dropped creator keeps their place, greyed (the plate stays white): the pictures fade, the words go quiet,
+   readable still */
+.card[data-flagged="true"] .plate > * {
+  filter: grayscale(1);
+}
+
 .card[data-flagged="true"] .posts,
-.card[data-status="dropped"] .figures,
-.card[data-status="dropped"] .sub,
 .card[data-status="dropped"] .posts {
   opacity: 0.55;
+  filter: grayscale(1);
+}
+
+.card[data-flagged="true"] :is(.name, .where, .figures, .figures *, .sub, .sub *),
+.card[data-status="dropped"] :is(.figures, .figures *, .sub, .sub *) {
+  color: var(--text-muted);
+}
+
+/* ---- Night ---- */
+
+:global([data-theme="dark"]) .card {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.045),
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 16px 32px -26px rgb(0 0 0 / 0.8);
+}
+
+:global([data-theme="dark"]) .card:hover {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    inset 0 0 0 1px rgb(255 255 255 / 0.07),
+    0 26px 44px -24px rgb(0 0 0 / 0.9),
+    0 20px 50px -30px color-mix(in srgb, var(--vertical) 40%, transparent);
+}
+
+:global([data-theme="dark"]) .blank {
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.13) 1.2px, transparent 1.6px) 0 0 / 7px 7px,
+    rgb(255 255 255 / 0.03);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+:global([data-theme="dark"]) .blank svg {
+  opacity: 0.75;
+  filter: grayscale(1) brightness(1.5);
+}
+
+:global([data-theme="dark"]) .open {
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 22px 40px -24px rgb(0 0 0 / 0.9);
+}
+
+:global([data-theme="dark"]) .selected {
+  --card-bg: color-mix(in srgb, var(--vertical) 16%, var(--paper));
+}
+
+:global([data-theme="dark"]) .card[data-status="idle"] .state {
+  color: #eab052;
 }

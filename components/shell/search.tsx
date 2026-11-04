@@ -90,8 +90,8 @@ function hitsFor(q: string): Hit[] {
       ),
     }));
   const people = [
-    ...MEMBERS.map((m) => ({ id: m.id, title: m.name, meta: `${ROLE_LABELS[m.role]} · ${m.email}`, initials: m.initials })),
-    { id: "maya", title: ACCOUNT_MANAGER.label, meta: `Your ${ACCOUNT_MANAGER.role.toLowerCase()}`, initials: ACCOUNT_MANAGER.initial },
+    ...MEMBERS.map((m) => ({ id: m.id, title: m.name, meta: `${ROLE_LABELS[m.role]} · ${m.email}`, initials: m.initials, photo: m.photo })),
+    { id: "maya", title: ACCOUNT_MANAGER.label, meta: `Your ${ACCOUNT_MANAGER.role.toLowerCase()}`, initials: ACCOUNT_MANAGER.initial, photo: undefined },
   ]
     .filter((m) => has(m.title) || has(m.meta))
     .map<Hit>((m) => ({
@@ -100,7 +100,7 @@ function hitsFor(q: string): Hit[] {
       title: m.title,
       meta: m.meta,
       href: "/team",
-      lead: <span className={styles.initials}>{m.initials}</span>,
+      lead: <span className={styles.initials}>{m.photo ? <img src={m.photo} alt="" width={256} height={256} /> : m.initials}</span>,
     }));
   return [...pages, ...creators, ...posts, ...scripts, ...people];
 }

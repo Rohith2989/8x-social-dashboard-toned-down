@@ -53,7 +53,7 @@ export const WAITING: Source[] = [
     id: "appstack",
     name: "AppStack",
     mark: <Icon name="package" size={20} />,
-    answers: "What happened in the Meridian app: installs and in-app events, by source",
+    answers: "What happened in your app: installs and in-app events, by source",
     reads: [
       "Uses the export API key from your app's settings in AppStack; 8x never sees your login.",
       "Reads daily counts of installs and in-app events with their source, campaign and ad. Never a device or user id.",

@@ -29,7 +29,7 @@ BASE = (
 
 # name: (the thing, its look, the screen it is keyed off), longest edge it is saved at
 OBJECTS = {
-    # (Meridian's own logo is no object: scripts/logo.py renders it flat, as a brand's mark)
+    # (the brand's own logo is no object: scripts/brand.py lays its official files flat, as a brand's mark)
     # Social's own icon (message-circle-heart) made solid, for the card that asks the brand to act
     "social-bubble": (
         "a round speech bubble made solid, about three centimetres deep with softly rounded edges and a short tail at "
