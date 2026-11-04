@@ -74,8 +74,10 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         <WorkspaceCard className={styles.profile} onNavigate={onClose}>
           <span className={styles.avatar}>
             <span className={styles.pic} data-pic>
-              <img src={CAMPAIGN.product.logo} alt="" width={512} height={512} />
-              <span className={styles.glint} aria-hidden />
+              <span className={styles.markBox}>
+                <img src={BRAND.avatar} alt="" width={360} height={128} />
+                <span className={styles.glint} aria-hidden />
+              </span>
             </span>
             <span className={styles.badge} aria-hidden>
               <i />

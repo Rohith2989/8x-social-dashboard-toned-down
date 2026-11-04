@@ -35,8 +35,9 @@ keys without one.
   sidebar scrolls. In a narrow tray a page's actions go under its title, and on a phone they fill their row. Headings
   wrap evenly and paragraphs never end on a lone word; dates and figures never split across lines. Small controls keep a
   finger's room (an invisible hit area round them). Each part was looked at, not only measured, at every width.
-- **Sidebar** (`shell/sidebar.tsx`): the logo, then the brand as a profile: its own logo, with a live dot while a
-  campaign runs. On hover a sheen crosses the mark. A click opens the brand's card (below). Then the pages,
+- **Sidebar** (`shell/sidebar.tsx`): the logo, then the brand as a profile, round: its mark on a white disc inside a
+  thin ring of the brand's own blues, with a live dot on the ring while a campaign runs. On hover the ring's light
+  turns once round it and a sheen crosses the mark. A click opens the brand's card (below). Then the pages,
   the Night switch (small, above Settings), Settings and Log out, and a blob of the vertical's colours with grain at
   the foot.
 - **The brand's card** (`shell/workspace.tsx`): not a list of links the sidebar already has, but the workspace at a
@@ -312,8 +313,9 @@ Placeholders, in `public/media`:
   client of 8x (ematura.si: online prep for the matura exam, by Procademy in Ljubljana), shown by its official logo.
   - **The logo files** are e-Matura's own, as published on ematura.si (`scripts/assets/`): its mark, a mortarboard
     whose board is an E, and the mark over the name. Its colours are the logo's: blue `#1b75bc` and grey `#58595b`.
-  - **The icon:** the mark in its colours on white. It is the sidebar's profile, the workspace on Settings and the
-    content plan's brief.
+  - **The icon:** the mark in its colours on white, for the workspace on Settings and the content plan's brief; the
+    mark alone (`ematura-mark.webp`) sits on the sidebar's round profile, and a round-friendly small one is the
+    phone's bar.
   - **The banner:** the lockup in white on the brand's blue, softly lit, with the dashboard's fine grain, across the
     top of the brand's card.
   - **How:** `scripts/brand.py` lays the official files out; nothing is redrawn or generated. (The made-up brand

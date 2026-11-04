@@ -237,8 +237,14 @@
   }
 
   .mobileBar .mobileMark {
+    width: 32px;
     height: 32px;
     margin-left: auto;
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 1.5px var(--paper),
+      0 0 0 3px #1b75bc,
+      0 6px 12px -6px rgb(27 117 188 / 0.6);
   }
 
   .menu {

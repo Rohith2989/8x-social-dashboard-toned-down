@@ -8,8 +8,11 @@ The logo files are e-Matura's own, as published on ematura.si (downloaded with t
 
 Its colours are the logo's: blue #1b75bc and grey #58595b. Nothing is redrawn or generated:
 
-  public/media/ematura-icon.webp (512) and ematura-icon-96.webp: the mark in its colours on white, the sidebar's
-    profile, the workspace on Settings and the content plan's brief
+  public/media/ematura-icon.webp (512): the mark in its colours on white, the workspace on Settings and the content
+    plan's brief
+  public/media/ematura-mark.webp: the mark alone, on nothing, for the sidebar's round profile (set on its white disc
+    inside the ring)
+  public/media/ematura-icon-96.webp: the mark on white with room round it, so it sits in a circle (the phone's bar)
   public/media/ematura-banner.webp (1280 x 560): the lockup in white on the brand's blue, softly lit, with the
     dashboard's fine grain, across the top of the brand's card
 
@@ -49,7 +52,17 @@ def icon():
     tile.alpha_composite(cap, ((512 - cap.width) // 2, (512 - cap.height) // 2 + 6))
     tile = tile.convert("RGB")
     tile.save(os.path.join(MEDIA, "ematura-icon.webp"), quality=94)
-    tile.resize((96, 96), Image.LANCZOS).save(os.path.join(MEDIA, "ematura-icon-96.webp"), quality=94)
+
+
+def mark():
+    """The mark alone on nothing (the round profile sets it on its own disc), and a small round-friendly icon."""
+    cap = fit(trimmed(CAP), 360)
+    cap.save(os.path.join(MEDIA, "ematura-mark.webp"), quality=94)
+    round_ = Image.new("RGBA", (384, 384), (255, 255, 255, 255))
+    small = fit(trimmed(CAP), 244)
+    round_.alpha_composite(small, ((384 - small.width) // 2, (384 - small.height) // 2 + 4))
+    round_.convert("RGB").resize((96, 96), Image.LANCZOS).save(os.path.join(MEDIA, "ematura-icon-96.webp"), quality=94)
+    print("mark", cap.size)
 
 
 def banner():
@@ -71,5 +84,6 @@ def banner():
 
 if __name__ == "__main__":
     icon()
+    mark()
     banner()
-    print("ematura-icon.webp, ematura-icon-96.webp, ematura-banner.webp")
+    print("ematura-icon.webp, ematura-mark.webp, ematura-icon-96.webp, ematura-banner.webp")

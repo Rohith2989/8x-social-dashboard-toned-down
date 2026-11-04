@@ -67,41 +67,96 @@
   text-align: center;
 }
 
-/* the brand's picture is the avatar: its own rounded square, on a soft shadow of its navy */
+/*
+  The brand's picture is the avatar, round: its mark on a white disc lit softly from the top, inside a thin ring of the
+  brand's own blues (e-Matura's #1b75bc, lighter and deeper), the paper showing between them. On hover the ring's light
+  turns once round it and a sheen crosses the mark. One size drives it all, so the rail, the short screens and the
+  phone's drawer keep its proportions.
+*/
+@property --turn {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 210deg;
+}
+
 .avatar {
+  --size: 88px;
+  --ring: 3px;
+  --gap: 3.5px;
+  --badge: 26px;
   position: relative;
   display: grid;
   place-items: center;
-  width: 88px;
-  height: 88px;
+  width: var(--size);
+  height: var(--size);
+  transition: transform 520ms var(--ease-out);
+}
+
+.avatar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from var(--turn), #1b75bc 0deg, #7cbcf2 70deg, #1b75bc 150deg, #0d4c86 240deg, #1b75bc 360deg);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--ring)), #000 calc(100% - var(--ring) + 0.6px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - var(--ring)), #000 calc(100% - var(--ring) + 0.6px));
+}
+
+.profile:hover .avatar {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.profile:hover .avatar::before {
+  animation: turn 1400ms var(--ease-current) both;
+}
+
+@keyframes turn {
+  from {
+    --turn: 210deg;
+  }
+  to {
+    --turn: 570deg;
+  }
 }
 
 .pic {
   position: relative;
+  display: grid;
+  place-items: center;
+  width: calc(var(--size) - 2 * (var(--ring) + var(--gap)));
+  height: calc(var(--size) - 2 * (var(--ring) + var(--gap)));
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 32% 18%, #fff 52%, #eef4fb 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(27 117 188 / 0.1),
+    0 12px 22px -12px rgb(27 117 188 / 0.6),
+    0 2px 4px rgb(13 24 56 / 0.1);
+}
+
+/* the mark, centred with room round it: the circle never touches its tips */
+.markBox {
+  position: relative;
+  display: block;
+  width: 74%;
+  margin-top: 2%;
+}
+
+.markBox img {
+  display: block;
   width: 100%;
-  height: 100%;
-  transition: transform 520ms var(--ease-out);
+  height: auto;
 }
 
-.pic img {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 14px 16px rgb(13 24 56 / 0.28)) drop-shadow(0 2px 3px rgb(13 24 56 / 0.18));
-}
-
-.profile:hover .pic {
-  transform: translateY(-2px) scale(1.03);
-}
-
-/* a sheen crossing the logo on hover: a band of light, seen only where it passes over the mark */
+/* a sheen crossing the mark on hover: a band of light, seen only where it passes over the mark */
 .glint {
   position: absolute;
   inset: 0;
-  background: linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.32) 47%, rgb(255 255 255 / 0.6) 50%, rgb(255 255 255 / 0.32) 53%, transparent 62%) no-repeat;
+  background: linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.4) 47%, rgb(255 255 255 / 0.72) 50%, rgb(255 255 255 / 0.4) 53%, transparent 62%) no-repeat;
   background-size: 320% 100%;
   background-position: 100% 0;
-  -webkit-mask: url("/media/ematura-icon.webp") center / 100% 100% no-repeat;
-  mask: url("/media/ematura-icon.webp") center / 100% 100% no-repeat;
+  -webkit-mask: url("/media/ematura-mark.webp") center / 100% 100% no-repeat;
+  mask: url("/media/ematura-mark.webp") center / 100% 100% no-repeat;
   pointer-events: none;
 }
 
@@ -118,14 +173,15 @@
   }
 }
 
+/* live: a dot on the ring, where it crosses the lower right */
 .badge {
   position: absolute;
-  right: -6px;
-  bottom: -4px;
+  right: calc(var(--size) * 0.1464 - var(--badge) / 2);
+  bottom: calc(var(--size) * 0.1464 - var(--badge) / 2);
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: var(--badge);
+  height: var(--badge);
   border-radius: 50%;
   background: var(--paper);
   box-shadow: 0 4px 10px -4px rgb(11 11 12 / 0.3);
@@ -265,8 +321,7 @@
   }
 
   .avatar {
-    width: 84px;
-    height: 84px;
+    --size: 84px;
   }
 
   .nav {
@@ -294,8 +349,10 @@
   }
 
   .avatar {
-    width: 68px;
-    height: 68px;
+    --size: 68px;
+    --ring: 2.5px;
+    --gap: 3px;
+    --badge: 22px;
   }
 
   .profile strong {
@@ -344,15 +401,10 @@
   }
 
   .avatar {
-    width: 56px;
-    height: 56px;
-  }
-
-  .badge {
-    width: 20px;
-    height: 20px;
-    right: -2px;
-    bottom: 0;
+    --size: 56px;
+    --ring: 2.5px;
+    --gap: 2.5px;
+    --badge: 20px;
   }
 
   .badge i {
@@ -470,8 +522,10 @@
   }
 
   .avatar {
-    width: 84px;
-    height: 84px;
+    --size: 84px;
+    --ring: 3px;
+    --gap: 3.5px;
+    --badge: 26px;
   }
 
   .profile strong,
@@ -497,9 +551,12 @@
 
 /* ---- Night ---- */
 
-/* the brand's photograph keeps its edge on the night: a hairline of light round it, its shadow deeper */
-:global([data-theme="dark"]) .pic img {
-  filter: drop-shadow(0 0 0.6px rgb(255 255 255 / 0.5)) drop-shadow(0 14px 18px rgb(0 0 0 / 0.65));
+/* the round profile at night: the disc stays white, its shadow deeper; the ring glows faintly in the brand's blue */
+:global([data-theme="dark"]) .pic {
+  box-shadow:
+    inset 0 0 0 1px rgb(27 117 188 / 0.12),
+    0 12px 24px -10px rgb(0 0 0 / 0.75),
+    0 0 18px -6px rgb(27 117 188 / 0.55);
 }
 
 :global([data-theme="dark"]) .item:hover {
@@ -527,5 +584,11 @@
 @media (max-width: 767px) {
   :global([data-theme="dark"]) .scrim {
     background: rgb(0 2 10 / 0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile:hover .avatar::before {
+    animation: none;
   }
 }

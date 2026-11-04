@@ -70,6 +70,8 @@ export const BRAND = {
   // its mark, small (the phone's top bar): the mortarboard whose board is an E, in its own blue and grey on white
   // (scripts/brand.py); the full one is CAMPAIGN.product.logo, and the lockup in white on its blue is the card's banner
   mark: "/media/ematura-icon-96.webp",
+  // the mark alone, on nothing: the sidebar sets it on a white disc inside a ring of the brand's blues
+  avatar: "/media/ematura-mark.webp",
   member: { name: "Alex Carter", role: "Head of growth", initials: "AC" } satisfies Person,
 };
 
